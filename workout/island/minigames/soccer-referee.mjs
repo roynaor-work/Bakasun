@@ -2,7 +2,7 @@
  * the canonical 18 bones; its eight clips are in the GLB). Presentation only: he follows play on the diagonal (soccerRefereeTarget /
  * soccerRefereeStep) and makes the call for a foul, a penalty, an advantage or a goal (soccerRefereeCall); the simulation never reads him.
  * `?soccerReferee=0` = no referee (v24). If the file fails to load the match plays on without him. */
-import {soccerRefereeUrl,soccerRefereeTarget,soccerRefereeStep,soccerRefereeCall,SOCCER_REFEREE} from './soccer-r241.mjs?v=island-v2-20261107-21';
+import {soccerRefereeUrl,soccerRefereeTarget,soccerRefereeStep,soccerRefereeCall,SOCCER_REFEREE} from './soccer-r241.mjs?v=island-v2-20261107-23';
 
 export async function createSoccerReferee({T,GLTFLoader,scene,pitch,url=soccerRefereeUrl(),R=SOCCER_REFEREE}){
   const gltf=await new GLTFLoader().loadAsync(url),root=gltf.scene;let triangles=0;

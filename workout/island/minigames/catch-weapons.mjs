@@ -17,7 +17,7 @@
  * every tool rolls the v6 tyre-gun chance (distance, lateral offset, steadiness, bends, swerve).
  * The interface mirrors catch-tyres.mjs (state, balance, step, fire, drainEvents, thiefSpeedScale, thiefWobble), so the
  * chase engine and the v6 fire HUD helpers keep working; `state` is the view of the tool in hand. Deterministic with rnd. */
-import {TYRES} from './catch-tyres.mjs?v=island-v2-20261107-21';
+import {TYRES} from './catch-tyres.mjs?v=island-v2-20261107-23';
 
 export const ARSENAL = Object.freeze({
   order: ['tyres', 'net', 'spikes', 'emp', 'mark'],

@@ -49,6 +49,7 @@
           <path class="part part-knees" d="M20 62 L19 86 M40 62 L41 86"/>
           <path class="part part-feet" d="M19 86 L18 110 H10 M41 86 L42 110 H50"/>
         </svg>
+        <div id="range" hidden><meter id="meter" min="0" max="1" low="0.6" high="0.99" optimum="1" value="0" aria-label="כמה מהתנועה נעשה"></meter><b id="meter-label"></b></div>
         <output id="big-count" aria-hidden="true"></output>
         <p id="big-status" aria-hidden="true"></p>
       </div>
@@ -59,6 +60,7 @@
     <p id="verification"></p>
     <p id="status" role="status" aria-live="polite"></p>
     <p id="side" hidden></p>
+    <p id="partials" hidden></p>
     <p id="signal-status" role="status" aria-live="polite" hidden></p>
     <div class="score"><output id="progress" aria-label="התקדמות">0</output><span id="target"></span></div>
     <p id="hint" role="status" aria-live="polite" hidden></p>
@@ -86,6 +88,7 @@
   <section id="summary" hidden>
     <h2 id="summary-title" tabindex="-1">האימון הסתיים</h2>
     <p id="reward"></p>
+    <p id="fix-note">המצלמה פספסה או ספרה יותר מדי? אפשר לתקן כאן את המספר.</p>
     <ul id="results"></ul>
     <button id="another" type="button">אימון נוסף</button>
   </section>

@@ -112,3 +112,21 @@ test('double disposal detaches effects and releases instance buffers once withou
  for(const resource of f.resources)resource.dispose();
  assert.ok([...resourceDisposals.values()].every(count=>count===1));
 });
+
+// racing-v24.9: the drift of the drift button (player.driftT > 0) smokes from its own pool; the v23 drift (no driftT) and a car that does not slide never use it
+test('drift smoke: a pool of 22 dense puffs only while the car slides from the drift button; they travel with the car and are gone 0.7 s after the slide',()=>{
+ const f=fixture();try{
+  f.fill(60);assert.equal(f.effects.metrics().driftSmoke,0,'the v23 drift (no driftT): none');assert.ok(f.effects.metrics().smoke>0,'the old puffs as before');assert.equal(f.root.children.length,5,'no mesh before the first slide');
+  const p=f.state.player,h=p.heading;p.driftT=.01;p.slipAngle=.2;
+  // the mesh and its sprite are made at the first slide: the page's document is there then
+  const context={createRadialGradient(){return {addColorStop(){}};},fillRect(){}};globalThis.document={createElement(){return {width:0,height:0,getContext(){return context;}};}};
+  try{for(let i=0;i<60;i++){p.driftT+=1/60;p.x+=Math.sin(h)*p.speed/60;p.z+=Math.cos(h)*p.speed/60;f.step();}}finally{delete globalThis.document;}
+  assert.equal(f.root.children.length,6);const mesh=f.root.children[5];assert.equal(mesh.instanceMatrix.count,22,'the drift smoke mesh');const buffer=mesh.instanceMatrix.array;
+  const m=f.effects.metrics();assert.ok(m.driftSmoke>=16&&m.driftSmoke<=22,'puffs alive after a second of drift: '+m.driftSmoke);
+  // the newest puff is still near the rear of the car (within 3 m), not left 30 m behind
+  const near=[];for(let i=0;i<mesh.count;i++){const x=buffer[i*16+12],z=buffer[i*16+14];near.push(Math.hypot(x-p.x,z-p.z));}assert.ok(Math.min(...near)<3,'nearest puff '+Math.min(...near).toFixed(1)+' m from the car');assert.ok(Math.max(...near)<16,'farthest puff '+Math.max(...near).toFixed(1)+' m');
+  assert.ok(buffer.slice(0,mesh.count*16).every(Number.isFinite));
+  f.step(1/60,2);assert.ok(f.effects.metrics().driftSmoke<=10,'the low quality cap');
+  p.drifting=false;p.driftT=0;f.fill(48);assert.equal(f.effects.metrics().driftSmoke,0,'gone 0.8 s after the slide');assert.equal(mesh.instanceMatrix.array,buffer,'no buffer reallocated');
+ }finally{f.close();}
+});

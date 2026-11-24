@@ -13,7 +13,7 @@
  *    under water only". A diving submarine is out of reach of shells, missiles and mines (they pass over with a small splash and the
  *    word "under water"); only the torpedo (3 to 5 a stage, its own button while a submarine is out) hits it, and from under water it
  *    fires torpedoes only (a bubble line and a red decal you can sail away from). It surfaces briefly, and then shells hit it too. */
-import {polishLegacy,polishValue} from './polish-flag.mjs?v=island-v2-20261107-21';
+import {polishLegacy,polishValue} from './polish-flag.mjs?v=island-v2-20261107-23';
 export const navalAimV24=search=>!polishLegacy('navalAim',search)&&!['v19','v20','v23'].includes(polishValue('navalAim',search));
 export const navalEnemyFireV24=search=>polishValue('navalEnemyFire',search)!=='v23';
 export const navalSubV24=search=>polishValue('navalSub',search)!=='v23';

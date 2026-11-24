@@ -28,9 +28,12 @@ export function kidBot({seed=1,balance,style='lockButton',notice=.7,forget=.15,v
   else{
    // 2. Wander (or sail to a buoy when the magazine is low).
    // v24.1 radar: "out of the radar's range" (a refused or lost lock, shown for a moment) reads like "too far": the child sails toward that hull.
-   const outOfRange=m.radarOn&&m.radarLost&&t-m.radarLost.time<2.5&&(m.enemies||[]).find(e=>e.index===m.radarLost.index&&e.active&&e.hp>0);
+   // v24.8 harder: "the radar lost the target, slow down" (a lock lost to fast sailing or turning): the child lets go of the stick for a moment.
+   const tooFast=m.radarOn&&m.radarLost?.reason==='track'&&t-m.radarLost.time<2.2;
+   const outOfRange=m.radarOn&&m.radarLost&&m.radarLost.reason!=='track'&&t-m.radarLost.time<2.5&&(m.enemies||[]).find(e=>e.index===m.radarLost.index&&e.active&&e.hp>0);
    const buoy=(m.buoys||[])[0],far=(m.homing?.status==='far'&&(m.enemies||[]).find(e=>e.index===m.homing.index))||outOfRange,near=m.homing?.status==='near'&&(m.enemies||[]).find(e=>e.index===m.homing.index);
-   if(buoy&&(m.loaded??99)<=4){Object.assign(input,steer(m,Math.atan2(buoy.z-ship.z,buoy.x-ship.x)));}
+   if(tooFast){/* eases off */}
+   else if(buoy&&(m.loaded??99)<=4){Object.assign(input,steer(m,Math.atan2(buoy.z-ship.z,buoy.x-ship.x)));}
    // The lock says "too far, get closer": the child sails toward it.
    else if(far){Object.assign(input,steer(m,Math.atan2(far.z-ship.z,far.x-ship.x)));}
    // "Too close, back off": the child sails away from it.

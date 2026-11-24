@@ -1,24 +1,25 @@
-import {moveAlienPlayer} from './g2m-motion.mjs?v=island-v2-20261107-21';
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-21';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-21';
-import {createPool,releaseAt} from './pool.mjs?v=island-v2-20261107-21';
+import {moveAlienPlayer} from './g2m-motion.mjs?v=island-v2-20261107-23';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-23';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-23';
+import {createPool,releaseAt} from './pool.mjs?v=island-v2-20261107-23';
 import {alienV9Enabled,alienV9Hp} from './alien-v9.mjs';
 import {alienV12Enabled} from './alien-v12.mjs';
 import {alienV13Enabled} from './alien-v13.mjs';
 import {alienV14Enabled,gearFactor,heatStep} from './alien-v14.mjs';
-import {alienV15Enabled,v15Config,fireGate,fireInterval,shotDamage,createSpawnCap,v15RateCap,convergeVx} from './alien-v15.mjs?v=island-v2-20261107-21';
-import {alienMoveEnabled,moveConfig,alienMoveStep} from './alien-move.mjs?v=island-v2-20261107-21';
-import {alienFireV23Enabled,v23Config,vulcanGate,vulcanShot} from './alien-v23.mjs?v=island-v2-20261107-21';
-import {alienRefillEnabled,v24Config,refillShouldDrop,refillApply} from './alien-v24.mjs?v=island-v2-20261107-21';
-import {alienVulcanV25Enabled,v25Config} from './alien-v25.mjs?v=island-v2-20261107-21';
-import {alienArsenalEnabled,alienEnemyFireV25Enabled,arsenalConfig,nextSpecial,ammoDropKind,shouldDropAmmo,ammoRefill,lightningChain,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-21';
+import {alienV15Enabled,v15Config,fireGate,fireInterval,shotDamage,createSpawnCap,v15RateCap,convergeVx} from './alien-v15.mjs?v=island-v2-20261107-23';
+import {alienMoveEnabled,moveConfig,alienMoveStep} from './alien-move.mjs?v=island-v2-20261107-23';
+import {alienFireV23Enabled,v23Config,vulcanGate,vulcanShot} from './alien-v23.mjs?v=island-v2-20261107-23';
+import {alienRefillEnabled,v24Config,refillShouldDrop,refillApply} from './alien-v24.mjs?v=island-v2-20261107-23';
+import {alienVulcanV25Enabled,v25Config} from './alien-v25.mjs?v=island-v2-20261107-23';
+import {alienArsenalEnabled,alienEnemyFireV25Enabled,arsenalConfig,nextSpecial,ammoDropKind,shouldDropAmmo,ammoRefill,lightningChain,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-23';
 import {alienV11Enabled,blastRule} from './alien-v11.mjs';
 import {alienV10Enabled,nearestAlien,steerMissile} from './alien-v10.mjs';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
-import {alienHullEnabled,hullContactRadius} from './alien-hull.mjs?v=island-v2-20261107-21';
-import {pelletOffsets} from './alien-v25.mjs?v=island-v2-20261107-21';
-import {alienLaserV25Enabled,laser25Config,laserPierceCount,shotPierces} from './alien-laser.mjs?v=island-v2-20261107-21';
-import {alienLaserBurstEnabled,burstConfig,burstPress,burstStep} from './alien-laser-burst.mjs?v=island-v2-20261107-21';
+import {alienHullEnabled,hullContactRadius} from './alien-hull.mjs?v=island-v2-20261107-23';
+import {pelletOffsets} from './alien-v25.mjs?v=island-v2-20261107-23';
+import {alienLaserV25Enabled,laser25Config,laserPierceCount,shotPierces} from './alien-laser.mjs?v=island-v2-20261107-23';
+import {alienLaserBurstEnabled,burstConfig,burstPress,burstStep} from './alien-laser-burst.mjs?v=island-v2-20261107-23';
+import {alienPierceFixEnabled,alienLaserSeenEnabled,laserSeenConfig,laserGiftDue} from './alien-v249.mjs';
 const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
 export function createAlienModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,permanentUpgrades=EMPTY,hangar=EMPTY,careerWins=Math.max(0,level-1),roundChoices=true,completion='survival',onUpgrade=()=>{},sound=()=>{}}){
@@ -30,6 +31,8 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  const laser25=phoneFixC&&alienLaserV25Enabled()?laser25Config(balance):null;let laserTime=0,laserMax=0;const laserHits=[];
  // v24.6 (?alienLaserBurst=0 keeps v24.5): while the pickup laser runs, every press of a fire button lights a beam for a few seconds (alien-laser-burst.mjs).
  const beamCfg=laser25&&alienLaserBurstEnabled()?burstConfig(balance):null;let burstDown=false,burstTick=0;const burstState={left:0,x:0,y:0,top:beamCfg?.top??-40,halfWidth:beamCfg?.halfWidth??7,presses:0,ticks:0,hits:0,kills:0,lit:0};
+ // v24.9 (alien-v249.mjs): ?alienPierceFix=0 keeps the permanent laser's rounds piercing; ?alienLaserSeen=0 keeps the v24.8 laser bonus (rotation only, the beam on a new press only).
+ const pierceFix=Boolean(laser25)&&alienPierceFixEnabled(),seen=beamCfg&&alienLaserSeenEnabled()?laserSeenConfig(balance):null;let seenWave=0,waveClock=0,waveLaser=false,laserGifts=0,giftRetry=0,laserTaken=0,firstLaserAt=-1,giftOut=false,giftLaser=false;
  level=clamp(Math.floor(level)||1,1,balance.levels.length);
  const settings={...balance.levels[level-1]};
  if(level===10 && polishValue('balanceAlien')==='1') settings.lives=6;
@@ -177,7 +180,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   // Put that same laser coefficient, with the same HP exponent, into its first hull hit.
   // Higher purchased ranks keep their value; cannon rounds, volley lasers and AoE retain their damage.
   // v24.5: a cannon/wing laser round (not a Vulcan one) is a piercing beam again, with the pre-fix-C damage per ship (alien-laser.mjs).
-  s.beam25=Boolean(laser25&&kind===1&&!s.vulcan);if(s.beam25)s.hp=laserPierceCount(balance,alienStack(campaign,'laser',upgrades.laser),laser25);
+  s.beam25=Boolean(laser25&&kind===1&&!s.vulcan&&(!pierceFix||laserTime>0||powerup===1));if(s.beam25)s.hp=laserPierceCount(balance,alienStack(campaign,'laser',upgrades.laser),laser25);
   if(phoneFixC&&kind===1&&!s.beam25){const factor=gearFactor({equipment:{weapon:equipment.weapon||0},permanentUpgrades:{laser:upgrades.laser},stacks:{laser:alienStack(campaign,'laser',upgrades.laser)}});s.damage*=Math.pow(factor,v14?(v15?v15.gearExp:v14.gearExp):1);}
   if(hullOn)s.pelletMask=0;
   shots.push(s);fired++;
@@ -275,8 +278,8 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    if(v11&&aliens.length){if(fireOn&&laserLeft<=0){laserTimer-=dt;if(laserTimer<=0){laserLeft=v11.laserShots[0]+Math.floor(random()*(v11.laserShots[1]-v11.laserShots[0]+1));laserGap=0;laserTimer=v11.laserEvery[0]+random()*(v11.laserEvery[1]-v11.laserEvery[0]);}}
     if(laserLeft>0){laserGap-=dt;if(laserGap<=0){sound('laser');fireShot(0,2);lasersFired++;laserLeft--;laserGap=v11.laserGap;}}}
    // v24.6: the laser bonus beam clock. A press (or a held button) while the pickup laser runs keeps the beam lit BURST.seconds; it follows the nose.
-   if(beamCfg){const pr=burstPress(input,burstDown),was=burstState.left>0;burstDown=pr.down;burstState.left=burstStep(burstState.left,{press:pr.press,down:pr.down,bonus:laserTime>0,dt,cfg:beamCfg});
-    if(pr.press&&laserTime>0){burstState.presses++;if(!was)sound('laser');}if(burstState.left>0){if(!was)burstTick=0;burstState.lit+=dt;const ship13=Boolean(v13&&model.shipV13);burstState.x=player.x;burstState.y=ship13?player.y-(v13.muzzleForward-balance.playerRadius):player.y-balance.playerRadius;}}
+   if(beamCfg){const pr=burstPress(input,burstDown),was=burstState.left>0;burstDown=pr.down;burstState.left=burstStep(burstState.left,{press:pr.press||Boolean(seen&&pr.down),down:pr.down,bonus:laserTime>0,dt,cfg:beamCfg});
+    if(pr.press&&laserTime>0){burstState.presses++;if(!was)sound('laser');}else if(seen&&!was&&burstState.left>0)sound('laser');if(burstState.left>0){if(!was)burstTick=0;burstState.lit+=dt;const ship13=Boolean(v13&&model.shipV13);burstState.x=player.x;burstState.y=ship13?player.y-(v13.muzzleForward-balance.playerRadius):player.y-balance.playerRadius;}}
    if(!aliens.length){if(time>=settings.seconds){finish(wave>=settings.waves||completion==='survival'?'win':'lose');return;}nextWave+=dt;if(nextWave>=(v9?.wavePauseSeconds??balance.wavePauseSeconds)){while(bolts.length)releaseAt(bolts,bolts.length-1,bp);if(wave>=settings.waves){finish('win');return;}if(offerUpgrade())return;wave++;formation();}return;}
    for(const a of aliens){a.age+=dt;a.hitTime=Math.max(0,a.hitTime-dt);a.shieldCool=Math.max(0,(a.shieldCool||0)-dt);a.sparkCool=Math.max(0,(a.sparkCool||0)-dt);a.entry=Math.max(0,a.entry-dt);const type=balance.enemyTypes[a.kind];bossGuard(a);
     const healthPhase=a.hp<=a.maxHp/3?3:a.hp<=a.maxHp*2/3?2:1,phaseStep=(balance.balance?.minBossSeconds||0)/3;
@@ -323,7 +326,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    // v24.6: the lit beam hits every ship whose drawn hull it crosses, once per tick (a shield takes a charge instead), with a share of a laser round's damage.
    if(beamCfg&&burstState.left>0){burstTick-=dt;
     for(let guard=0;burstTick<=0&&guard<4;guard++){burstTick+=beamCfg.tick;burstState.ticks++;
-     const base=(v23?v23.regularDamage:v15?shotDamage('normal',v15):v12?dmgK:1)*1.25,damage=(equipment.damage||1)*power*(1+alienStack(campaign,'damage',upgrades.damage))*base*beamCfg.tickDamage;
+     const base=(v23?v23.regularDamage:v15?shotDamage('normal',v15):v12?dmgK:1)*1.25,damage=(equipment.damage||1)*power*(1+alienStack(campaign,'damage',upgrades.damage))*base*beamCfg.tickDamage*(giftLaser?seen.giftPower:1);
      for(let j=aliens.length-1;j>=0;j--){const a=aliens[j];if(!(a.y<burstState.y))continue;
       const t=segmentContact(burstState.x,burstState.y,burstState.x,burstState.top,a.x,a.y,hull?hullContactRadius(a,{shotRadius:beamCfg.halfWidth,pxPerUnit:hull.pxPerUnit}):a.radius+beamCfg.halfWidth,aspect());if(t===null)continue;
       burstState.hits++;hits++;a.hitTime=balance.hitFlashSeconds;laserHits.push({x:burstState.x,y:a.y,at:time});if(laserHits.length>16)laserHits.shift();
@@ -331,7 +334,10 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
       if(a.shield>0){if(!v14||(a.shieldCool||0)<=0){a.shield--;a.shieldCool=v14?v14.shieldGap:0;signal('shield-hit',a.x,a.y,a.shield,.4);}continue;}
       const dealt=damageAlien(a,damage);if(dealt>0)signal('enemy-hit',a.x,a.y,dealt,.25);if(!v12||(a.sparkCool||0)<=0||a.hp<=0){burst(a.x,a.y);a.sparkCool=v12?v12.sparkCool:0;}if(a.hp<=0){burstState.kills++;destroy(j);}}}}
    for(let i=pickups.length-1;i>=0;i--){const d=pickups[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
-    if(dist<balance.pickups.radius+balance.playerRadius){const coolingFan=d.kind===0&&spreadCooldown>0;sound('bonus');signal(coolingFan?'spread-cooldown':'pickup',player.x,player.y,coolingFan?spreadCooldown:d.kind,1.5);if(d.kind===5)novaCharges++;else if(d.kind===0){if(!coolingFan){const sec=v11?v11.bonusSeconds:balance.spread.seconds;spreadTime=powerMax=sec;spreadCooldown=sec+balance.spread.cooldownSeconds;}}else if(v10&&d.kind===4){wingTime=wingMax=v11?v11.bonusSeconds:v10.wingSeconds;}else if(laser25&&d.kind===1){laserTime=laserMax=laser25.seconds;}else{powerup=d.kind;powerTime=powerMax=v11?v11.bonusSeconds:balance.pickups.seconds;}releaseAt(pickups,i,pp);}else if(d.y>config.height+30)releaseAt(pickups,i,pp);}
+    if(dist<balance.pickups.radius+balance.playerRadius){const coolingFan=d.kind===0&&spreadCooldown>0;sound('bonus');signal(coolingFan?'spread-cooldown':'pickup',player.x,player.y,coolingFan?spreadCooldown:d.kind,1.5);if(d.kind===5)novaCharges++;else if(d.kind===0){if(!coolingFan){const sec=v11?v11.bonusSeconds:balance.spread.seconds;spreadTime=powerMax=sec;spreadCooldown=sec+balance.spread.cooldownSeconds;}}else if(v10&&d.kind===4){wingTime=wingMax=v11?v11.bonusSeconds:v10.wingSeconds;}else if(laser25&&d.kind===1){giftLaser=Boolean(seen&&giftOut);laserTime=laserMax=giftLaser?seen.giftSeconds:laser25.seconds;giftOut=false;if(seen){burstState.left=beamCfg.seconds;laserTaken++;if(firstLaserAt<0)firstLaserAt=time;}}else{powerup=d.kind;powerTime=powerMax=v11?v11.bonusSeconds:balance.pickups.seconds;}releaseAt(pickups,i,pp);}else if(d.y>config.height+30){if(seen&&d.kind===1){waveLaser=false;giftOut=false;giftRetry=time+seen.retry;}releaseAt(pickups,i,pp);}}
+   // v24.9: a laser token of its own a few seconds into wave 1 and every second wave (again if it was missed), so the laser is seen in every game.
+   if(seen){if(wave!==seenWave){seenWave=wave;waveClock=0;waveLaser=false;}waveClock+=dt;if(pickups.some(d=>d.kind===1))waveLaser=true;
+    if(laserGiftDue({wave,waveClock,given:waveLaser,laserTime,pickups:pickups.length,aliens:aliens.length,time,retryAt:giftRetry,cfg:seen})){const d=pp.take(clamp(player.x,seen.edge,config.width-seen.edge),-12,0,balance.pickups.speed,0,1);if(d){pickups.push(d);waveLaser=true;giftOut=true;laserGifts++;}}}
    dropBonus();
    // v25 arsenal: the rings roll up (each alien hit once, enemy bullets in the ring wiped out); ammo tokens fall and home on the ship like a bonus.
    if(arsenal){
@@ -355,6 +361,6 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(!a.boss&&a.diveAge<0&&a.y-a.radius>player.y+20){releaseAt(aliens,i,ap);damagePlayer(player.x,player.y);}}
    if(lives<=0)finish('lose');else if(!aliens.length&&wave>=settings.waves)finish('win');else if(time>=settings.seconds)finish(completion==='survival'&&!settings.boss?'win':'lose');
   },
-  snapshot(){return{...(laser25?{laser25:{time:laserTime,max:laserMax,hits:laserHits.length}}:{}),...(beamCfg?{laserBurst:{left:+burstState.left.toFixed(2),lit:+burstState.lit.toFixed(2),presses:burstState.presses,ticks:burstState.ticks,hits:burstState.hits,kills:burstState.kills}}:{}),...(v23?{v23:true,regularOn,vulcanOn,regularFired,vulcanFired,vulcan:{heat:vgate.heat,lock:vgate.lock,locked:vgate.lock>0,firing:vulcanOn}}:{}),...(v25?{v25:{ticks:vulcanTicks,impacts:impacts.length,lockAt,capDropped:vulcanCap.dropped,fireSeconds:v25.heatShots*v25.vulcanInterval}}:{}),...(arsenal?{arsenal:{special,ammo:specialAmmo(),dropped:ammoDropped,collected:ammoCollected,lightningsFired,lightningHits,wavesFired,waveHits,waveBolts,onScreen:ammoDrops.length},ammoDrops:ammoDrops.map(d=>({...d}))}:{}),...(refillCfg?{refill:{dropped:refillsDropped,collected:refillsCollected,cold:refillCold,onScreen:refills.length,overheatsSince:overheatsSinceRefill,picked:refillPicked&&{...refillPicked}},refills:refills.map(d=>({...d}))}:{}),overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
+  snapshot(){return{...(seen?{laserSeen:{gifts:laserGifts,taken:laserTaken,firstAt:+firstLaserAt.toFixed(2)}}:{}),pierceFix,...(laser25?{laser25:{time:laserTime,max:laserMax,hits:laserHits.length}}:{}),...(beamCfg?{laserBurst:{left:+burstState.left.toFixed(2),lit:+burstState.lit.toFixed(2),presses:burstState.presses,ticks:burstState.ticks,hits:burstState.hits,kills:burstState.kills}}:{}),...(v23?{v23:true,regularOn,vulcanOn,regularFired,vulcanFired,vulcan:{heat:vgate.heat,lock:vgate.lock,locked:vgate.lock>0,firing:vulcanOn}}:{}),...(v25?{v25:{ticks:vulcanTicks,impacts:impacts.length,lockAt,capDropped:vulcanCap.dropped,fireSeconds:v25.heatShots*v25.vulcanInterval}}:{}),...(arsenal?{arsenal:{special,ammo:specialAmmo(),dropped:ammoDropped,collected:ammoCollected,lightningsFired,lightningHits,wavesFired,waveHits,waveBolts,onScreen:ammoDrops.length},ammoDrops:ammoDrops.map(d=>({...d}))}:{}),...(refillCfg?{refill:{dropped:refillsDropped,collected:refillsCollected,cold:refillCold,onScreen:refills.length,overheatsSince:overheatsSinceRefill,picked:refillPicked&&{...refillPicked}},refills:refills.map(d=>({...d}))}:{}),overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
  };return model;
 }

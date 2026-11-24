@@ -1,13 +1,13 @@
-export { missionStrings } from './board.mjs?v=island-v2-20261107-21';
-import { announceCityMissionRewards, cityMissionEntry, renderCityMissions } from './board.mjs?v=island-v2-20261107-21';
-import { createMissionState, advanceMissions, mergeMissionSaves, validMissionState } from './logic.mjs?v=island-v2-20261107-21';
-import { gameAvailability } from '../../activity/availability.mjs?v=island-v2-20261107-21';
-import { cityConnections } from '../../engine/city-connections.mjs?v=island-v2-20261107-21';
-import { citySites } from '../../engine/city-sites.mjs?v=island-v2-20261107-21';
-import { readyPlots } from '../../engine/ready-plots.mjs?v=island-v2-20261107-21';
-import { cellsFor, placementAvailability, upgradeAvailability } from '../../engine/rules.mjs?v=island-v2-20261107-21';
-import catalog from './catalog.mjs?v=island-v2-20261107-21';
-import { leagueMatch } from '../../minigames/soccer-campaign.mjs?v=island-v2-20261107-21';
+export { missionStrings } from './board.mjs?v=island-v2-20261107-23';
+import { announceCityMissionRewards, cityMissionEntry, renderCityMissions } from './board.mjs?v=island-v2-20261107-23';
+import { createMissionState, advanceMissions, mergeMissionSaves, validMissionState } from './logic.mjs?v=island-v2-20261107-23';
+import { gameAvailability } from '../../activity/availability.mjs?v=island-v2-20261107-23';
+import { cityConnections } from '../../engine/city-connections.mjs?v=island-v2-20261107-23';
+import { citySites } from '../../engine/city-sites.mjs?v=island-v2-20261107-23';
+import { readyPlots } from '../../engine/ready-plots.mjs?v=island-v2-20261107-23';
+import { cellsFor, placementAvailability, upgradeAvailability } from '../../engine/rules.mjs?v=island-v2-20261107-23';
+import catalog from './catalog.mjs?v=island-v2-20261107-23';
+import { leagueMatch } from '../../minigames/soccer-campaign.mjs?v=island-v2-20261107-23';
 
 const resources = ['money', 'food', 'materials', 'energy'];
 const kinds = ['build', 'upgrade', 'collect', 'connect', 'play', 'rescue'];

@@ -12,7 +12,7 @@
  *    `?hoopsCrowd3d=full` (Codex's 70K budget, all three levels, no culling) for a comparison on a phone;
  *  - fans outside the camera's view (with a margin) are not submitted; the plan is redone at most four times a second, at once on a cut.
  * Presentation only: the simulation never reads any of it. */
-import {planCrowd} from '../assets/hoops-v241/crowd/runtime/lod-policy.mjs?v=island-v2-20261107-21';
+import {planCrowd} from '../assets/hoops-v241/crowd/runtime/lod-policy.mjs?v=island-v2-20261107-23';
 
 export const HOOPS_CROWD_BASE=()=>new URL('../assets/hoops-v241/crowd/',import.meta.url).href;
 /** The six seated figures of the pack (variant 0-5: pose down, up, clap, down, up, clap). */

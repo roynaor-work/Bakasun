@@ -7,7 +7,7 @@
  * Sheets follow the pack's loading contract (sRGB, straight alpha, linear filtering, no mipmaps, clamp; repeat in U for the trail).
  * Calm (reduced motion or the economy tiers) keeps only the cues that carry information: the selection ring and the switch ring. */
 import * as T from '../vendor/three.module.js';
-import {SOCCER_FX_SPRITES,soccerFxFrame,soccerFxUv,soccerFxForEvent,soccerBallLanded,soccerV24Url} from './soccer-v24.mjs?v=island-v2-20261107-21';
+import {SOCCER_FX_SPRITES,soccerFxFrame,soccerFxUv,soccerFxForEvent,soccerBallLanded,soccerV24Url} from './soccer-v24.mjs?v=island-v2-20261107-23';
 
 const POOL={'landing-turf':3,'slide-turf':3,'goal-confetti':2,'goal-net-ripple':1,'click-ring':2,'power-kick':2};
 const GROUND=new Set(['click-ring','selected-player-ring']);
@@ -75,7 +75,7 @@ export function createSoccerFxV1({scene,config,track=x=>x,fetchTexture=url=>new 
     get ringActive(){return status==='ready'&&ring!==null;},
     /** Drained match events (soccer-session -> view.noteEvent), handled at the next update with the then-current positions. */
     noteEvent(event){if(event&&pending.length<32)pending.push(event);},
-    update(s,dt,{quality=0,camera=null,markers=true,kitGoals=false,controlled=null,calm=false}={}){
+    update(s,dt,{quality=0,camera=null,markers=true,kitGoals=false,controlled=null,calm=false,ringScale=1}={}){
       if(disposed||status!=='ready')return;
       const reduced=calm||motionPreference?.matches===true,economy=quality>=2;
       for(const event of pending.splice(0)){
@@ -102,7 +102,7 @@ export function createSoccerFxV1({scene,config,track=x=>x,fetchTexture=url=>new 
       for(const n of netPlanes){n.age+=Math.max(0,dt);const hold=1.1;n.plane.visible=kitGoals&&n.age<n.spec.seconds+hold;if(!n.plane.visible)continue;active++;
         frameUv(n.texture,n.spec,Math.min(n.age,n.spec.seconds-1e-3));n.plane.material.opacity=.85*(n.age<n.spec.seconds?1:Math.max(0,1-(n.age-n.spec.seconds)/hold));}
       // selection ring under the controlled player (markers off during the show's cuts, as the old selector)
-      if(ring){ringAge+=Math.max(0,dt);const c=controlled||s.players[s.controlled];ring.mesh.visible=Boolean(markers&&c);if(ring.mesh.visible){ring.mesh.position.set(c.x,.05,c.z);const grow=1+Math.max(0,s.selectionTime||0)*.35;ring.mesh.scale.set(grow,grow,1);frameUv(ring.texture,ring.spec,reduced?0:ringAge);active++;}}
+      if(ring){ringAge+=Math.max(0,dt);const c=controlled||s.players[s.controlled];ring.mesh.visible=Boolean(markers&&c);if(ring.mesh.visible){ring.mesh.position.set(c.x,.05,c.z);const grow=(1+Math.max(0,s.selectionTime||0)*.35)*ringScale;ring.mesh.scale.set(grow,grow,1);frameUv(ring.texture,ring.spec,reduced?0:ringAge);active++;}}
       // trail: a free ball faster than 12 m/s (the old ribbon's rule), at most 140 ms of flight, tapered, U scrolling
       if(trail){const b=s.ball,speed=Math.hypot(b.vx||0,b.vz||0),show=!economy&&!reduced&&(b.owner===null||b.owner===undefined)&&speed>12;trail.mesh.visible=show;
         if(show){const ux=-(b.vz||0)/speed,uz=(b.vx||0)/speed,g=config.physics.gravity??12;

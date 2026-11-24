@@ -1,8 +1,8 @@
-import {kidUx, kidUxStyle, kidSpeak} from '../kid-ux.mjs?v=island-v2-20261107-21';
-import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-21';
-import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-21';
-import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-21';
-import {drawNavalLockHud} from './naval-lockon-hud.mjs?v=island-v2-20261107-21';
+import {kidUx, kidUxStyle, kidSpeak} from '../kid-ux.mjs?v=island-v2-20261107-23';
+import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-23';
+import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-23';
+import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-23';
+import {drawNavalLockHud} from './naval-lockon-hud.mjs?v=island-v2-20261107-23';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -15,6 +15,11 @@ const weaponSpeech = [
  'פָּגָז אֶחָד עָף מַהֵר.', 'הַטִּיל עוֹקֵב אַחֲרֵי הַמַּטָּרָה.', 'הַטּוֹרְפֵּדוֹ שָׁט עַל הַמַּיִם.',
  'הַמּוֹקֵשׁ מְחַכֶּה בַּנָּתִיב.', 'שְׁלוֹשָׁה פְגָזִים מְכַסִּים שֶׁטַח רָחָב.', 'עֶרְכַּת הַתִּקּוּן מְתַקֶּנֶת אֶת הַסְּפִינָה.',
 ];
+/** v24.9 (Roy on the phone, 22/11/2026: "why does he talk during the ships game? it is not supposed to be like that"): the only spoken voice
+ * of the naval battle was this picker, which read the weapon's sentence aloud (device speech synthesis, kidSpeak) at every weapon choice.
+ * The battle is silent now: no speech call at all (the lock, radar and "slow down" messages were always text only, the sound effects stay,
+ * and the picker keeps its small written hint). ?navalVoice=1 brings the spoken weapon sentence back. */
+export function navalVoiceEnabled(search=globalThis.location?.search||''){try{return new URLSearchParams(search).get('navalVoice')==='1';}catch{return false;}}
 const navalKidPickerStyle = `
 .game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .naval-picked-name{display:block;font-size:14px;line-height:17px;color:white}
 .game-screen[data-game=navalDuel] .naval-adventure-controls[data-kid-picker] .naval-weapon-picker{width:146px;min-width:146px;background:#092a3c}
@@ -214,7 +219,7 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
 /** All six original weapon buttons remain in an expandable dock. */
 export function mountNavalWeaponPicker(ctx,getModel){
   const controls=ctx.controls,rack=controls.querySelector('.ammo-rack');if(!rack)return {update(){},dispose(){}};
-  const kidPicker=kidUx('034');
+  const kidPicker=kidUx('034');const voice=navalVoiceEnabled();
   if(kidPicker){kidUxStyle('034',navalKidPickerStyle);controls.dataset.kidPicker='';}
   const fireIcon=controls.querySelector('#shoot .game-icon'),originalFire=fireIcon?.innerHTML;if(fireIcon)fireIcon.innerHTML='<path d="m20 29 29-17 5 8-29 17Z" fill="currentColor"/><path d="m45 10 4-2 8 13-4 2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M22 36h12l8 14H12Z" fill="currentColor"/><path d="M10 53h36" stroke="currentColor" stroke-width="3"/><path d="m55 8 5-5M57 29l6 1" stroke="currentColor" stroke-width="2"/>';
   const events=new AbortController(),picker=document.createElement('button'),icon=document.createElement('span'),count=document.createElement('span'),name=document.createElement('span'),copy=document.createElement('span'),arrow=document.createElement('span'),hint=document.createElement('span'),fire=controls.querySelector('#shoot'),originalFireLabel=fire?.getAttribute('aria-label'),originalButtons=[];
@@ -227,7 +232,7 @@ export function mountNavalWeaponPicker(ctx,getModel){
   picker.addEventListener('click',()=>expand(!open),{signal:events.signal});
   function choose(event) {
     const button=event.target.closest('[data-ammo-index]');
-    if(kidPicker&&button&&!button.disabled&&open){
+    if(kidPicker&&voice&&button&&!button.disabled&&open){
       try { if(localStorage.getItem('island.sound')!=='off')kidSpeak(weaponSpeech[Number(button.dataset.ammoIndex)]); } catch { /* drawings remain */ }
     }
     if(button||event.type==='pointerup')expand(false);

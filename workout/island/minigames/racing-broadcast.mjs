@@ -5,8 +5,8 @@
 // tower lists every car with position, team colour, number, the gap to the car ahead in seconds, a green/red arrow on a position change and a
 // purple mark for the fastest lap; lower-third cards announce the lap, an overtake and a new fastest lap; the results page lists all finishers
 // with their gap to the winner. A good phone racing game keeps the tower short on the left, never over the wheel or the buttons.
-import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-21';
-import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-21';
+import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-23';
+import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-23';
 
 export const broadcastEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingBroadcast')!=='0';
 export const COUNTDOWN=3,LIGHTS=5,LIGHT_STEP=.5,GO_SHOW=1.2,INTRO_SECONDS=4,PODIUM_SECONDS=8,START_QUIET=2,CARD_SECONDS=1.7;
@@ -116,9 +116,11 @@ function chip(row,withName=true,art=false){const c=node('span','rb-chip');c.styl
 
 /** The broadcast layer of one race. update(state, dt, input) every frame after the view is ready; holding() is true while the intro card is up
  * (the session does not step the model then); podium(state, done) replaces the plain podium. */
-export function createBroadcast({stage,model,league=false,signal=null,art=broadcastArtEnabled()}){
+// racing-v24.9: showCards=false (the session's default unless ?racingText=old) never shows the card in the middle of the screen; card() gives the current one to the
+// session, which shows it as a small chip in the corner.
+export function createBroadcast({stage,model,league=false,signal=null,art=broadcastArtEnabled(),showCards=true}){
  const track=model.track,trackLength=track.length,tracker=createGapTracker(),watch=createRankWatch(),cards=createCards();
- let introT=0,introDone=false,fastest=null,lapsSeen=0,disposed=false,prevLights=-1;
+ let introT=0,introDone=false,fastest=null,lapsSeen=0,disposed=false,prevLights=-1,shown=null;
  const lights=node('div','racing-lights');lights.setAttribute('role','img');lights.setAttribute('aria-label','רמזורי זינוק');
  const lamps=[];for(let i=0;i<LIGHTS;i++){const l=node('i','rb-lamp');lights.append(l);lamps.push(l);}
  const lightLabel=node('span','rb-lights-label','מוכנים');lights.append(lightLabel);const early=node('span','rb-early','חכו שהאורות ייכבו');early.hidden=true;lights.append(early);
@@ -146,7 +148,7 @@ export function createBroadcast({stage,model,league=false,signal=null,art=broadc
   renderLights(state);
   if(state.phase==='racing'||state.phase==='finished'){tracker.record(state);
    const changes=watch.update(state,now),ev=broadcastEvents(state,{changes,prevFastest:fastest,prevLaps:lapsSeen});fastest=ev.fastest;lapsSeen=ev.laps;for(const c of ev.cards)cards.push(c,now);}
-  const c=cards.current(now);card.hidden=!c;if(c){if(card.dataset.kind!==c.kind||cardTitle.textContent!==c.title){card.dataset.kind=c.kind;cardTitle.textContent=c.title;}cardSub.textContent=c.sub||'';}
+  const c=cards.current(now);shown=c;card.hidden=!c||!showCards;if(c&&showCards){if(card.dataset.kind!==c.kind||cardTitle.textContent!==c.title){card.dataset.kind=c.kind;cardTitle.textContent=c.title;}cardSub.textContent=c.sub||'';}
  }
  /** The full result page: three steps and the whole classification; tap or the button continues, or PODIUM_SECONDS pass. */
  function podium(state,done){
@@ -167,5 +169,5 @@ export function createBroadcast({stage,model,league=false,signal=null,art=broadc
  }
  /** racing-broadcast-v1: how many of the 3D gantry's lamps are lit (always 0 with the art off, so the old view never gets a lamp call that does anything). */
  const gantryLamps=state=>art?litCount(startLights(state)):0;
- return {update,holding:()=>!introDone,podium,lamps:gantryLamps,art,tracker,watch,fastest:()=>fastest,trackLength,dispose(){disposed=true;lights.remove();card.remove();intro.remove();}};
+ return {update,card:()=>shown,holding:()=>!introDone,podium,lamps:gantryLamps,art,tracker,watch,fastest:()=>fastest,trackLength,dispose(){disposed=true;lights.remove();card.remove();intro.remove();}};
 }

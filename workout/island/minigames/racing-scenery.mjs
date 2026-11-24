@@ -1,4 +1,4 @@
-import {createRacingRoadside} from './racing-roadside.mjs?v=island-v2-20261107-21';
+import {createRacingRoadside} from './racing-roadside.mjs?v=island-v2-20261107-23';
 /** Original, instanced roadside scenery. The view owns every registered resource. */
 // racing-v23: clear>0 (no walls) keeps bushes, rocks, tufts and the grass mounds that far beyond the asphalt; 0 = the old layout
 // racing-v24.5: a mound keeps its whole rotated footprint (the diagonal of sx, sz) out of the zone: on the round circuits one mound's corner reached 8.2 m (ruins, tier 1)

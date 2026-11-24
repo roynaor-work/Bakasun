@@ -1,6 +1,6 @@
-import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-v2-20261107-21';
-import {cityBlueprint,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-21';
-import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-21';
+import {CITY_DEPARTMENTS,CITY_ZONES} from '../engine/city-management.mjs?v=island-v2-20261107-23';
+import {cityBlueprint,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-23';
+import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-23';
 
 kidUxStyle('014', `
   .city-planning-overlay .city-mode button,.city-planning-overlay .city-tab{min-height:48px;font-size:14px}

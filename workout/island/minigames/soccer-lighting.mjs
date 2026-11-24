@@ -1,4 +1,5 @@
 import * as T from '../vendor/three.module.js';
+import {SOCCER_LOOK249} from './soccer-look249.mjs';
 
 /** Late-afternoon sun: warmer key from a lower angle (longer, softer player shadows), cool sky fill. One sun/shadow pass. Only the original players, ball and goal cast shadows.
  * This is deliberately independent of gameplay and of the city's lighting. */
@@ -10,7 +11,8 @@ export function createSoccerLighting(scene,renderer,config){
  const extent=Math.hypot(config.pitch.length,config.pitch.width)/2+3,camera=sun.shadow.camera;
  Object.assign(camera,{left:-extent,right:extent,top:extent,bottom:-extent,near:1,far:75});camera.updateProjectionMatrix();
  sun.shadow.mapSize.set(2048,2048);sun.shadow.bias=-.0002;sun.shadow.normalBias=.025;sun.shadow.radius=3;
- const fill=new T.DirectionalLight('#a9c8ee',.5);fill.position.set(16,10,14);
+ // v24.9 look (`?soccerLook=0`): a stronger, more neutral fill from the broadcast camera's side, so faces and shirt fronts are not in shadow
+ const fill=config.v249Look?new T.DirectionalLight(SOCCER_LOOK249.fillColor,SOCCER_LOOK249.fill):new T.DirectionalLight('#a9c8ee',.5);fill.position.set(16,10,14);
  scene.add(ambient,sun,sun.target,fill);let quality=0,disposed=false;
  function setQuality(level){
   quality=Math.max(0,Math.min(3,Math.floor(level)));sun.castShadow=quality<2;renderer.shadowMap.enabled=quality<2;

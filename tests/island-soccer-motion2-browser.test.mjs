@@ -1,18 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/island-browser.mjs';
 import {waitForGameStart} from '../workout/island/tests/shell-ready.mjs';
 import {SOCCER_RESTART_SEQUENCES} from '../workout/island/minigames/soccer-restart-motion.mjs';
+import {SOCCER_V24_RESTARTS} from '../workout/island/minigames/soccer-v24.mjs';
+import {applySoccerFull} from '../workout/island/minigames/soccer-full.mjs';
 
 const enabled=process.env.ISLAND_SOCCER_BROWSER==='1';
 const output=process.env.ISLAND_SOCCER_RESTART_DIR||process.env.ISLAND_SOCCER_AUDIT_DIR||fileURLToPath(new URL('../../../outputs/soccer-fixes-20261101/final-restarts/',import.meta.url));
 const executablePath=process.env.ISLAND_CHROME||process.env.CHROMIUM_PATH||(process.platform==='win32'?'C:/Program Files/Google/Chrome/Application/chrome.exe':undefined);
 const physicalTypes=['throw','pass','loft','shot'];
+const fullPitch=applySoccerFull(JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.soccer).pitch;
 
-test('soccer motion2 native restart contacts and releases under shipped index CSP, both phone orientations',{skip:!enabled,timeout:900000},async t=>{
+test('soccer motion2 native restart contacts and releases under shipped index CSP, both phone orientations',{skip:!enabled,timeout:1500000},async t=>{
  const server=await serveIsland('/workout/island/'),browser=await(await islandChromium()).launch({executablePath,headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']}),reports=[];
  await mkdir(output,{recursive:true});
  try{
@@ -31,7 +34,7 @@ test('soccer motion2 native restart contacts and releases under shipped index CS
    const snapshot=()=>page.evaluate(()=>window.__island.games.current.session.snapshot);
    const events=()=>page.evaluate(()=>window.__soccerRestartEvents||[]);
    const until=async(predicate,label,ms=34,attempts=500)=>{for(let i=0;i<attempts;i++){const s=await snapshot();if(predicate(s))return s;await page.clock.runFor(ms);}assert.fail(label);};
-   const shot=async name=>{const before=await page.evaluate(()=>JSON.stringify(window.__island.games.current.session.debug.model.getState()));await page.screenshot({path:path.join(output,`${tag}-${name}.png`)});assert.equal(await page.evaluate(()=>JSON.stringify(window.__island.games.current.session.debug.model.getState())),before,'screenshots cannot advance simulation');};
+   const shot=async name=>{const before=await page.evaluate(()=>JSON.stringify(window.__island.games.current.session.debug.model.getState()));/* v24, 11 v 11: a software-GL frame of 22 players is slow and the capture waits for the frames already queued, so it gets more than the default 30 s. */await page.screenshot({path:path.join(output,`${tag}-${name}.png`),timeout:180000});assert.equal(await page.evaluate(()=>JSON.stringify(window.__island.games.current.session.debug.model.getState())),before,'screenshots cannot advance simulation');};
    const advanceTo=async(taker,target)=>{const s=await snapshot(),elapsed=s.players[taker].restartMotion.elapsed;if(target>elapsed)await page.clock.runFor(Math.floor((target-elapsed)*1000));return snapshot();};
    try{
     await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island);
@@ -43,14 +46,19 @@ test('soccer motion2 native restart contacts and releases under shipped index CS
     if(role==='keeper'){
      // The league exposes field play. This is an explicitly labeled goalkeeper
      // session fixture on the real shell, assets, RAF and controls, not a menu option.
-     await page.evaluate(async()=>{const {engine,games}=window.__island,{startSoccer}=await import(new URL('./minigames/soccer-session.mjs',location.href));const dialog=document.querySelector('.game-screen'),old=dialog.querySelector('canvas'),canvas=old.cloneNode(false),controls=dialog.querySelector('.game-controls'),status=dialog.querySelector('.game-status');games.current.session.dispose();old.replaceWith(canvas);controls.replaceChildren();for(const node of dialog.querySelectorAll('.soccer-scoreboard,.soccer-goal-banner,.soccer-phase-banner,.soccer-loading,.soccer-fixture,.soccer-action-feedback,.soccer-edge-arrow'))node.remove();const session=startSoccer({engine,state:engine.state,balance:engine.data.config.minigames.soccer,canvas,controls,status,t:games.t,role:'keeper',soccerCard:engine.state.soccerCard,difficulty:'normal',level:1,seed:57,finish(){},cancel(){},onError(id){throw Error(id);}});games.current.session=session;games.shell.bind(session);});
+     // The module is imported in its own call and kept on the page; the fixture itself is then synchronous. A dynamic import awaited inside one long
+     // evaluate was sometimes lost by the browser ("Resulting promise was garbage collected", CI); the import alone can simply be asked for again.
+     for(let attempt=1;;attempt++){try{await page.evaluate(async()=>{window.__soccerSessionModule=await import(new URL('./minigames/soccer-session.mjs',location.href));});break;}catch(error){if(attempt>=3||!/garbage collected/.test(String(error)))throw error;}}
+     await page.evaluate(()=>{const {engine,games}=window.__island,{startSoccer}=window.__soccerSessionModule;const dialog=document.querySelector('.game-screen'),old=dialog.querySelector('canvas'),canvas=old.cloneNode(false),controls=dialog.querySelector('.game-controls'),status=dialog.querySelector('.game-status');games.current.session.dispose();old.replaceWith(canvas);controls.replaceChildren();for(const node of dialog.querySelectorAll('.soccer-scoreboard,.soccer-goal-banner,.soccer-phase-banner,.soccer-loading,.soccer-fixture,.soccer-action-feedback,.soccer-edge-arrow'))node.remove();const session=startSoccer({engine,state:engine.state,balance:engine.data.config.minigames.soccer,canvas,controls,status,t:games.t,role:'keeper',soccerCard:engine.state.soccerCard,difficulty:'normal',level:1,seed:57,finish(){},cancel(){},onError(id){throw Error(id);}});games.current.session=session;games.shell.bind(session);});
      await page.waitForLoadState('networkidle');await until(s=>s.contractsStatus==='ready'&&s.renderMetrics?.assetStatus==='ready','keeper fixture assets and controls must complete',50,400);report.keeperSessionFixture=true;
     }
-    let natural=await snapshot();assert.equal(natural.role,role);assert.equal(natural.renderMetrics.assetStats.kind,'design-glb-v2');assert.ok(natural.renderMetrics.assetStats.clips.includes('throwIn'));assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
+    let natural=await snapshot();assert.equal(natural.role,role);/* v24: the Codex shared body v2 (athlete-body-v2.mjs) is the default set. */assert.equal(natural.renderMetrics.assetStats.kind,'athlete-body-v2');assert.ok(natural.renderMetrics.assetStats.clips.includes('throwIn'));assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
     await shot(role==='field'?'natural-playing':'keeper-fixture-playing');report.natural={elapsed:natural.elapsed,players:natural.players.length,assetKind:natural.renderMetrics.assetStats.kind};
     await page.evaluate(()=>{window.__soccerRestartEvents=[];const m=window.__island.games.current.session.debug.model,drain=m.drainEvents;m.drainEvents=function(){const e=drain.call(this);window.__soccerRestartEvents.push(...e);return e;};});
-    const fixture=async kind=>page.evaluate(kind=>{
-     const q=window.__island.games.current.session,m=q.debug.model,s=m.getState(),c=window.__island.data.config.minigames.soccer,hx=c.pitch.length/2,hz=c.pitch.width/2;m.clearInput();q.debug.poseCamera(null);
+    // Soccer full (14/11): the match is played on the 105 x 68 m pitch (soccer-session.mjs applies applySoccerFull to the shipped balance), so the
+    // fixture places the ball and the players on the pitch of the running match (fullPitch), not on the small pitch of data/config.json.
+    const fixture=async kind=>page.evaluate(({kind,fullPitch})=>{
+     const q=window.__island.games.current.session,m=q.debug.model,s=m.getState(),c=window.__island.data.config.minigames.soccer,full=new URLSearchParams(location.search).get('soccerFull')!=='0',hx=(full?fullPitch.length:c.pitch.length)/2,hz=(full?fullPitch.width:c.pitch.width)/2;m.clearInput();q.debug.poseCamera(null);
      Object.assign(s,{phase:'playing',phaseTime:0,attackDir:1,controlled:s.role==='keeper'?2:0,switchCooldown:100,passTarget:null,restart:null,charging:false,charge:0,chargeKind:null,mode:'attack'});
      for(const p of s.players)Object.assign(p,{x:(p.team?1:-1)*hx*.45,z:(p.id%3-1)*hz*.55,vx:0,vz:0,fx:p.team?-1:1,fz:0,cooldown:100,think:100,recover:0,slideTime:0,headerTime:0,kickTime:0,stealTime:0,throwTime:0,diveTime:0,catchTime:0,hands:false,hold:0,restartMotion:null,distribution:null});
      Object.assign(s.players[2],{x:-hx+2,z:0});Object.assign(s.players[5],{x:hx-2,z:0});
@@ -60,7 +68,7 @@ test('soccer motion2 native restart contacts and releases under shipped index CS
      Object.assign(s.ball,{owner:null,x:kind==='corner'?hx-.05:kind==='goalKick'?-hx+.05:3,z:kind==='throwIn'?hz-.05:6,y:c.physics.ballRadius,vx:kind==='corner'?30:kind==='goalKick'?-30:0,vz:kind==='throwIn'?30:0,vy:0,curve:0,grace:100,lastTeam:1,lastPlayer:3,flight:null,shot:null,thrower:null});
      if(kind.startsWith('keeper')){const p=s.players[2];Object.assign(p,{cooldown:0,hands:true});Object.assign(s.ball,{owner:2,x:p.x+c.goalkeeping.holdForward,z:0,y:c.goalkeeping.holdHeight,vx:0,vz:0,vy:0,lastTeam:0,lastPlayer:2});}
      window.__soccerRestartEvents.length=0;
-    },kind);
+    },{kind,fullPitch});
     for(const kind of role==='field'?['throwIn','corner','goalKick']:['keeperThrow','keeperPunt']){
      const profile=SOCCER_RESTART_SEQUENCES[kind];await fixture(kind);await page.clock.runFor(34);let s=await snapshot(),taker;
      if(role==='field'){assert.equal(s.restart?.type,kind);s=await until(s=>s.phase==='restartReady',`${kind} walk/organization must finish`);taker=s.restart.player;}else taker=2;
@@ -77,7 +85,7 @@ test('soccer motion2 native restart contacts and releases under shipped index CS
      }
      const fixedStep=await page.evaluate(()=>window.__island.data.config.minigames.soccer.match.fixedStep),lastBeforeContact=Math.floor((profile.contact-1e-7)/fixedStep)*fixedStep;
      await advanceTo(taker,lastBeforeContact-fixedStep);
-     s=await until(s=>s.players[taker].restartMotion.elapsed+1e-8>=lastBeforeContact,'last fixed sample before authored contact',4,30);assert.ok(s.players[taker].restartMotion.elapsed<profile.contact);assert.equal(s.ball.owner,taker);assert.equal((await events()).filter(e=>physicalTypes.includes(e.type)&&e.player===taker).length,0);assert.equal(s.renderMetrics.poses[taker].clip,kind);
+     s=await until(s=>s.players[taker].restartMotion.elapsed+1e-8>=lastBeforeContact,'last fixed sample before authored contact',4,30);assert.ok(s.players[taker].restartMotion.elapsed<profile.contact);assert.equal(s.ball.owner,taker);assert.equal((await events()).filter(e=>physicalTypes.includes(e.type)&&e.player===taker).length,0);/* v24: a goal kick, a keeper's throw and a throw-in scrub the Codex v13 clip on the same restart clock (SOCCER_V24_RESTARTS); the corner and the punt keep theirs. */assert.equal(s.renderMetrics.poses[taker].clip,SOCCER_V24_RESTARTS[kind]?.clip??kind);
      if(kind==='throwIn'||kind==='keeperThrow'){
       const binding=s.renderMetrics.restartAttachment;assert.equal(binding?.kind,kind);assert.ok(Math.abs(binding.rightDistance-binding.radius)<.02);if(kind==='throwIn')assert.ok(Math.abs(binding.leftDistance-binding.radius)<.02);
      }else{const strike=s.renderMetrics.restartStrike;assert.equal(strike?.kind,kind);assert.ok(strike.footDistance<=strike.radius+.1,`${kind} actual toe distance ${strike.footDistance}`);}

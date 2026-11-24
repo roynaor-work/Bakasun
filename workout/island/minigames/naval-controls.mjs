@@ -1,9 +1,10 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-21';
-import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-21';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-21';
-import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-21';
-import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-21';
-import {navalAimV24,navalSubV24,navalV24Config} from './naval-v24.mjs?v=island-v2-20261107-21';
+import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-23';
+import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-23';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-23';
+import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-23';
+import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-23';
+import {navalHarderPick} from './naval-harder.mjs?v=island-v2-20261107-23';
+import {navalAimV24,navalSubV24,navalV24Config} from './naval-v24.mjs?v=island-v2-20261107-23';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -100,7 +101,7 @@ export function createNavalInput(ctx,getModel,getView){
  // turret follows the lock, so a hold on Fire only fires (release on the X still cancels). `?navalLock=0` restores v22.
  const lockOn=navalLockOn(),lc=navalLockConfig(balance);let press=null,lockEvent=null,lockTapEvent=null,lockSmartEvent=false,lockCycleEvent=0,torpedoEvent=false,lockSwipe=null;
  const onButton=t=>Boolean(t?.closest?.('button,[data-game-control],.naval-weapon-picker'));
- const pickAt=(x,y)=>{const m=getModel();if(!m)return null;const r=canvas.getBoundingClientRect();return navalLockPick(m.enemies,(px,pz,py)=>project(m,px,pz,py),{x:x-r.left,y:y-r.top},r.width,r.height,lc,balance);};
+ const pickAt=(x,y)=>{const m=getModel();if(!m)return null;const r=canvas.getBoundingClientRect();return navalLockPick(m.enemies,(px,pz,py)=>project(m,px,pz,py),{x:x-r.left,y:y-r.top},r.width,r.height,navalHarderPick(lc,m.harder),balance);};
  const buzz=()=>{try{if(globalThis.localStorage?.getItem('island.naval.vibration')==='off')return;globalThis.navigator?.vibrate?.(22);}catch{}};
  const project=(m,x,z,y=0)=>getView()?.projectTarget(x,z,y)||m.screenPoint(x,z,y);
  const choose=point=>{const m=getModel(),r=canvas.getBoundingClientRect();return m&&navalVisibleTarget(m,(x,z,y)=>project(m,x,z,y),r.width,r.height,point,m.selectedTargetIndex);};

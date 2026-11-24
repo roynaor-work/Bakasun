@@ -1,4 +1,4 @@
-import { kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-21';
+import { kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-23';
 
 kidUxStyle('001', `
   .modal.modal[data-game-library] .adventure-game-card .adventure-enter {

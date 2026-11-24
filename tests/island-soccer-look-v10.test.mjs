@@ -58,7 +58,10 @@ test('no sky inside the match camera at pitch corners, goal ends and sidelines, 
    const magentaShare=async()=>{const png=(await page.screenshot()).toString('base64');return page.evaluate(async b64=>{const img=new Image();img.src='data:image/png;base64,'+b64;await img.decode();const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const x=c.getContext('2d');x.drawImage(img,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let n=0;for(let i=0;i<d.length;i+=4)if(d[i]>200&&d[i+2]>200&&d[i+1]<80)n++;return n/(c.width*c.height);},png);};
    const moveTo=(x,z)=>page.evaluate(([x,z])=>{const s=window.__island.games.current.session.debug.model.getState();s.ball.x=x;s.ball.z=z;s.ball.vx=s.ball.vz=0;s.ball.owner=null;const p=s.players[s.controlled];p.x=x;p.z=z;},[x,z]);
    await page.evaluate(()=>window.__island.games.current.session.debug.view.skyProbe(true));
-   for(const [name,x,z] of spots){await moveTo(x,z);await page.waitForTimeout(2200);assert.equal(await magentaShare(),0,`${name}: backdrop visible`);}
+   // The 11 v 11 camera follows the ball with easing and a software-GL frame is slow: 2.2 s of real time is not always enough for it to arrive
+   // (CI: 3.8% backdrop at the centre while the camera was still coming back from the touchline). The view is judged once the camera has settled:
+   // up to five looks, 2.2 s apart; a real hole in the surround stays visible on every one of them.
+   for(const [name,x,z] of spots){await moveTo(x,z);let share=1;for(let look=0;look<5&&share>0;look++){await page.waitForTimeout(2200);share=await magentaShare();}assert.equal(share,0,`${name}: backdrop visible`);}
    // Negative control: without the surround the same probe finds uncovered pixels, so the check can fail.
    await page.evaluate(()=>window.__island.games.current.session.debug.view.skyProbe(true,false));
    let worst=0;for(const [name,x,z] of spots.slice(0,2)){await moveTo(x,z);await page.waitForTimeout(2200);worst=Math.max(worst,await magentaShare());}

@@ -19,7 +19,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const round=n=>Math.round(n*1000)/1000;
 const finite=n=>Number.isFinite(n)?n:0;
 const master=search=>read('soccerV241',search)!=='0';
-export const SOCCER_V241_TAG='island-v2-20261107-21';
+export const SOCCER_V241_TAG='island-v2-20261107-23';
 
 // ---- switches ----------------------------------------------------------------------------------------------------------------------------
 /** The radar comes back only when asked (`?soccerRadar=1`) or with every v24.1 change off. */

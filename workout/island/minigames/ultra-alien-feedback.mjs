@@ -1,4 +1,5 @@
 import {drawV10Pickup} from './alien-v10-draw.mjs';
+import {alienTextCompact} from './alien-v249.mjs';
 const TAU=Math.PI*2;
 const clamp=(n,lo=0,hi=1)=>Math.max(lo,Math.min(hi,Number.isFinite(n)?n:lo));
 export const ALIEN_PICKUPS=Object.freeze([
@@ -73,6 +74,14 @@ function inScreenPixels(p,config,draw){
 }
 function bossHud(p,model,config,balance){
  const boss=alienBossReadout(model,balance.balance?.minBossSeconds??16);if(!boss)return;
+ // v24.9 (?alienText=old keeps the plate below): one thin bar at the top edge with a short label, no plate over the play area.
+ if(alienTextCompact()){inScreenPixels(p,config,(w,h)=>{
+  const width=Math.min(220,w*.26),x=(w-width)/2,y=24,label=boss.guard?.active?boss.guard.label:`בוס · שלב ${boss.phase}`;
+  p.fillStyle='#3d2631';p.fillRect(x,y,width,4);p.fillStyle=boss.phase===3?'#ef8f87':'#dfba80';p.fillRect(x,y,width*boss.ratio,4);
+  p.fillStyle='#08121c';for(let i=1;i<3;i++)p.fillRect(x+width*i/3-1,y,2,4);
+  if(boss.guard?.active){p.fillStyle='#90caff';p.fillRect(x,y+5,width*boss.guard.progress,1.5);}
+  p.font='600 10px Assistant, Arial, sans-serif';p.textAlign='right';p.textBaseline='middle';p.direction='rtl';p.fillStyle=boss.guard?.active?'#a8dcff':'#f2d6aa';p.fillText(label,x-7,y+2);
+ });return;}
  inScreenPixels(p,config,(w,h)=>{
   const width=Math.min(310,w*.36),x=(w-width)/2,y=34;
   p.fillStyle='#071421d9';p.fillRect(x-9,y-12,width+18,43);p.strokeStyle='#d9b17a66';p.lineWidth=1;p.strokeRect(x-9,y-12,width+18,43);

@@ -1,0 +1,230 @@
+{
+ "clock": "Playwright page.clock; times are model time",
+ "viewport": "844x390 hasTouch isMobile, SwiftShader",
+ "text": {
+  "playArea": "x 22%..78%, y 66px..bottom",
+  "before": {
+   "mode": "before",
+   "samples": 660,
+   "inPlay": {
+    "banner": 7.87,
+    "caption": 10.56
+   },
+   "maxBox": {
+    "banner": {
+     "w": 170,
+     "h": 57,
+     "top": 64,
+     "text": "🚀 ••••• → 🛸וולקן"
+    },
+    "notice": {
+     "w": 92,
+     "h": 32,
+     "top": 34,
+     "text": "פגיעה בחללית"
+    },
+    "caption": {
+     "w": 74,
+     "h": 22,
+     "top": 191,
+     "text": "החלפת נשק"
+    }
+   },
+   "firstSeconds": {},
+   "at8s": [
+    {
+     "name": "banner",
+     "text": "🚀 · · · → 🛸ירי רגיל",
+     "w": 150,
+     "h": 57,
+     "top": 64,
+     "left": 347,
+     "inPlay": true
+    },
+    {
+     "name": "caption",
+     "text": "החלפת נשק",
+     "w": 74,
+     "h": 22,
+     "top": 191,
+     "left": 621,
+     "inPlay": true
+    }
+   ]
+  },
+  "after": {
+   "mode": "after",
+   "samples": 660,
+   "inPlay": {},
+   "maxBox": {
+    "notice": {
+     "w": 35,
+     "h": 17,
+     "top": 30,
+     "text": "גל 1"
+    },
+    "caption": {
+     "w": 61,
+     "h": 17,
+     "top": 160,
+     "text": "החלפת נשק"
+    }
+   },
+   "firstSeconds": {},
+   "at8s": []
+  }
+ },
+ "fails": [],
+ "laser": {
+  "before": {
+   "mode": "before",
+   "view": "three",
+   "weapon": 0,
+   "tokenAt": null,
+   "laserAt": null,
+   "beamAt": null,
+   "chip": null,
+   "beamPixels": null,
+   "litSeconds": 0,
+   "chipSeconds": 0,
+   "snapshot": {
+    "laserBurst": {
+     "left": 0,
+     "lit": 0,
+     "presses": 0,
+     "ticks": 0,
+     "hits": 0,
+     "kills": 0
+    },
+    "laserChip": null,
+    "time": 19.3,
+    "wave": 2
+   }
+  },
+  "after": {
+   "mode": "after",
+   "view": "three",
+   "weapon": 0,
+   "tokenAt": 5.01,
+   "laserAt": 8.1,
+   "beamAt": 8.1,
+   "chip": {
+    "text": "8",
+    "box": {
+     "left": 10,
+     "top": 30,
+     "w": 42,
+     "h": 22
+    },
+    "at": 8.1
+   },
+   "beamPixels": {
+    "x": 249.3,
+    "y": 371.6,
+    "core": [
+     255,
+     255,
+     255,
+     255
+    ],
+    "side": [
+     9,
+     45,
+     63,
+     255
+    ],
+    "cssWidth": 844,
+    "left": 2.5,
+    "muzzleY": 431.6,
+    "top": -40
+   },
+   "litSeconds": 10.5,
+   "chipSeconds": 8,
+   "snapshot": {
+    "laserSeen": {
+     "gifts": 1,
+     "taken": 1,
+     "firstAt": 8.1
+    },
+    "laserBurst": {
+     "left": 0,
+     "lit": 10.48,
+     "presses": 0,
+     "ticks": 93,
+     "hits": 102,
+     "kills": 1
+    },
+    "laserChip": {
+     "visible": false,
+     "seconds": 0,
+     "blink": false,
+     "beam": false,
+     "shown": false,
+     "text": ""
+    },
+    "time": 19.3,
+    "wave": 2
+   }
+  }
+ },
+ "purchase": {
+  "results": [
+   {
+    "ok": true
+   },
+   {
+    "ok": true
+   }
+  ],
+  "weapon": 2
+ },
+ "shots": {
+  "before": {
+   "mode": "before",
+   "weapon": 2,
+   "plain": {
+    "rounds": 61,
+    "hitRounds": 41,
+    "multi": 37,
+    "max": 2
+   },
+   "bonus": {
+    "rounds": 0,
+    "hitRounds": 0,
+    "multi": 0,
+    "max": 0
+   },
+   "vulcan": {
+    "rounds": 0,
+    "hitRounds": 0,
+    "multi": 0,
+    "max": 0
+   },
+   "plainFlyingAfterHit": 864
+  },
+  "after": {
+   "mode": "after",
+   "weapon": 2,
+   "plain": {
+    "rounds": 63,
+    "hitRounds": 44,
+    "multi": 0,
+    "max": 1
+   },
+   "bonus": {
+    "rounds": 0,
+    "hitRounds": 0,
+    "multi": 0,
+    "max": 0
+   },
+   "vulcan": {
+    "rounds": 0,
+    "hitRounds": 0,
+    "multi": 0,
+    "max": 0
+   },
+   "plainFlyingAfterHit": 0
+  }
+ },
+ "note": "three runs (ONLY=text, laser, shots) merged; Chromium SwiftShader, not a phone"
+}

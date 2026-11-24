@@ -1,6 +1,6 @@
-import {runAlpineRaceSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-21';
-import {stageInfo, equipmentFor, RIVALS, STAGE_COUNT} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-21';
-import {stageGoals} from '../minigames/alpine-league-stages.mjs?v=island-v2-20261107-21';
+import {runAlpineRaceSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-23';
+import {stageInfo, equipmentFor, RIVALS, STAGE_COUNT} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-23';
+import {stageGoals} from '../minigames/alpine-league-stages.mjs?v=island-v2-20261107-23';
 
 /** Alpine Rush performance page: runs one race on autopilot through the real session
  * (engine, controls, view, HUD) and reports frame pacing. Query: seconds, stage, seed,

@@ -1,5 +1,5 @@
-import { EPOCH_SEGMENTS, generateCourse, MAX_SEGMENTS, SEGMENT_LENGTH_M } from './alpine-runner-generator/index.mjs?v=island-v2-20261107-21';
-import { alpineRunnerScore } from './alpine-runner-rules.mjs?v=island-v2-20261107-21';
+import { EPOCH_SEGMENTS, generateCourse, MAX_SEGMENTS, SEGMENT_LENGTH_M } from './alpine-runner-generator/index.mjs?v=island-v2-20261107-23';
+import { alpineRunnerScore } from './alpine-runner-rules.mjs?v=island-v2-20261107-23';
 
 const STEP = 1 / 120;
 const LEAD_IN = 32;

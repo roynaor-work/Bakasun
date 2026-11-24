@@ -1,5 +1,5 @@
 // Headless AI-vs-AI gameplay measurement for Street Slam basketball (no browser).
-// Usage: node workout/island/tools/hoops-gameplay-sim.mjs [games=200] [ai=v2|v1] [profile=quick] [out.json]
+// Usage: node workout/island/tools/hoops-gameplay-sim.mjs [games=200] [ai=v2|v1] [profile=quick] [out.json] [motion=0]   (positional values)
 // Each game: both teams on autopilot, real tactics package loaded (as the session does), fixed seeds.
 import {readFileSync,writeFileSync} from 'node:fs';
 import {createHoopsEngine,NO_INPUT} from '../minigames/hoops-engine.mjs';
@@ -9,7 +9,7 @@ const cfg=JSON.parse(readFileSync(new URL('../data/config.json',import.meta.url)
 const tacticsData=compileHoopsTactics(JSON.parse(readFileSync(new URL('../design/tactics/basketball.json',import.meta.url),'utf8')));
 const r2=(n,d=2)=>+n.toFixed(d),pct=(a,b)=>b?r2(100*a/b,1):0;
 
-export function simulate({games=200,ai='v2',profile='quick',difficulty='normal',seedBase=9000,mirror=false}={}){
+export function simulate({games=200,ai='v2',profile='quick',difficulty='normal',seedBase=9000,mirror=false,motion=true}={}){
  const m={games,possessions:0,fga:0,fgm:0,tpa:0,tpm:0,points:0,passes:0,tov:0,steals:0,intercepts:0,blocks:0,rebounds:0,oreb:0,fouls:0,
   travel:0,doubleDribble:0,out:0,shotclock:0,backcourt:0,three:0,shotTypes:{layup:0,dunk:0,jumpshot:0,pullup:0,other:0},zones:{close:0,mid:0,three:0},
   passesBeforeShot:0,shotPossessions:0,pingPong:0,holdTicks:0,holds:0,attackSec:0,wins0:0,diffAbs:0,diff0:0,scores:[],lateralPass:0,contestedLateral:0,holdList:[],tovOwn:0,inboundOut:0,looseOut:0,badPassOut:0,shotClockOver:0,dribbleFails:0};
@@ -18,7 +18,7 @@ export function simulate({games=200,ai='v2',profile='quick',difficulty='normal',
   const config=structuredClone(cfg),clubs=matchTeams(config,initialHoops(config),{stage:1});
   let teams=clubs.teams;
   if(mirror){const b=structuredClone(teams[0]);b.id=b.id+'-b';b.name=b.name+' B';b.look=teams[1].look;b.colors=teams[1].colors;b.roster=structuredClone(teams[0].roster);teams=[teams[0],b];}
-  const e=createHoopsEngine({config,seed:seedBase+g*37,teams,userTeam:0,profile,difficulty,autopilot:true,aiVersion:ai});
+  const e=createHoopsEngine({config,seed:seedBase+g*37,teams,userTeam:0,profile,difficulty,autopilot:true,aiVersion:ai,...(motion?{}:{play:{...config.play,motion:null}})});
   e.setTacticsData(tacticsData);
   const a=e.debug.api,S=e.debug.state;
   let lastInbound=-9999,curTeam=null,start=0,passes=0,shots=0,holdStart=null,holdPlayer=null,pos=0;
@@ -68,6 +68,7 @@ export function simulate({games=200,ai='v2',profile='quick',difficulty='normal',
   simSpeedX:Math.round(steps/((Date.now()-t0)/1000)/60)};
 }
 if(import.meta.url===`file://${process.argv[1]}`){
+ // a fifth argument `motion=0` plays without the v24.9 motion offence (config play.motion)
  const [games,ai,profile,out]=[+process.argv[2]||200,process.argv[3]||'v2',process.argv[4]||'quick',process.argv[5]];
- const r=simulate({games,ai,profile});console.log(JSON.stringify(r,null,1));if(out)writeFileSync(out,JSON.stringify(r,null,1));
+ const r=simulate({games,ai,profile,motion:process.argv[6]!=='motion=0'});console.log(JSON.stringify(r,null,1));if(out)writeFileSync(out,JSON.stringify(r,null,1));
 }

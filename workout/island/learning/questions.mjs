@@ -1,5 +1,5 @@
-import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS,PICTURE_LANGUAGE} from './banks.mjs?v=island-v2-20261107-21';
-import {numberVoice,quantityVoice,pictureRevealVoice} from './spoken-copy.mjs?v=island-v2-20261107-21';
+import {WORDS,RHYMES,ANIMALS,OPPOSITES,SYNONYMS,FACTS,SOUNDS,PICTURE_LANGUAGE} from './banks.mjs?v=island-v2-20261107-23';
+import {numberVoice,quantityVoice,pictureRevealVoice} from './spoken-copy.mjs?v=island-v2-20261107-23';
 export const unpoint = s=>String(s).replace(/[\u0591-\u05c7]/g,'');
 export function shuffled(items,rng=Math.random) {
   const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;

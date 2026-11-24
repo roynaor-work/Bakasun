@@ -182,6 +182,7 @@ export function soccerFxSound(event,s){
     case 'header':case 'clearance':case 'pass':case 'loft':return 'v24/kick-soft';
     case 'post':return event.kind==='crossbar'?'v24/crossbar-hit':'v24/post-hit';
     case 'possession':{const p=s?.players?.[event.player];return p?.role==='keeper'&&p.hands?'v24/keeper-catch':null;}
+    case 'parry':return 'v24/keeper-catch'; // v24.9: a save pushed away (the gloves' sound, no new asset)
     case 'goal':return 'v24/net-rustle';
     default:return null;
   }
