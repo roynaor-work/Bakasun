@@ -101,7 +101,8 @@ test('one button downloads soccer, basketball, ski and racing; status counts the
   await t.context.setOffline(true);
   const offlinePage=await t.context.newPage();offlinePage.setDefaultTimeout(180000);const errors=[];offlinePage.on('pageerror',e=>errors.push(e.message));
   const failed=[];offlinePage.on('requestfailed',r=>{if(!/ERR_ABORTED/.test(r.failure()?.errorText||''))failed.push(r.url()+' '+r.failure()?.errorText);});/* a request cut short when the game closes is not a missing file */
-  await offlinePage.goto(server.url+'?dev=1',{waitUntil:'domcontentloaded'});
+  /* alpineThemes=1: this software-rendered browser is measured as a slow device, and light mode alone would skip the runner's theme pack. */
+  await offlinePage.goto(server.url+'?dev=1&alpineThemes=1',{waitUntil:'domcontentloaded'});
   await offlinePage.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:180000});
   await offlinePage.evaluate(()=>{window.__island.engine.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;});
   for(const [name,id] of Object.entries(GAMES)){
@@ -159,7 +160,7 @@ test('each game renders after a requested asset is blocked by the browser',{skip
   await route.abort('failed');
   intercepted.set(name,url.pathname);
  });
- await boot(t.page,server);
+ await boot(t.page,server,'&alpineRunner=0');/* the blocked ski file belongs to the race */
  for(const [name,id] of Object.entries(GAMES)){
   current=name;
   await play(t.page,name,id);
