@@ -35,7 +35,7 @@ test('v25 packages: every playable game maps to packages that exist, the hub is 
  for(const packs of Object.values(PACKS_OF))for(const p of packs)assert.ok(p in OFFLINE_GAMES&&p in manifest.games,p);
  assert.deepEqual(packsForGames([]),Object.keys(OFFLINE_GAMES).filter(p=>[...ALWAYS_PACKS,...DEFAULT_PACKS].includes(p)));
  assert.deepEqual(packsForGames(['tennis','tennis','boarDefense']),['tennis','boar','city']);
- assert.deepEqual(packsForGames(['alpineRush']),['alpine','alpineLeague','city']);
+ assert.deepEqual(packsForGames(['alpineRush']),['alpine','alpineLeague','alpineRunner','city']);
  assert.ok(packsForGames(['streetSlam']).includes('hoops')&&!packsForGames(['streetSlam']).includes('soccer'));
 });
 
@@ -144,7 +144,7 @@ test('v25 panel texts: package states, summary and storage line',()=>{
  assert.equal(describePack({complete:true},{downloading:{percent:40}}),'בהורדה · 40%');
  assert.equal(describePack({complete:true},{update:{changed:2,bytes:3*1048576}}),'יש עדכון (2 קבצים, 3 MB)');
  const games=Object.fromEntries(Object.keys(OFFLINE_GAMES).map(g=>[g,{complete:g==='soccer'}]));
- assert.match(describeStatus25({supported:true,complete:false,have:10,haveBytes:20*1048576,bytes:97*1048576,shell:{complete:true,have:5,total:5},games}),/האפליקציה שמורה · 1 מתוך 12 משחקים מוכנים · 20 מתוך 97 MB/);
+ assert.match(describeStatus25({supported:true,complete:false,have:10,haveBytes:20*1048576,bytes:97*1048576,shell:{complete:true,have:5,total:5},games}),/האפליקציה שמורה · 1 מתוך 13 משחקים מוכנים · 20 מתוך 97 MB/);
  assert.match(describeStatus25({supported:true,complete:true,bytes:97*1048576,games}),/שמור לגרסה הזו: כל המשחקים במכשיר \(97 MB\)/);
  assert.equal(describeStatus25({supported:false,games:{}}),'ההורדה למכשיר לא זמינה בדפדפן הזה. המשחקים נטענים מהרשת.');
  assert.equal(describeStorage({usage:null,quota:null,persisted:null}),'');

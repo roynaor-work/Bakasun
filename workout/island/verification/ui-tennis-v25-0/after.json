@@ -1,0 +1,373 @@
+{
+ "mode": "after",
+ "query": "",
+ "clock": "Playwright page.clock; times are model time",
+ "hub": {
+  "on": true,
+  "gear": {
+   "box": [
+    68,
+    121,
+    44,
+    44
+   ],
+   "icon": null,
+   "iconLoaded": null,
+   "text": "⚙",
+   "label": "להורים",
+   "fontSize": "22px",
+   "beforeImage": "none"
+  },
+  "coin": {
+   "box": [
+    666,
+    18,
+    24,
+    24
+   ],
+   "icon": "coin",
+   "iconLoaded": true,
+   "text": "",
+   "label": null,
+   "fontSize": "10px",
+   "beforeImage": "none"
+  },
+  "chip": {
+   "box": [
+    614,
+    18,
+    75,
+    24
+   ],
+   "icon": "coin",
+   "iconLoaded": true,
+   "text": "99,225",
+   "label": "מטבעות 99,225",
+   "fontSize": "13px",
+   "beforeImage": "none"
+  }
+ },
+ "tennis": {
+  "motion": {
+   "loaded": true,
+   "clips": [
+    null,
+    null
+   ]
+  },
+  "motion3": {
+   "on": true,
+   "hips": [
+    0,
+    0
+   ],
+   "flipX": [
+    -1,
+    -1
+   ]
+  }
+ },
+ "pauseButton": {
+  "box": [
+   780,
+   8,
+   56,
+   56
+  ],
+  "icon": null,
+  "iconLoaded": null,
+  "text": "השהיה",
+  "label": "השהיה",
+  "fontSize": "0px",
+  "beforeImage": "assets/ui-icons-v2/normal/pause.svg"
+ },
+ "textOnStage": [],
+ "rally": {
+  "swings": 10,
+  "hits": 9,
+  "clips": {
+   "serve_follow_through": 40,
+   "run_left": 41,
+   "backhand_flat_short": 19,
+   "v3:lob:m": 17,
+   "v3:point_win": 95,
+   "v3:defensive_slice:m": 10,
+   "v3:point_disappointment": 31,
+   "forehand_flat_short": 20,
+   "v3:lob": 10,
+   "v3:defensive_slice": 10,
+   "v3:slide_to_ball": 10,
+   "v3:childlike_joy": 37,
+   "v3:lateral_crossover_run:m": 9
+  },
+  "opponentClips": {
+   "run_forward": 205,
+   "v3:serve_return_aggressive:m": 13,
+   "v3:slide_to_ball:m": 3,
+   "run_left": 278,
+   "v3:lateral_crossover_run:m": 226,
+   "backhand_flat_short": 8,
+   "run_backward": 116,
+   "v3:point_disappointment": 140,
+   "v3:slide_to_ball": 12,
+   "v3:volley_low:m": 16,
+   "v3:point_win": 31,
+   "v3:serve_return_aggressive": 4,
+   "forehand_flat_short": 23,
+   "serve_toss": 11,
+   "serve_follow_through": 9
+  },
+  "hipsLowest": -0.203,
+  "triangles": {
+   "min": 99224,
+   "max": 99512
+  },
+  "score": {
+   "points": [
+    0,
+    0
+   ],
+   "games": [
+    1,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "audio": {
+   "recorded": true,
+   "listLoaded": false,
+   "takes": {
+    "out": 0,
+    "net": 0
+   },
+   "order": [
+    "words",
+    "rec",
+    "pack",
+    "synth"
+   ],
+   "words": {
+    "on": true,
+    "listLoaded": true,
+    "takes": {
+     "out": 3,
+     "net": 3
+    }
+   },
+   "pack": {
+    "on": true,
+    "asked": false,
+    "loaded": false
+   }
+  },
+  "flipX": [
+   -1,
+   -1
+  ]
+ },
+ "pause": {
+  "open": {
+   "paused": "true",
+   "resume": {
+    "box": [
+     481,
+     163,
+     102,
+     66
+    ],
+    "icon": "resume",
+    "iconLoaded": true,
+    "text": "המשך",
+    "label": "המשך",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "sound": {
+    "box": [
+     371,
+     163,
+     102,
+     66
+    ],
+    "icon": "sound",
+    "iconLoaded": true,
+    "text": "כיבוי צליל",
+    "label": "כיבוי צליל",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "exit": {
+    "box": [
+     261,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "לחזור לאי",
+    "label": "לחזור לאי",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "header": {
+    "box": [
+     780,
+     8,
+     56,
+     56
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "",
+    "label": "השהיה",
+    "fontSize": "0px",
+    "beforeImage": "assets/ui-icons-v2/normal/resume.svg"
+   }
+  },
+  "muted": {
+   "paused": "true",
+   "resume": {
+    "box": [
+     481,
+     163,
+     102,
+     66
+    ],
+    "icon": "resume",
+    "iconLoaded": true,
+    "text": "המשך",
+    "label": "המשך",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "sound": {
+    "box": [
+     371,
+     163,
+     102,
+     66
+    ],
+    "icon": "mute",
+    "iconLoaded": true,
+    "text": "הפעלת צליל",
+    "label": "הפעלת צליל",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "exit": {
+    "box": [
+     261,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "לחזור לאי",
+    "label": "לחזור לאי",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "header": {
+    "box": [
+     780,
+     8,
+     56,
+     56
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "",
+    "label": "השהיה",
+    "fontSize": "0px",
+    "beforeImage": "assets/ui-icons-v2/normal/resume.svg"
+   }
+  },
+  "unmuted": {
+   "box": [
+    371,
+    163,
+    102,
+    66
+   ],
+   "icon": "sound",
+   "iconLoaded": true,
+   "text": "כיבוי צליל",
+   "label": "כיבוי צליל",
+   "fontSize": "14px",
+   "beforeImage": "none"
+  },
+  "afterResume": {
+   "paused": "false",
+   "sheet": false
+  }
+ },
+ "requests": [
+  {
+   "path": "assets/ui-icons-v2/normal/pause.svg",
+   "status": 200
+  },
+  {
+   "path": "assets/ui-icons-v2/normal/pause.svg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-motion-v1/core.json",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/takes.json",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/out-1.ogg",
+   "status": 200
+  },
+  {
+   "path": "minigames/tennis-motion-v3.mjs",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/out-2.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-motion-v3/core.json",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/out-3.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/net-1.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/net-2.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/net-3.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/ui-icons-v2/normal/resume.svg",
+   "status": 200
+  },
+  {
+   "path": "assets/ui-icons-v2/normal/resume.svg",
+   "status": 200
+  },
+  {
+   "path": "assets/ui-icons-v2/normal/sound.svg",
+   "status": 200
+  },
+  {
+   "path": "assets/ui-icons-v2/normal/mute.svg",
+   "status": 200
+  }
+ ]
+}

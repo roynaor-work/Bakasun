@@ -20,6 +20,10 @@ class Node extends EventTarget {
  set innerHTML(value){assert.equal(this.tagName,'template');this.content=new Node();const svg=new Node('svg');svg.append(new Node('path'));this.content.append(svg);}
 }
 function fixture(t,{muted=false}={}){
+ // v25.0: these tests describe the drawn glyphs (?uiIcons=0). The package icons that replace resume and sound by default are checked in a real
+ // browser (workout/island/tests/ui-tennis-v25-0-browser.mjs) and in tests/island-ui-tennis-v25-0.test.mjs.
+ const savedLocation=Object.getOwnPropertyDescriptor(globalThis,'location');Object.defineProperty(globalThis,'location',{configurable:true,value:{search:'?uiIcons=0'}});
+ t.after(()=>{if(savedLocation)Object.defineProperty(globalThis,'location',savedLocation);else delete globalThis.location;});
  const doc=new Node('document');doc.createElement=tag=>new Node(tag);doc.hidden=false;
  const saved=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{configurable:true,value:doc});
  const dialog=new Node(),stage=new Node(),controls=new Node(),pauseButton=new Node('button'),canvas=new Node('canvas'),icon=new Node('svg'),button=new Node('button');

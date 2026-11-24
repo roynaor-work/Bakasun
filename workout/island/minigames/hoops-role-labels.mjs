@@ -2,7 +2,7 @@
  * Default scope 'team': only the child's team-mates carry a label, smaller, and the
  * controlled player has none (the marker already shows him). Ten labels over the
  * whole court read as clutter. ?hoopsLabels=all restores the old behaviour. */
-import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-23';
+import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-24';
 import {positionName,abilitySummary,ABILITY_NAMES} from './hoops-roles.mjs';
 const CHILD_POSITION={PG:'רכז',SG:'קלע',SF:'כנף',PF:'גבוה',C:'סנטר'};
 const ABILITY_KEYS=Object.keys(ABILITY_NAMES);

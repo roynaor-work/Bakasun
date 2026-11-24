@@ -1,4 +1,4 @@
-@import url('./soccer-controls.css?v=island-v2-20261107-23');
+@import url('./soccer-controls.css?v=island-v2-20261107-24');
 /* Soccer broadcast layer; the shell continues to own pause and navigation. */
 .game-screen[data-game=soccer]{--soccer-navy:#101f2d;--soccer-ivory:#f3f2df;--soccer-teal:#78cfbd;--soccer-line:#cde2dc42;color:var(--soccer-ivory)}
 .game-screen[data-game=soccer] .game-header .game-pause{flex-direction:row;width:56px;height:56px;padding:0;gap:0;border:1px solid #d2e7df5c;border-radius:16px;background:#102331e8;color:var(--soccer-ivory);box-shadow:0 4px 18px #03111740,inset 0 1px 0 #ffffff14;backdrop-filter:none}
@@ -63,3 +63,7 @@
 .game-screen[data-game=soccer] .soccer-fixture{transition:opacity .45s ease}
 .game-screen[data-game=soccer] .soccer-fixture.soccer-fixture-away{opacity:0;pointer-events:none}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-fixture{transition:none}}
+/* v25.0 (soccer-r250.mjs): the ring where a tap on the pitch landed */
+.soccer-tap-ring{position:fixed;width:46px;height:46px;margin:-23px 0 0 -23px;border:3px solid #ffe14a;border-radius:50%;box-shadow:0 0 0 2px rgba(16,35,44,.55);pointer-events:none;z-index:40;animation:soccer-tap-ring .4s ease-out forwards}
+@keyframes soccer-tap-ring{from{transform:scale(.45);opacity:1}to{transform:scale(1.2);opacity:0}}
+@media (prefers-reduced-motion:reduce){.soccer-tap-ring{animation-duration:.01s}}

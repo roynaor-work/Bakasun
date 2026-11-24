@@ -160,6 +160,6 @@ test('rec: the takes in the repo byte for byte, README "הקלטות של רוע
  for(const f of Object.keys(SHA)){assert.ok(r.includes('assets/racing-rec/'+f),f);assert.equal(m.files['assets/racing-rec/'+f]?.[0],SHA[f],'hashed '+f);}
  assert.ok(!r.some(f=>/engine-accel-shifts/.test(f)),'the unused take is not downloaded');
  const audio=await readFile(new URL('minigames/racing-audio.mjs',island),'utf8'),session=await readFile(new URL('minigames/racing-session.mjs',island),'utf8');
- assert.match(audio,/baseRec:new URL\('\.\.\/assets\/racing-rec\/'/);assert.match(session,/rec:v245\.rec/);assert.match(session,/racing-v24-5\.mjs\?v=island-v2-20261107-23/);
+ assert.match(audio,/baseRec:new URL\('\.\.\/assets\/racing-rec\/'/);assert.match(session,/rec:v245\.rec/);assert.match(session,/racing-v24-5\.mjs\?v=island-v2-20261107-24/);
  assert.ok(m.shell.includes('minigames/racing-v24-5.mjs'));
 });

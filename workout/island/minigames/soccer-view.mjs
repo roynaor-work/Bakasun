@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-23';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-23';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-23';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-23';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-23';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-24';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-24';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-24';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-24';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-24';
 import {createSoccerSurround} from './soccer-surround.mjs';
 import {soccerV8Enabled} from './soccer-v8.mjs';
 import {loadStadium as loadV8Stadium} from './soccer-v8-stadium.mjs';
@@ -18,29 +18,31 @@ import {soccerShowEnabled,soccerShowConfig} from './soccer-show.mjs';
 import {createSoccerShowView} from './soccer-show-view.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-23';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-24';
 import {soccerV7FullDetail,SOCCER_V7_FULL_DETAIL,withSoccerV7Kits} from './soccer-v7.mjs';
-import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-23';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-23';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-23';
-import {passDestination} from './soccer.mjs?v=island-v2-20261107-23';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-23';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-23';
+import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-24';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-24';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-24';
+import {passDestination} from './soccer.mjs?v=island-v2-20261107-24';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-24';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-24';
 import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-23';
-import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-23';
+// v25.0 (soccer-r250.mjs): the dotted flight and the target of the child's aimed free kick and corner; screen <-> grass for taps on the pitch.
+import {soccerAimGuide} from './soccer-r250.mjs';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-24';
+import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-24';
 // v24 (13/11): Codex pitch kit, effects, 3D fans (each behind its own switch, see soccer-v24.mjs)
-import {soccerV24Flags,soccerCrowdSeats,soccerCrowdCardRank,soccerCrowdHiddenCards,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-23';
-import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=island-v2-20261107-23';
-import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-23';
+import {soccerV24Flags,soccerCrowdSeats,soccerCrowdCardRank,soccerCrowdHiddenCards,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.mjs?v=island-v2-20261107-24';
+import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=island-v2-20261107-24';
+import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-24';
 // v24.1 (14/11): the referee on the pitch (`?soccerReferee=0` = none), full match only
-import {createSoccerReferee} from './soccer-referee.mjs?v=island-v2-20261107-23';
-import {soccerRefereeEnabled} from './soccer-r241.mjs?v=island-v2-20261107-23';
-import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-23';
+import {createSoccerReferee} from './soccer-referee.mjs?v=island-v2-20261107-24';
+import {soccerRefereeEnabled} from './soccer-r241.mjs?v=island-v2-20261107-24';
+import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-24';
 import {crowdPlacements,LEVELS as V8_LEVELS,TIERS as V8_TIERS} from './soccer-v8-layout.mjs';
 // Soccer full (14/11): the 11 against 11 broadcast camera and the distance LOD / off-camera culling of the 22 bodies (`?soccerFull=0` = none of it).
-import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-23';
+import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-24';
 const FX_REPLACED=new Set(['confetti','landing-dust']);
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
@@ -130,6 +132,8 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const requests=new T.InstancedMesh(track(new T.RingGeometry(.14,.22,12)),track(new T.MeshBasicMaterial({color:'#dfffac',side:T.DoubleSide})),roster.length);requests.frustumCulled=false;scene.add(requests);
   const landing=new T.Mesh(track(new T.RingGeometry(.65,.74,32)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,side:T.DoubleSide,transparent:true,opacity:.9})));landing.rotation.x=-Math.PI/2;scene.add(landing);
   const arcDots=new T.InstancedMesh(track(new T.SphereGeometry(config.passing.arcRadius,6,4)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,depthTest:false})),config.passing.arcDots);arcDots.frustumCulled=false;scene.add(arcDots);
+  const guideDots=new T.InstancedMesh(track(new T.SphereGeometry(.15,8,6)),track(new T.MeshBasicMaterial({color:'#ffe14a',depthTest:false,transparent:true,opacity:.95})),16);guideDots.frustumCulled=false;guideDots.renderOrder=7;guideDots.count=0;scene.add(guideDots);
+  const guideRing=new T.Mesh(track(new T.RingGeometry(.42,.56,28)),track(new T.MeshBasicMaterial({color:'#ffe14a',side:T.DoubleSide,depthTest:false,transparent:true,opacity:.95})));guideRing.renderOrder=7;guideRing.visible=false;scene.add(guideRing);const guideOut={points:[],target:{x:0,y:0,z:0},flat:false};
   const turfPositions=new Float32Array(roster.length*config.view.animation.turfPerPlayer*3),turfG=track(new T.BufferGeometry());turfG.setAttribute('position',new T.BufferAttribute(turfPositions,3));const turf=new T.Points(turfG,track(new T.PointsMaterial({color:config.view.animation.turfColor,size:.12,transparent:true,opacity:.65})));scene.add(turf);
   const releaseBlend={x:0,y:0,z:0,ox:0,oy:0,oz:0,held:false,age:-1}; // v24: the shown ball after a Codex v13 throw clip lets go
   const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0},ballShown={x:0,y:0,z:0,valid:false},glitchV23=soccerGlitchVersion()==='v23';ballRoot.name='soccer-ball-root';if(config.v249View)ballRoot.scale.setScalar(config.v249View.ballScale);const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
@@ -519,12 +523,16 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     practiceTarget.visible=!!s.practiceTarget;practiceCones.count=s.practiceTarget?.cones?2:0;if(s.practiceTarget){const p=s.practiceTarget;practiceTarget.position.set(p.x,p.cones ? .05 : 1,p.z);practiceTarget.rotation.set(p.cones?-Math.PI/2:0,p.cones?0:Math.PI/2,0);for(let i=0;i<practiceCones.count;i++){dummy.position.set(p.x,.3,p.z+(i?1:-1)*config.training.coneWidth/2);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();practiceCones.setMatrixAt(i,dummy.matrix);}practiceCones.instanceMatrix.needsUpdate=true;}
     const restartCue=restartAimPreview(s,config,restartAim,passDestination),arc=restartCue?(restartCue.loft?restartCue:null):crossArc(s,config);arcDots.count=arc?config.passing.arcDots:0;
     for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
-    turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;const groundLanding=arc?null:passLanding(s,config);landing.visible=Boolean(arc||groundLanding);if(arc)landing.position.set(arc.x,.04,arc.z);else if(groundLanding)landing.position.set(groundLanding.x,.04,groundLanding.z);
+    // v25.0: the aimed set piece: dots along the flight, a ring at the target (upright in the goal mouth, flat on the grass at a corner).
+    const guide=markers?soccerAimGuide(s,config,guideOut):null;guideDots.count=guide?Math.min(16,guide.points.length):0;guideRing.visible=Boolean(guide);if(guide)arcDots.count=0;
+    if(guide){for(let i=0;i<guideDots.count;i++){const q=guide.points[i];dummy.position.set(q.x,q.y,q.z);dummy.rotation.set(0,0,0);dummy.scale.setScalar(.7+.5*i/guideDots.count);dummy.updateMatrix();guideDots.setMatrixAt(i,dummy.matrix);}guideDots.instanceMatrix.needsUpdate=true;
+      guideRing.position.set(guide.target.x,guide.target.y,guide.target.z);guideRing.rotation.set(guide.flat?-Math.PI/2:0,guide.flat?0:Math.PI/2,0);guideRing.scale.setScalar((guide.flat?1.9:1)*(1+.08*Math.sin(time*7)));}
+    turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;const groundLanding=arc?null:passLanding(s,config);landing.visible=Boolean(arc||groundLanding)&&!guide;if(arc)landing.position.set(arc.x,.04,arc.z);else if(groundLanding)landing.position.set(groundLanding.x,.04,groundLanding.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
     const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,(look249?look249.arrowHeight:2.4)+Math.sin(time*4)*.08,controlled.z);arrow.visible=markers;selector.visible=markers&&!fx?.ringActive;if(!markers)requests.count=0;fx?.update(s,dt,{quality,camera,markers,kitGoals:kitReady,controlled,calm,ringScale:look249?look249.ringScale:1}); // v24: the soccer-fx-v1 selection ring replaces the plain one
     const destination=!restartCue&&s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
     const aim=destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
-    aimArrow.visible=s.charging;aimArrow.position.set(restartCue?.originX??controlled.x,.065,restartCue?.originZ??controlled.z);aimArrow.rotation.y=restartCue?Math.atan2(restartCue.aimX,restartCue.aimZ):Math.atan2(aim.x,aim.z);
+    aimArrow.visible=s.charging&&!guide;aimArrow.position.set(restartCue?.originX??controlled.x,.065,restartCue?.originZ??controlled.z);aimArrow.rotation.y=restartCue?Math.atan2(restartCue.aimX,restartCue.aimZ):Math.atan2(aim.x,aim.z);
     const chargeLimit=s.chargeKind==='pass'?config.passing.chargeSeconds:config.physics.chargeSeconds;aimArrow.scale.z=(config.view.aimArrowMinLength+(config.view.aimArrowMaxLength-config.view.aimArrowMinLength)*s.charge/chargeLimit)/config.view.aimArrowLength;
     const height=shotHeight(s.charge/config.physics.chargeSeconds,s.kickAim?.height,config);aimMaterial.color.set(s.chargeKind==='pass'?config.passing.landingColor:height>config.pitch.goalHeight?config.shooting.arrowHighColor:height>config.aerial.minHeight?config.shooting.arrowMidColor:config.shooting.arrowLowColor);
     {// Dribble touches: a visual offset along the carrier's facing, eased out when the ball leaves the foot.
@@ -576,6 +584,9 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     /** soccerShow v1: the session does not step the model while `hold` is true; `noteEvent` feeds drained match events (short replays, crowd mood). */
     get hold(){return Boolean(show?.hold);},get show(){return show;},get showPhase(){return show?.phase||'live';},get finaleSeconds(){return show?show.finaleSeconds:0;},get crowdMood(){return show?.mood||null;},noteEvent(event){show?.event(event);fx?.noteEvent(event);referee?.noteEvent(event);},
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
+    /** v25.0 taps: a pitch point on the canvas (CSS pixels from its top left), and the grass under a canvas point (null above the horizon). */
+    screenPoint(x,y,z){target.set(x,y,z).project(camera);return {x:(target.x+1)*lastWidth/2,y:(1-target.y)*lastHeight/2,front:target.z<1};},
+    groundPoint(px,py){target.set(px/lastWidth*2-1,1-py/lastHeight*2,.5).unproject(camera).sub(camera.position);if(!(target.y<-1e-4))return null;const k=-camera.position.y/target.y;return {x:camera.position.x+target.x*k,z:camera.position.z+target.z*k};},
     /** Test hook: backdrop meshes off and the clear colour magenta, so any pixel the scenery fails to cover shows. */
     get scene(){return scene;},get characters(){return characters;},
     skyProbe(on,surroundOn=true){if(on&&!probeBackground)probeBackground=scene.background;scene.background=on?new T.Color('#ff00ff'):probeBackground||new T.Color('#7d9592');if(!on)probeBackground=null;scene.traverse(o=>{if(o.renderOrder===-1000)o.visible=!on;});if(v8)v8.root.visible=surroundOn;else surround.root.visible=surroundOn;},

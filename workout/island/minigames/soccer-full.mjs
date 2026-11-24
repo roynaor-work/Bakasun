@@ -6,7 +6,7 @@
  * `?soccerFull=0` (or an explicit `?soccerTeams=`) gives back the v24 small match exactly: nothing below is read then.
  * Pure: no three.js and no DOM; the URL is read only when a browser location exists. */
 import {applySoccerTeams} from './soccer-teams.mjs';
-import {soccerSlideRecoverV241Enabled,SOCCER_SLIDE_V241} from './soccer-r241.mjs?v=island-v2-20261107-23';
+import {soccerSlideRecoverV241Enabled,SOCCER_SLIDE_V241} from './soccer-r241.mjs?v=island-v2-20261107-24';
 
 const read=(name,search=globalThis.location?.search)=>{try{return typeof search==='string'?new URLSearchParams(search).get(name):null;}catch{return null;}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -183,11 +183,14 @@ export function soccerFullCamera(state,aspect,config,previous,dt=0){
   const ahead=owner&&!owner.hands?state.attackDir*(owner.team===0?1:-1)*c.ahead:0,gap=p?Math.hypot(p.x-b.x,p.z-b.z):0,follow=p&&gap<=c.followRange?c.follow:0;
   let x=b.x+(b.vx||0)/n*lead+ahead,z=b.z+(b.vz||0)/n*lead;
   if(follow){x+=(p.x-x)*follow;z+=(p.z-z)*follow;}
+  // v25.0 (soccer-r250.mjs, only with its camera): at the child's aimed corner the camera looks between the flag and the target in the box.
+  const cornerAim=c.cornerAim&&state.restart?.type==='corner'&&state.restart.aim250&&String(state.phase).startsWith('restart')?state.restart.aim250:null;
+  if(cornerAim){x+=(cornerAim.x-x)*c.cornerAim.share;z+=(cornerAim.z-z)*c.cornerAim.share;}
   x=clamp(x,-hx+c.edgeX,hx-c.edgeX);z=clamp(z,-hz+c.edgeZ,hz-c.edgeZ);
   const portrait=aspect<1,base=portrait?c.portraitBase:c.base,far=portrait?c.portraitFar:c.far;
   const restart=state.restart&&String(state.phase).startsWith('restart')?state.restart.type:null,keeper=owner?.hands;
   const box=Math.max(0,1-Math.hypot(Math.max(0,hx-config.pitch.penaltyDepth-Math.abs(b.x)),Math.max(0,Math.abs(b.z)-config.pitch.penaltyWidth/2))/4);
-  let zoom=base+clamp(speed/c.fastBallSpeed,0,1)*c.speedZoom+Math.max(0,gap-c.spreadFrom)*c.spreadZoom-box*c.boxZoom*(restart?0:1)+(restart?c.setPieceZoom[restart]??0:keeper?c.setPieceZoom.keeper:0);
+  let zoom=base+clamp(speed/c.fastBallSpeed,0,1)*c.speedZoom+Math.max(0,gap-c.spreadFrom)*c.spreadZoom-box*c.boxZoom*(restart?0:1)+(restart?c.setPieceZoom[restart]??0:keeper?c.setPieceZoom.keeper:0)+(cornerAim?c.cornerAim.zoom:0);
   zoom=clamp(zoom,c.near,far);
   const blend=previous&&dt>0?1-Math.exp(-c.smoothing*dt):previous?0:1,zoomBlend=previous&&dt>0?1-Math.exp(-(zoom>previous.zoom?c.zoomOut:c.zoomIn)*dt):previous?0:1;
   const next={x:previous?previous.x+(x-previous.x)*blend:x,z:previous?previous.z+(z-previous.z)*blend:z,zoom:previous?previous.zoom+(zoom-previous.zoom)*zoomBlend:zoom,direction:state.attackDir};

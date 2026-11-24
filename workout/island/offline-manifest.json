@@ -89,7 +89,17 @@
   "assets/upgrade-offer/icons/tennis-power.svg",
   "assets/upgrade-offer/icons/throw-power.svg",
   "assets/upgrade-offer/icons/tires.svg",
-  "assets/upgrade-offer/icons/upgrade.svg"
+  "assets/upgrade-offer/icons/upgrade.svg",
+  "assets/ui-icons-v2/normal/pause.svg",
+  "assets/ui-icons-v2/normal/resume.svg",
+  "assets/ui-icons-v2/normal/sound.svg",
+  "assets/ui-icons-v2/normal/mute.svg",
+  "assets/ui-icons-v2/normal/coin.svg",
+  "assets/ui-icons-v2/pressed/pause.svg",
+  "assets/ui-icons-v2/pressed/resume.svg",
+  "assets/ui-icons-v2/pressed/sound.svg",
+  "assets/ui-icons-v2/pressed/mute.svg",
+  "assets/ui-icons-v2/pressed/coin.svg"
  ],
  "shell": [
   "",
@@ -318,6 +328,17 @@
   "minigames/alpine-quality.mjs",
   "minigames/alpine-records.mjs",
   "minigames/alpine-result.mjs",
+  "minigames/alpine-runner-engine.mjs",
+  "minigames/alpine-runner-generator/generate.mjs",
+  "minigames/alpine-runner-generator/index.mjs",
+  "minigames/alpine-runner-generator/profiles.mjs",
+  "minigames/alpine-runner-generator/validate.mjs",
+  "minigames/alpine-runner-rules.mjs",
+  "minigames/alpine-runner-session.mjs",
+  "minigames/alpine-runner-themes.mjs",
+  "minigames/alpine-runner-view.mjs",
+  "minigames/alpine-runner-weather.mjs",
+  "minigames/alpine-runner.css",
   "minigames/alpine-screen.css",
   "minigames/alpine-screen.mjs",
   "minigames/alpine-session.mjs",
@@ -480,6 +501,9 @@
   "minigames/hoops-tall.mjs",
   "minigames/hoops-textures.mjs",
   "minigames/hoops-v241.mjs",
+  "minigames/hoops-v250-hud.mjs",
+  "minigames/hoops-v250.css",
+  "minigames/hoops-v250.mjs",
   "minigames/hoops-v4.mjs",
   "minigames/hoops-v5-venue.mjs",
   "minigames/hoops-v5.mjs",
@@ -626,6 +650,7 @@
   "minigames/soccer-presentation.mjs",
   "minigames/soccer-r241.mjs",
   "minigames/soccer-r249.mjs",
+  "minigames/soccer-r250.mjs",
   "minigames/soccer-referee.mjs",
   "minigames/soccer-restart-motion.mjs",
   "minigames/soccer-restart-poses.mjs",
@@ -667,6 +692,7 @@
   "minigames/tennis-draco.mjs",
   "minigames/tennis-environment.mjs",
   "minigames/tennis-grip.mjs",
+  "minigames/tennis-motion-v3.mjs",
   "minigames/tennis-motion.mjs",
   "minigames/tennis-pose.mjs",
   "minigames/tennis-result.mjs",
@@ -740,6 +766,8 @@
   "ui/release-watch.mjs",
   "ui/soccer-card.mjs",
   "ui/translate.mjs",
+  "ui/ui-icons.css",
+  "ui/ui-icons.mjs",
   "ui/ui-kit-bridge.css",
   "ui/ui-kit.mjs",
   "ui/upgrade-offer-core.mjs",
@@ -1255,6 +1283,172 @@
    "assets/alpine-themes-v23/village/snow.webp",
    "assets/alpine-themes-v23/village/village-pine.glb"
   ],
+  "alpineRunner": [
+   "assets/alpine-runner-themes-v2/aurora/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/aurora/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/aurora/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/aurora/props/array-dish.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/ground-beacon.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/guide-bollard.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/light-rail.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/mica-boulder.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/night-fir.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/observation-pod.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/prism.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/violet-crystals.glb",
+   "assets/alpine-runner-themes-v2/aurora/props/wind-sock.glb",
+   "assets/alpine-runner-themes-v2/aurora/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/aurora/signs/start.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/aurora/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/forest/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/forest/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/forest/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/forest/props/berry-brush.glb",
+   "assets/alpine-runner-themes-v2/forest/props/birch.glb",
+   "assets/alpine-runner-themes-v2/forest/props/boulder.glb",
+   "assets/alpine-runner-themes-v2/forest/props/fir.glb",
+   "assets/alpine-runner-themes-v2/forest/props/footbridge-rail.glb",
+   "assets/alpine-runner-themes-v2/forest/props/larch.glb",
+   "assets/alpine-runner-themes-v2/forest/props/log-stack.glb",
+   "assets/alpine-runner-themes-v2/forest/props/stump.glb",
+   "assets/alpine-runner-themes-v2/forest/props/trail-lantern.glb",
+   "assets/alpine-runner-themes-v2/forest/props/trail-post.glb",
+   "assets/alpine-runner-themes-v2/forest/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/forest/signs/start.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/forest/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/frozen-lava/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/frozen-lava/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/basalt-column.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/cairn.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/column-cluster.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/copper-ore.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/frosted-shelf.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/frozen-fissure.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/obsidian-fin.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/ridge-marker.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/strata.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/props/survey-beacon.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/signs/start.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/frozen-lava/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/ice/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/ice/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/ice/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/ice/props/blue-spire.glb",
+   "assets/alpine-runner-themes-v2/ice/props/drift.glb",
+   "assets/alpine-runner-themes-v2/ice/props/frost-lantern.glb",
+   "assets/alpine-runner-themes-v2/ice/props/frozen-arch.glb",
+   "assets/alpine-runner-themes-v2/ice/props/glacial-boulder.glb",
+   "assets/alpine-runner-themes-v2/ice/props/ice-wall.glb",
+   "assets/alpine-runner-themes-v2/ice/props/icefall.glb",
+   "assets/alpine-runner-themes-v2/ice/props/rope-marker.glb",
+   "assets/alpine-runner-themes-v2/ice/props/split-shards.glb",
+   "assets/alpine-runner-themes-v2/ice/props/survey-tripod.glb",
+   "assets/alpine-runner-themes-v2/ice/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/ice/signs/start.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/ice/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/summit/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/summit/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/summit/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/summit/props/expedition-crate.glb",
+   "assets/alpine-runner-themes-v2/summit/props/rescue-hut.glb",
+   "assets/alpine-runner-themes-v2/summit/props/ridge-flag.glb",
+   "assets/alpine-runner-themes-v2/summit/props/ridge-spire.glb",
+   "assets/alpine-runner-themes-v2/summit/props/ridge-telescope.glb",
+   "assets/alpine-runner-themes-v2/summit/props/rope-stanchion.glb",
+   "assets/alpine-runner-themes-v2/summit/props/stacked-slate.glb",
+   "assets/alpine-runner-themes-v2/summit/props/summit-cairn.glb",
+   "assets/alpine-runner-themes-v2/summit/props/weather-mast.glb",
+   "assets/alpine-runner-themes-v2/summit/props/wind-carved-bank.glb",
+   "assets/alpine-runner-themes-v2/summit/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/summit/signs/start.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/summit/tiles/08-summit.glb",
+   "assets/alpine-runner-themes-v2/themes.json",
+   "assets/alpine-runner-themes-v2/village/parallax/foothills.webp",
+   "assets/alpine-runner-themes-v2/village/parallax/ridges.webp",
+   "assets/alpine-runner-themes-v2/village/parallax/sky.webp",
+   "assets/alpine-runner-themes-v2/village/props/chalet.glb",
+   "assets/alpine-runner-themes-v2/village/props/clock-tower.glb",
+   "assets/alpine-runner-themes-v2/village/props/lamp-post.glb",
+   "assets/alpine-runner-themes-v2/village/props/market-stall.glb",
+   "assets/alpine-runner-themes-v2/village/props/planter.glb",
+   "assets/alpine-runner-themes-v2/village/props/sled-rack.glb",
+   "assets/alpine-runner-themes-v2/village/props/snow-bench.glb",
+   "assets/alpine-runner-themes-v2/village/props/split-fence.glb",
+   "assets/alpine-runner-themes-v2/village/props/supply-shed.glb",
+   "assets/alpine-runner-themes-v2/village/props/wood-pile.glb",
+   "assets/alpine-runner-themes-v2/village/signs/finish.glb",
+   "assets/alpine-runner-themes-v2/village/signs/start.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/01-straight.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/02-gentle_turn.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/03-slope.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/04-bridge.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/05-ice_tunnel.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/06-village.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/07-forest.glb",
+   "assets/alpine-runner-themes-v2/village/tiles/08-summit.glb",
+   "assets/alpine-runner/content/effects/powder-particle.png",
+   "assets/alpine-runner/content/models/boulder.glb",
+   "assets/alpine-runner/content/models/double-coin.glb",
+   "assets/alpine-runner/content/models/star.glb",
+   "assets/alpine-runner/runner/characters/skier-coral.glb",
+   "assets/alpine-runner/runner/props/coin.glb",
+   "assets/alpine-runner/runner/props/high_beam.glb",
+   "assets/alpine-runner/runner/props/low_fence.glb",
+   "assets/alpine-runner/runner/props/magnet.glb",
+   "assets/alpine-runner/runner/props/shield.glb",
+   "assets/alpine-runner/runner/props/turbo.glb",
+   "assets/alpine-runner/runner/tiles/bridge.glb",
+   "assets/alpine-runner/runner/tiles/forest.glb",
+   "assets/alpine-runner/runner/tiles/gentle_turn.glb",
+   "assets/alpine-runner/runner/tiles/ice_tunnel.glb",
+   "assets/alpine-runner/runner/tiles/slope.glb",
+   "assets/alpine-runner/runner/tiles/straight.glb",
+   "assets/alpine-runner/runner/tiles/summit.glb",
+   "assets/alpine-runner/runner/tiles/village.glb",
+   "assets/alpine-runner/themes/01-pine/textures/sky.png",
+   "assets/alpine-runner/themes/02-ice/textures/sky.png",
+   "assets/alpine-runner/themes/03-volcano/textures/sky.png",
+   "assets/alpine-runner/themes/04-aurora/textures/sky.png",
+   "assets/alpine-runner/themes/05-village/textures/sky.png",
+   "assets/alpine-runner/themes/06-summit/textures/sky.png"
+  ],
   "tennis": [
    "assets/audio/g4e/applause-large.ogg",
    "assets/audio/g4e/applause-medium.ogg",
@@ -1341,6 +1535,7 @@
    "assets/tennis-crowd-v22/runtime/lod2/fan-12.glb",
    "assets/tennis-grip-v1/racket.glb",
    "assets/tennis-motion-v1/core.json",
+   "assets/tennis-motion-v3/core.json",
    "assets/tennis-stadium-v1/ad-board.glb",
    "assets/tennis-stadium-v1/crowd-atlas.webp",
    "assets/tennis-stadium-v1/evening-city.png",
@@ -1975,8 +2170,8 @@
  },
  "files": {
   "": [
-   "42c8a6042bfb52b2",
-   2704
+   "5bf75ce9997b5239",
+   2779
   ],
   "activity/alien-upgrades.mjs": [
    "e0da13756f40f19f",
@@ -2007,7 +2202,7 @@
    2080
   ],
   "activity/runtime.mjs": [
-   "f58dabdcbad3eac3",
+   "77d03f459b5759f6",
    8378
   ],
   "activity/soccer-card.mjs": [
@@ -2023,12 +2218,12 @@
    1781
   ],
   "activity/state.mjs": [
-   "045b3104fbe89b21",
+   "97b35b274aca88dd",
    4546
   ],
   "app.mjs": [
-   "c39ecc89a3438c2b",
-   10395
+   "cc189a81058ec6bd",
+   10543
   ],
   "assets/alien-v24/overheat.ogg": [
    "6d01d7168b98edda",
@@ -2101,6 +2296,662 @@
   "assets/alien-v25/steam-256.png": [
    "9d021618456099e7",
    11101
+  ],
+  "assets/alpine-runner-themes-v2/aurora/parallax/foothills.webp": [
+   "104cd445bf21e71c",
+   26518
+  ],
+  "assets/alpine-runner-themes-v2/aurora/parallax/ridges.webp": [
+   "86cd122ad7a506a1",
+   25936
+  ],
+  "assets/alpine-runner-themes-v2/aurora/parallax/sky.webp": [
+   "3c2cd4fb9ea03e7f",
+   8550
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/array-dish.glb": [
+   "5a529c09a06eef2e",
+   10116
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/ground-beacon.glb": [
+   "fa54402a71c4e9e1",
+   8600
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/guide-bollard.glb": [
+   "25c43651c0076f00",
+   8596
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/light-rail.glb": [
+   "020a74cd073f0c84",
+   9336
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/mica-boulder.glb": [
+   "03c450a5a97b8276",
+   5912
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/night-fir.glb": [
+   "4c4e87246d3ba445",
+   20252
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/observation-pod.glb": [
+   "cf3894f46219ea42",
+   30996
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/prism.glb": [
+   "470914560912ab39",
+   5172
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/violet-crystals.glb": [
+   "07fdc7e2aca6a54d",
+   7784
+  ],
+  "assets/alpine-runner-themes-v2/aurora/props/wind-sock.glb": [
+   "edd5b0e2cf35e497",
+   8296
+  ],
+  "assets/alpine-runner-themes-v2/aurora/signs/finish.glb": [
+   "ce3ec2c4a8f64699",
+   40644
+  ],
+  "assets/alpine-runner-themes-v2/aurora/signs/start.glb": [
+   "1e343d163b7af7af",
+   29808
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/01-straight.glb": [
+   "480f419fac6315a5",
+   38800
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/02-gentle_turn.glb": [
+   "740ff5ae2885922c",
+   40564
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/03-slope.glb": [
+   "cacd45c4fb0a8050",
+   40504
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/04-bridge.glb": [
+   "9c517b6d5cb8073f",
+   73308
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/05-ice_tunnel.glb": [
+   "2093b25793d1a9f2",
+   58900
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/06-village.glb": [
+   "79fa1403dc675743",
+   47672
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/07-forest.glb": [
+   "fdf9bf1a15fbb7de",
+   44384
+  ],
+  "assets/alpine-runner-themes-v2/aurora/tiles/08-summit.glb": [
+   "d8b32adf6ffca7e1",
+   44412
+  ],
+  "assets/alpine-runner-themes-v2/forest/parallax/foothills.webp": [
+   "05db06eb5e24cfbb",
+   40454
+  ],
+  "assets/alpine-runner-themes-v2/forest/parallax/ridges.webp": [
+   "0ee1957d9babba0e",
+   28874
+  ],
+  "assets/alpine-runner-themes-v2/forest/parallax/sky.webp": [
+   "e73fcfa8c33f6f47",
+   6266
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/berry-brush.glb": [
+   "9d10a5033d3453c9",
+   16120
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/birch.glb": [
+   "e22ce3afee39167a",
+   34180
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/boulder.glb": [
+   "2ed9f2de102b2a56",
+   5904
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/fir.glb": [
+   "feac4913d60144dd",
+   20240
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/footbridge-rail.glb": [
+   "6fe6f159d30f3cee",
+   8568
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/larch.glb": [
+   "93e75a02620b56ca",
+   20256
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/log-stack.glb": [
+   "6596b421fdada2da",
+   56300
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/stump.glb": [
+   "1bb2625d5631c58a",
+   7156
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/trail-lantern.glb": [
+   "ca08917165aba6a2",
+   8596
+  ],
+  "assets/alpine-runner-themes-v2/forest/props/trail-post.glb": [
+   "c4f91261ecf0a543",
+   5560
+  ],
+  "assets/alpine-runner-themes-v2/forest/signs/finish.glb": [
+   "35705688021830ad",
+   41364
+  ],
+  "assets/alpine-runner-themes-v2/forest/signs/start.glb": [
+   "28d34f04134e44d7",
+   30528
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/01-straight.glb": [
+   "9ebf378f1b754186",
+   38056
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/02-gentle_turn.glb": [
+   "f5d5ba9fb105b8f5",
+   39700
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/03-slope.glb": [
+   "8ed35ec3fea38a58",
+   39668
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/04-bridge.glb": [
+   "fa3f4eb3cc7fc51c",
+   72560
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/05-ice_tunnel.glb": [
+   "a3ba6c016a7d6ceb",
+   58920
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/06-village.glb": [
+   "b9c3862f49331359",
+   47008
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/07-forest.glb": [
+   "863bf76dd204dd60",
+   43692
+  ],
+  "assets/alpine-runner-themes-v2/forest/tiles/08-summit.glb": [
+   "7a50dfcfd9f51b66",
+   43664
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/parallax/foothills.webp": [
+   "bbc373e03114a32c",
+   22302
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/parallax/ridges.webp": [
+   "45ea3dc076a2fd62",
+   30074
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/parallax/sky.webp": [
+   "3eb2f95ba10ffa8b",
+   6816
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/basalt-column.glb": [
+   "5e795f1265e0dbd6",
+   5636
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/cairn.glb": [
+   "0c641c31558f3ca6",
+   7708
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/column-cluster.glb": [
+   "c2d24688c28a8b56",
+   12408
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/copper-ore.glb": [
+   "b0446e58f47b2971",
+   12936
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/frosted-shelf.glb": [
+   "5d454f044b05b6e2",
+   5916
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/frozen-fissure.glb": [
+   "8767828df9297749",
+   13688
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/obsidian-fin.glb": [
+   "aa3e36ad6bf1b8fb",
+   5912
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/ridge-marker.glb": [
+   "09a620db41ddb355",
+   5560
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/strata.glb": [
+   "46572ac5c545f2b7",
+   5900
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/props/survey-beacon.glb": [
+   "d8a3f24d8f0b209f",
+   9340
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/signs/finish.glb": [
+   "bdecc356f2ba1c72",
+   39928
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/signs/start.glb": [
+   "8c722730639694b7",
+   29092
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/01-straight.glb": [
+   "ba1e4590759ae649",
+   38060
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/02-gentle_turn.glb": [
+   "7466c588dd63134f",
+   39764
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/03-slope.glb": [
+   "1fc3792d998c31d9",
+   39700
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/04-bridge.glb": [
+   "55285e4f8eaabc19",
+   72564
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/05-ice_tunnel.glb": [
+   "ce149fa6a10b5bca",
+   67968
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/06-village.glb": [
+   "da09dc8a127f1e88",
+   46956
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/07-forest.glb": [
+   "658e1a5ee113f95e",
+   43640
+  ],
+  "assets/alpine-runner-themes-v2/frozen-lava/tiles/08-summit.glb": [
+   "873a8b9394162dd6",
+   43668
+  ],
+  "assets/alpine-runner-themes-v2/ice/parallax/foothills.webp": [
+   "5e30323dddd62d50",
+   22210
+  ],
+  "assets/alpine-runner-themes-v2/ice/parallax/ridges.webp": [
+   "563f73aa82f37104",
+   32050
+  ],
+  "assets/alpine-runner-themes-v2/ice/parallax/sky.webp": [
+   "a6abdd4158f0d047",
+   5892
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/blue-spire.glb": [
+   "5ad5523ff708a6dd",
+   6644
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/drift.glb": [
+   "2e27c9c9265c3e3f",
+   5900
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/frost-lantern.glb": [
+   "84527fffca2ff201",
+   8596
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/frozen-arch.glb": [
+   "f7acc34421c0976d",
+   7048
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/glacial-boulder.glb": [
+   "921a99ceecae9705",
+   5964
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/ice-wall.glb": [
+   "f8b0d9a9b9194b0e",
+   22380
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/icefall.glb": [
+   "f5c1997dbdafb27e",
+   24632
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/rope-marker.glb": [
+   "57a0d76bbc16441f",
+   13080
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/split-shards.glb": [
+   "be786557cb646562",
+   6292
+  ],
+  "assets/alpine-runner-themes-v2/ice/props/survey-tripod.glb": [
+   "a51b15841533fa2e",
+   10312
+  ],
+  "assets/alpine-runner-themes-v2/ice/signs/finish.glb": [
+   "d9d7ef4fdf790dc7",
+   39836
+  ],
+  "assets/alpine-runner-themes-v2/ice/signs/start.glb": [
+   "38957a7847fc3bc3",
+   28996
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/01-straight.glb": [
+   "1781ff0a5a94b55e",
+   38792
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/02-gentle_turn.glb": [
+   "98fd92f36086fb92",
+   40412
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/03-slope.glb": [
+   "30fa4b3ea02ef507",
+   40432
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/04-bridge.glb": [
+   "2439f8cb1cb69350",
+   73324
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/05-ice_tunnel.glb": [
+   "059bb781280be321",
+   65516
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/06-village.glb": [
+   "4af3eb83d0463044",
+   47692
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/07-forest.glb": [
+   "010b626d3292514f",
+   44348
+  ],
+  "assets/alpine-runner-themes-v2/ice/tiles/08-summit.glb": [
+   "de7b43995896e29e",
+   44400
+  ],
+  "assets/alpine-runner-themes-v2/summit/parallax/foothills.webp": [
+   "214f5959be6d5f0b",
+   23140
+  ],
+  "assets/alpine-runner-themes-v2/summit/parallax/ridges.webp": [
+   "743c1c0c6321f415",
+   32134
+  ],
+  "assets/alpine-runner-themes-v2/summit/parallax/sky.webp": [
+   "512ac2fe91dd6cf9",
+   6218
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/expedition-crate.glb": [
+   "ab09e35156b17ab6",
+   10076
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/rescue-hut.glb": [
+   "e65e6961a4806bd6",
+   30984
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/ridge-flag.glb": [
+   "c35f7529f8c6718b",
+   3472
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/ridge-spire.glb": [
+   "9c1fdc63e5005d7a",
+   5896
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/ridge-telescope.glb": [
+   "87be881b25f8aa9e",
+   10316
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/rope-stanchion.glb": [
+   "88bdcfb7f57d3ae6",
+   13084
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/stacked-slate.glb": [
+   "492f9beea816b3b6",
+   5916
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/summit-cairn.glb": [
+   "6576a408eece0725",
+   8468
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/weather-mast.glb": [
+   "8caf72e0c909459f",
+   11164
+  ],
+  "assets/alpine-runner-themes-v2/summit/props/wind-carved-bank.glb": [
+   "0bc99deaacc24aec",
+   5920
+  ],
+  "assets/alpine-runner-themes-v2/summit/signs/finish.glb": [
+   "ac0ae593e8f82eed",
+   39876
+  ],
+  "assets/alpine-runner-themes-v2/summit/signs/start.glb": [
+   "5e597d41e09a50a1",
+   29040
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/01-straight.glb": [
+   "7ef4581a48c07ec2",
+   38000
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/02-gentle_turn.glb": [
+   "96b835ac01020b36",
+   39672
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/03-slope.glb": [
+   "6105afdbc3f829c8",
+   39696
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/04-bridge.glb": [
+   "e2a121e11eb7c382",
+   72560
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/05-ice_tunnel.glb": [
+   "d765e9f71feab06d",
+   58864
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/06-village.glb": [
+   "b144aebe368e8a25",
+   47008
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/07-forest.glb": [
+   "2fb0c439979eea6b",
+   43664
+  ],
+  "assets/alpine-runner-themes-v2/summit/tiles/08-summit.glb": [
+   "b25dd38fdf5edad7",
+   43608
+  ],
+  "assets/alpine-runner-themes-v2/themes.json": [
+   "e709d9d5cf89a7a2",
+   27629
+  ],
+  "assets/alpine-runner-themes-v2/village/parallax/foothills.webp": [
+   "f03f008a2c6ab375",
+   29118
+  ],
+  "assets/alpine-runner-themes-v2/village/parallax/ridges.webp": [
+   "38c897c0ec3ce27d",
+   29044
+  ],
+  "assets/alpine-runner-themes-v2/village/parallax/sky.webp": [
+   "bcf247c53759ba34",
+   6040
+  ],
+  "assets/alpine-runner-themes-v2/village/props/chalet.glb": [
+   "60ffef9641a8d72a",
+   30976
+  ],
+  "assets/alpine-runner-themes-v2/village/props/clock-tower.glb": [
+   "8506dbf349ce5300",
+   28900
+  ],
+  "assets/alpine-runner-themes-v2/village/props/lamp-post.glb": [
+   "c0493679dc203eca",
+   8576
+  ],
+  "assets/alpine-runner-themes-v2/village/props/market-stall.glb": [
+   "1515f5d0de07c00c",
+   10792
+  ],
+  "assets/alpine-runner-themes-v2/village/props/planter.glb": [
+   "5a8b4a2db8040799",
+   40864
+  ],
+  "assets/alpine-runner-themes-v2/village/props/sled-rack.glb": [
+   "45d1499f4b04ad0e",
+   10792
+  ],
+  "assets/alpine-runner-themes-v2/village/props/snow-bench.glb": [
+   "9b5954e68dca5287",
+   8556
+  ],
+  "assets/alpine-runner-themes-v2/village/props/split-fence.glb": [
+   "07b44af1491cdc46",
+   8560
+  ],
+  "assets/alpine-runner-themes-v2/village/props/supply-shed.glb": [
+   "044989d305d9a353",
+   30980
+  ],
+  "assets/alpine-runner-themes-v2/village/props/wood-pile.glb": [
+   "ec8d0f9baf89b644",
+   56300
+  ],
+  "assets/alpine-runner-themes-v2/village/signs/finish.glb": [
+   "e36c35fdf3619a5b",
+   41368
+  ],
+  "assets/alpine-runner-themes-v2/village/signs/start.glb": [
+   "df6766c903b86711",
+   30528
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/01-straight.glb": [
+   "22a6ef7bf5fa1926",
+   38084
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/02-gentle_turn.glb": [
+   "b5b15ddbd2e42482",
+   39760
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/03-slope.glb": [
+   "2ae5c436fefe450b",
+   39724
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/04-bridge.glb": [
+   "c3097f9576a4ce05",
+   72560
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/05-ice_tunnel.glb": [
+   "fc58ca947c963c9a",
+   58920
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/06-village.glb": [
+   "7b45861afb6a79ef",
+   46980
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/07-forest.glb": [
+   "d31192c9e28d1906",
+   43692
+  ],
+  "assets/alpine-runner-themes-v2/village/tiles/08-summit.glb": [
+   "bca6c580f3698c4e",
+   43692
+  ],
+  "assets/alpine-runner/content/effects/powder-particle.png": [
+   "8d5589686854a47a",
+   1370
+  ],
+  "assets/alpine-runner/content/models/boulder.glb": [
+   "8c2c901b921ac936",
+   11044
+  ],
+  "assets/alpine-runner/content/models/double-coin.glb": [
+   "08485d15c147d13c",
+   24756
+  ],
+  "assets/alpine-runner/content/models/star.glb": [
+   "0e970626de38b8eb",
+   10912
+  ],
+  "assets/alpine-runner/runner/characters/skier-coral.glb": [
+   "b05992706ddf2c79",
+   338840
+  ],
+  "assets/alpine-runner/runner/props/coin.glb": [
+   "a3c7cf5c5296046e",
+   7192
+  ],
+  "assets/alpine-runner/runner/props/high_beam.glb": [
+   "ffef849278b6bc9b",
+   6924
+  ],
+  "assets/alpine-runner/runner/props/low_fence.glb": [
+   "24f90a85c4c8e8d9",
+   7620
+  ],
+  "assets/alpine-runner/runner/props/magnet.glb": [
+   "1a0d94b61cd216e0",
+   6316
+  ],
+  "assets/alpine-runner/runner/props/shield.glb": [
+   "91eefcac51b1c90c",
+   5116
+  ],
+  "assets/alpine-runner/runner/props/turbo.glb": [
+   "0f20446994732c14",
+   3696
+  ],
+  "assets/alpine-runner/runner/tiles/bridge.glb": [
+   "e4598418c70ee8f2",
+   45792
+  ],
+  "assets/alpine-runner/runner/tiles/forest.glb": [
+   "3fd1a704cc541526",
+   72716
+  ],
+  "assets/alpine-runner/runner/tiles/gentle_turn.glb": [
+   "32fee947f878574a",
+   47484
+  ],
+  "assets/alpine-runner/runner/tiles/ice_tunnel.glb": [
+   "0f8cd271e7607b9f",
+   53876
+  ],
+  "assets/alpine-runner/runner/tiles/slope.glb": [
+   "b0f4f2bbffe8eb0f",
+   49032
+  ],
+  "assets/alpine-runner/runner/tiles/straight.glb": [
+   "e81f848b094cd8c6",
+   47408
+  ],
+  "assets/alpine-runner/runner/tiles/summit.glb": [
+   "be432b3c9b856c38",
+   34468
+  ],
+  "assets/alpine-runner/runner/tiles/village.glb": [
+   "80c515be4d418995",
+   66604
+  ],
+  "assets/alpine-runner/themes/01-pine/textures/sky.png": [
+   "c3e58a1bbe836990",
+   33648
+  ],
+  "assets/alpine-runner/themes/02-ice/textures/sky.png": [
+   "e6b6acccf665d0ef",
+   37827
+  ],
+  "assets/alpine-runner/themes/03-volcano/textures/sky.png": [
+   "5229b4685c49f041",
+   29980
+  ],
+  "assets/alpine-runner/themes/04-aurora/textures/sky.png": [
+   "3e8a089a10c4de0d",
+   41408
+  ],
+  "assets/alpine-runner/themes/05-village/textures/sky.png": [
+   "e5d0e4534d98af82",
+   32912
+  ],
+  "assets/alpine-runner/themes/06-summit/textures/sky.png": [
+   "e7a615af3a953363",
+   33354
   ],
   "assets/alpine-rush/granite-v5.webp": [
    "8bf89bf8a0dbabaa",
@@ -2999,7 +3850,7 @@
    12500
   ],
   "assets/city-missions-v1/runtime.mjs": [
-   "a90a4de76fc73cdf",
+   "9c18f6b7a47e71be",
    11817
   ],
   "assets/city-progression-v1/catalog.mjs": [
@@ -3007,11 +3858,11 @@
    9769
   ],
   "assets/city-progression-v1/island-adapter.mjs": [
-   "5bfbcc0994d9860b",
+   "354bd14cd1ebff8c",
    6980
   ],
   "assets/city-progression-v1/progression.mjs": [
-   "1c50c08692eb2690",
+   "e26a603ed509564f",
    12123
   ],
   "assets/city-progression-v1/storage.mjs": [
@@ -3907,15 +4758,15 @@
    216620
   ],
   "assets/learning-v2/src/adaptive.mjs": [
-   "444d5b6efcfec874",
+   "d7f89c4409baa0e0",
    4304
   ],
   "assets/learning-v2/src/data.mjs": [
-   "c4e5eff75b79a2a9",
+   "3c1a6e28dfa0ef8f",
    1159
   ],
   "assets/learning-v2/src/integration-runtime.mjs": [
-   "ae88ee349d29436b",
+   "9fff45457541a9d6",
    8277
   ],
   "assets/learning-v2/src/integration.css": [
@@ -3923,7 +4774,7 @@
    740
   ],
   "assets/learning-v2/src/integration.mjs": [
-   "233838acda0a652c",
+   "17a3ce001c0fbf9d",
    12935
   ],
   "assets/models/adult-man-512.glb": [
@@ -4243,19 +5094,19 @@
    5534
   ],
   "assets/progress-board-v1/src/integration.mjs": [
-   "53552879203ada26",
+   "46dd758ca4944017",
    4801
   ],
   "assets/progress-board-v1/src/progress.mjs": [
-   "96adc362b0fbdffa",
+   "c5bc2a5f46b27945",
    10336
   ],
   "assets/progress-board-v1/src/store.mjs": [
-   "e78ab3397660e706",
+   "2e6f35bcc84b7722",
    2793
   ],
   "assets/progress-board-v1/src/view.mjs": [
-   "09a9c87bf297d437",
+   "94dc251760c840be",
    16894
   ],
   "assets/racing-audio-v2/engine-high.mp3": [
@@ -5822,6 +6673,10 @@
    "09ed0fdebf01f1aa",
    433868
   ],
+  "assets/tennis-motion-v3/core.json": [
+   "a6276016234a6130",
+   547723
+  ],
   "assets/tennis-stadium-v1/ad-board.glb": [
    "02cd3c12a3a25b71",
    9776
@@ -5977,6 +6832,46 @@
   "assets/textures/naval-waternormals.jpg": [
    "add9912b158a4fe9",
    248813
+  ],
+  "assets/ui-icons-v2/normal/coin.svg": [
+   "548753e2176e2846",
+   384
+  ],
+  "assets/ui-icons-v2/normal/mute.svg": [
+   "31650bee8af62552",
+   322
+  ],
+  "assets/ui-icons-v2/normal/pause.svg": [
+   "98f1274a9da564e3",
+   274
+  ],
+  "assets/ui-icons-v2/normal/resume.svg": [
+   "fd0bb87c04d6d395",
+   266
+  ],
+  "assets/ui-icons-v2/normal/sound.svg": [
+   "1d036ff320485274",
+   330
+  ],
+  "assets/ui-icons-v2/pressed/coin.svg": [
+   "77a873965100d2a7",
+   426
+  ],
+  "assets/ui-icons-v2/pressed/mute.svg": [
+   "69894f064e42a519",
+   364
+  ],
+  "assets/ui-icons-v2/pressed/pause.svg": [
+   "03775277720e21e8",
+   316
+  ],
+  "assets/ui-icons-v2/pressed/resume.svg": [
+   "376b30bd3370b39b",
+   308
+  ],
+  "assets/ui-icons-v2/pressed/sound.svg": [
+   "756288850ee21464",
+   372
   ],
   "assets/ultra-hub/alpine.webp": [
    "517d22217435d5c0",
@@ -6159,8 +7054,8 @@
    399
   ],
   "data/strings.he.json": [
-   "fe7dc45a0a4c39ff",
-   139354
+   "ee353f850aa3c550",
+   140692
   ],
   "data/strings.he.v246.json": [
    "f2ea30ad0477cc2a",
@@ -7207,7 +8102,7 @@
    1389
   ],
   "engine/city-depth.mjs": [
-   "7318633a46d0986a",
+   "4993d75372161f56",
    9259
   ],
   "engine/city-hall.mjs": [
@@ -7215,24 +8110,24 @@
    1618
   ],
   "engine/city-management.mjs": [
-   "2893edba2a34d6d6",
+   "56d9d78c477a00e6",
    14412
   ],
   "engine/city-runtime.mjs": [
-   "5d9105b9782a640f",
+   "2add1108dd758c99",
    4056
   ],
   "engine/city-sites.mjs": [
-   "b9cb7e093fd33c80",
+   "bf83c723341e8b43",
    6043
   ],
   "engine/economy.mjs": [
-   "987c74672411a79e",
+   "b55b5fe156c260a7",
    3804
   ],
   "engine/engine.mjs": [
-   "e0591ee77d7701aa",
-   42694
+   "e4b16b0d3815df33",
+   42874
   ],
   "engine/episodes.mjs": [
    "fbc9c1bebf54a287",
@@ -7243,27 +8138,27 @@
    499
   ],
   "engine/load-data.mjs": [
-   "ad1ecceb386aeba0",
+   "86ec57639cf7e6f6",
    2561
   ],
   "engine/metrics.mjs": [
-   "059e68753a1f6864",
+   "e7ea30ac65f7bc6e",
    4146
   ],
   "engine/paths.mjs": [
-   "0ee6fec75cbd2d50",
+   "ab9b9262c5eb295a",
    2081
   ],
   "engine/persistence.mjs": [
-   "f105f867a411b6c8",
+   "78cbb1cccb884e9d",
    26989
   ],
   "engine/placement-help.mjs": [
-   "894e370e231b30a0",
+   "4dffd58126caf712",
    2501
   ],
   "engine/ready-plots.mjs": [
-   "5992074c14ed87f1",
+   "b36e7ae0ecaa41e2",
    16721
   ],
   "engine/registry.mjs": [
@@ -7271,7 +8166,7 @@
    2810
   ],
   "engine/rules.mjs": [
-   "6420c9b854b71628",
+   "98f68eab8522f0e3",
    5975
   ],
   "episodes/example-first-visit.json": [
@@ -7287,19 +8182,19 @@
    364
   ],
   "extensions/alien-defense.mjs": [
-   "38d22b5555a2e37f",
+   "856eeb0350fcacc3",
    867
   ],
   "extensions/alpine-rush.mjs": [
-   "fab50c6d9ee3a089",
+   "7e32968b776f68ad",
    760
   ],
   "extensions/boar-defense.mjs": [
-   "9fe674ec2f3a3128",
+   "a9856223ca9a9b87",
    415
   ],
   "extensions/catch-criminal.mjs": [
-   "13d5d587a99ecd02",
+   "f3faa388047cae4e",
    2198
   ],
   "extensions/example-building.mjs": [
@@ -7323,36 +8218,36 @@
    93
   ],
   "extensions/fire-rescue.mjs": [
-   "922edd2a201a54b6",
+   "de9eeeefddd27b38",
    521
   ],
   "extensions/island-events.mjs": [
-   "390d27c95c2cd9f4",
+   "d2433c059fa4488b",
    759
   ],
   "extensions/naval-duel.mjs": [
-   "dd470e04043d9903",
+   "d9a2e69bc984765a",
    512
   ],
   "extensions/racing.mjs": [
-   "e4376509aadc0182",
+   "72e04f00cdf414ea",
    519
   ],
   "extensions/soccer.mjs": [
-   "6a6478f432287c0d",
+   "e90981d02036403c",
    414
   ],
   "extensions/street-slam.mjs": [
-   "45ba4d723c0c2dba",
+   "3bd19c4540f5bd15",
    569
   ],
   "extensions/tennis.mjs": [
-   "99785471b3b74d1f",
+   "5466eae8ce13a694",
    400
   ],
   "index.html": [
-   "42c8a6042bfb52b2",
-   2704
+   "5bf75ce9997b5239",
+   2779
   ],
   "kid-ux.mjs": [
    "891b6c5afe2ed742",
@@ -7363,7 +8258,7 @@
    8214
   ],
   "learning/interface.mjs": [
-   "8895e17d4c239ab7",
+   "1328c40572d5d5a5",
    31485
   ],
   "learning/learning.css": [
@@ -7371,11 +8266,11 @@
    10071
   ],
   "learning/questions.mjs": [
-   "c47cab19a63a54c3",
+   "dc94c2bc55745678",
    20766
   ],
   "learning/runtime.mjs": [
-   "ffa449a792c606ca",
+   "7736df588aa81d94",
    4065
   ],
   "learning/spoken-copy.mjs": [
@@ -7411,7 +8306,7 @@
    6082
   ],
   "minigames/alien-flight-model.mjs": [
-   "8e0dc03b952da6dc",
+   "569e098a1540ec56",
    54373
   ],
   "minigames/alien-hull.mjs": [
@@ -7431,11 +8326,11 @@
    3465
   ],
   "minigames/alien-session.mjs": [
-   "0ce1ed630cdfbeee",
+   "6dd3de156c75b2e5",
    20540
   ],
   "minigames/alien-ui.mjs": [
-   "68c0b4caa0a2baf9",
+   "ea4eb387c59078ff",
    6145
   ],
   "minigames/alien-v10-draw.mjs": [
@@ -7463,11 +8358,11 @@
    2016
   ],
   "minigames/alien-v13.mjs": [
-   "074b030abca8373b",
+   "a6de8b109d4951e6",
    1415
   ],
   "minigames/alien-v14-draw.mjs": [
-   "c5b3e52f93d649f7",
+   "ca95f37df55abe09",
    2658
   ],
   "minigames/alien-v14.mjs": [
@@ -7475,7 +8370,7 @@
    1895
   ],
   "minigames/alien-v15-audio.mjs": [
-   "fba7d0143973e502",
+   "603de0cfa32236d4",
    1908
   ],
   "minigames/alien-v15.mjs": [
@@ -7483,11 +8378,11 @@
    7436
   ],
   "minigames/alien-v23-draw.mjs": [
-   "8fdd281efc0dcc47",
+   "2a80ad05f4eb11c0",
    1496
   ],
   "minigames/alien-v23-ui.mjs": [
-   "bcfb18a796cdd3b9",
+   "8b595400e85f3b64",
    6309
   ],
   "minigames/alien-v23.css": [
@@ -7499,11 +8394,11 @@
    5427
   ],
   "minigames/alien-v24-audio.mjs": [
-   "b4779f907ede10b3",
+   "afb60a7029800454",
    2498
   ],
   "minigames/alien-v24-draw.mjs": [
-   "391ca4ab8f156708",
+   "3e599a0472fb5ca5",
    4511
   ],
   "minigames/alien-v24.css": [
@@ -7527,15 +8422,15 @@
    6626
   ],
   "minigames/alien-v25-audio.mjs": [
-   "e6663eb2b3eaa6a7",
+   "6bbc67cdd486b9a8",
    6610
   ],
   "minigames/alien-v25-draw.mjs": [
-   "f3d2ef8d33dbbb93",
+   "6bc22d1e5b83be83",
    9008
   ],
   "minigames/alien-v25-ui.mjs": [
-   "d27643079a45ad52",
+   "f3a2236a80f5cf1a",
    4986
   ],
   "minigames/alien-v25.css": [
@@ -7543,7 +8438,7 @@
    4532
   ],
   "minigames/alien-v25.mjs": [
-   "18221fe5f2ac684c",
+   "7f48785732413995",
    4890
   ],
   "minigames/alien-v7.mjs": [
@@ -7555,7 +8450,7 @@
    840
   ],
   "minigames/alien-view.mjs": [
-   "ab8b38a29016225d",
+   "321547957c6f3ad1",
    11041
   ],
   "minigames/alien.css": [
@@ -7563,7 +8458,7 @@
    14352
   ],
   "minigames/aliens.mjs": [
-   "ee1035627a49a8ce",
+   "011915dfc7502b9f",
    5794
   ],
   "minigames/alpine-arrows.mjs": [
@@ -7571,7 +8466,7 @@
    1702
   ],
   "minigames/alpine-art.mjs": [
-   "01cd0782270efc67",
+   "c261537564e4d380",
    9839
   ],
   "minigames/alpine-audio.mjs": [
@@ -7611,7 +8506,7 @@
    2459
   ],
   "minigames/alpine-engine.mjs": [
-   "c4fd8143a7139887",
+   "36804bc2b8338b71",
    49116
   ],
   "minigames/alpine-env.mjs": [
@@ -7627,7 +8522,7 @@
    4427
   ],
   "minigames/alpine-fir.mjs": [
-   "9435c0096009ec80",
+   "785e022e06939629",
    6946
   ],
   "minigames/alpine-hud.mjs": [
@@ -7643,23 +8538,23 @@
    4903
   ],
   "minigames/alpine-league-island.mjs": [
-   "67cc91cf573f66d0",
+   "bc0364b422b8d227",
    4574
   ],
   "minigames/alpine-league-look.mjs": [
-   "ed7778baca4ba19c",
+   "bb0081e9be1ce371",
    16239
   ],
   "minigames/alpine-league-result.mjs": [
-   "0dd94dd686d103fe",
+   "df9fb2ece3261cd4",
    2121
   ],
   "minigames/alpine-league-stages.mjs": [
-   "7338061ff9b8cb01",
+   "a8bad0e91c9c93bc",
    14897
   ],
   "minigames/alpine-league-store.mjs": [
-   "d9fb070c23a7c8da",
+   "c518a0a1a7ed642a",
    2268
   ],
   "minigames/alpine-league-theme.mjs": [
@@ -7683,12 +8578,56 @@
    1387
   ],
   "minigames/alpine-records.mjs": [
-   "e525b6e92c5ce0a4",
+   "cdb5bdba35159bf6",
    5786
   ],
   "minigames/alpine-result.mjs": [
-   "349f343a100e79eb",
-   2776
+   "4d6ceb2519093233",
+   3042
+  ],
+  "minigames/alpine-runner-engine.mjs": [
+   "38c3129496cfec2b",
+   8680
+  ],
+  "minigames/alpine-runner-generator/generate.mjs": [
+   "cee163f9f4ab52c3",
+   6685
+  ],
+  "minigames/alpine-runner-generator/index.mjs": [
+   "c62e95664c500169",
+   342
+  ],
+  "minigames/alpine-runner-generator/profiles.mjs": [
+   "53cdfe54b7512461",
+   4788
+  ],
+  "minigames/alpine-runner-generator/validate.mjs": [
+   "0752ff86aee547ad",
+   12123
+  ],
+  "minigames/alpine-runner-rules.mjs": [
+   "1673fb0c1394722e",
+   2949
+  ],
+  "minigames/alpine-runner-session.mjs": [
+   "a86b70f0d6fcff46",
+   14773
+  ],
+  "minigames/alpine-runner-themes.mjs": [
+   "e0aa79b8b1a0a9b8",
+   13377
+  ],
+  "minigames/alpine-runner-view.mjs": [
+   "da93d25c1d9fd52a",
+   22757
+  ],
+  "minigames/alpine-runner-weather.mjs": [
+   "741898f58bdfa243",
+   4555
+  ],
+  "minigames/alpine-runner.css": [
+   "1284d42c19526be2",
+   4637
   ],
   "minigames/alpine-screen.css": [
    "b6948022896f59e8",
@@ -7699,8 +8638,8 @@
    1173
   ],
   "minigames/alpine-session.mjs": [
-   "83ac62a3208338ca",
-   41473
+   "45466f1a6ac24009",
+   41835
   ],
   "minigames/alpine-start-lights.css": [
    "f19f7a763dcf5736",
@@ -7715,7 +8654,7 @@
    2540
   ],
   "minigames/alpine-track.mjs": [
-   "e08708bcd7ec08db",
+   "d8fda411ab1562ab",
    23327
   ],
   "minigames/alpine-v241.css": [
@@ -7735,7 +8674,7 @@
    16194
   ],
   "minigames/alpine-view.mjs": [
-   "bf77fe1314126f78",
+   "38dc92c05164fb08",
    74851
   ],
   "minigames/alpine.css": [
@@ -7747,7 +8686,7 @@
    12825
   ],
   "minigames/athlete-body-v2.mjs": [
-   "efcd47b9b6baa74a",
+   "7c8fd5afe9145131",
    9731
   ],
   "minigames/athlete-body-v22.mjs": [
@@ -7763,8 +8702,8 @@
    14692
   ],
   "minigames/athletes-gait.mjs": [
-   "abda4d928944cd87",
-   10731
+   "2d67d7817fe5bfed",
+   10747
   ],
   "minigames/boar-island/aim-v24.mjs": [
    "13bb137c6b23c23d",
@@ -7783,7 +8722,7 @@
    20402
   ],
   "minigames/boar-island/game.js": [
-   "86131ff42956bc92",
+   "098d546dcb634aec",
    151643
   ],
   "minigames/boar-island/guns.js": [
@@ -7855,11 +8794,11 @@
    23262
   ],
   "minigames/boar-session.mjs": [
-   "ea7e07a9b3e6aa16",
+   "171b2f5115ee4d9e",
    5390
   ],
   "minigames/canvas-session.mjs": [
-   "f5e57275c3c7bed3",
+   "059719ce96800fde",
    20348
   ],
   "minigames/catch-actors.mjs": [
@@ -7867,7 +8806,7 @@
    11584
   ],
   "minigames/catch-arsenal-hud.mjs": [
-   "7e66e04afd2f7ac8",
+   "66a4c4d7a87c139e",
    23045
   ],
   "minigames/catch-assist.mjs": [
@@ -7875,7 +8814,7 @@
    8493
   ],
   "minigames/catch-audio.mjs": [
-   "372b89e989f851b6",
+   "66a3d783477aa6be",
    35665
   ],
   "minigames/catch-audio8.mjs": [
@@ -7883,11 +8822,11 @@
    29856
   ],
   "minigames/catch-bow-hud.mjs": [
-   "0ec481890cf695a0",
+   "b4de145550907718",
    15049
   ],
   "minigames/catch-bow-view.mjs": [
-   "5f72eee6cb39cacb",
+   "e74d96a9eff65da5",
    30878
   ],
   "minigames/catch-burst8.mjs": [
@@ -7903,7 +8842,7 @@
    11777
   ],
   "minigames/catch-chase6.mjs": [
-   "fe24c92bb57ac78d",
+   "cf19ae80352a4253",
    28800
   ],
   "minigames/catch-engine.mjs": [
@@ -7927,11 +8866,11 @@
    13370
   ],
   "minigames/catch-session.mjs": [
-   "3e4e3943d9af9cdf",
+   "3208a554b717e50d",
    27761
   ],
   "minigames/catch-session6.mjs": [
-   "f9ffbb90074932e1",
+   "6cfd98013977b587",
    47693
   ],
   "minigames/catch-track.mjs": [
@@ -7947,15 +8886,15 @@
    5340
   ],
   "minigames/catch-view.mjs": [
-   "41abbc62988961b6",
+   "1773226073884866",
    49825
   ],
   "minigames/catch-view6.mjs": [
-   "3a0dc7247e0f4842",
+   "3d8f432a3010be3a",
    39101
   ],
   "minigames/catch-weapons.mjs": [
-   "a9bf69d4e658c060",
+   "1a598aa3da2c5075",
    22285
   ],
   "minigames/catch.css": [
@@ -7963,7 +8902,7 @@
    11268
   ],
   "minigames/context.mjs": [
-   "ad34cac6356fa959",
+   "95a298a6b641bea7",
    1269
   ],
   "minigames/controls.mjs": [
@@ -7971,15 +8910,15 @@
    8095
   ],
   "minigames/fire-assistance.mjs": [
-   "91af9821c08ed4a6",
+   "b0824a78b9a78e24",
    6897
   ],
   "minigames/fire-bonus-draw.mjs": [
-   "739fb6c4dfff989e",
+   "6302191fba29e8a1",
    17940
   ],
   "minigames/fire-bonus-session.mjs": [
-   "d41d39489b96963e",
+   "e0845bbee3ea9d43",
    18864
   ],
   "minigames/fire-bonus.mjs": [
@@ -7991,7 +8930,7 @@
    5113
   ],
   "minigames/fire-canvas.mjs": [
-   "64ddf42889353762",
+   "9d34cd12965317a1",
    11928
   ],
   "minigames/fire-crew.mjs": [
@@ -7999,7 +8938,7 @@
    2593
   ],
   "minigames/fire-interior.mjs": [
-   "eda333a5fa6eb5dd",
+   "519b18ffa16aa973",
    12063
   ],
   "minigames/fire-ladder.mjs": [
@@ -8031,19 +8970,19 @@
    14279
   ],
   "minigames/fire-session.mjs": [
-   "b895e0b6c70f45e9",
+   "c996bcea754cb400",
    13329
   ],
   "minigames/fire-targets.mjs": [
-   "2f619decd08b1080",
+   "65c8bfaff5e0363d",
    9736
   ],
   "minigames/fire-truck.mjs": [
-   "b0e1c60d96ac95d6",
+   "c8d671f6b33c6e1c",
    4825
   ],
   "minigames/fire-ui.mjs": [
-   "63752d794731ef28",
+   "8ae98450f0347937",
    11705
   ],
   "minigames/fire-v23-anchors.mjs": [
@@ -8051,7 +8990,7 @@
    6877
   ],
   "minigames/fire-v23-assets.mjs": [
-   "b49a8092599ed6b4",
+   "d92f010d2b76c4f2",
    7777
   ],
   "minigames/fire-v23.css": [
@@ -8063,19 +9002,19 @@
    1431
   ],
   "minigames/fire-v24-flow.mjs": [
-   "44b8e935da737f96",
+   "c304976ee956f8de",
    12151
   ],
   "minigames/fire-v24-interior.mjs": [
-   "0b60bda7ccd631ae",
+   "87b14693e36bf3f8",
    13533
   ],
   "minigames/fire-v24-scene.mjs": [
-   "f0f40f6244e92cfc",
+   "f3f0bf12496c4521",
    33056
   ],
   "minigames/fire-v24-session.mjs": [
-   "f1e7af293517e268",
+   "c26be2e15975487b",
    23279
   ],
   "minigames/fire-v24.css": [
@@ -8091,7 +9030,7 @@
    18091
   ],
   "minigames/fire-view.mjs": [
-   "206f67089bd0f4b3",
+   "6c6bb8a1bdf45815",
    37870
   ],
   "minigames/fire.css": [
@@ -8099,11 +9038,11 @@
    8428
   ],
   "minigames/fire.mjs": [
-   "3f6ed303c7a160a7",
+   "9028df56e27b51bc",
    18995
   ],
   "minigames/g2m-audio.mjs": [
-   "398f25457c956fd7",
+   "634d78011d6601e2",
    9082
   ],
   "minigames/g2m-effects.mjs": [
@@ -8115,7 +9054,7 @@
    1524
   ],
   "minigames/g2n-audio.mjs": [
-   "3b7378da2c8b69bf",
+   "4c9bc10e70a3357b",
    9005
   ],
   "minigames/g2n-fire.css": [
@@ -8131,15 +9070,15 @@
    4306
   ],
   "minigames/g3h-soccer.css": [
-   "b120b2bd236b18c5",
-   8678
+   "0e379a5768648cae",
+   9172
   ],
   "minigames/g3j-soccer.css": [
    "e254c81717c8795d",
    1553
   ],
   "minigames/g4e-audio.mjs": [
-   "53829777eb36b2a2",
+   "92e8fe62cab41e14",
    10439
   ],
   "minigames/g4f-tennis.css": [
@@ -8147,11 +9086,11 @@
    1329
   ],
   "minigames/g6d-audio.mjs": [
-   "ddd21d53178f9340",
+   "63f37d2f32810ce5",
    5815
   ],
   "minigames/g6d-effects.mjs": [
-   "53becb4eed0847a0",
+   "faaeed0bff92594d",
    3958
   ],
   "minigames/g6e-naval.css": [
@@ -8163,15 +9102,15 @@
    28168
   ],
   "minigames/hoops-arena.mjs": [
-   "cb0256a39b6e0b66",
+   "e73a99dc08c2e42a",
    17019
   ],
   "minigames/hoops-athlete.mjs": [
-   "9818621b32659e9e",
+   "2af6c4c85b5bd0af",
    18359
   ],
   "minigames/hoops-audio.mjs": [
-   "14088d1df62f39a2",
+   "c766c8d5435640a2",
    17753
   ],
   "minigames/hoops-baked.mjs": [
@@ -8183,7 +9122,7 @@
    6314
   ],
   "minigames/hoops-body-v2.mjs": [
-   "ce3b25f47ae62948",
+   "a5b7a80687f41b26",
    3889
   ],
   "minigames/hoops-controls-profile.mjs": [
@@ -8199,7 +9138,7 @@
    1689
   ],
   "minigames/hoops-crowd3d.mjs": [
-   "59ca6aa94ab3842e",
+   "10017eb6a7256334",
    18260
   ],
   "minigames/hoops-draco-worker.mjs": [
@@ -8211,15 +9150,15 @@
    1952
   ],
   "minigames/hoops-engine.mjs": [
-   "9645a68039ed81b3",
-   70578
+   "2e1c7fe5eac056ee",
+   74227
   ],
   "minigames/hoops-feel.mjs": [
    "7d59f78d5d63028d",
    4256
   ],
   "minigames/hoops-franchise.mjs": [
-   "c430e585334f78c0",
+   "cfdaa870668b7c81",
    9251
   ],
   "minigames/hoops-gltf.mjs": [
@@ -8287,7 +9226,7 @@
    9541
   ],
   "minigames/hoops-referee.mjs": [
-   "39bf42a7b4942b78",
+   "f9395676aee73ba0",
    8446
   ],
   "minigames/hoops-reflection.mjs": [
@@ -8299,7 +9238,7 @@
    2645
   ],
   "minigames/hoops-role-labels.mjs": [
-   "2dd4b5d0e2229715",
+   "ffb2ddb0919d93fd",
    4251
   ],
   "minigames/hoops-roles.mjs": [
@@ -8311,8 +9250,8 @@
    5458
   ],
   "minigames/hoops-session.mjs": [
-   "9b05db3df5b409f4",
-   26418
+   "b56203f8dedd69ea",
+   28414
   ],
   "minigames/hoops-show.mjs": [
    "caf45c3a7bea9c51",
@@ -8327,8 +9266,8 @@
    10234
   ],
   "minigames/hoops-tall.mjs": [
-   "12e62198ec0dd875",
-   29976
+   "9373b7a6a9189d38",
+   31258
   ],
   "minigames/hoops-textures.mjs": [
    "23d51541c5b9befc",
@@ -8337,6 +9276,18 @@
   "minigames/hoops-v241.mjs": [
    "7abbd08f07bf779f",
    3965
+  ],
+  "minigames/hoops-v250-hud.mjs": [
+   "ce45ff4ecbdb1590",
+   9347
+  ],
+  "minigames/hoops-v250.css": [
+   "725bd830c7d660d1",
+   7205
+  ],
+  "minigames/hoops-v250.mjs": [
+   "eb64f7c5fbbfb64e",
+   11075
   ],
   "minigames/hoops-v4.mjs": [
    "379ce2329ff40c75",
@@ -8367,8 +9318,8 @@
    11390
   ],
   "minigames/hoops-view.mjs": [
-   "d13baae3df83938c",
-   48793
+   "e850b27d372e7499",
+   49087
   ],
   "minigames/hoops.css": [
    "6279c61f2bc1a0c4",
@@ -8379,19 +9330,19 @@
    3801
   ],
   "minigames/kid-hoops-pass-demo.mjs": [
-   "ec8dd5e93a17fc9a",
+   "9c7733fccc36ea29",
    6989
   ],
   "minigames/model-art.mjs": [
-   "6d7c9c3b4b2b050b",
+   "5b20e6fbfb608265",
    5182
   ],
   "minigames/naval-aim-flag.mjs": [
-   "6bde4d2e285b3660",
+   "68c061bf3badfe5e",
    5127
   ],
   "minigames/naval-aim-view.mjs": [
-   "ed343eed96db5e15",
+   "6bd62136e3a7c213",
    5245
   ],
   "minigames/naval-aim.css": [
@@ -8399,19 +9350,19 @@
    8012
   ],
   "minigames/naval-air-audio.mjs": [
-   "8b2eeeefb854fb7d",
+   "fd5deebae1995def",
    3336
   ],
   "minigames/naval-air-view.mjs": [
-   "e7f72904466332da",
+   "a2c5ad52ac0a9dce",
    8424
   ],
   "minigames/naval-air.mjs": [
-   "9ccee55f46ec95df",
+   "c759707664cfd0d8",
    8883
   ],
   "minigames/naval-assets.mjs": [
-   "bfb05d777726fa51",
+   "47d4637309a9bb3b",
    6104
   ],
   "minigames/naval-ballistics.mjs": [
@@ -8419,7 +9370,7 @@
    7741
   ],
   "minigames/naval-base-view.mjs": [
-   "c2259ca095e3e411",
+   "357577aaf805c994",
    8198
   ],
   "minigames/naval-battle.mjs": [
@@ -8431,11 +9382,11 @@
    8289
   ],
   "minigames/naval-campaign.mjs": [
-   "cae343bafffc9b21",
+   "a5d574a3ba216175",
    6649
   ],
   "minigames/naval-controls.mjs": [
-   "1509745422655f6c",
+   "8406c41879412957",
    27523
   ],
   "minigames/naval-dressing.mjs": [
@@ -8443,19 +9394,19 @@
    7453
   ],
   "minigames/naval-environment.mjs": [
-   "be841f58e11611fe",
+   "5afbdffcc5125d26",
    9354
   ],
   "minigames/naval-forecast.mjs": [
-   "e211a7b8f6b2a176",
+   "8eac64b532cb9372",
    3690
   ],
   "minigames/naval-harder.mjs": [
-   "c830c24b8426c7fd",
+   "146e1dafe8b023a3",
    8128
   ],
   "minigames/naval-hud.mjs": [
-   "6c0b232b132c3817",
+   "ceb550f2d1c56c51",
    34396
   ],
   "minigames/naval-icons.mjs": [
@@ -8471,15 +9422,15 @@
    2610
   ],
   "minigames/naval-lockon-hud.mjs": [
-   "3be8eaed984b0679",
+   "d57ae3268dc235bc",
    7339
   ],
   "minigames/naval-lockon.mjs": [
-   "af46bb8f7abbb5a0",
+   "230c8658483f9109",
    9402
   ],
   "minigames/naval-marks.mjs": [
-   "95de96eb9867e2eb",
+   "bef68d452d19ffdf",
    8498
   ],
   "minigames/naval-patrol.mjs": [
@@ -8487,19 +9438,19 @@
    6360
   ],
   "minigames/naval-projectiles.mjs": [
-   "c370e19c96eb9e68",
+   "0fc5cad2e8b55c34",
    7707
   ],
   "minigames/naval-scenery.mjs": [
-   "b1f72e342c92e823",
+   "24de3e832c2c446e",
    11751
   ],
   "minigames/naval-supply-view.mjs": [
-   "fe968ca26d340984",
+   "75fdcb88bbd99a2f",
    2550
   ],
   "minigames/naval-supply.mjs": [
-   "81fa7e7741bd8252",
+   "4d7a9034e05763c1",
    4696
   ],
   "minigames/naval-upgrades.css": [
@@ -8507,15 +9458,15 @@
    4012
   ],
   "minigames/naval-upgrades.mjs": [
-   "9c0dba1799c127d2",
+   "129e1827a44b4529",
    5183
   ],
   "minigames/naval-v24-audio.mjs": [
-   "f44ce05b99e3be91",
+   "dc22b83fdaed4bc0",
    3024
   ],
   "minigames/naval-v24-hud.mjs": [
-   "cb5a07bcbdbaccc9",
+   "f946ee4b1d51d364",
    12969
   ],
   "minigames/naval-v24.css": [
@@ -8523,11 +9474,11 @@
    3188
   ],
   "minigames/naval-v24.mjs": [
-   "4c7866441903bd68",
+   "86fa1656d5372307",
    8768
   ],
   "minigames/naval-v241-hud.mjs": [
-   "0f83c0a6ac862699",
+   "683cbf9aa8cf67c6",
    7911
   ],
   "minigames/naval-v241.css": [
@@ -8535,15 +9486,15 @@
    909
   ],
   "minigames/naval-v241.mjs": [
-   "2e24b4e48c32d32e",
+   "3d21af7ade5265e1",
    6802
   ],
   "minigames/naval-v7.mjs": [
-   "dde8316ac62f883a",
+   "8b503b8afb2bea1e",
    5488
   ],
   "minigames/naval-view.mjs": [
-   "53881ca0ada25b00",
+   "93e29ae0a8af4b54",
    36906
   ],
   "minigames/naval-visual-atlases.mjs": [
@@ -8551,7 +9502,7 @@
    145386
   ],
   "minigames/naval-visual-effects.mjs": [
-   "4e226b1584a475d6",
+   "6931c389b8b6b3bb",
    6556
   ],
   "minigames/naval-water.mjs": [
@@ -8563,11 +9514,11 @@
    15335
   ],
   "minigames/naval.mjs": [
-   "ed96c09470da239a",
+   "d55b4bb26f1319fc",
    80977
   ],
   "minigames/patrol-boat.mjs": [
-   "b2903c795a9a5e41",
+   "ee0acbe7e773b00b",
    1952
   ],
   "minigames/polish-flag.mjs": [
@@ -8579,19 +9530,19 @@
    809
   ],
   "minigames/racing-audio.mjs": [
-   "7374093d9dc7875f",
+   "75c90640519b71b0",
    31053
   ],
   "minigames/racing-broadcast-art.mjs": [
-   "b7ac788e8b77d857",
+   "8aa1c57618a69a8e",
    4180
   ],
   "minigames/racing-broadcast.mjs": [
-   "98cd76945f077f8a",
+   "3e0a0272df9f6ed9",
    16877
   ],
   "minigames/racing-car-look.mjs": [
-   "1e200f7f93b4d2a4",
+   "121bb842bb9e31e0",
    8288
   ],
   "minigames/racing-controls.mjs": [
@@ -8615,7 +9566,7 @@
    8451
   ],
   "minigames/racing-formula-all.mjs": [
-   "c55644fd5a31a650",
+   "016bd16f98b73af8",
    9892
   ],
   "minigames/racing-league-core.mjs": [
@@ -8623,11 +9574,11 @@
    28765
   ],
   "minigames/racing-league-result.mjs": [
-   "86718a8bbabf0b9c",
+   "73c0bbf95fa38634",
    2714
   ],
   "minigames/racing-league.mjs": [
-   "0d52d247446ee65c",
+   "f8b49569f8e6cdf3",
    3709
   ],
   "minigames/racing-offtrack.mjs": [
@@ -8635,15 +9586,15 @@
    3140
   ],
   "minigames/racing-physics.mjs": [
-   "bd7f3def987bb013",
+   "8e0f7e78ff60c4a2",
    59716
   ],
   "minigames/racing-pit-crew.mjs": [
-   "0e3bd25fdc8f7136",
+   "880b27b8a4705d18",
    7245
   ],
   "minigames/racing-pit-seq.mjs": [
-   "86616eaebf32b487",
+   "54b092ca0dac92e8",
    21350
   ],
   "minigames/racing-pit-sequence.mjs": [
@@ -8651,23 +9602,23 @@
    23354
   ],
   "minigames/racing-pit-ui.mjs": [
-   "a461d094f5d32edd",
+   "44a62c939ef019c9",
    9669
   ],
   "minigames/racing-pit-view.mjs": [
-   "c1ec9d9417ef2c04",
+   "25b32879192cf231",
    2027
   ],
   "minigames/racing-pit.mjs": [
-   "b9bfdda7bb1905f3",
+   "d68e66caedbea3e0",
    11937
   ],
   "minigames/racing-recover.mjs": [
-   "ceffca89b448adcf",
+   "c5880595a84e470b",
    6319
   ],
   "minigames/racing-result.mjs": [
-   "68382df640fe1b8a",
+   "902bc64265876d50",
    1636
   ],
   "minigames/racing-roadside.mjs": [
@@ -8679,11 +9630,11 @@
    30241
   ],
   "minigames/racing-scenery.mjs": [
-   "a34388d3bc348649",
+   "281b45919cb8b75a",
    7256
   ],
   "minigames/racing-session.mjs": [
-   "e348b1baf71279f6",
+   "8a8283491ba6810a",
    26718
   ],
   "minigames/racing-speedometer.mjs": [
@@ -8691,7 +9642,7 @@
    5075
   ],
   "minigames/racing-tower.mjs": [
-   "ca1c87e2275d4183",
+   "0e3d405a1ad3d4e7",
    6026
   ],
   "minigames/racing-tracks-v3-env.mjs": [
@@ -8699,7 +9650,7 @@
    4348
   ],
   "minigames/racing-tracks.mjs": [
-   "b208637afb013fbb",
+   "e94add00b4917922",
    32816
   ],
   "minigames/racing-unlock.mjs": [
@@ -8743,7 +9694,7 @@
    4718
   ],
   "minigames/racing-view.mjs": [
-   "4d891508798204a3",
+   "59d5c2b107d012e9",
    50224
   ],
   "minigames/racing.css": [
@@ -8767,7 +9718,7 @@
    4771
   ],
   "minigames/soccer-assistance.mjs": [
-   "de09506434bd11a3",
+   "930ca1624afe0994",
    19590
   ],
   "minigames/soccer-athlete-body.mjs": [
@@ -8811,11 +9762,11 @@
    8380
   ],
   "minigames/soccer-design-audio.mjs": [
-   "b57f8d2a821621e8",
+   "e8bd687da4de86d3",
    16760
   ],
   "minigames/soccer-design-character.mjs": [
-   "f67ca6e0989db01e",
+   "764934456ef3a154",
    86374
   ],
   "minigames/soccer-design-contracts.mjs": [
@@ -8823,7 +9774,7 @@
    1472
   ],
   "minigames/soccer-design-controls.mjs": [
-   "97c74c919552314b",
+   "bf94f82aa36afa0d",
    20149
   ],
   "minigames/soccer-design-loader.mjs": [
@@ -8843,7 +9794,7 @@
    6629
   ],
   "minigames/soccer-design-tactics.mjs": [
-   "f162904478dfe799",
+   "5d3e0cc70b568c7c",
    31693
   ],
   "minigames/soccer-design-vfx.mjs": [
@@ -8855,7 +9806,7 @@
    6492
   ],
   "minigames/soccer-drill.mjs": [
-   "5d8158521a91e983",
+   "f88faf06ebe8f943",
    2666
   ],
   "minigames/soccer-feel.mjs": [
@@ -8871,8 +9822,8 @@
    895
   ],
   "minigames/soccer-full.mjs": [
-   "7670299297c78796",
-   21714
+   "848f2e342f6a3698",
+   22132
   ],
   "minigames/soccer-headers.mjs": [
    "a24369184209305b",
@@ -8895,11 +9846,11 @@
    3886
   ],
   "minigames/soccer-motion-v9.mjs": [
-   "04fc4a69d7ea018d",
+   "142e961880e6d939",
    3887
   ],
   "minigames/soccer-penalties.mjs": [
-   "cc1708eb2c203d5a",
+   "526cffbb85ce4015",
    3559
   ],
   "minigames/soccer-physics.mjs": [
@@ -8911,19 +9862,23 @@
    1910
   ],
   "minigames/soccer-presentation.mjs": [
-   "19300d7b936e0e79",
+   "2a1b9e181072a8d8",
    11034
   ],
   "minigames/soccer-r241.mjs": [
-   "0cbda69d237734fd",
+   "6db17568297ae175",
    29545
   ],
   "minigames/soccer-r249.mjs": [
    "953447ebedb03f81",
    9470
   ],
+  "minigames/soccer-r250.mjs": [
+   "09744e5ea37914f3",
+   28088
+  ],
   "minigames/soccer-referee.mjs": [
-   "eaf99913280c931a",
+   "dcdfed645f894d91",
    3331
   ],
   "minigames/soccer-restart-motion.mjs": [
@@ -8939,7 +9894,7 @@
    12995
   ],
   "minigames/soccer-result.mjs": [
-   "e359ef390fc95992",
+   "be248799e6f42668",
    2755
   ],
   "minigames/soccer-rig.mjs": [
@@ -8947,7 +9902,7 @@
    1455
   ],
   "minigames/soccer-rules.mjs": [
-   "11236f3a6f402c4d",
+   "f518dc5c55bb61e7",
    7800
   ],
   "minigames/soccer-scale.mjs": [
@@ -8955,8 +9910,8 @@
    8049
   ],
   "minigames/soccer-session.mjs": [
-   "0ce7155784054d7f",
-   35004
+   "5e980ac866478402",
+   38430
   ],
   "minigames/soccer-shot.mjs": [
    "eac60656cb0ab90c",
@@ -8967,8 +9922,8 @@
    8448
   ],
   "minigames/soccer-show.mjs": [
-   "5346a4b72ead3c98",
-   19916
+   "414366d0fbb3a7bb",
+   20201
   ],
   "minigames/soccer-sprint.mjs": [
    "3777018266301acf",
@@ -8987,7 +9942,7 @@
    21003
   ],
   "minigames/soccer-tactics.mjs": [
-   "39033a5332e2ccd9",
+   "7d6513d57b288b1c",
    6693
   ],
   "minigames/soccer-teamplay.mjs": [
@@ -9007,15 +9962,15 @@
    14537
   ],
   "minigames/soccer-v24-crowd.mjs": [
-   "e1eb4af3780408df",
+   "aedaec1e8a80b84a",
    9682
   ],
   "minigames/soccer-v24-fx.mjs": [
-   "bb26da9d1c7f6170",
+   "0aefdd40983b868c",
    10637
   ],
   "minigames/soccer-v24-pitch.mjs": [
-   "d7a767ed880b41c2",
+   "00fd4ed96bc3b3f5",
    8717
   ],
   "minigames/soccer-v24.mjs": [
@@ -9043,12 +9998,12 @@
    2970
   ],
   "minigames/soccer-view.mjs": [
-   "830206aeeed01b9a",
-   77140
+   "df2f90842f5b21b8",
+   79288
   ],
   "minigames/soccer.mjs": [
-   "30ee245ba129cdb0",
-   105828
+   "10ae48e665c4193f",
+   114989
   ],
   "minigames/sound.mjs": [
    "522b4b41e74b348d",
@@ -9059,7 +10014,7 @@
    2515
   ],
   "minigames/tennis-callouts.mjs": [
-   "870f254f19609154",
+   "e8ea0ad085003e5c",
    13063
   ],
   "minigames/tennis-controls.mjs": [
@@ -9079,15 +10034,19 @@
    2926
   ],
   "minigames/tennis-environment.mjs": [
-   "371d677bd6093b41",
+   "dca8556e3e6c676b",
    9113
   ],
   "minigames/tennis-grip.mjs": [
-   "c05bccb3d8ada432",
+   "660154d46eac7194",
    11600
   ],
+  "minigames/tennis-motion-v3.mjs": [
+   "8f3fdd113552b514",
+   6230
+  ],
   "minigames/tennis-motion.mjs": [
-   "c7d067961c881554",
+   "3695bbaad9b66952",
    5176
   ],
   "minigames/tennis-pose.mjs": [
@@ -9099,15 +10058,15 @@
    1469
   ],
   "minigames/tennis-session.mjs": [
-   "eee3b9a2aaebfe6b",
+   "ca96ac3fc52be97e",
    22902
   ],
   "minigames/tennis-ui.mjs": [
-   "faadd55bb643e4e2",
+   "1aca69b09863f5ba",
    3132
   ],
   "minigames/tennis-ui2.mjs": [
-   "8886ced8b73c1632",
+   "616470f9d0c494a9",
    2883
   ],
   "minigames/tennis-v11-stadium.mjs": [
@@ -9115,11 +10074,11 @@
    8474
   ],
   "minigames/tennis-v12-stadium.mjs": [
-   "38905c1f9b2b4449",
+   "a1e80a9ecb676917",
    12222
   ],
   "minigames/tennis-v7-venue.mjs": [
-   "e2451598c56edf1f",
+   "cc5ff993b7f85947",
    18084
   ],
   "minigames/tennis-v7.mjs": [
@@ -9127,8 +10086,8 @@
    6046
   ],
   "minigames/tennis-view.mjs": [
-   "3dc83352db7845cd",
-   41276
+   "7218bf60186e3dce",
+   44714
   ],
   "minigames/tennis.css": [
    "c86b62cb00df803d",
@@ -9139,7 +10098,7 @@
    50261
   ],
   "minigames/ultra-alien-effects.mjs": [
-   "9c92230a4efc0621",
+   "7afc62172cc58931",
    7863
   ],
   "minigames/ultra-alien-environment.mjs": [
@@ -9163,7 +10122,7 @@
    17760
   ],
   "minigames/ultra-fire-scenery.mjs": [
-   "b1bf661f605839f4",
+   "253d019244d24f14",
    1564
   ],
   "minigames/ultra-naval-effects.mjs": [
@@ -9207,7 +10166,7 @@
    3064
   ],
   "release.mjs": [
-   "e4fc51f8c288edb8",
+   "ced0de0a17557d77",
    273
   ],
   "styles.css": [
@@ -9215,11 +10174,11 @@
    62159
   ],
   "ui/activity.mjs": [
-   "278444ad84686527",
-   61930
+   "37664141fa9670e5",
+   63388
   ],
   "ui/adventure-emblems.mjs": [
-   "cd456336e58c935b",
+   "60277e309a0876b2",
    3133
   ],
   "ui/alpine-league.css": [
@@ -9227,11 +10186,11 @@
    7466
   ],
   "ui/alpine-league.mjs": [
-   "c6998f0819c79f85",
+   "09223ef424cc1676",
    17055
   ],
   "ui/boot-splash-start.mjs": [
-   "9657b4a2b7b04682",
+   "39b8e0c1c2bfd23f",
    326
   ],
   "ui/boot-splash.css": [
@@ -9263,7 +10222,7 @@
    7211
   ],
   "ui/city-management.mjs": [
-   "528be63b8dc0e4ed",
+   "12cea774c57037ec",
    21800
   ],
   "ui/city-planning.css": [
@@ -9271,7 +10230,7 @@
    8826
   ],
   "ui/city-preview.mjs": [
-   "a3739a8734fb0ed0",
+   "842933793cc8a101",
    7665
   ],
   "ui/clean-hud.css": [
@@ -9283,7 +10242,7 @@
    4813
   ],
   "ui/fire-bonus-ui.mjs": [
-   "364fb4cc264145b6",
+   "88bdd0cf1467afc3",
    6855
   ],
   "ui/game-shell.css": [
@@ -9291,31 +10250,31 @@
    4511
   ],
   "ui/game-shell.mjs": [
-   "e1749bd897a153a3",
-   16503
+   "857d181d741943f8",
+   16881
   ],
   "ui/hangar-preview.mjs": [
-   "790892273dffc893",
+   "dec4e1b26d8a8cda",
    6231
   ],
   "ui/hoops-club.mjs": [
-   "e50b2ddd7a64d07b",
+   "7cb35308dcba30f5",
    11333
   ],
   "ui/interface.mjs": [
-   "240ec0094757d436",
-   63290
+   "880fe81f04728f08",
+   63742
   ],
   "ui/kid-ux-help.mjs": [
-   "aea33d25064392e2",
+   "09cde0b2925258f2",
    14092
   ],
   "ui/kid-ux-library.mjs": [
-   "7e97f1a63a57bd78",
+   "21d8836e54796a6e",
    1977
   ],
   "ui/kid-ux-result.mjs": [
-   "adf865b1af9c0819",
+   "889d4bfa8dcd27f4",
    5863
   ],
   "ui/load-report.mjs": [
@@ -9339,8 +10298,8 @@
    15631
   ],
   "ui/offline.mjs": [
-   "b036b52548a57afd",
-   25787
+   "986f96715a83ba59",
+   26010
   ],
   "ui/press.mjs": [
    "8aa8a502d8ca750c",
@@ -9355,7 +10314,7 @@
    8644
   ],
   "ui/racing-league.mjs": [
-   "d047328b1610623e",
+   "1f5da5af3ac840dd",
    18877
   ],
   "ui/ready-plots.css": [
@@ -9363,7 +10322,7 @@
    3008
   ],
   "ui/ready-plots.mjs": [
-   "f15670dc021723f4",
+   "9689c058f50fc968",
    7113
   ],
   "ui/release-watch.mjs": [
@@ -9371,12 +10330,20 @@
    937
   ],
   "ui/soccer-card.mjs": [
-   "58394d796aac49f8",
+   "ea39265a0fa8e932",
    6085
   ],
   "ui/translate.mjs": [
    "9956cdc9c6ffe175",
    390
+  ],
+  "ui/ui-icons.css": [
+   "a796e8d0a5e1f86a",
+   1738
+  ],
+  "ui/ui-icons.mjs": [
+   "d7c1c7785f8b3e0b",
+   2451
   ],
   "ui/ui-kit-bridge.css": [
    "e7928f3ff5185e6d",
@@ -9387,11 +10354,11 @@
    4685
   ],
   "ui/upgrade-offer-core.mjs": [
-   "cbb3b61f8a2d977e",
+   "029324662c65cef4",
    6267
   ],
   "ui/upgrade-offer.mjs": [
-   "9814244cf9335232",
+   "780a07fb6bfa4473",
    3617
   ],
   "vendor/BufferGeometryUtils.js": [
@@ -9427,7 +10394,7 @@
    670681
   ],
   "view/avatar.mjs": [
-   "b8f79f8ff1d47633",
+   "abbbf10f560dbfc8",
    8324
   ],
   "view/batch.mjs": [
@@ -9435,15 +10402,15 @@
    1725
   ],
   "view/buildings.mjs": [
-   "d920e8b160bbd37a",
+   "285dfff2d3550945",
    28931
   ],
   "view/city-citizens.mjs": [
-   "ee49759bfb64a2f3",
+   "3ebd9c1efce9cc39",
    5399
   ],
   "view/city-depth.mjs": [
-   "5617d32d7707c35d",
+   "30604945ae156c20",
    7090
   ],
   "view/city-growth.mjs": [
@@ -9451,7 +10418,7 @@
    1906
   ],
   "view/city-life.mjs": [
-   "3bcb05e6a7a13572",
+   "e254c2ebc26ec143",
    3376
   ],
   "view/city-lighting.mjs": [
@@ -9479,7 +10446,7 @@
    7002
   ],
   "view/city-preview-props.mjs": [
-   "f40130765525c45d",
+   "65ddb8115081ab22",
    3180
   ],
   "view/city-sites.mjs": [
@@ -9487,7 +10454,7 @@
    4843
   ],
   "view/city-streets.mjs": [
-   "71275a5919519c3a",
+   "aaeadcef4ff0fc69",
    11607
   ],
   "view/city-traffic-model.mjs": [
@@ -9495,7 +10462,7 @@
    5151
   ],
   "view/city-traffic.mjs": [
-   "f9d6c857257847ef",
+   "1e32bbec8fd74958",
    2951
   ],
   "view/coastal-surfaces.mjs": [
@@ -9503,23 +10470,23 @@
    1703
   ],
   "view/environment.mjs": [
-   "89bccedb0b894f06",
+   "418e245ed6594f9d",
    4856
   ],
   "view/island-view.mjs": [
-   "a95e6dd81c971933",
+   "ccb384a8692a9524",
    36991
   ],
   "view/learning-buildings.mjs": [
-   "1f8ce7a7591071e7",
+   "f2f39e51ee99710d",
    1926
   ],
   "view/local-models.mjs": [
-   "81adbe4e30b727fa",
+   "a17f78ac4591c9a7",
    3624
   ],
   "view/meshy-pilot.mjs": [
-   "6e7f23d087f2bac9",
+   "0e134d48812f10f2",
    5659
   ],
   "view/planning-frame.mjs": [
@@ -9547,7 +10514,7 @@
    2596
   ],
   "view/ultra-island-flora.mjs": [
-   "ac22c5e6a7c6c213",
+   "46a4d2ce8ac086dc",
    3372
   ],
   "view/ultra-island-roads.mjs": [
@@ -9555,7 +10522,7 @@
    2932
   ],
   "view/ultra-island-scenery.mjs": [
-   "0934e80fd0661269",
+   "48bef6cfe00501f9",
    7698
   ],
   "view/ultra-island-terrain.mjs": [
@@ -9563,7 +10530,7 @@
    5518
   ],
   "view/ultra-island-water.mjs": [
-   "e2233ec650ed36a3",
+   "b3ba8511386b87c3",
    4692
   ]
  }

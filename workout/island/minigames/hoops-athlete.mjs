@@ -15,12 +15,12 @@ import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
 import {decodeTallPack,buildTallClips,TALL_PROFILES,TALL_REQUIRED,tallEnabled} from './hoops-tall.mjs';
 import {loadV8Motion,buildV8Clips,v8MotionEnabled} from './hoops-v8-motion.mjs';
 import {athletesEnabled,unifyTallPack} from './athletes-gait.mjs';
-import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor,v22SkinFor,V22_MAP,V22_LEG_RATIO,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-23';
-import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-23';
-import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-23';
-import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-23';
-import {hoopsLookEnabled,cullBodyGeometry,applyHoopsLook,hoopsLookKit} from './hoops-look-v249.mjs?v=island-v2-20261107-23';
-import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-23';
+import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor,v22SkinFor,V22_MAP,V22_LEG_RATIO,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-24';
+import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-24';
+import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-24';
+import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-24';
+import {hoopsLookEnabled,cullBodyGeometry,applyHoopsLook,hoopsLookKit} from './hoops-look-v249.mjs?v=island-v2-20261107-24';
+import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-24';
 
 /** The athlete body is used when the tall library is on and the flag does not say otherwise. */
 export function hoopsAthleteEnabled(cfg,params,quality=2){return athleteBodyEnabled(params?.toString?.()?'?'+params.toString():'')&&tallEnabled(cfg,params,quality);}

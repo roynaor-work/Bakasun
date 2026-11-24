@@ -35,8 +35,8 @@ async function open({browser,server,defer},{saveData=false,contextOptions={}}={}
  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
  return {context,page,csp,errors,requests,server};
 }
-async function boot(page,server){
- await page.goto(server.url+'?dev=1',{waitUntil:'domcontentloaded'});
+async function boot(page,server,query=''){
+ await page.goto(server.url+'?dev=1'+query,{waitUntil:'domcontentloaded'});
  await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
  if(await page.locator('[data-action=avatar-start]').count())await page.locator('[data-action=avatar-start]').click();
  await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=50000;e.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;
@@ -47,6 +47,7 @@ async function play(page,name,id){
  await page.evaluate(({id,report})=>{
   const e=window.__island.engine;
   if(report)localStorage.removeItem(report);
+  if(id==='alpineRush')localStorage.removeItem('island.alpineRunner.lastLoadReport');
   if(!e.state.instructionsSeen.includes(id))e.state.instructionsSeen.push(id);
   window.__island.ui.activityInterface.launch(id,undefined,1);
  },{id,report});
@@ -56,7 +57,8 @@ async function play(page,name,id){
   if(error)return {status:'failed',error};
   if(session?.ready!==true||!(m?.calls>0||m?.drawCalls>0))return false;
   if(name==='racing')return m.mode==='webgl'&&m.modelLoaded?{status:'ready'}:false;
-  const reportText=localStorage.getItem(report);
+  /* Ski: the three-lane runner (default) writes its own report; with ?alpineRunner=0 the race writes the ski one. */
+  const reportText=localStorage.getItem(name==='alpine'&&s.mode==='runner'?'island.alpineRunner.lastLoadReport':report);
   if(!reportText)return false;
   const observed=name==='soccer'?m.assetStatus:/^status (\w+)/m.exec(reportText)?.[1];
   return observed?{status:observed}:false;
@@ -71,7 +73,7 @@ const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__
 test('one button downloads soccer, basketball, ski and racing; status counts the real cache; saves stay untouched; then the island opens offline with all four games',{skip:!enabled,timeout:900000},async testContext=>{
  const fixture=await setup(testContext),{server}=fixture;
  const t=await open(fixture,{saveData:true});
-  await boot(t.page,server);
+  await boot(t.page,server,'&alpineRunner=0');
   await t.page.evaluate(()=>{localStorage.setItem('island.test.marker','keep');});
   const savedBefore=await t.page.evaluate(()=>Object.keys(localStorage).filter(k=>!k.startsWith('island.offline')).sort());
   await t.page.evaluate(()=>window.__island.ui.activityInterface.menu());
@@ -99,7 +101,8 @@ test('one button downloads soccer, basketball, ski and racing; status counts the
   await t.context.setOffline(true);
   const offlinePage=await t.context.newPage();offlinePage.setDefaultTimeout(180000);const errors=[];offlinePage.on('pageerror',e=>errors.push(e.message));
   const failed=[];offlinePage.on('requestfailed',r=>{if(!/ERR_ABORTED/.test(r.failure()?.errorText||''))failed.push(r.url()+' '+r.failure()?.errorText);});/* a request cut short when the game closes is not a missing file */
-  await offlinePage.goto(server.url+'?dev=1',{waitUntil:'domcontentloaded'});
+  /* alpineThemes=1: this software-rendered browser is measured as a slow device, and light mode alone would skip the runner's theme pack. */
+  await offlinePage.goto(server.url+'?dev=1&alpineThemes=1',{waitUntil:'domcontentloaded'});
   await offlinePage.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:180000});
   await offlinePage.evaluate(()=>{window.__island.engine.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;});
   for(const [name,id] of Object.entries(GAMES)){
@@ -108,7 +111,9 @@ test('one button downloads soccer, basketball, ski and racing; status counts the
   }
   assert.deepEqual(failed.filter(u=>u.startsWith(server.url)&&!/release\.json/.test(u)),[],'nothing the app needs failed offline');
   assert.deepEqual(errors,[]);
-  for(const id of reportedGames)assert.ok(await offlinePage.evaluate(id=>localStorage.getItem(`island.${id}.lastLoadReport`),id),id+' wrote a load report');
+  /* Online the ski stage ran as the race (?alpineRunner=0 above); offline, with no flag, it is the runner and its theme pack. */
+  for(const id of ['soccer','hoops','alpineRunner'])assert.ok(await offlinePage.evaluate(id=>localStorage.getItem(`island.${id}.lastLoadReport`),id),id+' wrote a load report');
+  assert.match(await offlinePage.evaluate(()=>localStorage.getItem('island.alpineRunner.lastLoadReport')),/themes forest/,'the runner drew its theme pack with no network');
   await t.csp.assertClean();
 });
 
@@ -155,7 +160,7 @@ test('each game renders after a requested asset is blocked by the browser',{skip
   await route.abort('failed');
   intercepted.set(name,url.pathname);
  });
- await boot(t.page,server);
+ await boot(t.page,server,'&alpineRunner=0');/* the blocked ski file belongs to the race */
  for(const [name,id] of Object.entries(GAMES)){
   current=name;
   await play(t.page,name,id);

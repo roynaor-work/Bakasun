@@ -1,4 +1,4 @@
-import { kidUxStyle, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-23';
+import { kidUxStyle, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-24';
 
 // Each scene connects a visible control and its gesture with a visible game outcome.
 const steps = {

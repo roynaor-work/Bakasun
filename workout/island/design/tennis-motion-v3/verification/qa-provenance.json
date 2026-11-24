@@ -1,0 +1,77 @@
+{
+  "tool": "motion-qa-v1",
+  "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "sourceManifest": "../tennis-motion-v2/verification/qa-provenance.json",
+  "sourceManifestSha256": "bbbd80ccc933404fbe1218896244d5f62dd76955244f284929f9fa9dd2fe2dd9",
+  "files": [
+    {
+      "path": "../tennis-motion-v2/vendor/motion-qa-v1/metrics.mjs",
+      "sourcePath": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "bytes": 36189,
+      "unchanged": true,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "../tennis-motion-v2/vendor/motion-qa-v1/glb.mjs",
+      "sourcePath": "workout/island/design/motion-qa-v1/glb.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+      "bytes": 9363,
+      "unchanged": true,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "../tennis-motion-v2/vendor/motion-qa-v1/sheets.mjs",
+      "sourcePath": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+      "bytes": 5947,
+      "unchanged": true,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "../tennis-motion-v2/vendor/motion-qa-v1/test/metrics.test.mjs",
+      "sourcePath": "workout/island/design/motion-qa-v1/test/metrics.test.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "ec6c14eb552ae1a5901a94f2440b74e1b8f48a0c2ad2200f6d52f4118621363a",
+      "bytes": 8909,
+      "unchanged": true,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "../tennis-motion-v2/vendor/motion-qa-v1/test/glb.test.mjs",
+      "sourcePath": "workout/island/design/motion-qa-v1/test/glb.test.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "a077432920069babd25515ad5be1d1c31be4c459177db5c67968965dceae7be8",
+      "bytes": 7611,
+      "unchanged": true,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "../tennis-motion-v2/vendor/three.module.js",
+      "sourcePath": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "bytes": 670681,
+      "unchanged": true,
+      "license": "MIT"
+    },
+    {
+      "path": "../tennis-motion-v2/vendor/LICENSE.three",
+      "sourcePath": "workout/island/design/soccer-motion-v8/runtime/vendor/LICENSE.three",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "bytes": 1081,
+      "unchanged": true,
+      "license": "MIT"
+    }
+  ],
+  "engineTests": {
+    "total": 30,
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0
+  }
+}

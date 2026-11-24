@@ -1,0 +1,57 @@
+/* Island Pro Basketball v25.0: shot meter, tap rings, rebound cue, special gauge, quiet HUD. Loaded only when ?hoopsV250 is on. */
+.game-screen[data-game=streetSlam] .hv250{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden;direction:ltr}
+.game-screen[data-game=streetSlam] .hv250 [hidden]{display:none}
+
+/* shot meter: a tall dark capsule, a yellow band, a bright green window, a white marker that rises */
+.game-screen[data-game=streetSlam] .hv250-meter{position:absolute;left:0;top:0;width:26px;height:132px;will-change:transform}
+.game-screen[data-game=streetSlam] .hv250-track{position:absolute;inset:0;border-radius:13px;background:#0a0f1ae6;border:2px solid #ffffffd9;box-shadow:0 2px 10px #000a;overflow:hidden}
+.game-screen[data-game=streetSlam] .hv250-yellow{position:absolute;left:0;right:0;background:#f2c230;opacity:.85}
+.game-screen[data-game=streetSlam] .hv250-green{position:absolute;left:0;right:0;background:#2ee27a;box-shadow:0 0 12px 2px #2ee27a}
+.game-screen[data-game=streetSlam] .hv250-marker{position:absolute;left:-2px;right:-2px;height:6px;margin-bottom:-3px;border-radius:3px;background:#fff;box-shadow:0 0 0 1.5px #0a0f1a,0 0 8px #fff}
+.game-screen[data-game=streetSlam] .hv250-meter[data-zone=green] .hv250-track{border-color:#8dffc0}
+.game-screen[data-game=streetSlam] .hv250-badge{position:absolute;left:50%;top:-40px;width:34px;height:34px;margin-left:-17px;border-radius:50%;display:grid;place-items:center;color:#fff;background:#0c111c;border:2px solid #fff;box-sizing:border-box}
+.game-screen[data-game=streetSlam] .hv250-badge:empty{display:none}
+.game-screen[data-game=streetSlam] .hv250-badge svg{width:20px;height:20px}
+.game-screen[data-game=streetSlam] .hv250-meter[data-result=perfect] .hv250-track,.game-screen[data-game=streetSlam] .hv250-meter[data-result=perfect] .hv250-badge,.game-screen[data-game=streetSlam] .hv250-reb-grade[data-result=perfect]{border-color:#8dffc0;background:#168a4c}
+.game-screen[data-game=streetSlam] .hv250-meter[data-result=good] .hv250-badge,.game-screen[data-game=streetSlam] .hv250-reb-grade[data-result=good]{border-color:#ffe9a6;background:#b98a14}
+.game-screen[data-game=streetSlam] .hv250-meter[data-result=early] .hv250-badge,.game-screen[data-game=streetSlam] .hv250-meter[data-result=late] .hv250-badge,.game-screen[data-game=streetSlam] .hv250-reb-grade[data-result=early],.game-screen[data-game=streetSlam] .hv250-reb-grade[data-result=late]{border-color:#ffc2b5;background:#b63a22}
+.game-screen[data-game=streetSlam] .hv250-meter[data-result=perfect] .hv250-marker{background:#eafff2;box-shadow:0 0 0 1.5px #0a0f1a,0 0 14px 4px #2ee27a}
+.game-screen[data-game=streetSlam] .hv250-meter:not([data-result=""]) .hv250-badge{animation:hv250-pop .22s ease-out}
+/* the old meter and the centre-screen grade give way to the new meter */
+.game-screen[data-game=streetSlam][data-hoops-v250~=meter] .hoops-meter,.game-screen[data-game=streetSlam][data-hoops-v250~=meter] .hoops-grade{display:none}
+
+/* team-mates the child can tap */
+.game-screen[data-game=streetSlam] .hv250-mate{position:absolute;left:0;top:0;box-sizing:border-box;border-radius:50%;border:2px solid #ffffffb8;background:#ffffff14}
+.game-screen[data-game=streetSlam] .hv250-mate[data-flash=true]{border-color:#ffd23f;background:#ffd23f55;border-width:3px}
+
+/* rebound cue: the spot, a ring that closes on it, green when it is time to jump */
+.game-screen[data-game=streetSlam] .hv250-reb{position:absolute;left:0;top:0}
+.game-screen[data-game=streetSlam] .hv250-reb-ring{position:absolute;inset:0;border-radius:50%;border:3px solid #ffffffd9;box-sizing:border-box}
+.game-screen[data-game=streetSlam] .hv250-reb-core{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;display:grid;place-items:center;color:#0a0f1a;background:#ffffffd9}
+.game-screen[data-game=streetSlam] .hv250-reb-core svg{width:14px;height:14px}
+.game-screen[data-game=streetSlam] .hv250-reb[data-go=true] .hv250-reb-ring{border-color:#2ee27a;box-shadow:0 0 10px #2ee27a}
+.game-screen[data-game=streetSlam] .hv250-reb[data-go=true] .hv250-reb-core{background:#2ee27a}
+.game-screen[data-game=streetSlam] .hv250-reb-grade{left:0;top:0;margin:-34px 0 0 0;animation:none}
+
+/* special gauge: a flame that fills, beside the time-out button, far from the court */
+.game-screen[data-game=streetSlam] .hv250-special{--v:0;position:absolute;left:calc(132px + var(--ih-safe-left,env(safe-area-inset-left,0px)));top:calc(16px + var(--ih-safe-top,env(safe-area-inset-top,0px)));width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#ffffff8c;background:conic-gradient(#ff9a2e calc(var(--v)*1turn),#ffffff2e 0)}
+.game-screen[data-game=streetSlam] .hv250-special::before{content:"";position:absolute;inset:4px;border-radius:50%;background:#0c111c}
+.game-screen[data-game=streetSlam] .hv250-special svg{position:relative;width:22px;height:22px}
+.game-screen[data-game=streetSlam] .hv250-special[data-ready=true]{color:#ffd23f;box-shadow:0 0 14px 3px #ff9a2e;animation:hv250-pulse .9s ease-in-out infinite}
+.game-screen[data-game=streetSlam] .hv250-special[data-used=true]{color:#fff;box-shadow:0 0 18px 6px #ffd23f}
+.game-screen[data-game=streetSlam] .hoops-action.hv250-fire{box-shadow:0 0 0 3px #ff9a2e,0 0 18px 4px #ff9a2e}
+@media(orientation:portrait){.game-screen[data-game=streetSlam] .hv250-special{left:calc(12px + var(--ih-safe-left,env(safe-area-inset-left,0px)));top:calc(132px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}}
+
+/* quiet HUD: no role labels (the session does not build them), the help and kit buttons sit together above the court as icons,
+   the step counter is three dots */
+.game-screen[data-game=streetSlam][data-hoops-v250~=hud] .kid-hoops-pass-launch{right:calc(68px + max(12px,env(safe-area-inset-right)));bottom:auto;top:max(72px,calc(64px + env(safe-area-inset-top)));width:48px;min-width:48px;height:48px;padding:0;border-radius:50%;font-size:0;border:1px solid var(--h-line);background:var(--h-glass)}
+.game-screen[data-game=streetSlam][data-hoops-v250~=hud] .kid-hoops-pass-launch::before{content:"?";font-size:24px;font-weight:800;line-height:46px;color:#fff}
+.game-screen[data-game=streetSlam][data-hoops-v250~=hud] .hoops-steps{font-size:0;padding:6px 10px;display:flex;gap:6px;bottom:calc(132px + env(safe-area-inset-bottom))}
+.game-screen[data-game=streetSlam][data-hoops-v250~=hud] .hoops-steps[hidden]{display:none}
+.game-screen[data-game=streetSlam][data-hoops-v250~=hud] .hoops-steps i{width:10px;height:10px;border-radius:50%;background:#ffffff47}
+.game-screen[data-game=streetSlam][data-hoops-v250~=hud] .hoops-steps i.on{background:#ffb020}
+/* during a replay the help and kit buttons step aside for the replay tag */
+.game-screen[data-game=streetSlam][data-hoops-v250~=hud][data-hoops-replaying=true] :is(.kid-hoops-pass-launch,.hoops-kit-trigger){visibility:hidden}
+@keyframes hv250-pop{from{transform:scale(.4)}to{transform:scale(1)}}
+@keyframes hv250-pulse{50%{transform:scale(1.12)}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=streetSlam] .hv250-special[data-ready=true],.game-screen[data-game=streetSlam] .hv250-badge{animation:none}}

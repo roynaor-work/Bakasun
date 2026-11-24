@@ -34,7 +34,7 @@ async function open(width,height,{query='',init}={}){
     if(failures.length)throw new AggregateError(failures,'Alpine CSP/teardown audit failed');
   }
   try{
-    await page.goto(server.url+'?dev=1'+query,{waitUntil:'networkidle'});
+    await page.goto(server.url+'?dev=1&alpineRunner=0'+query,{waitUntil:'networkidle'});
     await csp.assertClean();
     await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
     await page.locator('[data-action=avatar-start]').tap();

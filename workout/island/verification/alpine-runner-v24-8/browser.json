@@ -1,0 +1,175 @@
+{
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "browser": "153.0.8010.12",
+ "renderer": "SwiftShader",
+ "themes": {
+  "pine": {
+   "touch": {
+    "commands": [
+     [
+      "right",
+      true
+     ],
+     [
+      "left",
+      true
+     ],
+     [
+      "jump",
+      true
+     ],
+     [
+      "slide",
+      true
+     ]
+    ],
+    "fps": 25.2
+   },
+   "pack": "forest",
+   "weather": "snow",
+   "weatherFrames": 80,
+   "triangles": 24693,
+   "calls": 20,
+   "budget": 60000,
+   "quality": "low",
+   "packFiles": 24,
+   "picture": {
+    "colours": 479,
+    "largestShare": 0.27610299506522695
+   },
+   "distance": 44,
+   "pictures": {
+    "run-pine": 70,
+    "run-pine-far": 141
+   }
+  },
+  "aurora": {
+   "touch": {
+    "commands": [
+     [
+      "right",
+      true
+     ],
+     [
+      "left",
+      true
+     ],
+     [
+      "jump",
+      true
+     ],
+     [
+      "slide",
+      true
+     ]
+    ],
+    "fps": 6.8
+   },
+   "pack": "aurora",
+   "weather": "glow",
+   "weatherFrames": 8,
+   "triangles": 15739,
+   "calls": 21,
+   "budget": 100000,
+   "quality": "high",
+   "packFiles": 47,
+   "picture": {
+    "colours": 779,
+    "largestShare": 0.10089412224556603
+   },
+   "distance": 131,
+   "pictures": {
+    "run-aurora": 158,
+    "run-aurora-far": 230
+   }
+  },
+  "ice": {
+   "touch": {
+    "commands": [
+     [
+      "right",
+      true
+     ],
+     [
+      "left",
+      true
+     ],
+     [
+      "jump",
+      true
+     ],
+     [
+      "slide",
+      true
+     ]
+    ],
+    "fps": 13.4
+   },
+   "pack": "ice",
+   "weather": "fog",
+   "weatherFrames": 55,
+   "triangles": 18478,
+   "calls": 21,
+   "budget": 100000,
+   "quality": "high",
+   "packFiles": 47,
+   "picture": {
+    "colours": 405,
+    "largestShare": 0.1481409097571701
+   },
+   "distance": 91,
+   "pictures": {
+    "run-ice": 116,
+    "run-ice-far": 187
+   }
+  }
+ },
+ "flags": {
+  "alpineThemes0": {
+   "mode": "runner",
+   "themePack": null,
+   "triangles": 8239,
+   "fps": 21.9
+  },
+  "alpineRunnerPatch0": {
+   "mode": "race",
+   "trackId": "ice-peak"
+  },
+  "alpineRunner0": {
+   "mode": "race",
+   "trackId": "ice-peak"
+  },
+  "missingPackFile": {
+   "mode": "runner",
+   "themePack": null,
+   "failures": 1,
+   "started": true
+  }
+ },
+ "result": [
+  {
+   "key": "distance",
+   "text": "מרחק600 מ׳",
+   "visible": false
+  },
+  {
+   "key": "time",
+   "text": "זמן31.9 שנ׳",
+   "visible": true
+  },
+  {
+   "key": "coins",
+   "text": "מטבעות שנאספו44",
+   "visible": true
+  },
+  {
+   "key": "newBest",
+   "text": "שיא חדש820",
+   "visible": true
+  }
+ ],
+ "resultVisibleAfterOpen": true
+}

@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 1,
+  "asset": "tennis-motion-v3.glb",
+  "bytes": 1557464,
+  "sha256": "28a9956ae1f5ae07726257238d3f8a08f2d21a0548041dd3864929f8c64dea7d",
+  "reference": {
+    "asset": "../tennis-motion-v2/tennis-motion-v2.glb",
+    "sha256": "e3a7ed216d28a3135447dbb54f5c8ef9a6d08be49740304fc32663c9bdf37a0a",
+    "joints": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ]
+  },
+  "racketMeasurement": {
+    "source": "../tennis-motion-v2/source/reference/grip-player.glb",
+    "sha256": "6f6a95bae86b471f1194b386f5cca3ef25ac01c341d799c624ad10384a357753",
+    "vertices": 3139,
+    "sampleHz": 120,
+    "floorMeters": 0,
+    "toleranceMeters": 0.0001,
+    "rightWristLimitDegrees": 62
+  },
+  "validator": {
+    "name": "Khronos glTF Validator",
+    "version": "2.0.0-dev.3.10",
+    "numErrors": 0,
+    "numWarnings": 0,
+    "numInfos": 14,
+    "numHints": 0,
+    "messages": [
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/19"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/20"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/21"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/22"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/23"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/24"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/25"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/26"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/33"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/34"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/35"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/36"
+      },
+      {
+        "code": "NODE_EMPTY",
+        "message": "Empty node encountered.",
+        "severity": 2,
+        "pointer": "/nodes/37"
+      },
+      {
+        "code": "UNUSED_MESH_WEIGHTS",
+        "message": "The static morph target weights are always overridden.",
+        "severity": 2,
+        "pointer": "/meshes/1/weights"
+      }
+    ],
+    "truncated": false
+  },
+  "checks": {
+    "catalogAssetDigest": true,
+    "catalogReferenceDigest": true,
+    "catalogGripFixtureDigest": true,
+    "khronosGltf2": true,
+    "requestedInventory": true,
+    "native30HzDeclaration": true,
+    "noForbiddenCodecs": true,
+    "selfContained": true,
+    "uniqueNodeNames": true,
+    "canonical18": true,
+    "skinBinding": true,
+    "inverseBindMatrices": true,
+    "frozenRestAndHierarchy": true,
+    "mountInRightHand": true,
+    "leftHandOpenMorphBinding": true,
+    "inclusiveNativeFrames": true,
+    "onlyCanonicalTracks": true,
+    "interpolation": true,
+    "sampleLayout": true,
+    "nativeTimeGrid": true,
+    "finiteOutput": true,
+    "visibleBallScale": true,
+    "unitQuaternions": true,
+    "fixedRoot": true,
+    "sharedKnotTangents": true,
+    "eventTimeline": true,
+    "embeddedCueMetadata": true,
+    "supportTimeline": true,
+    "racketSurfaceAboveCourt": true,
+    "rightWristWithinV2Limit": true
+  },
+  "clips": [
+    {
+      "id": "volley_low",
+      "channels": 22,
+      "frames": 51,
+      "events": 2,
+      "durationSeconds": 1.6666666666666667,
+      "maxQuaternionError": 4.092675254252498e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 201,
+        "minCourtClearanceMeters": 0.6482445691952623,
+        "minClearanceTimeSeconds": 0.7083333333333334,
+        "maxWristBendDegrees": 58.58015305392152,
+        "maxBendTimeSeconds": 0.31666666666666665
+      }
+    },
+    {
+      "id": "volley_high",
+      "channels": 22,
+      "frames": 50,
+      "events": 1,
+      "durationSeconds": 1.6333333333333333,
+      "maxQuaternionError": 4.8232247973345466e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 197,
+        "minCourtClearanceMeters": 0.9994813863594242,
+        "minClearanceTimeSeconds": 0,
+        "maxWristBendDegrees": 44.870236731091246,
+        "maxBendTimeSeconds": 1.075
+      }
+    },
+    {
+      "id": "half_volley",
+      "channels": 22,
+      "frames": 54,
+      "events": 2,
+      "durationSeconds": 1.7666666666666666,
+      "maxQuaternionError": 3.904642031926642e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 213,
+        "minCourtClearanceMeters": 0.16155848855172755,
+        "minClearanceTimeSeconds": 0.5916666666666667,
+        "maxWristBendDegrees": 59.92605149818611,
+        "maxBendTimeSeconds": 0.25
+      }
+    },
+    {
+      "id": "lob",
+      "channels": 22,
+      "frames": 69,
+      "events": 2,
+      "durationSeconds": 2.2666666666666666,
+      "maxQuaternionError": 3.8729002116433264e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 273,
+        "minCourtClearanceMeters": 0.42821000677695753,
+        "minClearanceTimeSeconds": 0.699999988079071,
+        "maxWristBendDegrees": 59.61704140761813,
+        "maxBendTimeSeconds": 0.4166666666666667
+      }
+    },
+    {
+      "id": "overhead_backward",
+      "channels": 22,
+      "frames": 83,
+      "events": 4,
+      "durationSeconds": 2.7333333333333334,
+      "maxQuaternionError": 3.877755794245985e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 329,
+        "minCourtClearanceMeters": 0.7612800581241261,
+        "minClearanceTimeSeconds": 1.6416666666666666,
+        "maxWristBendDegrees": 58.105120018481585,
+        "maxBendTimeSeconds": 2.216666666666667
+      }
+    },
+    {
+      "id": "serve_return_aggressive",
+      "channels": 22,
+      "frames": 52,
+      "events": 2,
+      "durationSeconds": 1.7,
+      "maxQuaternionError": 4.559164523687542e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 205,
+        "minCourtClearanceMeters": 0.8794482444182208,
+        "minClearanceTimeSeconds": 0.5333333333333333,
+        "maxWristBendDegrees": 59.775436074938085,
+        "maxBendTimeSeconds": 0.5583333333333333
+      }
+    },
+    {
+      "id": "defensive_slice",
+      "channels": 22,
+      "frames": 67,
+      "events": 2,
+      "durationSeconds": 2.2,
+      "maxQuaternionError": 3.988530650200772e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 265,
+        "minCourtClearanceMeters": 0.7482627443197052,
+        "minClearanceTimeSeconds": 1.2333333333333334,
+        "maxWristBendDegrees": 58.19545954447854,
+        "maxBendTimeSeconds": 0.35
+      }
+    },
+    {
+      "id": "lateral_crossover_run",
+      "channels": 22,
+      "frames": 70,
+      "events": 3,
+      "durationSeconds": 2.3,
+      "maxQuaternionError": 3.795046477073072e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 277,
+        "minCourtClearanceMeters": 0.9350072623495975,
+        "minClearanceTimeSeconds": 0.5416666666666666,
+        "maxWristBendDegrees": 59.61705986758823,
+        "maxBendTimeSeconds": 1.2583333333333333
+      }
+    },
+    {
+      "id": "change_direction",
+      "channels": 22,
+      "frames": 68,
+      "events": 3,
+      "durationSeconds": 2.2333333333333334,
+      "maxQuaternionError": 3.9963873765813673e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 269,
+        "minCourtClearanceMeters": 0.8848861729778126,
+        "minClearanceTimeSeconds": 1,
+        "maxWristBendDegrees": 58.03393028640032,
+        "maxBendTimeSeconds": 0.25
+      }
+    },
+    {
+      "id": "slide_to_ball",
+      "channels": 22,
+      "frames": 73,
+      "events": 5,
+      "durationSeconds": 2.4,
+      "maxQuaternionError": 3.930543546193377e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 289,
+        "minCourtClearanceMeters": 0.672553313476905,
+        "minClearanceTimeSeconds": 0.8416666666666667,
+        "maxWristBendDegrees": 59.6972145667734,
+        "maxBendTimeSeconds": 0.5833333333333334
+      }
+    },
+    {
+      "id": "court_fall",
+      "channels": 22,
+      "frames": 49,
+      "events": 4,
+      "durationSeconds": 1.6,
+      "maxQuaternionError": 4.1535561878802696e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 193,
+        "minCourtClearanceMeters": 0.6913132406829714,
+        "minClearanceTimeSeconds": 1.4416666666666667,
+        "maxWristBendDegrees": 58.00134318648573,
+        "maxBendTimeSeconds": 0.85
+      }
+    },
+    {
+      "id": "court_get_up",
+      "channels": 22,
+      "frames": 77,
+      "events": 5,
+      "durationSeconds": 2.533333333333333,
+      "maxQuaternionError": 3.941190218625934e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 305,
+        "minCourtClearanceMeters": 0.6913131942813341,
+        "minClearanceTimeSeconds": 0.19166666666666668,
+        "maxWristBendDegrees": 58.00050904158867,
+        "maxBendTimeSeconds": 0.8583333333333333
+      }
+    },
+    {
+      "id": "point_win",
+      "channels": 22,
+      "frames": 62,
+      "events": 4,
+      "durationSeconds": 2.033333333333333,
+      "maxQuaternionError": 4.0670042444901355e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 245,
+        "minCourtClearanceMeters": 0.8705545556088221,
+        "minClearanceTimeSeconds": 1,
+        "maxWristBendDegrees": 59.68863727233107,
+        "maxBendTimeSeconds": 1.4833333333333334
+      }
+    },
+    {
+      "id": "childlike_joy",
+      "channels": 22,
+      "frames": 75,
+      "events": 5,
+      "durationSeconds": 2.466666666666667,
+      "maxQuaternionError": 4.1423803942564064e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 297,
+        "minCourtClearanceMeters": 0.8520280661756954,
+        "minClearanceTimeSeconds": 0.26666666666666666,
+        "maxWristBendDegrees": 58.0053282731434,
+        "maxBendTimeSeconds": 1.85
+      }
+    },
+    {
+      "id": "point_disappointment",
+      "channels": 22,
+      "frames": 91,
+      "events": 4,
+      "durationSeconds": 3,
+      "maxQuaternionError": 4.051823321304937e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 361,
+        "minCourtClearanceMeters": 0.282630124632507,
+        "minClearanceTimeSeconds": 1.5666666666666667,
+        "maxWristBendDegrees": 58.002311977980725,
+        "maxBendTimeSeconds": 1.1833333333333333
+      }
+    },
+    {
+      "id": "match_handshake",
+      "channels": 22,
+      "frames": 87,
+      "events": 5,
+      "durationSeconds": 2.8666666666666667,
+      "maxQuaternionError": 3.814883720032469e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 345,
+        "minCourtClearanceMeters": 0.5643308669218551,
+        "minClearanceTimeSeconds": 0.699999988079071,
+        "maxWristBendDegrees": 59.642171425042186,
+        "maxBendTimeSeconds": 2.4166666666666665
+      }
+    },
+    {
+      "id": "coach_serve_demo",
+      "channels": 22,
+      "frames": 223,
+      "events": 8,
+      "durationSeconds": 7.4,
+      "maxQuaternionError": 4.2286363632904056e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 889,
+        "minCourtClearanceMeters": 0.5363307710698881,
+        "minClearanceTimeSeconds": 3.4,
+        "maxWristBendDegrees": 60.632449997768276,
+        "maxBendTimeSeconds": 2.4166666666666665
+      }
+    },
+    {
+      "id": "child_serve_rehearsal",
+      "channels": 22,
+      "frames": 223,
+      "events": 7,
+      "durationSeconds": 7.4,
+      "maxQuaternionError": 3.99309538767767e-8,
+      "maxRootDeviation": 0,
+      "maxKnotTangentMismatch": 0,
+      "racket": {
+        "samples": 889,
+        "minCourtClearanceMeters": 0.851409185540574,
+        "minClearanceTimeSeconds": 6.35,
+        "maxWristBendDegrees": 60.924468091473535,
+        "maxBendTimeSeconds": 4.458333333333333
+      }
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

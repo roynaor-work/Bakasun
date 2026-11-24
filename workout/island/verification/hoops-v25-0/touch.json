@@ -1,0 +1,203 @@
+{
+ "viewport": "844x390 touch, dpr 1.5, SwiftShader",
+ "before (hoopsV250=0)": {
+  "flags": {
+   "on": false,
+   "meter": false,
+   "hud": false,
+   "tapPass": false,
+   "rebound": false,
+   "stick": false,
+   "replay": false,
+   "special": false,
+   "feet": false
+  },
+  "hudLayout": {
+   "roleLabels": 1,
+   "labelsUnderControls": 1,
+   "hebrewWordsOverCourt": [
+    "סנטר",
+    "🏀 מסירות"
+   ]
+  },
+  "meter": {
+   "oldMeterShown": true,
+   "newMeter": null,
+   "green": {
+    "zone": "green",
+    "result": null
+   },
+   "late": {
+    "zone": "red",
+    "result": null
+   }
+  },
+  "tap": {
+   "tries": [
+    {
+     "target": "waves-1",
+     "inStickZone": false,
+     "passedTo": null,
+     "byTap": false,
+     "ok": false
+    },
+    {
+     "target": "waves-2",
+     "inStickZone": false,
+     "passedTo": null,
+     "byTap": false,
+     "ok": false
+    },
+    {
+     "target": "waves-3",
+     "inStickZone": false,
+     "passedTo": null,
+     "byTap": false,
+     "ok": false
+    }
+   ]
+  },
+  "rebound": {
+   "run": {
+    "go": -1,
+    "seen": 0,
+    "state": "dead"
+   },
+   "timing": null
+  },
+  "special": {},
+  "replay": {
+   "tries": 5,
+   "made": true,
+   "started": null,
+   "slow": null
+  },
+  "errors": []
+ },
+ "after": {
+  "flags": {
+   "on": true,
+   "meter": true,
+   "hud": true,
+   "tapPass": true,
+   "rebound": true,
+   "stick": true,
+   "replay": true,
+   "special": true,
+   "feet": true
+  },
+  "hudLayout": {
+   "roleLabels": 0,
+   "labelsUnderControls": 0,
+   "hebrewWordsOverCourt": []
+  },
+  "meter": {
+   "oldMeterShown": false,
+   "newMeter": {
+    "x": 537,
+    "y": 117,
+    "w": 26,
+    "h": 132,
+    "shown": true
+   },
+   "green": {
+    "zone": "green",
+    "result": "perfect"
+   },
+   "late": {
+    "zone": "red",
+    "result": "late"
+   }
+  },
+  "tap": {
+   "tries": [
+    {
+     "target": "waves-1",
+     "inStickZone": false,
+     "passedTo": "waves-1",
+     "byTap": true,
+     "ok": true
+    },
+    {
+     "target": "waves-2",
+     "inStickZone": false,
+     "passedTo": "waves-2",
+     "byTap": true,
+     "ok": true
+    },
+    {
+     "target": "waves-3",
+     "inStickZone": false,
+     "passedTo": "waves-3",
+     "byTap": true,
+     "ok": true
+    }
+   ]
+  },
+  "rebound": {
+   "run": {
+    "go": 12,
+    "seen": 13,
+    "state": "shot"
+   },
+   "timing": null
+  },
+  "special": {
+   "ready": {
+    "special": {
+     "v": 1,
+     "ready": true,
+     "used": 0
+    },
+    "readyEvent": true,
+    "gauge": {
+     "x": 132,
+     "y": 16,
+     "w": 40,
+     "h": 40,
+     "shown": true
+    }
+   },
+   "used": {
+    "special": {
+     "v": 0,
+     "ready": false,
+     "used": 1
+    },
+    "release": {
+     "seq": 102,
+     "tick": 4195,
+     "time": 69.91666666666667,
+     "type": "release",
+     "playerId": "waves-1",
+     "shotId": 5,
+     "shotType": "jumpshot",
+     "points": 3,
+     "quality": 1,
+     "chance": 0.573,
+     "contest": 0.422,
+     "x": 5.2,
+     "z": 2.6,
+     "oop": false,
+     "special": true
+    }
+   }
+  },
+  "replay": {
+   "tries": 2,
+   "made": true,
+   "started": {
+    "show": true,
+    "reason": "green",
+    "cam": null,
+    "scale": 1,
+    "wall": 0,
+    "frames": 180,
+    "contact": 4.866666666666666,
+    "total": 3.6611111111111105
+   },
+   "slow": null
+  },
+  "errors": []
+ }
+}

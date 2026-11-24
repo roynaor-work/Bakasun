@@ -1,28 +1,28 @@
-import {installCity} from './city-runtime.mjs?v=island-v2-20261107-23';
-import {installLearning} from '../learning/runtime.mjs?v=island-v2-20261107-23';
-import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-v2-20261107-23';
-import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-23';
-import {recordStageWin} from '../activity/progress.mjs?v=island-v2-20261107-23';
-import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-23';
-import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-v2-20261107-23';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-23';
-import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-23';
-import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-23';
-import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-23';
-import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-23';
-import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-23';
-import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-23';
-import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-23';
-import {fireBonusMission,fireBonusResult,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-23';
-import { createRegistry } from './registry.mjs?v=island-v2-20261107-23';
-import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-23';
-import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-23';
-import { calculateIncome, accrueIncome } from './economy.mjs?v=island-v2-20261107-23';
-import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-v2-20261107-23';
-import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-v2-20261107-23';
-import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-v2-20261107-23';
-import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-23';
-import {installAlpineLeague} from '../minigames/alpine-league-island.mjs?v=island-v2-20261107-23';
+import {installCity} from './city-runtime.mjs?v=island-v2-20261107-24';
+import {installLearning} from '../learning/runtime.mjs?v=island-v2-20261107-24';
+import {cityReport,zoneAvailability,advanceCity} from './city-management.mjs?v=island-v2-20261107-24';
+import {validCertificate,recordFireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-24';
+import {recordStageWin} from '../activity/progress.mjs?v=island-v2-20261107-24';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-24';
+import {recordTeamWin} from '../activity/soccer-team.mjs?v=island-v2-20261107-24';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-24';
+import {trainingOffer} from '../activity/soccer-card.mjs?v=island-v2-20261107-24';
+import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-24';
+import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-24';
+import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-24';
+import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-24';
+import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-24';
+import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-24';
+import {fireBonusMission,fireBonusResult,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-24';
+import { createRegistry } from './registry.mjs?v=island-v2-20261107-24';
+import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-24';
+import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-24';
+import { calculateIncome, accrueIncome } from './economy.mjs?v=island-v2-20261107-24';
+import { createInitialState, loadWorld, saveWorld, exportWorld, importWorld, resetWorld } from './persistence.mjs?v=island-v2-20261107-24';
+import { loadEpisode, episodeAvailable } from './episodes.mjs?v=island-v2-20261107-24';
+import { canPlay, spendPlayTime, createNarrationHook } from './hooks.mjs?v=island-v2-20261107-24';
+import {nextGame as hoopsNextGame,applyResult as hoopsApply,setLineup as hoopsSetLineup,train as hoopsTrain,trainingOffer as hoopsOffer,newSeason as hoopsNewSeason,hoopsSummary} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-24';
+import {installAlpineLeague} from '../minigames/alpine-league-island.mjs?v=island-v2-20261107-24';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -544,7 +544,8 @@ export function createEngine(data, options = {}) {
         state.money += result.money;
         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
         if (config.minigameLevels?.[id]) {
-          state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
+          // The alpine runner stores its own score. The legacy Alpine score is a race placement.
+          if (id !== 'alpineRush' || raw?.runner === undefined || raw.alpine !== undefined) state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
           if(result.outcome==='win'){recordStageWin(state,data,id,stage,result.stars);}
           if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
           if(id==='tennis'&&result.outcome==='win')recordTeamWin(state,config.minigames.soccer,'tennis');

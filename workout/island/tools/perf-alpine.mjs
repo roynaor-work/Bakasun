@@ -1,6 +1,6 @@
-import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-23';
-import {stageInfo, equipmentFor, RIVALS, STAGE_COUNT} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-23';
-import {stageGoals} from '../minigames/alpine-league-stages.mjs?v=island-v2-20261107-23';
+import {runAlpineRaceSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-24';
+import {stageInfo, equipmentFor, RIVALS, STAGE_COUNT} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-24';
+import {stageGoals} from '../minigames/alpine-league-stages.mjs?v=island-v2-20261107-24';
 
 /** Alpine Rush performance page: runs one race on autopilot through the real session
  * (engine, controls, view, HUD) and reports frame pacing. Query: seconds, stage, seed,
@@ -103,7 +103,7 @@ async function run() {
   let recording = false, startWall = 0, pending = null, stopped = false;
   window.requestAnimationFrame = cb => rawRaf(ts => { if (stopped) return; const t0 = performance.now(); const heap0 = performance.memory?.usedJSHeapSize ?? null; pending = {ts, step: 0, snapshot: 0, presentation: 0, render: 0, heap: heap0}; cb(ts); pending.cost = performance.now() - t0; pending.alloc = heap0 === null ? null : (performance.memory.usedJSHeapSize - heap0) / 1024; if (recording) frames.push(pending); pending = null; });
   const created = performance.now();
-  const session = runAlpineSession({balance, level: stage, seed, equipment: info ? alpineLeague.equipment : {}, power: 1, alpineLeague, canvas, controls, status, t, debug: true, storage: memory(), sound() {},
+  const session = runAlpineRaceSession({balance, level: stage, seed, equipment: info ? alpineLeague.equipment : {}, power: 1, alpineLeague, canvas, controls, status, t, debug: true, storage: memory(), sound() {},
     finish: () => ({ok: true}), cancel() {}, onError(reason) { statusLine.textContent = `שגיאה: ${reason}`; }});
   window.__perfSession = session;
   const engine = session.debug.engine, input = session.debug.input();

@@ -1,16 +1,16 @@
 import {createUltraFireCity} from './ultra-fire-city.mjs';
 import {createUltraFireEffects} from './ultra-fire-effects.mjs';
 import {createUltraFireScenery} from './ultra-fire-scenery.mjs';
-import {fireScreenMovement} from './fire-navigation.mjs?v=island-v2-20261107-23';
+import {fireScreenMovement} from './fire-navigation.mjs?v=island-v2-20261107-24';
 import {polishLegacy,polishValue,fireV20,fireV21} from './polish-flag.mjs';
-import {ladderArmPose} from './fire-ladder.mjs?v=island-v2-20261107-23';
+import {ladderArmPose} from './fire-ladder.mjs?v=island-v2-20261107-24';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {palette} from '../view/environment.mjs?v=island-v2-20261107-23';
-import {loadFireTruck} from './fire-truck.mjs?v=island-v2-20261107-23';
-import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-v2-20261107-23';
-import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-v2-20261107-23';
-import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-23';
+import {palette} from '../view/environment.mjs?v=island-v2-20261107-24';
+import {loadFireTruck} from './fire-truck.mjs?v=island-v2-20261107-24';
+import {drawWaterDrop,drawFireArrow,drawFireFeedback,pickFireObjective} from './fire-canvas.mjs?v=island-v2-20261107-24';
+import {LocalModels,fitModel} from '../view/local-models.mjs?v=island-v2-20261107-24';
+import {cloneFireCharacter,createFireCrewRig} from './fire-crew.mjs?v=island-v2-20261107-24';
 import {createFireV7,fireV7Enabled} from './fire-v7.mjs';
 
 /** Own everything in this round. Static colored parts share a material and are

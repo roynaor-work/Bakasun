@@ -7,10 +7,10 @@ import {browserCleanup,serveIsland,islandChromium,installIslandCspMonitor} from 
  * with ?loadStuckMs. Opt in with ISLAND_CSP_BROWSER=1, like the other island browser suites. */
 const enabled=process.env.ISLAND_CSP_BROWSER==='1'||process.env.ISLAND_LOAD_RESCUE_BROWSER==='1';
 const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'];
-const GAMES={soccer:{id:'soccer',hold:/design\/tactics\/soccer\.json/,key:'soccer'},hoops:{id:'streetSlam',hold:/minigames\/hoops-view\.mjs/,key:'hoops'},alpine:{id:'alpineRush',hold:/minigames\/alpine-view\.mjs/,key:'alpine'}};
+const GAMES={soccer:{id:'soccer',hold:/design\/tactics\/soccer\.json/,key:'soccer'},hoops:{id:'streetSlam',hold:/minigames\/hoops-view\.mjs/,key:'hoops'},alpine:{id:'alpineRush',hold:/minigames\/alpine-view\.mjs/,key:'alpine',query:'&alpineRunner=0'}};
 const STUCK=5000;
 
-async function setup(testContext,hold,query=''){
+async function setup(testContext,{hold,query=''},extra=''){query+=extra;
  const defer=browserCleanup(testContext);
  const chromium=await islandChromium();
  const server=await serveIsland('/workout/island/');
@@ -62,7 +62,7 @@ const saveKeys=page=>page.evaluate(()=>Object.keys(localStorage).filter(k=>!/las
 
 for(const [name,g] of Object.entries(GAMES)){
  test(`${name}: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key`,{skip:!enabled,timeout:600000},async tctx=>{
-  const t=await setup(tctx,g.hold);
+  const t=await setup(tctx,g);
    await t.page.evaluate(()=>localStorage.setItem('island.test.marker','keep'));
    const before=await saveKeys(t.page);
    assert.equal(await launch(t.page,g.id),0,'no rescue box at launch');
@@ -90,7 +90,7 @@ for(const [name,g] of Object.entries(GAMES)){
 }
 
 test('soccer: ?strings=v246 puts the previous restart wording back on the rescue button',{skip:!enabled,timeout:600000},async tctx=>{
- const g=GAMES.soccer,t=await setup(tctx,g.hold,'&strings=v246');
+ const g=GAMES.soccer,t=await setup(tctx,g,'&strings=v246');
   assert.equal(await launch(t.page,g.id),0,'no rescue box at launch');
   await t.page.waitForSelector('[data-load-rescue] [data-action=rescue-restart]',{timeout:30000});
   assert.equal((await t.page.locator('[data-action=rescue-restart]').first().innerText()).trim(),'נתקע? אתחול המשחק');
@@ -98,7 +98,7 @@ test('soccer: ?strings=v246 puts the previous restart wording back on the rescue
 });
 
 test('ski: second stuck attempt offers the light version, third offers clearing only this game\'s asset cache; saves and other games\' files stay',{skip:!enabled,timeout:600000},async tctx=>{
- const g=GAMES.alpine,t=await setup(tctx,g.hold);
+ const g=GAMES.alpine,t=await setup(tctx,g);
   await t.page.evaluate(()=>localStorage.setItem('island.test.marker','keep'));
   const before=await saveKeys(t.page);
   await launch(t.page,g.id);

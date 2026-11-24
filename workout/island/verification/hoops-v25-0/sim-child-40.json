@@ -1,0 +1,99 @@
+{
+ "note": "scripted child (team 0) against the bot, 40 games, quick profile, same seeds; tools/hoops-v250-sim.mjs",
+ "before (v250 off)": {
+  "v250": false,
+  "games": 40,
+  "profile": "quick",
+  "timingSd": 0.07,
+  "childWinPct": 47.5,
+  "avgScore": [
+   22.8,
+   22.8
+  ],
+  "avgMargin": 0,
+  "fgPct": 40.4,
+  "threePct": 0,
+  "greenPct": 48.9,
+  "yellowPct": 36.9,
+  "redPct": 14.1,
+  "reboundsPerGame": [
+   13.4,
+   7.9
+  ],
+  "childTeamReboundPct": 62.9,
+  "childOwnReboundsPerGame": 13.45,
+  "reboundJumpsPerGame": 14.3,
+  "reboundGrades": {
+   "perfect": 0,
+   "good": 0,
+   "early": 0,
+   "late": 0
+  },
+  "gradedJumpWonPct": 0,
+  "stealsPerGame": [
+   8.95,
+   3.92
+  ],
+  "blocksPerGame": [
+   2.9,
+   1.15
+  ],
+  "passesPerGame": 33.6,
+  "tapPassesPerGame": 0,
+  "guardSpotDistance": 1.83,
+  "betweenManAndRimPct": 14.7,
+  "specialReadyPerGame": 0,
+  "specialUsedPerGame": 0,
+  "fireShotMakePct": 0,
+  "simSeconds": 210.5,
+  "steps": 1143591
+ },
+ "after": {
+  "v250": true,
+  "games": 40,
+  "profile": "quick",
+  "timingSd": 0.07,
+  "childWinPct": 47.5,
+  "avgScore": [
+   24.4,
+   24.7
+  ],
+  "avgMargin": -0.3,
+  "fgPct": 41.4,
+  "threePct": 0,
+  "greenPct": 52.5,
+  "yellowPct": 35,
+  "redPct": 12.5,
+  "reboundsPerGame": [
+   14.8,
+   5.6
+  ],
+  "childTeamReboundPct": 72.5,
+  "childOwnReboundsPerGame": 14.82,
+  "reboundJumpsPerGame": 27.9,
+  "reboundGrades": {
+   "perfect": 146,
+   "good": 155,
+   "early": 33,
+   "late": 84
+  },
+  "gradedJumpWonPct": 71.8,
+  "stealsPerGame": [
+   8.75,
+   4.1
+  ],
+  "blocksPerGame": [
+   3.1,
+   1.3
+  ],
+  "passesPerGame": 29.7,
+  "tapPassesPerGame": 28.8,
+  "guardSpotDistance": 1.79,
+  "betweenManAndRimPct": 19.1,
+  "specialReadyPerGame": 2.9,
+  "specialUsedPerGame": 2.77,
+  "fireShotMakePct": 55.9,
+  "simSeconds": 249,
+  "steps": 1146930
+ }
+}

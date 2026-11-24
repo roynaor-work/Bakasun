@@ -1,0 +1,685 @@
+diff --git a/tests/island-alpine-ctrl-ski.test.mjs b/tests/island-alpine-ctrl-ski.test.mjs
+index 9914a58d0f29f4058294aec7a8de51b97520c011..007723927b2e6e04aa66ae41028e5e0a896cea32 100644
+--- a/tests/island-alpine-ctrl-ski.test.mjs
++++ b/tests/island-alpine-ctrl-ski.test.mjs
+@@ -24,7 +24,7 @@ test('browser: stick left / actions right in both orientations, floating stick w
+       const page = await context.newPage(), errors = []; page.setDefaultTimeout(180000); await csp.attachPage(page);
+       page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/missing-alpine-rider|404/.test(m.text())) errors.push(m.text()); });
+       try {
+-        await page.goto(server.url + '?dev=1', {waitUntil: 'networkidle'});
++        await page.goto(server.url + '?dev=1&alpineRunner=0', {waitUntil: 'networkidle'});
+         await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded);
+         await page.locator('[data-action=avatar-start]').tap();
+         await page.evaluate(() => { const {engine: e} = window.__island; e.skipTutorial(); e.tick = () => ({ok: true}); });
+diff --git a/tests/island-load-rescue-browser.test.mjs b/tests/island-load-rescue-browser.test.mjs
+index 5e61630fd6d3fe7b963b383a8bf01417e32f2161..1d688e40ea66bb380d4bc3b255bd2a27efc2773b 100644
+--- a/tests/island-load-rescue-browser.test.mjs
++++ b/tests/island-load-rescue-browser.test.mjs
+@@ -7,17 +7,17 @@ import {serveIsland,islandChromium,installIslandCspMonitor} from './helpers/isla
+  * with ?loadStuckMs. Opt in with ISLAND_CSP_BROWSER=1, like the other island browser suites. */
+ const enabled=process.env.ISLAND_CSP_BROWSER==='1'||process.env.ISLAND_LOAD_RESCUE_BROWSER==='1';
+ const gpuArgs=['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'];
+-const GAMES={soccer:{id:'soccer',hold:/design\/tactics\/soccer\.json/,key:'soccer'},hoops:{id:'streetSlam',hold:/minigames\/hoops-view\.mjs/,key:'hoops'},alpine:{id:'alpineRush',hold:/minigames\/alpine-view\.mjs/,key:'alpine'}};
++const GAMES={soccer:{id:'soccer',hold:/design\/tactics\/soccer\.json/,key:'soccer'},hoops:{id:'streetSlam',hold:/minigames\/hoops-view\.mjs/,key:'hoops'},alpine:{id:'alpineRush',hold:/minigames\/alpine-view\.mjs/,key:'alpine',query:'&alpineRunner=0'}};
+ const STUCK=5000;
+
+-async function setup(browser,server,hold){
++async function setup(browser,server,{hold,query=''}){
+  const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
+  const csp=await installIslandCspMonitor(context),page=await context.newPage();page.setDefaultTimeout(120000);await csp.attachPage(page);
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const state={holding:true,held:[]};
+  await context.route('**/*',route=>{if(state.holding&&hold.test(route.request().url())){state.held.push(route);return;}return route.continue();});
+  state.release=async()=>{state.holding=false;const list=state.held.splice(0);for(const r of list)await r.continue().catch(()=>{});};
+- await page.goto(server.url+`?dev=1&loadStuckMs=${STUCK}`,{waitUntil:'networkidle'});
++ await page.goto(server.url+`?dev=1&loadStuckMs=${STUCK}${query}`,{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
+  if(await page.locator('[data-action=avatar-start]').count())await page.locator('[data-action=avatar-start]').click();
+  await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=50000;e.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;
+@@ -36,7 +36,7 @@ for(const [name,g] of Object.entries(GAMES)){
+  test(`${name}: a stuck load shows the restart button after the threshold; pressing it plays the game again and keeps every save key`,{skip:!enabled,timeout:600000},async()=>{
+   const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
+   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
+-  const t=await setup(browser,server,g.hold);
++  const t=await setup(browser,server,g);
+   try{
+    await t.page.evaluate(()=>localStorage.setItem('island.test.marker','keep'));
+    const before=await saveKeys(t.page);
+@@ -65,7 +65,7 @@ for(const [name,g] of Object.entries(GAMES)){
+ test('ski: second stuck attempt offers the light version, third offers clearing only this game\'s asset cache; saves and other games\' files stay',{skip:!enabled,timeout:600000},async()=>{
+  const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
+  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:gpuArgs});
+- const g=GAMES.alpine,t=await setup(browser,server,g.hold);
++ const g=GAMES.alpine,t=await setup(browser,server,g);
+  try{
+   await t.page.evaluate(()=>localStorage.setItem('island.test.marker','keep'));
+   const before=await saveKeys(t.page);
+diff --git a/tests/island-offline-browser.test.mjs b/tests/island-offline-browser.test.mjs
+index 3d46bffd3aeb613eba342e2016e2d08650da9f3d..8e6b337ff58a8cadb43481fbb17dde397433ded9 100644
+--- a/tests/island-offline-browser.test.mjs
++++ b/tests/island-offline-browser.test.mjs
+@@ -21,8 +21,8 @@ async function open(browser,server,{saveData=false,contextOptions={}}={}){
+  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));page.on('requestfailed',r=>failed.push(r.url()+' '+r.failure()?.errorText));
+  return {context,page,csp,errors,requests,failed,server};
+ }
+-async function boot(page,server){
+- await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});
++async function boot(page,server,query=''){
++ await page.goto(server.url+'?dev=1'+query,{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);
+  if(await page.locator('[data-action=avatar-start]').count())await page.locator('[data-action=avatar-start]').click();
+  await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();data.featureFlags.events=false;e.state.money=50000;e.learningStatus=()=>({locked:false});window.__island.ui.activityInterface.requireDaily=()=>false;
+@@ -34,7 +34,7 @@ async function play(page,id){
+  if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
+  await page.waitForFunction(()=>{const s=window.__island.games?.current?.session?.snapshot;return s&&(s.renderMetrics?.calls>0||s.renderMetrics?.drawCalls>0||s.loaded||s.renderMetrics?.assetStatus==='ready');},null,{timeout:200000});
+  await page.waitForTimeout(3000);
+- return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
++ return page.evaluate(id=>{const s=window.__island.games.current.session.snapshot,key=({soccer:'soccer',streetSlam:'hoops',alpineRush:s.mode==='runner'?'alpineRunner':'alpine'})[id];return {status:s.renderMetrics?.assetStatus||(s.loaded||(s.renderMetrics?.mode==='webgl'&&s.renderMetrics.modelLoaded)?'ready':(/status (\w+)/.exec(localStorage.getItem(`island.${key}.lastLoadReport`)||'')||[])[1]||'?'),error:s.error||null};},id);
+ }
+ const leave=page=>page.evaluate(()=>{window.__island.games.cleanup?.();window.__island.ui.closeModal?.();});
+
+@@ -74,7 +74,7 @@ test('one button downloads soccer, basketball, ski and racing; status counts the
+   }
+   assert.deepEqual(failed.filter(u=>u.startsWith(server.url)&&!/release\.json/.test(u)),[],'nothing the app needs failed offline');
+   assert.deepEqual(errors,[]);
+-  for(const id of ['soccer','hoops','alpine'])assert.ok(await offlinePage.evaluate(id=>localStorage.getItem(`island.${id}.lastLoadReport`),id),id+' wrote a load report');
++  for(const id of ['soccer','hoops','alpineRunner'])assert.ok(await offlinePage.evaluate(id=>localStorage.getItem(`island.${id}.lastLoadReport`),id),id+' wrote a load report');
+   await t.csp.assertClean();
+  }finally{await t.csp.dispose();await t.context.close();await browser.close();await server.close();}
+ });
+@@ -103,7 +103,7 @@ test('a missing or blocked asset never hangs a game: soccer, basketball, ski and
+  const blocked={soccer:/crowd-dots\.webp|goal-burst\.webp/,hoops:/net-spark\.webp|burning-ball-glow\.webp/,alpine:/ski-scrape\.webp|snow-dust\.webp/,racing:/tire-smoke\.png|asphalt-orm\.webp/};
+  let current='soccer';await t.context.route('**/*',route=>{const url=route.request().url();if(blocked[current].test(url))return route.abort('failed');return route.continue();});
+  try{
+-  await boot(t.page,server);
++  await boot(t.page,server,'&alpineRunner=0');
+   for(const [name,id] of Object.entries(GAMES)){current=name;const result=await play(t.page,id);assert.equal(result.status,'ready',name+' with a blocked asset: '+JSON.stringify(result));await leave(t.page);}
+   assert.deepEqual(t.errors.filter(e=>!/Failed to load resource|net::/.test(e)),[]);
+  }finally{await t.csp.dispose();await t.context.close();await browser.close();await server.close();}
+diff --git a/tests/island-offline-v25-browser.test.mjs b/tests/island-offline-v25-browser.test.mjs
+index 292bea827b1423f2a185d4d30d610fb9d160bc03..71cf7b5083e55c9fa6b59760e4993294feed99a4 100644
+--- a/tests/island-offline-v25-browser.test.mjs
++++ b/tests/island-offline-v25-browser.test.mjs
+@@ -59,21 +59,21 @@ test('v25: the background download keeps the shell and the main games only; the
+   const auto=await t.page.evaluate(()=>window.__offlineState);
+   console.log('v25 auto download',Math.round((Date.now()-t0)/1000),'s',JSON.stringify({state:auto.state,wanted:auto.wanted,failed:auto.result?.failed?.length,bytes:auto.result?.bytes}));
+   assert.equal(auto.state,'ready',JSON.stringify(auto.result?.failed));
+-  assert.deepEqual(auto.wanted,['soccer','hoops','alpine','alpineLeague','city'],'nothing played yet: the three main games and the hub');
++  assert.deepEqual(auto.wanted,['soccer','hoops','alpine','alpineLeague','alpineRunner','city'],'nothing played yet: the three main games and the hub');
+   let s=await status(t.page);
+-  assert.equal(s.shell,true);for(const g of ['soccer','hoops','alpine','alpineLeague','city'])assert.equal(s.games[g],true,g);
++  assert.equal(s.shell,true);for(const g of ['soccer','hoops','alpine','alpineLeague','alpineRunner','city'])assert.equal(s.games[g],true,g);
+   for(const g of ['tennis','racing','naval','fire','alien','catch'])assert.equal(s.games[g],false,g+' is not downloaded before it was played');
+   assert.equal((await t.page.evaluate(()=>caches.keys())).length,1);
+   // The panel: v25 rows with size and state, storage line, install button or hint.
+   await t.page.evaluate(()=>window.__island.ui.activityInterface.menu());
+   await t.page.waitForFunction(()=>document.querySelector('[data-offline-panel][data-v25] .offline-pack[data-game=soccer][data-state=ready]'));
+   const rows=await t.page.evaluate(()=>[...document.querySelectorAll('.offline-pack')].map(li=>({game:li.dataset.game,state:li.dataset.state,size:li.querySelector('.offline-pack-size').textContent,action:li.querySelector('button')?.dataset.action})));
+-  assert.equal(rows.length,11);
++  assert.equal(rows.length,12);
+   assert.deepEqual(rows.find(r=>r.game==='soccer'),{game:'soccer',state:'ready',size:'24 MB',action:'offline-pack-delete'});
+   const tennis=rows.find(r=>r.game==='tennis');assert.ok(['missing','partial'].includes(tennis.state),'tennis is not ready (files shared with the main games may already be there): '+JSON.stringify(tennis));
+   assert.equal(tennis.size,'4.7 MB');assert.equal(tennis.action,'offline-pack-download');
+   const texts=await t.page.evaluate(()=>({status:document.querySelector('.offline-status').textContent,storage:document.querySelector('[data-offline-storage]').textContent,install:document.querySelector('[data-action=offline-install]').textContent,installState:document.querySelector('[data-offline-panel]').dataset.install}));
+-  assert.match(texts.status,/האפליקציה שמורה · 5 מתוך 11 משחקים מוכנים/);
++  assert.match(texts.status,/האפליקציה שמורה · 6 מתוך 12 משחקים מוכנים/);
+   assert.match(texts.storage,/באחסון המכשיר: [\d.]+ MB/);assert.match(texts.storage,/שמירה קבועה: (כן|לא)/);
+   assert.ok(['prompt','manual','ios','installed'].includes(texts.installState),texts.installState);
+   if(texts.installState!=='installed'){await t.page.locator('[data-action=offline-install]').click();await t.page.waitForFunction(()=>!document.querySelector('[data-install-hint]').hidden);assert.match(await t.page.evaluate(()=>document.querySelector('[data-install-hint]').textContent),/הוספה למסך הבית|התקנת אפליקציה|מותקנת/);}
+diff --git a/tests/island-offline-v25.test.mjs b/tests/island-offline-v25.test.mjs
+index 5747f92ec1d110e1ce4626549ab0c5b9ecd89da6..27a222d70801796203a6241be78ba1a8292c1aee 100644
+--- a/tests/island-offline-v25.test.mjs
++++ b/tests/island-offline-v25.test.mjs
+@@ -34,7 +34,7 @@ test('v25 packages: every playable game maps to packages that exist, the hub is
+  for(const packs of Object.values(PACKS_OF))for(const p of packs)assert.ok(p in OFFLINE_GAMES&&p in manifest.games,p);
+  assert.deepEqual(packsForGames([]),Object.keys(OFFLINE_GAMES).filter(p=>[...ALWAYS_PACKS,...DEFAULT_PACKS].includes(p)));
+  assert.deepEqual(packsForGames(['tennis','tennis','boarDefense']),['tennis','city']);
+- assert.deepEqual(packsForGames(['alpineRush']),['alpine','alpineLeague','city']);
++ assert.deepEqual(packsForGames(['alpineRush']),['alpine','alpineLeague','alpineRunner','city']);
+  assert.ok(packsForGames(['streetSlam']).includes('hoops')&&!packsForGames(['streetSlam']).includes('soccer'));
+ });
+
+@@ -143,7 +143,7 @@ test('v25 panel texts: package states, summary and storage line',()=>{
+  assert.equal(describePack({complete:true},{downloading:{percent:40}}),'בהורדה · 40%');
+  assert.equal(describePack({complete:true},{update:{changed:2,bytes:3*1048576}}),'יש עדכון (2 קבצים, 3 MB)');
+  const games=Object.fromEntries(Object.keys(OFFLINE_GAMES).map(g=>[g,{complete:g==='soccer'}]));
+- assert.match(describeStatus25({supported:true,complete:false,have:10,haveBytes:20*1048576,bytes:97*1048576,shell:{complete:true,have:5,total:5},games}),/האפליקציה שמורה · 1 מתוך 11 משחקים מוכנים · 20 מתוך 97 MB/);
++ assert.match(describeStatus25({supported:true,complete:false,have:10,haveBytes:20*1048576,bytes:97*1048576,shell:{complete:true,have:5,total:5},games}),/האפליקציה שמורה · 1 מתוך 12 משחקים מוכנים · 20 מתוך 97 MB/);
+  assert.match(describeStatus25({supported:true,complete:true,bytes:97*1048576,games}),/שמור לגרסה הזו: כל המשחקים במכשיר \(97 MB\)/);
+  assert.equal(describeStatus25({supported:false,games:{}}),'ההורדה למכשיר לא זמינה בדפדפן הזה. המשחקים נטענים מהרשת.');
+  assert.equal(describeStorage({usage:null,quota:null,persisted:null}),'');
+diff --git a/tests/island-offline.test.mjs b/tests/island-offline.test.mjs
+index 45e1968f5b4d9069400b8321cc7e98405081c806..eb539725531b6e434c15261ae10a5a632520d094 100644
+--- a/tests/island-offline.test.mjs
++++ b/tests/island-offline.test.mjs
+@@ -15,8 +15,9 @@ const bytesOf=async list=>{let n=0;for(const p of list)if(p)n+=(await stat(path.
+
+ test('offline manifest: every listed file exists, is cacheable by the worker rules and appears once per game',async()=>{
+  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
++ const smallPacks=['alpineRunner','tennis','racing','naval','fire','alien','city','catch'];
+  for(const [game,list] of Object.entries(manifest.games)){
+-  assert.ok(list.length>=(game==='tennis'||game==='racing'||game==='naval'||game==='fire'||game==='alien'||game==='city'||game==='catch'?5:40),game+' has a real asset list');/* small packs */
++  assert.ok(list.length>=(smallPacks.includes(game)?5:40),game+' has a real asset list');
+   assert.equal(new Set(list).size,list.length,game+' has no duplicates');
+   for(const p of list){await access(path.join(island,p));assert.ok(isManagedPath('/workout/island/'+p),p+' is served from the cache');}
+  }
+diff --git a/workout/island/data/strings.he.json b/workout/island/data/strings.he.json
+index 9d6cee8ab83461e5c1d50f9948cad4a60fbbd3e9..260c55f3f3db21e247dc8c8f1c8e7d402a646e1b 100644
+--- a/workout/island/data/strings.he.json
++++ b/workout/island/data/strings.he.json
+@@ -1589,6 +1589,20 @@
+  "minigame.alpineRush.help.1": "הג׳ויסטיק משמאל, או גרירה על המסלול, מזיזים שמאלה וימינה ומעלים על קירות חצי הצינור. במחשב: חצים או A ו־D.",
+  "minigame.alpineRush.help.2": "כפתור הברק מפעיל האצה כשיש מספיק במיכל (במחשב: רווח). המיכל מתמלא לאט, בשערים, על משטחי תכלת ובכל טריק שהצליח.",
+  "minigame.alpineRush.help.3": "באוויר, מרמפה או משפת הקיר, לוחצים על כפתורי הטריקים סביב הברק (במחשב: 1 עד 4). טריק שלא נגמר לפני הנחיתה הוא נפילה. כל מטבע במסלול שווה מטבע בעיר, גם בלי ניצחון. כדי לעבור שלב צריך לסיים במקום הנדרש.",
++ "minigame.alpineRush.runner.description": "גלישה אינסופית בשלושה נתיבים עם מכשולים, מטבעות ובונוסים.",
++ "minigame.alpineRush.runner.help.1": "החליקו ימינה או שמאלה כדי לעבור לנתיב הסמוך.",
++ "minigame.alpineRush.runner.help.2": "החליקו למעלה כדי לקפוץ מעל גדר נמוכה ולמטה כדי לעבור מתחת לקורה. במחשב השתמשו בחצים.",
++ "minigame.alpineRush.runner.help.3": "אספו מטבעות ובונוסים בדרך. הגלישה נמשכת עד פגיעה ללא מגן. הגיעו ליעד המרחק כדי לפתוח את השלב הבא.",
++ "minigame.alpineRush.runner.stage.1": "קל · יעד {distance} מ׳",
++ "minigame.alpineRush.runner.stage.2": "בינוני · יעד {distance} מ׳",
++ "minigame.alpineRush.runner.stage.3": "קשה · יעד {distance} מ׳",
++ "minigame.alpineRush.runner.distance": "{distance} מ׳",
++ "minigame.alpineRush.runner.seconds": "{time} שנ׳",
++ "minigame.alpineRush.runner.result.distance": "מרחק",
++ "minigame.alpineRush.runner.result.time": "זמן",
++ "minigame.alpineRush.runner.result.coins": "מטבעות שנאספו",
++ "minigame.alpineRush.runner.result.newBest": "שיא חדש",
++ "minigame.alpineRush.runner.result.best": "שיא אישי",
+  "feature.alpineRush.1": "פסגת הקרח · 1.6 ק״מ · יעד מקום 3",
+  "feature.alpineRush.2": "יער הכפור · 1.75 ק״מ · יעד מקום 2",
+  "feature.alpineRush.3": "רכס הסערה · 1.9 ק״מ · יעד מקום 1",
+diff --git a/workout/island/engine/engine.mjs b/workout/island/engine/engine.mjs
+index e32b1d9dc0ec2b3925522c3c502ca249f5b871da..438d7ecbbf8d1d73fd7cec7bc30f224099f4da46 100644
+--- a/workout/island/engine/engine.mjs
++++ b/workout/island/engine/engine.mjs
+@@ -500,7 +500,8 @@ export function createEngine(data, options = {}) {
+         state.money += result.money;
+         // Only shipped game IDs are persisted; third-party contract examples remain compatible.
+         if (config.minigameLevels?.[id]) {
+-          state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
++          // The alpine runner stores its own score. The legacy Alpine score is a race placement.
++          if (id !== 'alpineRush' || raw?.runner === undefined || raw.alpine !== undefined) state.highScores[id] = Math.max(state.highScores[id] || 0,result.score);
+           if(result.outcome==='win'){recordStageWin(state,data,id,stage,result.stars);}
+           if(result.outcome==='win')state.minigameWins[id]=Math.min(Number.MAX_SAFE_INTEGER,(state.minigameWins[id]||0)+1);
+           if(id==='tennis'&&result.outcome==='win')recordTeamWin(state,config.minigames.soccer,'tennis');
+diff --git a/workout/island/minigames/alpine-result.mjs b/workout/island/minigames/alpine-result.mjs
+index 265f7bd92f12d0b432dc21016494daa0fbab1fb6..8114aad48662f5beb7927a2b7a709ca50927ef23 100644
+--- a/workout/island/minigames/alpine-result.mjs
++++ b/workout/island/minigames/alpine-result.mjs
+@@ -1,5 +1,6 @@
+ import {alpineReward, alpineTrack} from './alpine-engine.mjs?v=island-v2-20261107-18';
+ import {generateCourse} from './alpine-track.mjs?v=island-v2-20261107-18';
++import {alpineRunnerEnabled, alpineRunnerResult} from './alpine-runner-rules.mjs';
+
+ /** Island reward contract for Alpine Rush. The settlement is recomputed from the
+  * validated race summary; any field that disagrees rejects the whole result. */
+@@ -13,6 +14,7 @@ function coinsOn(balance, stage) {
+ }
+
+ export function alpineResult(raw, ctx, balance) {
++  if (raw?.runner !== undefined && !ctx.alpineLeague && alpineRunnerEnabled()) return raw.alpine === undefined ? alpineRunnerResult(raw, ctx, balance) : null;
+   const r = raw?.alpine;
+   if (!r || typeof r !== 'object' || Array.isArray(r) || Object.keys(r).length !== FIELDS.length || !FIELDS.every(key => Object.hasOwn(r, key))) return null;
+   if (!Number.isInteger(r.stage) || r.stage !== ctx.level || r.stage < 1 || r.stage > balance.levels.length) return null;
+diff --git a/workout/island/minigames/alpine-session.mjs b/workout/island/minigames/alpine-session.mjs
+index ecd198ad5dc841597e8c88361017c1a1cd7b71f2..727e5854312982044bf5bd812500c5276a742e0c 100644
+--- a/workout/island/minigames/alpine-session.mjs
++++ b/workout/island/minigames/alpine-session.mjs
+@@ -12,6 +12,8 @@ import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-18';
+ import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-18';
+ import {createStartLights,startLightsEnabled} from './alpine-start-lights.mjs?v=island-v2-20261107-18';
+ import {balanceForPage,SECTION_NAMES,SECTION_HINTS} from './alpine-v241.mjs?v=island-v2-20261107-18';
++import {alpineRunnerEnabled} from './alpine-runner-rules.mjs';
++import {runAlpineRunnerSession} from './alpine-runner-session.mjs';
+
+ const SVG_NS = 'http://www.w3.org/2000/svg';
+ const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
+@@ -46,10 +48,15 @@ export function goalText(g) {
+   return 'לגלוש בלי ליפול';
+ }
+
++export function runAlpineSession(ctx) {
++  if (ctx.canvas && !ctx.alpineLeague && alpineRunnerEnabled()) return runAlpineRunnerSession(ctx);
++  return runAlpineRaceSession(ctx);
++}
++
+ /** Controller for one Alpine Rush session: owns the engine, the view, requestAnimationFrame,
+  * input, audio and the HUD. The island engine owns rewards; this file only reports the
+  * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
+-export function runAlpineSession(ctx) {
++export function runAlpineRaceSession(ctx) {
+   // Ski league v23: the island engine hands a league run its setup (ctx.alpineLeague: stage, theme, goals, gear); the course, rivals and
+   // speed come from the league balance of that stage. Without it this is the regular game, unchanged.
+   const league = ctx.alpineLeague || null, leagueTheme = league ? THEME_LOOKS[league.theme] : null;
+diff --git a/workout/island/offline-manifest.json b/workout/island/offline-manifest.json
+index e613a217f7610f70d1a650a57a5bca96320604b9..96c573e55e68d0cbf0fdc594e10445848eb88a7d 100644
+--- a/workout/island/offline-manifest.json
++++ b/workout/island/offline-manifest.json
+@@ -255,6 +255,15 @@
+   "minigames/alpine-quality.mjs",
+   "minigames/alpine-records.mjs",
+   "minigames/alpine-result.mjs",
++  "minigames/alpine-runner-engine.mjs",
++  "minigames/alpine-runner-generator/generate.mjs",
++  "minigames/alpine-runner-generator/index.mjs",
++  "minigames/alpine-runner-generator/profiles.mjs",
++  "minigames/alpine-runner-generator/validate.mjs",
++  "minigames/alpine-runner-rules.mjs",
++  "minigames/alpine-runner-session.mjs",
++  "minigames/alpine-runner-view.mjs",
++  "minigames/alpine-runner.css",
+   "minigames/alpine-screen.css",
+   "minigames/alpine-screen.mjs",
+   "minigames/alpine-session.mjs",
+@@ -1147,6 +1156,33 @@
+    "assets/alpine-themes-v23/village/snow.webp",
+    "assets/alpine-themes-v23/village/village-pine.glb"
+   ],
++  "alpineRunner": [
++   "assets/alpine-runner/content/effects/powder-particle.png",
++   "assets/alpine-runner/content/models/boulder.glb",
++   "assets/alpine-runner/content/models/double-coin.glb",
++   "assets/alpine-runner/content/models/star.glb",
++   "assets/alpine-runner/runner/characters/skier-coral.glb",
++   "assets/alpine-runner/runner/props/coin.glb",
++   "assets/alpine-runner/runner/props/high_beam.glb",
++   "assets/alpine-runner/runner/props/low_fence.glb",
++   "assets/alpine-runner/runner/props/magnet.glb",
++   "assets/alpine-runner/runner/props/shield.glb",
++   "assets/alpine-runner/runner/props/turbo.glb",
++   "assets/alpine-runner/runner/tiles/bridge.glb",
++   "assets/alpine-runner/runner/tiles/forest.glb",
++   "assets/alpine-runner/runner/tiles/gentle_turn.glb",
++   "assets/alpine-runner/runner/tiles/ice_tunnel.glb",
++   "assets/alpine-runner/runner/tiles/slope.glb",
++   "assets/alpine-runner/runner/tiles/straight.glb",
++   "assets/alpine-runner/runner/tiles/summit.glb",
++   "assets/alpine-runner/runner/tiles/village.glb",
++   "assets/alpine-runner/themes/01-pine/textures/sky.png",
++   "assets/alpine-runner/themes/02-ice/textures/sky.png",
++   "assets/alpine-runner/themes/03-volcano/textures/sky.png",
++   "assets/alpine-runner/themes/04-aurora/textures/sky.png",
++   "assets/alpine-runner/themes/05-village/textures/sky.png",
++   "assets/alpine-runner/themes/06-summit/textures/sky.png"
++  ],
+   "tennis": [
+    "assets/audio/g4e/racket.ogg",
+    "assets/audio/g4e/bounce.ogg",
+@@ -1803,6 +1839,106 @@
+    "d1fb98517ac995ad",
+    11871
+   ],
++  "assets/alpine-runner/content/effects/powder-particle.png": [
++   "8d5589686854a47a",
++   1370
++  ],
++  "assets/alpine-runner/content/models/boulder.glb": [
++   "8c2c901b921ac936",
++   11044
++  ],
++  "assets/alpine-runner/content/models/double-coin.glb": [
++   "08485d15c147d13c",
++   24756
++  ],
++  "assets/alpine-runner/content/models/star.glb": [
++   "0e970626de38b8eb",
++   10912
++  ],
++  "assets/alpine-runner/runner/characters/skier-coral.glb": [
++   "b05992706ddf2c79",
++   338840
++  ],
++  "assets/alpine-runner/runner/props/coin.glb": [
++   "a3c7cf5c5296046e",
++   7192
++  ],
++  "assets/alpine-runner/runner/props/high_beam.glb": [
++   "ffef849278b6bc9b",
++   6924
++  ],
++  "assets/alpine-runner/runner/props/low_fence.glb": [
++   "24f90a85c4c8e8d9",
++   7620
++  ],
++  "assets/alpine-runner/runner/props/magnet.glb": [
++   "1a0d94b61cd216e0",
++   6316
++  ],
++  "assets/alpine-runner/runner/props/shield.glb": [
++   "91eefcac51b1c90c",
++   5116
++  ],
++  "assets/alpine-runner/runner/props/turbo.glb": [
++   "0f20446994732c14",
++   3696
++  ],
++  "assets/alpine-runner/runner/tiles/bridge.glb": [
++   "e4598418c70ee8f2",
++   45792
++  ],
++  "assets/alpine-runner/runner/tiles/forest.glb": [
++   "3fd1a704cc541526",
++   72716
++  ],
++  "assets/alpine-runner/runner/tiles/gentle_turn.glb": [
++   "32fee947f878574a",
++   47484
++  ],
++  "assets/alpine-runner/runner/tiles/ice_tunnel.glb": [
++   "0f8cd271e7607b9f",
++   53876
++  ],
++  "assets/alpine-runner/runner/tiles/slope.glb": [
++   "b0f4f2bbffe8eb0f",
++   49032
++  ],
++  "assets/alpine-runner/runner/tiles/straight.glb": [
++   "e81f848b094cd8c6",
++   47408
++  ],
++  "assets/alpine-runner/runner/tiles/summit.glb": [
++   "be432b3c9b856c38",
++   34468
++  ],
++  "assets/alpine-runner/runner/tiles/village.glb": [
++   "80c515be4d418995",
++   66604
++  ],
++  "assets/alpine-runner/themes/01-pine/textures/sky.png": [
++   "c3e58a1bbe836990",
++   33648
++  ],
++  "assets/alpine-runner/themes/02-ice/textures/sky.png": [
++   "e6b6acccf665d0ef",
++   37827
++  ],
++  "assets/alpine-runner/themes/03-volcano/textures/sky.png": [
++   "5229b4685c49f041",
++   29980
++  ],
++  "assets/alpine-runner/themes/04-aurora/textures/sky.png": [
++   "3e8a089a10c4de0d",
++   41408
++  ],
++  "assets/alpine-runner/themes/05-village/textures/sky.png": [
++   "e5d0e4534d98af82",
++   32912
++  ],
++  "assets/alpine-runner/themes/06-summit/textures/sky.png": [
++   "e7a615af3a953363",
++   33354
++  ],
+   "assets/alpine-rush/granite-v5.webp": [
+    "8bf89bf8a0dbabaa",
+    443746
+@@ -4816,8 +4952,8 @@
+    399
+   ],
+   "data/strings.he.json": [
+-   "f5445654c1706674",
+-   138130
++   "650d8de0f9abe6f6",
++   139468
+   ],
+   "data/team.json": [
+    "82a4168feca9f02a",
+@@ -5884,8 +6020,8 @@
+    3301
+   ],
+   "engine/engine.mjs": [
+-   "dbcaa9622489838a",
+-   39322
++   "33d5de2ca51b7916",
++   39502
+   ],
+   "engine/episodes.mjs": [
+    "fbc9c1bebf54a287",
+@@ -6316,8 +6452,44 @@
+    5786
+   ],
+   "minigames/alpine-result.mjs": [
+-   "5bc2734798b1a2d7",
+-   2776
++   "4f73915e478c3372",
++   3018
++  ],
++  "minigames/alpine-runner-engine.mjs": [
++   "b455d36a169ba01a",
++   8632
++  ],
++  "minigames/alpine-runner-generator/generate.mjs": [
++   "886ca86ad2547ad7",
++   6661
++  ],
++  "minigames/alpine-runner-generator/index.mjs": [
++   "dc8e55d6a4906f77",
++   270
++  ],
++  "minigames/alpine-runner-generator/profiles.mjs": [
++   "53cdfe54b7512461",
++   4788
++  ],
++  "minigames/alpine-runner-generator/validate.mjs": [
++   "ee4635084a0110e8",
++   12099
++  ],
++  "minigames/alpine-runner-rules.mjs": [
++   "8474347891dc4f66",
++   2479
++  ],
++  "minigames/alpine-runner-session.mjs": [
++   "ac40285245035bff",
++   13993
++  ],
++  "minigames/alpine-runner-view.mjs": [
++   "03d5c107b581bc1b",
++   18408
++  ],
++  "minigames/alpine-runner.css": [
++   "3bb5f736699db6f2",
++   4319
+   ],
+   "minigames/alpine-screen.css": [
+    "b6948022896f59e8",
+@@ -6328,8 +6500,8 @@
+    1173
+   ],
+   "minigames/alpine-session.mjs": [
+-   "ab73f94a8edf69a9",
+-   37498
++   "ae200eda6f260e38",
++   37812
+   ],
+   "minigames/alpine-start-lights.css": [
+    "f19f7a763dcf5736",
+@@ -7740,8 +7912,8 @@
+    62159
+   ],
+   "ui/activity.mjs": [
+-   "c65cf2a33f3f93c7",
+-   56325
++   "72c327b69a43708e",
++   57561
+   ],
+   "ui/adventure-emblems.mjs": [
+    "09227d199b1a151e",
+@@ -7852,8 +8024,8 @@
+    16136
+   ],
+   "ui/offline.mjs": [
+-   "002b7614c24da510",
+-   25681
++   "f0ac23c0ab036895",
++   25880
+   ],
+   "ui/press.mjs": [
+    "c1c9ae632a225d2e",
+diff --git a/workout/island/tests/alpine-browser.mjs b/workout/island/tests/alpine-browser.mjs
+index 1268156c0e1f0711f431c301febb49368be31b34..3423a8704d320642e1845777386410f312820729 100644
+--- a/workout/island/tests/alpine-browser.mjs
++++ b/workout/island/tests/alpine-browser.mjs
+@@ -34,7 +34,7 @@ async function open(width,height,{query='',init}={}){
+     if(failures.length)throw new AggregateError(failures,'Alpine CSP/teardown audit failed');
+   }
+   try{
+-    await page.goto(server.url+'?dev=1'+query,{waitUntil:'networkidle'});
++    await page.goto(server.url+'?dev=1&alpineRunner=0'+query,{waitUntil:'networkidle'});
+     await csp.assertClean();
+     await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
+     await page.locator('[data-action=avatar-start]').tap();
+diff --git a/workout/island/tools/alpine-v241-browser.mjs b/workout/island/tools/alpine-v241-browser.mjs
+index 3d5896804f00e291ecd618502a883bd42e530800..c66ce07a3443569ffaf958da9c72d9c69b03eb07 100644
+--- a/workout/island/tools/alpine-v241-browser.mjs
++++ b/workout/island/tools/alpine-v241-browser.mjs
+@@ -121,7 +121,7 @@ async function islandRun(label, query, {toFinish}) {
+   const page = await context.newPage(), errors = []; page.setDefaultTimeout(600000); await csp.attachPage(page); await page.addInitScript(LOCKSTEP_INIT, FRAME);
+   page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
+   const touch = await touchKit(page);
+-  await page.goto(server.url + '?dev=1&games=1' + query, {waitUntil: 'load'});
++  await page.goto(server.url + '?dev=1&games=1&alpineRunner=0' + query, {waitUntil: 'load'});
+   await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded, null, {timeout: 900000, polling: 1000});
+   await touch.tap('[data-action=avatar-start]'); await page.waitForSelector('[data-game-library]');
+   await touch.tap('[data-action=game-enter][data-game-id=alpineRush]'); await page.waitForSelector('[data-game-home=alpineRush]');
+diff --git a/workout/island/tools/perf-alpine.mjs b/workout/island/tools/perf-alpine.mjs
+index 08a3eb7d88594389a3b7836768c888196f1a2cc3..bf06a5a7a52f658555b119bc300d3c8a47fc5899 100644
+--- a/workout/island/tools/perf-alpine.mjs
++++ b/workout/island/tools/perf-alpine.mjs
+@@ -1,4 +1,4 @@
+-import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-18';
++import {runAlpineRaceSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-18';
+ import {stageInfo, equipmentFor, RIVALS, STAGE_COUNT} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-18';
+ import {stageGoals} from '../minigames/alpine-league-stages.mjs?v=island-v2-20261107-18';
+
+@@ -103,7 +103,7 @@ async function run() {
+   let recording = false, startWall = 0, pending = null, stopped = false;
+   window.requestAnimationFrame = cb => rawRaf(ts => { if (stopped) return; const t0 = performance.now(); const heap0 = performance.memory?.usedJSHeapSize ?? null; pending = {ts, step: 0, snapshot: 0, presentation: 0, render: 0, heap: heap0}; cb(ts); pending.cost = performance.now() - t0; pending.alloc = heap0 === null ? null : (performance.memory.usedJSHeapSize - heap0) / 1024; if (recording) frames.push(pending); pending = null; });
+   const created = performance.now();
+-  const session = runAlpineSession({balance, level: stage, seed, equipment: info ? alpineLeague.equipment : {}, power: 1, alpineLeague, canvas, controls, status, t, debug: true, storage: memory(), sound() {},
++  const session = runAlpineRaceSession({balance, level: stage, seed, equipment: info ? alpineLeague.equipment : {}, power: 1, alpineLeague, canvas, controls, status, t, debug: true, storage: memory(), sound() {},
+     finish: () => ({ok: true}), cancel() {}, onError(reason) { statusLine.textContent = `שגיאה: ${reason}`; }});
+   window.__perfSession = session;
+   const engine = session.debug.engine, input = session.debug.input();
+diff --git a/workout/island/ui/activity.mjs b/workout/island/ui/activity.mjs
+index 900567514104985bcb74078283148e3538099b46..115d2b11e9afce9f3a6f6e45d249978daa78c919 100644
+--- a/workout/island/ui/activity.mjs
++++ b/workout/island/ui/activity.mjs
+@@ -30,11 +30,13 @@ import {navalAimV24} from '../minigames/naval-v24.mjs?v=island-v2-20261107-18';
+ import {navalLockOn} from '../minigames/naval-lockon.mjs?v=island-v2-20261107-18';
+ import {navalAirEnabled} from '../minigames/naval-air.mjs?v=island-v2-20261107-18';
+ import {polishValue} from '../minigames/polish-flag.mjs?v=island-v2-20261107-18';
++import {alpineRunnerEnabled,alpineRunnerGoals} from '../minigames/alpine-runner-rules.mjs';
+
+ /** Phone fixes B/D (v24.3) changed the naval lock and the racing pit; `.v241` keys keep the v24.1 text for ?phoneFixB=0 / ?phoneFixD=0 (or ?phoneFixes=0). */
+ const phoneFixOn=letter=>polishValue('phoneFixes')!=='0'&&polishValue('phoneFix'+letter)!=='0';
+ /** One key selection for written and spoken instructions; ?reviewHelp=0 restores the v24.1 help. */
+-function helpKeys(id){
++function helpKeys(id,rescue){
++ if(id==='alpineRush'&&!rescue?.alpineLeague&&alpineRunnerEnabled())return [1,2,3].map(i=>`minigame.alpineRush.runner.help.${i}`);
+  const keys=[1,2,3].map(i=>`minigame.${id}.help.${i}`);
+  if(polishValue('reviewHelp')==='0')return keys;
+  if(id==='islandRacing'){
+@@ -153,7 +155,7 @@ export class ActivityInterface {
+   gameHome(id){
+     if(this.data?.config?.minigames?.[id]?.embeddedCampaign)return this.launch(id,undefined,1);
+     const game=this.engine.registry.minigames.get(id),art=gameArtwork(id),dialog=this.modal(game.title,'minigame.subtitle');dialog.dataset.gameHome=id;
+-    const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=art.description;
++    const subtitle=dialog.querySelector?.('.modal-subtitle');if(subtitle)subtitle.textContent=id==='alpineRush'&&alpineRunnerEnabled()?this.t('minigame.alpineRush.runner.description'):art.description;
+     const hero=el('div','adventure-game-hero'),opening=kitIntro(id);
+     // The kit's opening card leads the game's home screen; the captured frame stays as the fallback and in the library.
+     if(opening){const card=el('div','island-kit ik-opening ik-enter');card.dataset.scene=id;opening.onerror=()=>{card.replaceWith(gameEmblem(id));};card.append(opening);hero.append(card);}else hero.append(gameEmblem(id));
+@@ -251,11 +253,12 @@ export class ActivityInterface {
+     if(id==='alpineRush'&&this.alpineLeagueOn())this.alpineLeagueCard(outer);
+     for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
+     if(id==='soccer'&&this.data.config.minigames.soccer.league?.leagues?.length){outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));return;}
+-    const map=el('div','stage-map');
++    const map=el('div','stage-map'),runner=id==='alpineRush'&&alpineRunnerEnabled();
+     p.stars.forEach((stars,i)=>{
+       const stage=i+1,locked=stage>p.stage;
+       const node=kitStageLabel(button('','stage-play',()=>this.start(id,undefined,stage)),this.t('minigame.stage',{stage}),{locked,stars});
+-      node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
++      node.title=runner?this.t(`minigame.alpineRush.runner.stage.${stage}`,{distance:alpineRunnerGoals(stage)[0]}):this.t(this.data.config.minigames[id].levels[i].feature);
++      node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
+     });dialog.append(map);if(id==='fireRescue')fireBonusMap(this,dialog);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
+   }
+   autoLaunch(choice) {
+@@ -266,8 +269,8 @@ export class ActivityInterface {
+     // Event countdown is the introduction; play opens directly and help stays reachable.
+     this.launch(choice.gameId,choice.eventId,stage);
+   }
+-  narrateHelp(id) {for(const key of helpKeys(id)){this.engine.narration.announce(key);this.ui.narrate(key);}}
+-  helpLines(id) {const lines=el('div','game-help-lines');for(const key of helpKeys(id))lines.append(el('p','',this.t(key)));return lines;}
++  narrateHelp(id,rescue) {for(const key of helpKeys(id,rescue)){this.engine.narration.announce(key);this.ui.narrate(key);}}
++  helpLines(id,rescue) {const lines=el('div','game-help-lines');for(const key of helpKeys(id,rescue))lines.append(el('p','',this.t(key)));return lines;}
+   soccerHandedness(id='soccer'){
+     const c=this.data.config.minigames[id].controls,label=el('label','soccer-hand-setting'),toggle=el('input'),text=el('span');toggle.type='checkbox';toggle.setAttribute('role','switch');toggle.dataset.action=id+'-hand';
+     let right=c.rightHanded;try{const saved=localStorage.getItem(c.handednessKey);if(saved!==null)right=saved==='right';}catch{}
+@@ -279,8 +282,8 @@ export class ActivityInterface {
+     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
+     dialog.dataset.intro=id;
+     {const opening=kitIntro(id);if(opening){const card=el('div','island-kit ik-opening ik-opening-small');card.append(opening);dialog.append(card);}}
+-    dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage,undefined,rescue);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
+-    this.narrateHelp(id);
++    dialog.append(this.helpLines(id,rescue),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage,undefined,rescue);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id,rescue)));
++    this.narrateHelp(id,rescue);
+   }
+   start(id,eventId,stage) {
+     if(this.requireBuilding(id))return;
+@@ -353,7 +356,8 @@ export class ActivityInterface {
+    * and the same game again with the same stage, drill and event. Attempt 2 offers the light version,
+    * attempt 3 clears only this game's asset cache. Saves and localStorage are never touched. */
+   async rescueRestart({id,eventId,stageNumber,drill,rescue},kind){
+-    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{}),...(rescue.alpineLeague?{alpineLeague:rescue.alpineLeague}:{})};
++    const key=id==='alpineRush'&&!rescue.alpineLeague&&alpineRunnerEnabled()?'alpineRunner':RESCUE_GAMES[id];
++    const next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{}),...(rescue.alpineLeague?{alpineLeague:rescue.alpineLeague}:{})};
+     this.closing=true;
+     try{this.fpsStop?.();this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
+     let count=0;
+@@ -463,6 +467,13 @@ export class ActivityInterface {
+     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
+   }
+   alpineResult(dialog,summary,a){
++    if(a.mode==='runner'){
++      const best=a.best?.score??a.best;
++      const rows=[['distance',this.t('minigame.alpineRush.runner.distance',{distance:a.distance.toLocaleString('he-IL')})],['time',this.t('minigame.alpineRush.runner.seconds',{time:(a.elapsed/1000).toFixed(1)})],['coins',a.coins]];
++      if(Number.isSafeInteger(best))rows.push([a.newBest?'newBest':'best',best]);
++      for(const [key,value] of rows){const row=el('p','result-row');row.dataset.alpineSummary=key;row.append(el('span','',this.t(`minigame.alpineRush.runner.result.${key}`)),el('bdi','',String(value)));summary.append(row);}
++      return;
++    }
+     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
+     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
+     const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261107-18',import.meta.url).href;dialog.append(css);
+diff --git a/workout/island/ui/offline.mjs b/workout/island/ui/offline.mjs
+index 49693f31238e95013cd4bd7ad81b88b172767125..afd53f2f5568c0a425212be85c51a5e670013b61 100644
+--- a/workout/island/ui/offline.mjs
++++ b/workout/island/ui/offline.mjs
+@@ -11,8 +11,9 @@
+ // old cache dropped when the new worker takes over, persistent storage, and a worker that
+ // answers the app shell from the device first.
+ import {DATA_VERSION} from '../release.mjs';
++import {alpineRunnerEnabled} from '../minigames/alpine-runner-rules.mjs';
+
+-export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',alpineLeague:'ליגת הסקי',tennis:'טניס',racing:'מרוצים',naval:'ספינות',fire:'כיבוי אש',alien:'הגנה מחייזרים',city:'העיר',catch:'תפוס את הפושע'});
++export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',alpineLeague:'ליגת הסקי',alpineRunner:'גלישת סקי אינסופית',tennis:'טניס',racing:'מרוצים',naval:'ספינות',fire:'כיבוי אש',alien:'הגנה מחייזרים',city:'העיר',catch:'תפוס את הפושע'});
+ export const STATUS_KEY='island.offline.status';
+ /** Same rule as offline-sw.js: only these island paths are answered from the cache. */
+ export const MANAGED=/\/(?:design|assets)\/.+\.(?:glb|webp|jpg|png|svg|ogg|mp3|json|wasm|mp4)$|\/vendor\/draco\/[^/]+\.(?:wasm|js)$/;
+@@ -24,16 +25,16 @@ const islandRoot=new URL('../',import.meta.url);
+ export const V25_PARAM='offlineV25';
+ export function v25On(search=globalThis.location?.search||''){return new URLSearchParams(search).get(V25_PARAM)!=='0';}
+ /** Which offline packages a game (engine id) needs. Boar defense is code only (shell). */
+-export const PACKS_OF=Object.freeze({soccer:['soccer'],streetSlam:['hoops'],alpineRush:['alpine','alpineLeague'],tennis:['tennis'],islandRacing:['racing'],navalDuel:['naval'],fireRescue:['fire'],alienDefense:['alien'],catchCriminal:['catch'],boarDefense:[]});
++export const PACKS_OF=Object.freeze({soccer:['soccer'],streetSlam:['hoops'],alpineRush:['alpine','alpineLeague','alpineRunner'],tennis:['tennis'],islandRacing:['racing'],navalDuel:['naval'],fireRescue:['fire'],alienDefense:['alien'],catchCriminal:['catch'],boarDefense:[]});
+ /** The hub itself (city models) is always wanted; the three main games are the default when nothing was played yet. */
+ export const ALWAYS_PACKS=Object.freeze(['city']);
+-export const DEFAULT_PACKS=Object.freeze(['soccer','hoops','alpine','alpineLeague']);
++export const DEFAULT_PACKS=Object.freeze(['soccer','hoops','alpine','alpineLeague','alpineRunner']);
+ /** Packages to keep on the device for the games played so far (engine ids), in manifest order. */
+ export function packsForGames(played=[]){
+   const wanted=new Set(ALWAYS_PACKS);
+   const fromPlay=[...new Set(played)].flatMap(id=>PACKS_OF[id]||[]);
+   for(const p of fromPlay.length?fromPlay:DEFAULT_PACKS)wanted.add(p);
+-  return Object.keys(OFFLINE_GAMES).filter(p=>wanted.has(p));
++  return Object.keys(OFFLINE_GAMES).filter(p=>wanted.has(p)&&(p!=='alpineRunner'||alpineRunnerEnabled()));
+ }
+
+ export async function loadManifest(version=DATA_VERSION,fetcher=globalThis.fetch,root=islandRoot){
