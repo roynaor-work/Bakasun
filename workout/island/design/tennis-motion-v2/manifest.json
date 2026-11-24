@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "library": "tennis-motion-v2",
+  "generatedAt": "2026-11-17T10:56:42.024Z",
+  "fileCount": 70,
+  "totalBytes": 11176612,
+  "excludes": [
+    "manifest.json"
+  ],
+  "files": [
+    {
+      "path": "catalog.json",
+      "bytes": 81068,
+      "sha256": "00ba43d379d68c7446d3a4ba5378a9c44e9d26f4c9c6d16f88af2804a6cb5b1a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "height-high.glb",
+      "bytes": 1843668,
+      "sha256": "9eefcdc7a8167c7960831077c8f036a15f22cda1d30342f2e48b59bc6f674f0a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "height-low.glb",
+      "bytes": 1843640,
+      "sha256": "bdb8f21cddd075e13f7dca05bbec3d0aa58d11aedebbecc90f67fbb391c7e4bb",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 5233,
+      "sha256": "1919816298aad2d5d583e64fe812524d394b23f2a8aae9d411757d3095daaa35",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 8134,
+      "sha256": "cba5dde09858f03bcdfd755bae9c62f815dd0c250a1788c3b02ebcee4dd728c9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 3605,
+      "sha256": "223cd58b68fa21a33dfbf45b2dd90da45f019e2b825e5dd7fe6e0dbb7beedb7d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 13813,
+      "sha256": "79b843b5ae22395c0fa3c556714767995e232210b5ed2c3f9dd48f008e911890",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8202,
+      "sha256": "48280400f2ae38efab7614676547831bcafeeca64662f42d8eeee67218c120dc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 9737,
+      "sha256": "88ace83426ec36cf8405062b4ef1ebc274569e7d49e88e5c6eff5b8a71196a08",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime.mjs",
+      "bytes": 6447,
+      "sha256": "90924d01b8ca889db8e3ed154b55f6b45a156e8610ff36b344bb3a4806880e96",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/backhand_one_handed.webp",
+      "bytes": 48742,
+      "sha256": "83c81a6a8168a58b6d77dae2475e1b0a81c4b7d835e107063de17f6fe2547991",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/backhand_two_handed.webp",
+      "bytes": 48066,
+      "sha256": "cf069b86ab1bd5701fcee5cc51ff7e2f0205bc4af276aaaa719c07a6a00255cb",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/celebrate.webp",
+      "bytes": 48542,
+      "sha256": "aee5e8f555efcc9c7bc4427ab4f331ab55cd6f8cf1883337e7921f7817738159",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/clay_slide.webp",
+      "bytes": 48750,
+      "sha256": "ea7bab3679220389d41eeedec6bfd2a69a66b62d95a14a161e6df56b10992b80",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/disappointed.webp",
+      "bytes": 47250,
+      "sha256": "18762b8e99182ded20e1ff679316b34e46d9855a2609bca0c3ce289ff977745b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/dive.webp",
+      "bytes": 48854,
+      "sha256": "c0c81f4ac5812c7bce586aec102ae68e92a82753bc19e5ba3a38796168f1935b",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/drop_shot.webp",
+      "bytes": 47860,
+      "sha256": "0b7813aac3abdf5ef72dd767d8e74c1bb4628a5482f9db4106c821c5f7603438",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/forehand.webp",
+      "bytes": 47468,
+      "sha256": "f748b64bb253fc5a625ea9b4e43b9e701cea3babd3daad602dd6ac441531a79f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/handshake.webp",
+      "bytes": 81076,
+      "sha256": "c91eedfe7235097665fdc7669301351dbb4f15fd61c970db4b594c234fee0f14",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/look_ball.webp",
+      "bytes": 45176,
+      "sha256": "f09580cdc975b0077a7eb5f07a2aed3b16828246caa36cfd4acaf8ac6f97f9dd",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/ready.webp",
+      "bytes": 45476,
+      "sha256": "959f5e580001b0ab8e7487eec5ec2c3db174fcc9c34a713c2499fe7432005f02",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/recover.webp",
+      "bytes": 46014,
+      "sha256": "e0b73378ae086344a47eb4b3a78f66d04882ef292d25f329a7e2e3cea44859db",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/run_forward.webp",
+      "bytes": 45604,
+      "sha256": "ad3aacd0ed5ff65a81bc45091e860bc0f9dd78aa5c4b6274d04c0830a8c3efd5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/run_side.webp",
+      "bytes": 45214,
+      "sha256": "32ca4c74584c524d6a69334cd44fde36b19a080b5eb97f0d30759f44e5f04e7e",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/serve_land.webp",
+      "bytes": 41164,
+      "sha256": "baae26df366e8bd1248529b132c62d07d37a4a6fe611b3b9f9459a01b6b7a7c5",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/serve_prepare_1.webp",
+      "bytes": 42202,
+      "sha256": "cbe8d14ee1d6dfdd7407cbcefd73c8987f2715db8aa4429951da95198fa678f4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/serve_prepare_2.webp",
+      "bytes": 42132,
+      "sha256": "a6b0a508cce62acead60513f4b2c31b12a17352365c61dff085cbc837c4148ee",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/serve_prepare_3.webp",
+      "bytes": 42132,
+      "sha256": "1d4579e28399212b330ab6e7007d69702979a09a2c4b1594afa8d11b184dd411",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/serve_toss.webp",
+      "bytes": 42896,
+      "sha256": "b8ce6ffac74a2b050d95f00bf3e40362eaca210474e127071f15d204adc40c3f",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/serve_whip.webp",
+      "bytes": 43624,
+      "sha256": "0249b5183b2d94ce124ac01d2bc3dd6fe41a9f09c6cbc1f255797a3fd7d2c24a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/slice.webp",
+      "bytes": 45778,
+      "sha256": "f5713eafc36fd0de3c8fdd0ee752a07c7984619a51dd926670a2d3daa3166362",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/smash.webp",
+      "bytes": 42658,
+      "sha256": "f6a9be9c4674deb3ce0fa4871a550ced70473da791833ac1e4bb7b1ff4bf98d9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/volley_backhand.webp",
+      "bytes": 47872,
+      "sha256": "8e2c74ce9a361151bb4ec4b4415ab14f7d5327ec34aa5c56793056314f68c1cd",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "sheets/volley_forehand.webp",
+      "bytes": 48228,
+      "sha256": "f80004df248ea5fa36e816942b2936090e98282c24bb5e5d8d0a166781a7e939",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/author.mjs",
+      "bytes": 22777,
+      "sha256": "edae99bbf8208461f3d955ec6fd3de91121c272261e1e2a232c8eb5b5be585bf",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 8179,
+      "sha256": "94be76c60ffebc089d25eb257cb96c08f7bdcdd0db632beff50ec38eee4dc773",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/capture.py",
+      "bytes": 9937,
+      "sha256": "6483df6ab64e1bca02190f0dc774a157ac2673bd84bf6a9cd9a1519f97599662",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/finalize-report.mjs",
+      "bytes": 12698,
+      "sha256": "6c6f70b8253b04b942637b211af19e5b4484c7ccfdb4fc2568c32271cb3c5c83",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/grip-check.mjs",
+      "bytes": 10172,
+      "sha256": "9944e720d67d73a6bccc22150a6c931c0937441ab30e9527f5d75022463900cc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/qa-register.mjs",
+      "bytes": 487,
+      "sha256": "e5929c985b0090a67f7ecf65a82b4531d9f342dfe7c81495101685f74d7f8566",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/qa.mjs",
+      "bytes": 21393,
+      "sha256": "e498e68169cba48fcef68c2105eca1eca665b4139771f7fc4f3ad8e894033796",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/reference/grip-player.glb",
+      "bytes": 1576624,
+      "sha256": "6f6a95bae86b471f1194b386f5cca3ef25ac01c341d799c624ad10384a357753",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/rig.mjs",
+      "bytes": 5222,
+      "sha256": "5722cf83197a8c46de583229a882690c3b0eac111ae9744c28b12b4be20882b9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/test-runtime.mjs",
+      "bytes": 6201,
+      "sha256": "ab0c581676475ba46239b1cc33e08826e0a8c160bec274b34540a55bbe353071",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/validate.mjs",
+      "bytes": 4507,
+      "sha256": "089ece675be93ca2436e1219082a5e39be5783268beff63c44209e4c56e0b310",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "tennis-motion-v2.glb",
+      "bytes": 1843716,
+      "sha256": "e3a7ed216d28a3135447dbb54f5c8ef9a6d08be49740304fc32663c9bdf37a0a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "license": "MIT"
+    },
+    {
+      "path": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "license": "MIT"
+    },
+    {
+      "path": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "license": "MIT"
+    },
+    {
+      "path": "vendor/motion-qa-v1/glb.mjs",
+      "bytes": 9363,
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vendor/motion-qa-v1/metrics.mjs",
+      "bytes": 36189,
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vendor/motion-qa-v1/sheets.mjs",
+      "bytes": 5947,
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vendor/motion-qa-v1/test/glb.test.mjs",
+      "bytes": 7611,
+      "sha256": "a077432920069babd25515ad5be1d1c31be4c459177db5c67968965dceae7be8",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vendor/motion-qa-v1/test/metrics.test.mjs",
+      "bytes": 8909,
+      "sha256": "ec6c14eb552ae1a5901a94f2440b74e1b8f48a0c2ad2200f6d52f4118621363a",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "license": "MIT"
+    },
+    {
+      "path": "verification/assets.json",
+      "bytes": 8133,
+      "sha256": "4bb82f6b53ff148a1811b0caa4067f2da960fa28657a3ba2b28a454fb258c9ac",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 269670,
+      "sha256": "b47e5583037cbafa683eb98c5ea6968a8bba8f698229e77db3b62730929ea61d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/grip.json",
+      "bytes": 56713,
+      "sha256": "fa924c8cc61c9d6e7de0f95f9b100be9746033c42307ae5d0789d9d46b326a0c",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/motion-qa.json",
+      "bytes": 507798,
+      "sha256": "3fdadd01d8529844c4b6fdc3ee11ffff4cbfda034ccaa5bae332c1e3060494ae",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/preview-390x844.png",
+      "bytes": 57388,
+      "sha256": "d5b3096a11b0801be6c2c3735dd1d050ce0ef858ab321d77b9d03ac6d88081fb",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/preview-844x390.png",
+      "bytes": 45010,
+      "sha256": "0f89a29a33a73730ff81b378e37ec6bf816d20b8b97c5e167277a164b11c22ad",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa-engine-tests.json",
+      "bytes": 445,
+      "sha256": "1a86a8878735b70a911afa3d46cc562e8b801371a4207c5a4f5950137a3a6dff",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa-engine-tests.tap",
+      "bytes": 5872,
+      "sha256": "42672f381ab40b83c343a615f3238f29d6dbc789b613e7345dac4a11c8595ce7",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/qa-provenance.json",
+      "bytes": 2639,
+      "sha256": "bbbd80ccc933404fbe1218896244d5f62dd76955244f284929f9fa9dd2fe2dd9",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/regression.json",
+      "bytes": 374,
+      "sha256": "9c8306b261bdb2179cf8df3f7b5549b34ee0f572e5d2795b25078a84d973f0d4",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/regression.tap",
+      "bytes": 856495,
+      "sha256": "858f80d02380101e35f8fa6d139659affc72a0d3aa1fbbac2261899dfbde5a7d",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/runtime-tests.json",
+      "bytes": 332,
+      "sha256": "f0576e85255ca54554a2a8e7717458fc0187b97284eb85e57c1a3b35672e9b37",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/runtime-tests.tap",
+      "bytes": 1420,
+      "sha256": "c29649438da5867f8bd711dad86354e92a3398704d6b7e1329cfe57d9e353734",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/scope.json",
+      "bytes": 216,
+      "sha256": "6b6de52f1dc554e5f6878f2f11f16697c6376e128d7c481f9f288a338e48bdc6",
+      "license": "CC0-1.0"
+    }
+  ]
+}

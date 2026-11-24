@@ -1,0 +1,324 @@
+{
+ "mode": "before",
+ "query": "&uiIcons=0&tennisMotionV3=0",
+ "clock": "Playwright page.clock; times are model time",
+ "hub": {
+  "on": false,
+  "gear": {
+   "box": [
+    68,
+    121,
+    44,
+    44
+   ],
+   "icon": null,
+   "iconLoaded": null,
+   "text": "⚙",
+   "label": "להורים",
+   "fontSize": "22px",
+   "beforeImage": "none"
+  },
+  "coin": {
+   "box": [
+    667,
+    25,
+    9,
+    10
+   ],
+   "icon": null,
+   "iconLoaded": null,
+   "text": "●",
+   "label": null,
+   "fontSize": "10px",
+   "beforeImage": "none"
+  },
+  "chip": {
+   "box": [
+    616,
+    24,
+    60,
+    13
+   ],
+   "icon": null,
+   "iconLoaded": null,
+   "text": "●\n99,225",
+   "label": "מטבעות 99,225",
+   "fontSize": "13px",
+   "beforeImage": "none"
+  }
+ },
+ "tennis": {
+  "motion": {
+   "loaded": true,
+   "clips": [
+    null,
+    null
+   ]
+  },
+  "motion3": {
+   "on": false,
+   "hips": [
+    0,
+    0
+   ],
+   "flipX": [
+    null,
+    null
+   ]
+  }
+ },
+ "pauseButton": {
+  "box": [
+   780,
+   8,
+   56,
+   56
+  ],
+  "icon": null,
+  "iconLoaded": null,
+  "text": "השהיה",
+  "label": "השהיה",
+  "fontSize": "0px",
+  "beforeImage": "none"
+ },
+ "textOnStage": [],
+ "rally": {
+  "swings": 10,
+  "hits": 9,
+  "clips": {
+   "serve_follow_through": 41,
+   "run_left": 41,
+   "backhand_flat_short": 59,
+   "forehand_flat_short": 36
+  },
+  "opponentClips": {
+   "run_forward": 239,
+   "backhand_flat_short": 16,
+   "run_left": 262,
+   "forehand_flat_short": 62,
+   "run_backward": 113,
+   "serve_toss": 20,
+   "serve_follow_through": 18
+  },
+  "hipsLowest": 0,
+  "triangles": {
+   "min": 98044,
+   "max": 99512
+  },
+  "score": {
+   "points": [
+    0,
+    1
+   ],
+   "games": [
+    1,
+    0
+   ],
+   "finished": false,
+   "winner": null
+  },
+  "audio": {
+   "recorded": true,
+   "listLoaded": false,
+   "takes": {
+    "out": 0,
+    "net": 0
+   },
+   "order": [
+    "words",
+    "rec",
+    "pack",
+    "synth"
+   ],
+   "words": {
+    "on": true,
+    "listLoaded": true,
+    "takes": {
+     "out": 3,
+     "net": 3
+    }
+   },
+   "pack": {
+    "on": true,
+    "asked": false,
+    "loaded": false
+   }
+  },
+  "flipX": [
+   null,
+   null
+  ]
+ },
+ "pause": {
+  "open": {
+   "paused": "true",
+   "resume": {
+    "box": [
+     481,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "המשך",
+    "label": "המשך",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "sound": {
+    "box": [
+     371,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "כיבוי צליל",
+    "label": "כיבוי צליל",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "exit": {
+    "box": [
+     261,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "לחזור לאי",
+    "label": "לחזור לאי",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "header": {
+    "box": [
+     780,
+     8,
+     56,
+     56
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "",
+    "label": "השהיה",
+    "fontSize": "0px",
+    "beforeImage": "none"
+   }
+  },
+  "muted": {
+   "paused": "true",
+   "resume": {
+    "box": [
+     481,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "המשך",
+    "label": "המשך",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "sound": {
+    "box": [
+     371,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "הפעלת צליל",
+    "label": "הפעלת צליל",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "exit": {
+    "box": [
+     261,
+     163,
+     102,
+     66
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "לחזור לאי",
+    "label": "לחזור לאי",
+    "fontSize": "14px",
+    "beforeImage": "none"
+   },
+   "header": {
+    "box": [
+     780,
+     8,
+     56,
+     56
+    ],
+    "icon": null,
+    "iconLoaded": null,
+    "text": "",
+    "label": "השהיה",
+    "fontSize": "0px",
+    "beforeImage": "none"
+   }
+  },
+  "unmuted": {
+   "box": [
+    371,
+    163,
+    102,
+    66
+   ],
+   "icon": null,
+   "iconLoaded": null,
+   "text": "כיבוי צליל",
+   "label": "כיבוי צליל",
+   "fontSize": "14px",
+   "beforeImage": "none"
+  },
+  "afterResume": {
+   "paused": "false",
+   "sheet": false
+  }
+ },
+ "requests": [
+  {
+   "path": "assets/tennis-callouts-v2/takes.json",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/out-1.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/out-2.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-motion-v1/core.json",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/out-3.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/net-1.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/net-2.ogg",
+   "status": 200
+  },
+  {
+   "path": "assets/tennis-callouts-v2/net-3.ogg",
+   "status": 200
+  }
+ ]
+}

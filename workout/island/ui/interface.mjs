@@ -8,6 +8,7 @@ import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2
 import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-23';
 import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-23';
 import { kidUx, kidUxStyle, kidSpeak, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-23';
+import {uiIconsEnabled,uiIconOr} from './ui-icons.mjs?v=island-v2-20261107-23';
 
 kidUxStyle('012', `
   .kid-city-hall-instruction{display:flex;align-items:stretch;gap:8px;margin-block:8px;color:#183c33}
@@ -84,10 +85,12 @@ const button = (label, action, className = '') => {
 };
 const compactStat = (icon, value, label) => {
   const node = el('span', 'status-value');
-  node.append(el('span', '', icon), el('b', '', value));
+  node.append(typeof icon === 'string' ? el('span', '', icon) : icon, el('b', '', value));
   node.setAttribute('aria-label', `${label} ${value}`);
   return node;
 };
+// HUD icons v2 (?uiIcons=0 off): the coin as the package icon on its dark plate; the earlier character when switched off or when the file fails.
+const coinFace = () => { const face = el('span', 'coin', uiIconsEnabled() ? '' : '●'); if (uiIconsEnabled()) face.append(uiIconOr('coin', () => '●', 18)); return face; };
 const list = value => Array.isArray(value) ? value : Object.values(value ?? {});
 
 export class IslandInterface {
@@ -322,7 +325,7 @@ export class IslandInterface {
   drawCityToggle(money, progression) {
     const amount = Math.floor(money).toLocaleString('he-IL');
     const label = `${this.t('app.city')} · ${amount} ${this.t('app.money')}`;
-    this.cityToggle.replaceChildren(compactStat('●', amount, this.t('app.money')));
+    this.cityToggle.replaceChildren(compactStat(uiIconsEnabled() ? coinFace() : '●', amount, this.t('app.money')));
     const day = progression ? this.t('progress.currentDay', {day: progression.day}) : '';
     if (progression) this.cityToggle.append(compactStat('☀', String(progression.day), day));
     this.cityToggle.setAttribute('aria-label', day ? `${label} · ${day}` : label);
@@ -344,7 +347,7 @@ export class IslandInterface {
     }
     this.wallet.replaceChildren();
     const money = el('div', 'money');
-    money.append(el('span', 'coin', '●'), el('strong', '', Math.floor(s.money).toLocaleString('he-IL')), el('small', '', this.t('app.money')));
+    money.append(coinFace(), el('strong', '', Math.floor(s.money).toLocaleString('he-IL')), el('small', '', this.t('app.money')));
     const population = this.engine.population?.() ?? s.buildings.reduce((sum, b) => sum + (this.getBuilding(b.typeId)?.population ?? 0) * b.level, 0);
     const pop = el('div', 'population', `♟ ${Math.round(population)} ${this.t('app.population')}`);
     this.wallet.append(money, pop);

@@ -89,7 +89,17 @@
   "assets/upgrade-offer/icons/tennis-power.svg",
   "assets/upgrade-offer/icons/throw-power.svg",
   "assets/upgrade-offer/icons/tires.svg",
-  "assets/upgrade-offer/icons/upgrade.svg"
+  "assets/upgrade-offer/icons/upgrade.svg",
+  "assets/ui-icons-v2/normal/pause.svg",
+  "assets/ui-icons-v2/normal/resume.svg",
+  "assets/ui-icons-v2/normal/sound.svg",
+  "assets/ui-icons-v2/normal/mute.svg",
+  "assets/ui-icons-v2/normal/coin.svg",
+  "assets/ui-icons-v2/pressed/pause.svg",
+  "assets/ui-icons-v2/pressed/resume.svg",
+  "assets/ui-icons-v2/pressed/sound.svg",
+  "assets/ui-icons-v2/pressed/mute.svg",
+  "assets/ui-icons-v2/pressed/coin.svg"
  ],
  "shell": [
   "",
@@ -682,6 +692,7 @@
   "minigames/tennis-draco.mjs",
   "minigames/tennis-environment.mjs",
   "minigames/tennis-grip.mjs",
+  "minigames/tennis-motion-v3.mjs",
   "minigames/tennis-motion.mjs",
   "minigames/tennis-pose.mjs",
   "minigames/tennis-result.mjs",
@@ -755,6 +766,8 @@
   "ui/release-watch.mjs",
   "ui/soccer-card.mjs",
   "ui/translate.mjs",
+  "ui/ui-icons.css",
+  "ui/ui-icons.mjs",
   "ui/ui-kit-bridge.css",
   "ui/ui-kit.mjs",
   "ui/upgrade-offer-core.mjs",
@@ -1522,6 +1535,7 @@
    "assets/tennis-crowd-v22/runtime/lod2/fan-12.glb",
    "assets/tennis-grip-v1/racket.glb",
    "assets/tennis-motion-v1/core.json",
+   "assets/tennis-motion-v3/core.json",
    "assets/tennis-stadium-v1/ad-board.glb",
    "assets/tennis-stadium-v1/crowd-atlas.webp",
    "assets/tennis-stadium-v1/evening-city.png",
@@ -2156,8 +2170,8 @@
  },
  "files": {
   "": [
-   "42c8a6042bfb52b2",
-   2704
+   "d7e5760693e12d0e",
+   2779
   ],
   "activity/alien-upgrades.mjs": [
    "e0da13756f40f19f",
@@ -2208,8 +2222,8 @@
    4546
   ],
   "app.mjs": [
-   "c39ecc89a3438c2b",
-   10395
+   "284a9998e5567419",
+   10543
   ],
   "assets/alien-v24/overheat.ogg": [
    "6d01d7168b98edda",
@@ -6659,6 +6673,10 @@
    "09ed0fdebf01f1aa",
    433868
   ],
+  "assets/tennis-motion-v3/core.json": [
+   "a6276016234a6130",
+   547723
+  ],
   "assets/tennis-stadium-v1/ad-board.glb": [
    "02cd3c12a3a25b71",
    9776
@@ -6814,6 +6832,46 @@
   "assets/textures/naval-waternormals.jpg": [
    "add9912b158a4fe9",
    248813
+  ],
+  "assets/ui-icons-v2/normal/coin.svg": [
+   "548753e2176e2846",
+   384
+  ],
+  "assets/ui-icons-v2/normal/mute.svg": [
+   "31650bee8af62552",
+   322
+  ],
+  "assets/ui-icons-v2/normal/pause.svg": [
+   "98f1274a9da564e3",
+   274
+  ],
+  "assets/ui-icons-v2/normal/resume.svg": [
+   "fd0bb87c04d6d395",
+   266
+  ],
+  "assets/ui-icons-v2/normal/sound.svg": [
+   "1d036ff320485274",
+   330
+  ],
+  "assets/ui-icons-v2/pressed/coin.svg": [
+   "77a873965100d2a7",
+   426
+  ],
+  "assets/ui-icons-v2/pressed/mute.svg": [
+   "69894f064e42a519",
+   364
+  ],
+  "assets/ui-icons-v2/pressed/pause.svg": [
+   "03775277720e21e8",
+   316
+  ],
+  "assets/ui-icons-v2/pressed/resume.svg": [
+   "376b30bd3370b39b",
+   308
+  ],
+  "assets/ui-icons-v2/pressed/sound.svg": [
+   "756288850ee21464",
+   372
   ],
   "assets/ultra-hub/alpine.webp": [
    "517d22217435d5c0",
@@ -8188,8 +8246,8 @@
    400
   ],
   "index.html": [
-   "42c8a6042bfb52b2",
-   2704
+   "d7e5760693e12d0e",
+   2779
   ],
   "kid-ux.mjs": [
    "891b6c5afe2ed742",
@@ -9983,6 +10041,10 @@
    "c05bccb3d8ada432",
    11600
   ],
+  "minigames/tennis-motion-v3.mjs": [
+   "3b0bdb31f273b218",
+   6230
+  ],
   "minigames/tennis-motion.mjs": [
    "c7d067961c881554",
    5176
@@ -10024,8 +10086,8 @@
    6046
   ],
   "minigames/tennis-view.mjs": [
-   "3dc83352db7845cd",
-   41276
+   "69522a88e9b0cb5e",
+   44714
   ],
   "minigames/tennis.css": [
    "c86b62cb00df803d",
@@ -10188,8 +10250,8 @@
    4511
   ],
   "ui/game-shell.mjs": [
-   "e1749bd897a153a3",
-   16503
+   "31a9ab68eb905c49",
+   16881
   ],
   "ui/hangar-preview.mjs": [
    "790892273dffc893",
@@ -10200,8 +10262,8 @@
    11333
   ],
   "ui/interface.mjs": [
-   "240ec0094757d436",
-   63290
+   "8a1084acd950b45a",
+   63742
   ],
   "ui/kid-ux-help.mjs": [
    "aea33d25064392e2",
@@ -10274,6 +10336,14 @@
   "ui/translate.mjs": [
    "9956cdc9c6ffe175",
    390
+  ],
+  "ui/ui-icons.css": [
+   "a796e8d0a5e1f86a",
+   1738
+  ],
+  "ui/ui-icons.mjs": [
+   "7a43cd5c3ecdea9c",
+   2451
   ],
   "ui/ui-kit-bridge.css": [
    "e7928f3ff5185e6d",

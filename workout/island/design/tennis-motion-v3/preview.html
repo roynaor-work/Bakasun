@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#142e29">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <title>טניס · ספריית תנועה 03</title>
+</head>
+<body>
+  <header class="masthead">
+    <span class="ball-mark" aria-hidden="true"></span>
+    <div class="brand"><strong>טניס</strong><span>ספריית תנועה</span></div>
+    <span class="edition" lang="en" dir="ltr">VOL. 03</span>
+    <div class="specs"><span id="count"></span><span id="rate" dir="ltr"></span></div>
+  </header>
+  <main class="workbench">
+    <aside class="library" aria-label="בחירת תנועה">
+      <h2>תנועות</h2>
+      <div id="clips" role="group" aria-label="קליפים"></div>
+    </aside>
+    <section class="viewer" aria-label="תצוגת תנועה">
+      <div class="court">
+        <canvas id="stage" tabindex="0" aria-label="שחקן טניס בתלת־ממד. גרירה לסיבוב המצלמה, מקשי החצים למעבר בין פריימים."></canvas>
+        <div class="caption"><span id="clip-id" dir="ltr" lang="en"></span><h1 id="clip-title">טוען תנועות…</h1></div>
+        <div class="camera-control">
+          <label for="view">מצלמה</label>
+          <select id="view"><option value="three">שלושה רבעים</option><option value="front">חזית</option><option value="side">צד</option><option value="back">גב</option></select>
+        </div>
+        <a id="sheet" class="sheet" hidden target="_blank" rel="noopener">גיליון פריימים</a>
+        <div id="error" role="alert" hidden></div>
+      </div>
+      <div class="transport">
+        <button id="play" type="button" aria-label="השהיה" title="ניגון או השהיה"><span aria-hidden="true"></span></button>
+        <div class="track">
+          <div class="timing">
+            <output id="timestamp" dir="ltr" for="time">0.00 / 0.00 s</output>
+            <div id="events" aria-label="קפיצה לאירוע"></div>
+          </div>
+          <input type="range" id="time" min="0" value="0" step="1" dir="ltr" aria-label="פריים בקליפ">
+        </div>
+        <label class="speed" for="speed">מהירות<select id="speed" dir="ltr"><option value=".25">0.25×</option><option value=".5">0.5×</option><option selected value="1">1×</option><option value="1.5">1.5×</option></select></label>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>
