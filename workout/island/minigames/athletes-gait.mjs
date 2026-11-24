@@ -139,7 +139,7 @@ export const createHeading = (yaw = 0) => ({yaw, following: false});
 export function stepHeading(state, p, ctx, dt, h = HEADING) {
   const speed = Math.hypot(p.vx || 0, p.vz || 0), face = p.face || 0, travel = Math.atan2(p.vx || 0, p.vz || 0);
   const acting = !!p.act && p.act !== 'cross' && p.act !== 'spin' || !!p.stumble;
-  const off = Math.abs(wrap(travel - face)), sliding = ctx.defending && !ctx.hasBall && speed < 4.2;
+  const off = Math.abs(wrap(travel - face)), sliding = ctx.defending && !ctx.hasBall && speed < (h.slideMax ?? 4.2);
   if (speed < h.minSpeed || acting || sliding) state.following = false;
   else if (!state.following && off > h.engage) state.following = true;
   else if (state.following && off < h.release) state.following = false;

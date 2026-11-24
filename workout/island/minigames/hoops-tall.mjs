@@ -109,7 +109,10 @@ export function layupSide(face,dx,dz){
 /** The motion plan for an engine player. Pure. `st` is the avatar's own state {gait, dribbleGait, cross, spin, celebrate, stumbleT, guardLocked, jumpClip}.
  * Returns {kind:'full'|'layer'|'v8', clip|upper+lower, t?, rate?, loop, ownsJump}. */
 export function chooseTallMotion(pack,p,ctx,st){
- const speed=Math.hypot(p.vx||0,p.vz||0),face=p.face||0,fwd=(p.vx||0)*Math.sin(face)+(p.vz||0)*Math.cos(face),lat=(p.vx||0)*Math.cos(face)-(p.vz||0)*Math.sin(face);
+ // v25.0 feet (`ctx.feet250`, hoops-v250.mjs FEET): the gait is chosen from the yaw the body is drawn with (it already turns to the travel
+ // direction when it runs), and the side-shuffle clips are kept to the speeds their stride can cover. Measured before: a body drawn running
+ // forward played the 0.55 m/s shuffle at up to 5 m/s, the planted foot sliding 2.3 m/s on average.
+ const F=ctx.feet250||null,speed=Math.hypot(p.vx||0,p.vz||0),face=F&&F.following&&Number.isFinite(F.yaw)?F.yaw:p.face||0,fwd=(p.vx||0)*Math.sin(face)+(p.vz||0)*Math.cos(face),lat=(p.vx||0)*Math.cos(face)-(p.vz||0)*Math.sin(face);
  if(p.stumble)return {kind:'full',clip:'get_up_front',t:Math.min(pack.clips.get_up_front.duration-.01,st.stumbleT||0),ownsJump:false};
  const act=p.act;
  if(act==='shoot'){
@@ -143,13 +146,13 @@ export function chooseTallMotion(pack,p,ctx,st){
  if(st.celebrate>0&&!act)return {kind:'full',clip:st.celebrateClip,t:Math.min(pack.clips[st.celebrateClip].duration-.01,2.2-st.celebrate),ownsJump:true};
  if(ctx.defending&&!p.hasBall){
   if(speed<.4)return {kind:'loop',clip:'defensive_stance',rate:1,group:'def'};
-  if(Math.abs(lat)>Math.abs(fwd)*.8&&speed<4.2)return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,1.7),group:'def'};
+  if(Math.abs(lat)>Math.abs(fwd)*.8&&speed<(F?F.slideMax:4.2))return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,F?F.slideRate:1.7),group:'def'};
   if(fwd>2&&speed<4.5&&ctx.nearHandler)return {kind:'loop',clip:'closeout',rate:clamp(speed/.9,.8,1.6),group:'def',closeout:true};
  }
  // moving sideways relative to where he faces: the sideways clips (a forward gait played over a sideways move is the "walks sideways" look;
  // measured: about half of the moving frames of a game have the sideways component bigger than the forward one)
- if(speed>.8&&speed<5&&Math.abs(lat)>Math.abs(fwd)*1.1){
-  if(!p.hasBall)return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,1.7),group:'def',sideways:true};
+ if(speed>.8&&speed<(F?F.slideMax:5)&&Math.abs(lat)>Math.abs(fwd)*1.1){
+  if(!p.hasBall)return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,F?F.slideRate:1.7),group:'def',sideways:true};
   if(p.dribbling!==false&&!st.guardLocked&&speed<3.5)return {kind:'loop',clip:'dribble_'+(lat>0?'left':'right'),rate:clamp(speed/1.05,.6,1.4),group:'dribble',dribble:true,sideways:true};
  }
  // v24.1 hoops-motion-v13 (hoops-motion-v13.mjs): `ctx.gaits13` = this body's gait tables, the references already scaled to its stride
@@ -275,7 +278,7 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
  const times={},st={gait:null,dribbleGait:null,cross:false,spin:false,celebrate:0,celebrateClip:'celebrate_fist',stumbleT:0,guardLocked:false,dunkOne:(card.number||0)%2===0};
  const guard=createDribbleGuard(),v8s={releasedAt:null,passClip:null,recvClip:null,recvSince:null};
  const heading=createHeading(0);let headingReady=false;
- let gaitPhase=0,state='idle',statePhase=0,lastAct=null,dribbleSrc=null,ownsJump=false;
+ let gaitPhase=0,state='idle',statePhase=0,lastAct=null,dribbleSrc=null,ownsJump=false,hold=null;
  const dur=name=>clipSet.get(name)?.duration||1;
  function easeWeights(map,name,tau,dt){const k=1-Math.exp(-dt/tau);let sum=0;for(const n of new Set([...Object.keys(map),...(name?[name]:[])])){const g=n===name?1:0,v=(map[n]||0)+(g-(map[n]||0))*k;if(v<.004&&g===0)delete map[n];else{map[n]=v;sum+=v;}}return sum;}
  let bodyScaleNode=1;root.traverse(o=>{if(o.name==='BodyScale')bodyScaleNode=o.scale.x;});
@@ -312,7 +315,14 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   if(p.act==='spin'&&lastAct!=='spin')st.spin=!st.spin;
   lastAct=p.act;
   const catching=ctx.catching||performance.now()<(st.catchUntil||0);
-  const plan=chooseTallMotion(pack,p,{...ctx,catching,v8pack:assets.v8,v8s,dt,gaits13:assets.gaits13?.[profile]||null,fakeV13:assets.fakeV13!==false},st);
+  const feet250=assets.feet250&&assets.unified?{...assets.feet250,yaw:heading.yaw,following:heading.following}:null;
+  let plan=chooseTallMotion(pack,p,{...ctx,catching,feet250,v8pack:assets.v8,v8s,dt,gaits13:assets.gaits13?.[profile]||null,fakeV13:assets.fakeV13!==false},st);
+  // v25.0 feet: a moving loop is kept for `dwell` seconds before another moving loop may replace it (measured: a clip change every 0.46 s per
+  // player, most of them dragging the planted foot); a stop, an act or a change of ball possession switches at once
+  if(feet250&&plan.kind==='loop'){const sp=Math.hypot(p.vx||0,p.vz||0);
+   if(hold&&plan.clip!==hold.plan.clip&&hold.t<feet250.dwell&&sp>.4&&!!plan.dribble===!!hold.plan.dribble&&plan.group!=='idle'){plan=hold.plan;hold.t+=dt;hold.held++;}
+   else if(!hold||plan.clip!==hold.plan.clip)hold={plan,t:0,held:0};else{hold.plan=plan;hold.t+=dt;}
+  }else hold=null;
   // weights and times: a layered plan is the upper and lower halves of two clips; everything else is one clip (full-body)
   const layered=plan.kind==='layer';
   cur.mix+=((layered?0:1)-cur.mix)*(1-Math.exp(-dt/(plan.kind==='loop'?.12:.07)));
@@ -335,7 +345,7 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   }
   mixer.update(0);
   // unified athletes: the visible body runs where he is going (the simulation's face is untouched)
-  if(assets.unified){if(!headingReady){heading.yaw=p.face||0;headingReady=true;}root.rotation.y=av.visualFace=stepHeading(heading,p,{defending:ctx.defending,hasBall:p.hasBall},dt);}
+  if(assets.unified){if(!headingReady){heading.yaw=p.face||0;headingReady=true;}root.rotation.y=av.visualFace=stepHeading(heading,p,{defending:ctx.defending,hasBall:p.hasBall},dt,assets.feet250?.heading);}
   // the clip owns the jump during shots, blocks and rebounds: the engine's own height (the old 0.85 lift) is replaced by the authored hips
   ownsJump=!!plan.ownsJump;if(ownsJump)root.position.y=0;
   // lean into acceleration, back into braking (a few hundredths of a radian)

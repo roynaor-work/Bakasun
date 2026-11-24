@@ -1,0 +1,193 @@
+{
+ "note": "1200 ticks of one autoplay game, all ten players, seed 4242; slide = the slower ankle among the feet on the floor, m/s; switches = clip changes, jump = planted foot moved faster than 1.5 m/s in that tick",
+ "before (hoopsFeet250=0)": {
+  "all": {
+   "n": 6592,
+   "mean": 1.264,
+   "p95": 4.855,
+   "badPct": 50
+  },
+  "clips": {
+   "sprint": {
+    "n": 1750,
+    "mean": 1.405,
+    "p95": 5.846,
+    "badPct": 50.7
+   },
+   "dribble:sprint_ball": {
+    "n": 209,
+    "mean": 1.717,
+    "p95": 7.239,
+    "badPct": 54.5
+   },
+   "defensive_slide_left": {
+    "n": 235,
+    "mean": 2.775,
+    "p95": 5.662,
+    "badPct": 96.6
+   },
+   "jog": {
+    "n": 153,
+    "mean": 2.346,
+    "p95": 5.233,
+    "badPct": 90.8
+   },
+   "run": {
+    "n": 241,
+    "mean": 2.577,
+    "p95": 5.829,
+    "badPct": 83.4
+   },
+   "defensive_slide_right": {
+    "n": 738,
+    "mean": 2.035,
+    "p95": 5.586,
+    "badPct": 80.5
+   },
+   "walk": {
+    "n": 515,
+    "mean": 2.026,
+    "p95": 5.267,
+    "badPct": 90.5
+   },
+   "idle_ready": {
+    "n": 1861,
+    "mean": 0.225,
+    "p95": 1.151,
+    "badPct": 12.6
+   },
+   "dribble:run_ball": {
+    "n": 78,
+    "mean": 1.604,
+    "p95": 5.005,
+    "badPct": 70.5
+   },
+   "defensive_stance": {
+    "n": 585,
+    "mean": 0.776,
+    "p95": 2.642,
+    "badPct": 43.2
+   },
+   "dribble:dribble_stand": {
+    "n": 71,
+    "mean": 0.461,
+    "p95": 1.828,
+    "badPct": 32.4
+   },
+   "v8:receive_two_hands": {
+    "n": 41,
+    "mean": 0.71,
+    "p95": 1.951,
+    "badPct": 39
+   }
+  },
+  "switches": {
+   "n": 386,
+   "jump": 234,
+   "mean": 2.514,
+   "p95": 6.124,
+   "badPct": 86.8
+  },
+  "ankle": 0.067,
+  "rows": 10407,
+  "errors": []
+ },
+ "after": {
+  "all": {
+   "n": 7645,
+   "mean": 1.019,
+   "p95": 4.231,
+   "badPct": 42.7
+  },
+  "clips": {
+   "sprint": {
+    "n": 2119,
+    "mean": 1.023,
+    "p95": 3.864,
+    "badPct": 42.1
+   },
+   "dribble:sprint_ball": {
+    "n": 223,
+    "mean": 1.682,
+    "p95": 7.116,
+    "badPct": 54.7
+   },
+   "defensive_slide_left": {
+    "n": 112,
+    "mean": 3.25,
+    "p95": 9.155,
+    "badPct": 95.5
+   },
+   "run": {
+    "n": 536,
+    "mean": 1.881,
+    "p95": 6.375,
+    "badPct": 71.5
+   },
+   "defensive_slide_right": {
+    "n": 317,
+    "mean": 1.95,
+    "p95": 5.025,
+    "badPct": 84.2
+   },
+   "idle_ready": {
+    "n": 2453,
+    "mean": 0.198,
+    "p95": 1.099,
+    "badPct": 11
+   },
+   "walk": {
+    "n": 469,
+    "mean": 2.662,
+    "p95": 6.011,
+    "badPct": 95.1
+   },
+   "jog": {
+    "n": 166,
+    "mean": 2.404,
+    "p95": 7.221,
+    "badPct": 88.6
+   },
+   "defensive_stance": {
+    "n": 925,
+    "mean": 0.744,
+    "p95": 2.394,
+    "badPct": 47.9
+   },
+   "dribble:run_ball": {
+    "n": 90,
+    "mean": 1.556,
+    "p95": 4.609,
+    "badPct": 70
+   },
+   "dribble:dribble_stand": {
+    "n": 83,
+    "mean": 0.537,
+    "p95": 1.923,
+    "badPct": 34.9
+   },
+   "v8:receive_two_hands": {
+    "n": 41,
+    "mean": 0.71,
+    "p95": 1.951,
+    "badPct": 39
+   },
+   "layup_left": {
+    "n": 32,
+    "mean": 1.875,
+    "p95": 5.744,
+    "badPct": 46.9
+   }
+  },
+  "switches": {
+   "n": 245,
+   "jump": 139,
+   "mean": 2.434,
+   "p95": 7.064,
+   "badPct": 81.6
+  },
+  "ankle": 0.071,
+  "rows": 10407,
+  "errors": []
+ }
+}
