@@ -1,0 +1,284 @@
+{
+  "phaseCount": 33,
+  "comparedToAllV2Clips": 24,
+  "comparedToOtherV3Clips": 17,
+  "method": "33 normalized phase samples of the 17 joint centers and local quaternions below Root. Horizontal pelvis translation is removed, so relocating a clip does not make a new motion. Nearest means minimum RMS marker position distance. Near duplicates must satisfy both tolerances.",
+  "nearDuplicateTolerance": {
+    "rmsMarkerMeters": 0.001,
+    "rmsLocalRotationDegrees": 0.5
+  },
+  "referenceSha256": "e3a7ed216d28a3135447dbb54f5c8ef9a6d08be49740304fc32663c9bdf37a0a",
+  "assetSha256": "28a9956ae1f5ae07726257238d3f8a08f2d21a0548041dd3864929f8c64dea7d",
+  "clips": [
+    {
+      "id": "volley_low",
+      "nearestV2": {
+        "id": "clay_slide",
+        "rmsMarkerMeters": 0.095439,
+        "rmsLocalRotationDegrees": 23.146763
+      },
+      "nearestOtherV3": {
+        "id": "half_volley",
+        "rmsMarkerMeters": 0.06363,
+        "rmsLocalRotationDegrees": 9.761269
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "volley_high",
+      "nearestV2": {
+        "id": "volley_forehand",
+        "rmsMarkerMeters": 0.060089,
+        "rmsLocalRotationDegrees": 13.166873
+      },
+      "nearestOtherV3": {
+        "id": "serve_return_aggressive",
+        "rmsMarkerMeters": 0.10947,
+        "rmsLocalRotationDegrees": 21.014166
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "half_volley",
+      "nearestV2": {
+        "id": "clay_slide",
+        "rmsMarkerMeters": 0.13475,
+        "rmsLocalRotationDegrees": 24.905691
+      },
+      "nearestOtherV3": {
+        "id": "volley_low",
+        "rmsMarkerMeters": 0.06363,
+        "rmsLocalRotationDegrees": 9.761269
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "lob",
+      "nearestV2": {
+        "id": "forehand",
+        "rmsMarkerMeters": 0.087506,
+        "rmsLocalRotationDegrees": 24.275347
+      },
+      "nearestOtherV3": {
+        "id": "serve_return_aggressive",
+        "rmsMarkerMeters": 0.054706,
+        "rmsLocalRotationDegrees": 15.289163
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "overhead_backward",
+      "nearestV2": {
+        "id": "serve_prepare_2",
+        "rmsMarkerMeters": 0.129409,
+        "rmsLocalRotationDegrees": 27.511897
+      },
+      "nearestOtherV3": {
+        "id": "volley_high",
+        "rmsMarkerMeters": 0.116937,
+        "rmsLocalRotationDegrees": 22.444938
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "serve_return_aggressive",
+      "nearestV2": {
+        "id": "forehand",
+        "rmsMarkerMeters": 0.087811,
+        "rmsLocalRotationDegrees": 21.639742
+      },
+      "nearestOtherV3": {
+        "id": "lob",
+        "rmsMarkerMeters": 0.054706,
+        "rmsLocalRotationDegrees": 15.289163
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "defensive_slice",
+      "nearestV2": {
+        "id": "slice",
+        "rmsMarkerMeters": 0.108991,
+        "rmsLocalRotationDegrees": 24.023373
+      },
+      "nearestOtherV3": {
+        "id": "change_direction",
+        "rmsMarkerMeters": 0.137551,
+        "rmsLocalRotationDegrees": 42.774851
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "lateral_crossover_run",
+      "nearestV2": {
+        "id": "serve_prepare_1",
+        "rmsMarkerMeters": 0.087609,
+        "rmsLocalRotationDegrees": 18.696041
+      },
+      "nearestOtherV3": {
+        "id": "change_direction",
+        "rmsMarkerMeters": 0.109269,
+        "rmsLocalRotationDegrees": 19.323536
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "change_direction",
+      "nearestV2": {
+        "id": "serve_prepare_1",
+        "rmsMarkerMeters": 0.095636,
+        "rmsLocalRotationDegrees": 18.450904
+      },
+      "nearestOtherV3": {
+        "id": "volley_low",
+        "rmsMarkerMeters": 0.098941,
+        "rmsLocalRotationDegrees": 25.286977
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "slide_to_ball",
+      "nearestV2": {
+        "id": "clay_slide",
+        "rmsMarkerMeters": 0.124085,
+        "rmsLocalRotationDegrees": 29.826971
+      },
+      "nearestOtherV3": {
+        "id": "volley_low",
+        "rmsMarkerMeters": 0.127374,
+        "rmsLocalRotationDegrees": 32.923847
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "court_fall",
+      "nearestV2": {
+        "id": "clay_slide",
+        "rmsMarkerMeters": 0.49533,
+        "rmsLocalRotationDegrees": 49.408164
+      },
+      "nearestOtherV3": {
+        "id": "half_volley",
+        "rmsMarkerMeters": 0.483746,
+        "rmsLocalRotationDegrees": 49.973713
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "court_get_up",
+      "nearestV2": {
+        "id": "clay_slide",
+        "rmsMarkerMeters": 0.420058,
+        "rmsLocalRotationDegrees": 45.190084
+      },
+      "nearestOtherV3": {
+        "id": "half_volley",
+        "rmsMarkerMeters": 0.377812,
+        "rmsLocalRotationDegrees": 45.525157
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "point_win",
+      "nearestV2": {
+        "id": "disappointed",
+        "rmsMarkerMeters": 0.078706,
+        "rmsLocalRotationDegrees": 21.787595
+      },
+      "nearestOtherV3": {
+        "id": "match_handshake",
+        "rmsMarkerMeters": 0.089832,
+        "rmsLocalRotationDegrees": 29.157706
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "childlike_joy",
+      "nearestV2": {
+        "id": "celebrate",
+        "rmsMarkerMeters": 0.167145,
+        "rmsLocalRotationDegrees": 28.120548
+      },
+      "nearestOtherV3": {
+        "id": "point_win",
+        "rmsMarkerMeters": 0.182962,
+        "rmsLocalRotationDegrees": 35.486724
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "point_disappointment",
+      "nearestV2": {
+        "id": "disappointed",
+        "rmsMarkerMeters": 0.075047,
+        "rmsLocalRotationDegrees": 28.993227
+      },
+      "nearestOtherV3": {
+        "id": "point_win",
+        "rmsMarkerMeters": 0.105169,
+        "rmsLocalRotationDegrees": 34.033733
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "match_handshake",
+      "nearestV2": {
+        "id": "handshake",
+        "rmsMarkerMeters": 0.083874,
+        "rmsLocalRotationDegrees": 31.535488
+      },
+      "nearestOtherV3": {
+        "id": "point_win",
+        "rmsMarkerMeters": 0.089832,
+        "rmsLocalRotationDegrees": 29.157706
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "coach_serve_demo",
+      "nearestV2": {
+        "id": "serve_prepare_2",
+        "rmsMarkerMeters": 0.114529,
+        "rmsLocalRotationDegrees": 30.046156
+      },
+      "nearestOtherV3": {
+        "id": "point_win",
+        "rmsMarkerMeters": 0.103165,
+        "rmsLocalRotationDegrees": 27.322975
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    },
+    {
+      "id": "child_serve_rehearsal",
+      "nearestV2": {
+        "id": "serve_prepare_3",
+        "rmsMarkerMeters": 0.10449,
+        "rmsLocalRotationDegrees": 26.98663
+      },
+      "nearestOtherV3": {
+        "id": "point_win",
+        "rmsMarkerMeters": 0.107458,
+        "rmsLocalRotationDegrees": 29.117904
+      },
+      "nearDuplicatesV2": [],
+      "nearDuplicatesV3": []
+    }
+  ]
+}

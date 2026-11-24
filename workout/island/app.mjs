@@ -12,12 +12,14 @@ import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-23';
 import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-23';
 import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-23';
 import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-23';
+import {installUiIcons} from './ui/ui-icons.mjs?v=island-v2-20261107-23';
 import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-23';
 import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-23';
 import {previewMode,readOnlyStorage,installCityPreview} from './ui/city-preview.mjs?v=island-v2-20261107-23';
 import {registerOfflineWorker,startAutoDownload,prefetchRelease,v25On,switchRelease,packsForGames} from './ui/offline.mjs?v=island-v2-20261107-23';
 import {startFpsProbe,isLowQuality,resetMeasured} from './ui/device-tier.mjs?v=island-v2-20261107-23';
 
+installUiIcons();/* HUD icons v2; ?uiIcons=0 keeps the earlier symbols */
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
   return r.json();

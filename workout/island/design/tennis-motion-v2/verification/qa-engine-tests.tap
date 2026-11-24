@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: GLB reader validates magic, declared size, and truncated chunks
+ok 1 - GLB reader validates magic, declared size, and truncated chunks
+  ---
+  duration_ms: 2.245027
+  type: 'test'
+  ...
+# Subtest: accessor reader respects interleaved byteStride and accessor offset
+ok 2 - accessor reader respects interleaved byteStride and accessor offset
+  ---
+  duration_ms: 1.744725
+  type: 'test'
+  ...
+# Subtest: accessor reader cannot read beyond its declared bufferView
+ok 3 - accessor reader cannot read beyond its declared bufferView
+  ---
+  duration_ms: 0.368338
+  type: 'test'
+  ...
+# Subtest: sparse accessors apply indexed overrides to implicit zero values
+ok 4 - sparse accessors apply indexed overrides to implicit zero values
+  ---
+  duration_ms: 0.58193
+  type: 'test'
+  ...
+# Subtest: normalized integer accessors preserve signed limits
+ok 5 - normalized integer accessors preserve signed limits
+  ---
+  duration_ms: 0.435188
+  type: 'test'
+  ...
+# Subtest: linear animation samples parent world transforms and exact endpoint
+ok 6 - linear animation samples parent world transforms and exact endpoint
+  ---
+  duration_ms: 4.468388
+  type: 'test'
+  ...
+# Subtest: STEP animation holds each pose until its next key
+ok 7 - STEP animation holds each pose until its next key
+  ---
+  duration_ms: 2.486446
+  type: 'test'
+  ...
+# Subtest: CUBICSPLINE uses glTF tangents, including segment duration
+ok 8 - CUBICSPLINE uses glTF tangents, including segment duration
+  ---
+  duration_ms: 1.017151
+  type: 'test'
+  ...
+# Subtest: unknown animation names fail visibly
+ok 9 - unknown animation names fail visibly
+  ---
+  duration_ms: 0.614639
+  type: 'test'
+  ...
+# Subtest: animation data is sampled without WebAssembly
+ok 10 - animation data is sampled without WebAssembly
+  ---
+  duration_ms: 1.019805
+  type: 'test'
+  ...
+# Subtest: slightly nonunit Float32 quaternions interpolate before normalization
+ok 11 - slightly nonunit Float32 quaternions interpolate before normalization
+  ---
+  duration_ms: 1.431976
+  type: 'test'
+  ...
+# Subtest: uniform and Float32 key times merge within one microsecond
+ok 12 - uniform and Float32 key times merge within one microsecond
+  ---
+  duration_ms: 1.733798
+  type: 'test'
+  ...
+# Subtest: all requested metrics expose reproducible thresholds and bounded score
+ok 13 - all requested metrics expose reproducible thresholds and bounded score
+  ---
+  duration_ms: 32.227368
+  type: 'test'
+  ...
+# Subtest: supported foot drift is measured rather than hidden by static root
+ok 14 - supported foot drift is measured rather than hidden by static root
+  ---
+  duration_ms: 57.243304
+  type: 'test'
+  ...
+# Subtest: floor intrusion uses supplied sole surface points
+ok 15 - floor intrusion uses supplied sole surface points
+  ---
+  duration_ms: 40.16144
+  type: 'test'
+  ...
+# Subtest: isolated adjacent-frame jump produces a pose-pop warning
+ok 16 - isolated adjacent-frame jump produces a pose-pop warning
+  ---
+  duration_ms: 38.522829
+  type: 'test'
+  ...
+# Subtest: impossible folded elbows produce anatomical violations
+ok 17 - impossible folded elbows produce anatomical violations
+  ---
+  duration_ms: 23.631009
+  type: 'test'
+  ...
+# Subtest: ball metric measures radius-adjusted gap at declared contact time
+ok 18 - ball metric measures radius-adjusted gap at declared contact time
+  ---
+  duration_ms: 36.9009
+  type: 'test'
+  ...
+# Subtest: entry and exit mismatch against idle degrades continuity
+ok 19 - entry and exit mismatch against idle degrades continuity
+  ---
+  duration_ms: 25.946285
+  type: 'test'
+  ...
+# Subtest: body travel without stance sweep flags body sliding
+ok 20 - body travel without stance sweep flags body sliding
+  ---
+  duration_ms: 15.765811
+  type: 'test'
+  ...
+# Subtest: unequal bilateral limb lengths flag structural asymmetry
+ok 21 - unequal bilateral limb lengths flag structural asymmetry
+  ---
+  duration_ms: 59.899069
+  type: 'test'
+  ...
+# Subtest: missing contact and idle data remain explicitly unmeasured
+ok 22 - missing contact and idle data remain explicitly unmeasured
+  ---
+  duration_ms: 20.432007
+  type: 'test'
+  ...
+# Subtest: contact offsets rotate with the sampled world bone quaternion
+ok 23 - contact offsets rotate with the sampled world bone quaternion
+  ---
+  duration_ms: 13.53061
+  type: 'test'
+  ...
+# Subtest: held contact windows detect gaps between their endpoints
+ok 24 - held contact windows detect gaps between their endpoints
+  ---
+  duration_ms: 47.060999
+  type: 'test'
+  ...
+# Subtest: calibrated knee hinge direction catches reverse bend below flexion limit
+ok 25 - calibrated knee hinge direction catches reverse bend below flexion limit
+  ---
+  duration_ms: 13.155807
+  type: 'test'
+  ...
+# Subtest: gait symmetry detects one-sided motion even when limb lengths stay equal
+ok 26 - gait symmetry detects one-sided motion even when limb lengths stay equal
+  ---
+  duration_ms: 32.410072
+  type: 'test'
+  ...
+# Subtest: invalid nonfinite poses, duplicate times, and zero quaternions fail visibly
+ok 27 - invalid nonfinite poses, duplicate times, and zero quaternions fail visibly
+  ---
+  duration_ms: 3.849189
+  type: 'test'
+  ...
+# Subtest: metric grading remains invariant under uniform character scale
+ok 28 - metric grading remains invariant under uniform character scale
+  ---
+  duration_ms: 30.889031
+  type: 'test'
+  ...
+# Subtest: ball-less action contact cue is not a missing ball measurement
+ok 29 - ball-less action contact cue is not a missing ball measurement
+  ---
+  duration_ms: 16.685368
+  type: 'test'
+  ...
+# Subtest: non-foot joint intrusion remains visible alongside valid sole probes
+ok 30 - non-foot joint intrusion remains visible alongside valid sole probes
+  ---
+  duration_ms: 14.573207
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 613.86799

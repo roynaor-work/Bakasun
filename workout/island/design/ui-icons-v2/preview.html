@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>אייקוני HUD · משחקי האי</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --base: #0b131f;
+    --panel: #101c2a;
+    --well: #14212e;
+    --stroke: #304357;
+    --quiet: #aabacc;
+    --text: #edf5fc;
+    --mint: #7de9d3;
+    font: 14px/1.4 system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--text);
+    background: radial-gradient(ellipse at 90% 0, #183543 0, var(--base) 58%);
+    min-block-size: 100dvh;
+    padding: max(12px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
+      max(12px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  }
+  button, input, select, a { font: inherit; }
+  button, select, a { cursor: pointer; }
+  button { color: var(--text); }
+  button:disabled { cursor: default; }
+  :focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+  .shell {
+    max-inline-size: 1180px;
+    margin: auto;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 10px;
+    block-size: calc(100dvh - max(12px, env(safe-area-inset-top)) - max(12px, env(safe-area-inset-bottom)));
+    min-block-size: 340px;
+  }
+  header, .title, .toolbar { display: flex; align-items: center; }
+  header { justify-content: space-between; min-block-size: 56px; gap: 12px; }
+  .title { gap: 10px; }
+  .title img {
+    inline-size: 42px;
+    block-size: 42px;
+    border: 1px solid #476b70;
+    border-radius: 13px;
+    padding: 6px;
+    background: #17333a;
+  }
+  h1, h2, p { margin: 0; }
+  h1 { font-size: 23px; line-height: 1.12; letter-spacing: -.03em; }
+  .subtitle { color: var(--quiet); margin-block-start: 2px; font-size: 12px; }
+  a { color: var(--mint); }
+  .report-link {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: 56px;
+    min-block-size: 56px;
+    padding-inline: 8px;
+    text-underline-offset: 4px;
+    white-space: nowrap;
+  }
+  .workspace { display: grid; min-block-size: 0; grid-template-columns: minmax(0, 1fr) 250px; gap: 10px; }
+  .catalog, .inspector {
+    min-inline-size: 0;
+    border: 1px solid var(--stroke);
+    background: var(--panel);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .catalog { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .toolbar { gap: 8px; padding: 8px; border-block-end: 1px solid var(--stroke); }
+  input, select {
+    min-block-size: 56px;
+    min-inline-size: 56px;
+    max-inline-size: 100%;
+    color: var(--text);
+    border: 1px solid var(--stroke);
+    border-radius: 10px;
+    background: #172638;
+    padding-inline: 8px;
+  }
+  input::placeholder { color: #acbfd2; }
+  #search { flex: 1 1 0; min-inline-size: 56px; }
+  #game { inline-size: 136px; }
+  #format { inline-size: 76px; }
+  #results {
+    overflow: auto;
+    scrollbar-color: #526c81 transparent;
+    padding: 0 9px 9px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    gap: 6px;
+    align-content: start;
+  }
+  .group-title {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--quiet);
+    gap: 8px;
+    min-block-size: 30px;
+    font-size: 12px;
+    font-weight: 650;
+  }
+  .status { font-weight: 500; font-variant-numeric: tabular-nums; }
+  .tile {
+    min-block-size: 64px;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 2px;
+    min-inline-size: 0;
+    border-radius: 10px;
+    border: 1px solid #2a3b4c;
+    background: var(--well);
+    padding: 5px 2px;
+  }
+  .tile img, .state-choices img { inline-size: 30px; block-size: 30px; }
+  .tile span { font-size: 11px; text-align: center; }
+  .tile[aria-pressed="true"], .state-choices input:checked + span {
+    border-color: var(--mint);
+    background: #1b383e;
+  }
+  @media (hover: hover) {
+    .tile:hover, .download:hover { border-color: var(--mint); }
+  }
+  .empty { grid-column: 1 / -1; color: var(--quiet); padding-block: 10px; }
+  .inspector { display: grid; grid-template-rows: minmax(112px, 1fr) auto auto; gap: 8px; padding: 9px; overflow: auto; }
+  .sample {
+    min-inline-size: 0;
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border: 1px solid #394d63;
+    border-radius: 12px;
+    background-color: #142431;
+    background-image:
+      linear-gradient(#829cb613 1px, transparent 1px),
+      linear-gradient(90deg, #829cb613 1px, transparent 1px),
+      radial-gradient(ellipse at 100% 50%, #214b4c, transparent 85%);
+    background-size: 16px 16px, 16px 16px, 100% 100%;
+  }
+  .demo {
+    inline-size: 72px;
+    block-size: 72px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #5a8d93;
+    box-shadow: 0 3px 0 #0b1522;
+    background: #172c37;
+    border-radius: 15px;
+    touch-action: manipulation;
+  }
+  .demo img { inline-size: 54px; block-size: 54px; }
+  .demo[data-state="pressed"] { background: #28484d; box-shadow: inset 0 2px 0 #11242b; }
+  .demo:disabled { background: #192633; border: 1px dashed #8797a6; box-shadow: none; }
+  #icon-name { font-size: 17px; line-height: 1.13; }
+  #icon-id { display: inline-block; color: var(--quiet); font: 11px ui-monospace, monospace; }
+  #icon-games { color: var(--quiet); font-size: 11px; line-height: 1.25; margin-block-start: 4px; }
+  .state-choices {
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(56px, 1fr));
+    gap: 5px;
+  }
+  .state-choices label { position: relative; cursor: pointer; }
+  .state-choices input { opacity: 0; position: absolute; inset: 0; inline-size: 100%; block-size: 100%; margin: 0; cursor: pointer; }
+  .state-choices input:focus-visible + span { outline: 2px solid var(--mint); outline-offset: 2px; }
+  .state-choices span {
+    min-block-size: 64px;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    border: 1px solid var(--stroke);
+    border-radius: 9px;
+    background: var(--well);
+    font-size: 11px;
+  }
+  .state-choices label:last-child span { border-style: dashed; }
+  .download {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 11px;
+    border: 1px solid #45685e;
+    border-radius: 10px;
+    background: #19342f;
+    min-block-size: 56px;
+    text-decoration: none;
+  }
+  .download bdi { font-size: 11px; color: #b9d8d1; }
+  .sr-only {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  @media (max-width: 620px) {
+    .workspace { grid-template-columns: minmax(0, 1fr); }
+    .shell { block-size: auto; }
+    .catalog { block-size: clamp(300px, 56dvh, 680px); }
+    .inspector { grid-row: 1; }
+    #game { inline-size: 110px; }
+    #format { inline-size: 66px; }
+    h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<main class="shell">
+  <header>
+    <div class="title">
+      <img src="svg/normal/compass.svg" alt="">
+      <div>
+        <h1>אייקוני <bdi>HUD</bdi></h1>
+        <p class="subtitle">120 אייקונים למשחקי האי</p>
+      </div>
+    </div>
+    <a class="report-link" href="REPORT.md">דוח מסירה</a>
+  </header>
+  <div class="workspace">
+    <section class="catalog" aria-label="קטלוג אייקונים">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="חיפוש אייקון" aria-label="חיפוש אייקון" autocomplete="off">
+        <select id="game" aria-label="סינון לפי משחק"><option value="">כל המשחקים</option></select>
+        <select id="format" aria-label="פורמט הקובץ" dir="ltr">
+          <option value="svg">SVG</option>
+          <option value="png">PNG</option>
+        </select>
+      </div>
+      <p class="sr-only" id="results-status" role="status"></p>
+      <div id="results"></div>
+    </section>
+    <aside class="inspector" aria-label="אייקון נבחר">
+      <div class="sample">
+        <button class="demo" type="button" id="demo" aria-describedby="demo-hint" data-state="normal">
+          <img id="demo-icon" alt="">
+        </button>
+        <span id="demo-hint" class="sr-only">להדגמת לחיצה, מחזיקים את הכפתור במגע או במקש רווח</span>
+        <div>
+          <h2 id="icon-name"></h2>
+          <bdi id="icon-id" dir="ltr"></bdi>
+          <p id="icon-games"></p>
+        </div>
+      </div>
+      <fieldset class="state-choices">
+        <legend class="sr-only">מצב לתצוגה ולהורדה</legend>
+        <label><input type="radio" name="state" value="normal" checked><span><img alt="">רגיל</span></label>
+        <label><input type="radio" name="state" value="pressed"><span><img alt="">לחוץ</span></label>
+        <label><input type="radio" name="state" value="disabled"><span><img alt="">מושבת</span></label>
+      </fieldset>
+      <a class="download" id="download" download>הורדת אייקון <bdi id="download-format" dir="ltr"></bdi></a>
+    </aside>
+  </div>
+  <noscript>יש להפעיל JavaScript כדי לסנן ולהציג את האייקונים. הנתיבים לכל הקבצים מופיעים ב־<a href="manifest.json">manifest.json</a>.</noscript>
+</main>
+<script type="application/json" id="catalog-data">{"games":[{"id":"islandRacing","nameHe":"מרוצי העיר"},{"id":"alienDefense","nameHe":"הגנה מפני חייזרים"},{"id":"fireRescue","nameHe":"כיבוי שריפה"},{"id":"navalDuel","nameHe":"קרב ספינות"},{"id":"soccer","nameHe":"ליגת העיר"},{"id":"tennis","nameHe":"טניס בעיר"},{"id":"streetSlam","nameHe":"ליגת העיר בכדורסל"},{"id":"alpineRush","nameHe":"מרוץ סנובורד"},{"id":"boarDefense","nameHe":"אי החזירים — הגנת החווה"},{"id":"catchCriminal","nameHe":"תפוס את הפושע"}],"categories":[{"id":"core","nameHe":"פעולות ותגמולים","accent":"#7de9d3"},{"id":"combat","nameHe":"ציוד ארקייד","accent":"#fd9b86"},{"id":"fire","nameHe":"כיבוי וחילוץ","accent":"#ffb579"},{"id":"facilities","nameHe":"מתקנים ומבנים","accent":"#a3d8ae"},{"id":"racing","nameHe":"נהיגה ומרוצים","accent":"#9bc5ff"},{"id":"alpine","nameHe":"שלג ומסלול","accent":"#a5dfff"},{"id":"sports","nameHe":"מגרש ותחרות","accent":"#f9d58d"},{"id":"sensors","nameHe":"ניווט ואיתות","accent":"#c5b8ff"}],"icons":[["coin","מטבע","core",[0,1,2,3,4,5,6,7,8,9],["currency","pickup","reward"]],["star","כוכב","core",[0,1,2,3,4,5,6,7,8,9],["rating","reward","collectible"]],["heart","לב","core",[0,1,2,3,4,5,6,7,8,9],["health","lives"]],["clock","שעון","core",[0,1,2,3,4,5,6,7,8,9],["time","duration"]],["stopwatch","שעון עצר","core",[0,1,2,3,4,5,6,7,8,9],["time","trial","split"]],["key","מפתח","core",[0,1,2,3,4,5,6,7,8,9],["inventory","access","unlock"]],["lock","מנעול","core",[0,1,2,3,4,5,6,7,8,9],["locked","access","secure"]],["unlock","פתיחת מנעול","core",[0,1,2,3,4,5,6,7,8,9],["unlocked","access","secure"]],["shield","מגן","core",[0,1,2,3,4,5,6,7,8,9],["protection","armor","defense"]],["boost","האצה","core",[0,1,2,3,4,5,6,7,8,9],["speed","powerup","sprint"]],["bonus-gift","מתנת בונוס","core",[0,1,2,3,4,5,6,7,8,9],["pickup","gift","reward"]],["diamond","יהלום","core",[0,1,2,3,4,5,6,7,8,9],["gem","pickup","reward"]],["trophy","גביע","core",[0,1,2,3,4,5,6,7,8,9],["victory","reward","podium"]],["medal","מדליה","core",[0,1,2,3,4,5,6,7,8,9],["achievement","reward","ranking"]],["checkpoint","דגל נקודת ביקורת","core",[0,1,2,3,4,5,6,7,8,9],["flag","progress","route"]],["gate","שער מעבר","core",[0,1,2,3,4,5,6,7,8,9],["finish","access","portal"]],["pause","השהיה","core",[0,1,2,3,4,5,6,7,8,9],["playback","control","pause"]],["resume","המשך","core",[0,1,2,3,4,5,6,7,8,9],["playback","control","start"]],["restart","התחלה מחדש","core",[0,1,2,3,4,5,6,7,8,9],["retry","reset","loop"]],["settings","הגדרות","core",[0,1,2,3,4,5,6,7,8,9],["options","sliders","audio"]],["sound","צליל","core",[0,1,2,3,4,5,6,7,8,9],["audio","volume","speaker"]],["mute","השתקה","core",[0,1,2,3,4,5,6,7,8,9],["audio","quiet","volume"]],["combo","רצף פעולות","core",[0,1,2,3,4,5,6,7,8,9],["streak","score","chained"]],["battery","תא אנרגיה","core",[0,1,2,3,4,5,6,7,8,9],["energy","charge","meter"]],["blaster","בלסטר ארקייד","combat",[1,8,9],["weapon","arcade","projectile"]],["turret","צריח","combat",[1,8,3],["weapon","arcade","defense"]],["cannon","תותח ארקייד","combat",[3],["weapon","naval","projectile"]],["missile","טיל ארקייד","combat",[1,3],["weapon","projectile","powerup"]],["laser","פולס לייזר","combat",[1],["weapon","alien","energy"]],["torpedo","טורפדו ארקייד","combat",[3],["weapon","naval","projectile"]],["ammo","אספקת תחמושת","combat",[1,3,9],["ammo","inventory","refill"]],["target","כוונת","combat",[1,3,8,9],["aim","target","precision"]],["target-lock","נעילה על מטרה","combat",[1,3,9],["aim","lock","tracking"]],["reload","טעינה מחדש","combat",[1,3,8,9],["ammo","rotation","replenish"]],["burst","מטח","combat",[1,3],["weapon","spread","arcade"]],["flare","נור איתות","combat",[3,2,1],["signal","rescue","defense"]],["net-launch","רשת לכידה","combat",[9],["capture","chase","utility"]],["decoy","פיתיון","combat",[8,1],["distraction","lure","defense"]],["extinguisher","מטף כיבוי","fire",[2],["fire","suppression","equipment"]],["fire-hose","זרנוק כיבוי","fire",[2],["water","spray","equipment"]],["hydrant","ברז כיבוי","fire",[2],["water","supply","refill"]],["water-drop","טיפת מים","fire",[2],["water","supply","resource"]],["water-tank","מכל מים","fire",[2],["reserve","resource","fill"]],["foam","קצף כיבוי","fire",[2],["suppression","bubbles","equipment"]],["ladder","סולם חילוץ","fire",[2],["access","rescue","equipment"]],["helmet","קסדת כבאי","fire",[2],["protection","rescue","gear"]],["fire-engine","כבאית","fire",[2],["vehicle","rescue","dispatch"]],["flame","להבה","fire",[2],["fire","alert","hazard"]],["smoke","עשן","fire",[2],["hazard","visibility","alert"]],["siren","צופר חירום","fire",[2],["alert","rescue","warning"]],["rescue-ring","גלגל הצלה","fire",[2,3],["lifebuoy","safety","rescue"]],["first-aid","ערכת עזרה ראשונה","fire",[2],["health","rescue","refill"]],["city-hall","בית העירייה","facilities",[0,1,2,3,4,5,6,7,8,9],["building","civic","facility"]],["workshop","סדנת שדרוג","facilities",[0,1,2,3,4,5,6,7,8,9],["building","upgrade","service"]],["warehouse","מחסן","facilities",[0,1,2,3,4,5,6,7,8,9],["building","storage","inventory"]],["farm","חווה","facilities",[8],["building","crops","facility"]],["fence","גדר","facilities",[8,7,9],["building","barrier","protection"]],["watchtower","מגדל תצפית","facilities",[8,1,3,9],["building","lookout","defense"]],["fire-station","תחנת כיבוי","facilities",[2,9],["building","depot","fire"]],["harbor","נמל","facilities",[3,2],["building","dock","naval"]],["stadium","אצטדיון","facilities",[4,6],["building","pitch","facility"]],["court","מגרש משחק","facilities",[5,6],["facility","court","match"]],["hangar","האנגר","facilities",[1,2],["building","alien","vehicle"]],["power-station","תחנת כוח","facilities",[0,1,2,3,4,5,6,7,8,9],["building","energy","supply"]],["water-tower","מגדל מים","facilities",[2,8],["building","water","utility"]],["lift-station","תחנת רכבל","facilities",[7],["building","snow","lift"]],["speedometer","מד מהירות","racing",[0,9],["speed","dashboard","gauge"]],["steering-wheel","הגה","racing",[0,9],["drive","direction","control"]],["turn-left","פנייה שמאלה","racing",[0,9],["direction","physical","left"]],["turn-right","פנייה ימינה","racing",[0,9],["direction","physical","right"]],["brake","בלימה","racing",[0,9],["drive","stopping","pedal"]],["accelerator","דוושת האצה","racing",[0,9],["drive","throttle","pedal"]],["tires","צמיגים","racing",[0,9],["traction","wheels","pit"]],["pit-stop","פיט סטופ","racing",[0,9],["service","repair","garage"]],["finish-flag","דגל משובץ","racing",[0,9],["race","finish","flag"]],["nitro","ניטרו","racing",[0,9],["boost","speed","charge"]],["drift","החלקת רכב","racing",[0,9],["drive","skid","traction"]],["gearbox","תיבת הילוכים","racing",[0,9],["drive","gear","transmission"]],["fuel","דלק","racing",[0,9],["resource","fuel","pit"]],["lap","הקפה","racing",[0,9],["race","route","timer"]],["traffic-lights","רמזור זינוק","racing",[0,9],["race","start","status"]],["roadblock","מחסום כביש","racing",[0,9,2],["road","obstacle","chase"]],["snowboard","סנובורד","alpine",[7],["winter","board","equipment"]],["jump","קפיצה","alpine",[7,6,8],["air","ramp","action"]],["slide","החלקה נמוכה","alpine",[7,4,8],["slide","snow","movement"]],["slalom","סלאלום","alpine",[7],["turn","snow","route"]],["snowflake","פתית שלג","alpine",[7],["winter","ice","weather"]],["mountain","פסגת הר","alpine",[7],["winter","terrain","route"]],["ramp","רמפה","alpine",[7,0],["jump","obstacle","course"]],["landing","נחיתה","alpine",[7,6],["air","impact","balance"]],["air-trick","תרגיל באוויר","alpine",[7],["rotation","snowboard","aerial"]],["avalanche","מפולת שלג","alpine",[7],["hazard","snow","warning"]],["goggles","משקפי שלג","alpine",[7],["equipment","winter","vision"]],["trail-marker","סמן מסלול","alpine",[7,0],["route","snow","sign"]],["soccer-ball","כדור כדורגל","sports",[4],["ball","soccer","equipment"]],["soccer-goal","שער כדורגל","sports",[4],["soccer","goal","score"]],["kick","בעיטה","sports",[4],["soccer","foot","shot"]],["glove-save","כפפת שוער","sports",[4],["soccer","keeper","save"]],["basketball","כדור כדורסל","sports",[6],["ball","basketball","equipment"]],["hoop","סל כדורסל","sports",[6],["basketball","hoop","score"]],["dunk","הטבעה","sports",[6],["basketball","shot","close"]],["dribble","כדרור","sports",[6],["basketball","bounce","movement"]],["tennis-ball","כדור טניס","sports",[5],["ball","tennis","equipment"]],["racket","מחבט טניס","sports",[5],["tennis","racket","equipment"]],["tennis-net","רשת טניס","sports",[5],["tennis","court","equipment"]],["serve","הגשה","sports",[5],["tennis","swing","opening"]],["pass","מסירה","sports",[4,6],["team","projectile","ball"]],["deflect","הדיפה","sports",[4,6,5],["defense","block","rebound"]],["whistle","משרוקית","sports",[4,6,5],["referee","match","alert"]],["scoreboard","לוח תוצאות","sports",[4,6,5],["score","match","status"]],["radar","מכ״ם","sensors",[3,1,9,8],["sensor","scan","tracking"]],["signal-wave","גל אותות","sensors",[3,1,2,9],["signal","waveform","detection"]],["radio","מכשיר קשר","sensors",[2,3,9,1],["signal","communications","rescue"]],["compass","מצפן","sensors",[0,1,2,3,4,5,6,7,8,9],["direction","heading","map"]],["heading","כיוון תנועה","sensors",[0,1,2,3,4,5,6,7,8,9],["direction","heading","arrow"]],["waypoint","נקודת יעד","sensors",[0,1,2,3,4,5,6,7,8,9],["marker","route","destination"]],["route","נתיב","sensors",[0,1,2,3,4,5,6,7,8,9],["map","navigation","progress"]],["warning","אזהרה","sensors",[0,1,2,3,4,5,6,7,8,9],["hazard","danger","status"]],["sonar","סונאר","sensors",[3],["sensor","naval","echo"]],["map","מפה","sensors",[0,1,2,3,4,5,6,7,8,9],["map","terrain","navigation"]]]}</script>
+<script>
+  const get = id => document.getElementById(id);
+  const { games, categories, icons } = JSON.parse(get('catalog-data').textContent);
+  const results = get('results');
+  const search = get('search');
+  const game = get('game');
+  const format = get('format');
+  const demo = get('demo');
+  const demoIcon = get('demo-icon');
+  const download = get('download');
+  const choices = Array.from(document.querySelectorAll('[name="state"]'));
+  const normalize = text => text.normalize('NFKD')
+    .replace(/[\u0591-\u05bd\u05bf-\u05c7'״׳"]/g, '').toLowerCase();
+  const searchText = new Map(icons.map(([id, label, , , tags]) =>
+    [id, normalize([id.replaceAll('-', ' '), id, label, ...tags].join(' '))]
+  ));
+
+  games.forEach(({nameHe}, index) => game.add(new Option(nameHe, String(index))));
+  let selected = icons[0];
+  let held = false;
+
+  function asset(id, state) {
+    return `${format.value}/${state}/${id}.${format.value}`;
+  }
+
+  function renderSample() {
+    if (!selected) return;
+    const state = choices.find(choice => choice.checked).value;
+    const visibleState = held && state === 'normal' ? 'pressed' : state;
+    demo.dataset.state = visibleState;
+    demo.disabled = state === 'disabled';
+    demoIcon.src = asset(selected[0], visibleState);
+    download.href = asset(selected[0], state);
+    download.download = `${selected[0]}-${state}.${format.value}`;
+    get('download-format').textContent = format.value === 'png' ? 'PNG · 96×96' : 'SVG';
+  }
+
+  function updateSelection() {
+    held = false;
+    const inspector = document.querySelector('.inspector');
+    inspector.style.visibility = selected ? 'visible' : 'hidden';
+    if (!selected) return;
+    const [id, name, , gameIds] = selected;
+    get('icon-name').textContent = name;
+    get('icon-id').textContent = id;
+    get('icon-games').textContent = gameIds.length === games.length ? 'כל המשחקים'
+      : gameIds.length <= 3 ? gameIds.map(index => games[index].nameHe).join(' · ')
+      : `${gameIds.length} משחקים`;
+    get('icon-games').title = gameIds.map(index => games[index].nameHe).join(' · ');
+    demo.setAttribute('aria-label', `הדגמת יעד לחיצה: ${name}`);
+    for (const choice of choices) {
+      choice.labels[0].querySelector('img').src = asset(id, choice.value);
+    }
+    for (const tile of results.querySelectorAll('.tile')) {
+      tile.setAttribute('aria-pressed', String(tile.dataset.icon === id));
+    }
+    renderSample();
+  }
+
+  function renderCatalog({ resetScroll = false } = {}) {
+    const terms = normalize(search.value).trim().split(/\s+/);
+    const matches = icons.filter(([id, , , gameIds]) =>
+      (game.value === '' || gameIds.includes(Number(game.value))) &&
+      terms.every(term => searchText.get(id).includes(term))
+    );
+    if (!matches.includes(selected)) selected = matches[0];
+    const contents = document.createDocumentFragment();
+    const count = `${matches.length} אייקונים`;
+    get('results-status').textContent = count;
+    for (const category of categories) {
+      const entries = matches.filter(icon => icon[2] === category.id);
+      if (!entries.length) continue;
+      const heading = document.createElement('h2');
+      heading.className = 'group-title';
+      const label = document.createElement('span');
+      label.textContent = category.nameHe;
+      label.style.color = category.accent;
+      heading.append(label);
+      if (!contents.childElementCount) {
+        const status = document.createElement('bdi');
+        status.className = 'status';
+        status.textContent = count;
+        heading.append(status);
+      }
+      contents.append(heading);
+      for (const [id, name] of entries) {
+        const tile = document.createElement('button');
+        tile.type = 'button';
+        tile.className = 'tile';
+        tile.dataset.icon = id;
+        const image = document.createElement('img');
+        image.alt = '';
+        image.loading = 'lazy';
+        image.src = asset(id, 'normal');
+        const text = document.createElement('span');
+        text.textContent = name;
+        tile.append(image, text);
+        contents.append(tile);
+      }
+    }
+    if (!matches.length) {
+      const empty = document.createElement('p');
+      empty.className = 'empty';
+      empty.textContent = 'אין אייקונים שתואמים לחיפוש.';
+      contents.append(empty);
+    }
+    results.replaceChildren(contents);
+    if (resetScroll) results.scrollTop = 0;
+    updateSelection();
+  }
+
+  results.addEventListener('click', event => {
+    const tile = event.target.closest('.tile');
+    if (!tile) return;
+    selected = icons.find(icon => icon[0] === tile.dataset.icon);
+    updateSelection();
+  });
+  search.addEventListener('input', () => renderCatalog({resetScroll: true}));
+  game.addEventListener('change', () => renderCatalog({resetScroll: true}));
+  format.addEventListener('change', () => renderCatalog());
+  for (const choice of choices) choice.addEventListener('change', renderSample);
+  function setHeld(value) {
+    if (held === value) return;
+    held = value;
+    renderSample();
+  }
+  demo.addEventListener('pointerdown', event => {
+    if (!event.isPrimary || event.button !== 0) return;
+    demo.setPointerCapture(event.pointerId);
+    setHeld(true);
+  });
+  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture', 'blur']) {
+    demo.addEventListener(type, () => setHeld(false));
+  }
+  demo.addEventListener('keydown', event => {
+    if (event.key === ' ' || event.key === 'Enter') setHeld(true);
+  });
+  demo.addEventListener('keyup', event => {
+    if (event.key === ' ' || event.key === 'Enter') setHeld(false);
+  });
+  window.addEventListener('blur', () => setHeld(false));
+  renderCatalog();
+</script>
+</body>
+</html>

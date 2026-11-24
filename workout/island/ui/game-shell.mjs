@@ -1,5 +1,6 @@
 import {nativeShellAction} from './press.mjs?v=island-v2-20261107-23';
 import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-23';
+import {uiIconOr} from './ui-icons.mjs?v=island-v2-20261107-23';
 
 kidUxStyle('007', `
   .game-screen.game-screen[data-paused] .game-header .game-pause[data-kid-ux-pause-label] {
@@ -73,7 +74,10 @@ export class FullscreenEntry {
 }
 
 const paths={install:'M12 3v12m-4-4 4 4 4-4M5 15v6h14v-6',play:'m9 5 11 7-11 7Z',exit:'M10 4H4v16h6m4-13 5 5-5 5m-5-5h14',sound:'m4 10 5-5v14l-5-5H1v-4Zm10-3a7 7 0 0 1 0 10',muted:'m4 10 5-5v14l-5-5H1v-4Zm10-2 7 8m0-8-7 8',pause:'M8 5v14M16 5v14',close:'m6 6 12 12M18 6 6 18'};
-function shellIcon(name){const template=document.createElement('template');template.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';const svg=template.content.firstChild;svg.firstChild.setAttribute('d',paths[name]);return svg;}
+// HUD icons v2: the package icon where it has one (resume, sound, mute, pause); exit, install and close keep the drawn glyph.
+const PACK_ICON={play:'resume',sound:'sound',muted:'mute',pause:'pause'};
+function shellIcon(name){return PACK_ICON[name]?uiIconOr(PACK_ICON[name],()=>drawnIcon(name)):drawnIcon(name);}
+function drawnIcon(name){const template=document.createElement('template');template.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';const svg=template.content.firstChild;svg.firstChild.setAttribute('d',paths[name]);return svg;}
 function iconButton(action,label,icon){const b=document.createElement('button');b.type='button';b.className='secondary-button shell-icon';b.dataset.action=action;b.title=label;b.setAttribute('aria-label',label);b.append(shellIcon(icon));return b;}
 
 /** Wire the existing adapters at the application boundary, without changing any

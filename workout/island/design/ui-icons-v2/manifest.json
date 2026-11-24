@@ -1,0 +1,3852 @@
+{
+  "version": 2,
+  "license": "CC0-1.0",
+  "locale": "he",
+  "direction": "rtl",
+  "rendering": {
+    "viewBox": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "pngSizePx": [
+      96,
+      96
+    ],
+    "recommendedGlyphSizeCssPx": 32,
+    "minHitTargetCssPx": 56,
+    "defaultBackground": "#14212e",
+    "alignment": "center"
+  },
+  "states": {
+    "normal": "רגיל",
+    "pressed": "לחוץ",
+    "disabled": "מושבת"
+  },
+  "formats": [
+    "svg",
+    "png"
+  ],
+  "games": [
+    {
+      "id": "islandRacing",
+      "nameHe": "מרוצי העיר"
+    },
+    {
+      "id": "alienDefense",
+      "nameHe": "הגנה מפני חייזרים"
+    },
+    {
+      "id": "fireRescue",
+      "nameHe": "כיבוי שריפה"
+    },
+    {
+      "id": "navalDuel",
+      "nameHe": "קרב ספינות"
+    },
+    {
+      "id": "soccer",
+      "nameHe": "ליגת העיר"
+    },
+    {
+      "id": "tennis",
+      "nameHe": "טניס בעיר"
+    },
+    {
+      "id": "streetSlam",
+      "nameHe": "ליגת העיר בכדורסל"
+    },
+    {
+      "id": "alpineRush",
+      "nameHe": "מרוץ סנובורד"
+    },
+    {
+      "id": "boarDefense",
+      "nameHe": "אי החזירים — הגנת החווה"
+    },
+    {
+      "id": "catchCriminal",
+      "nameHe": "תפוס את הפושע"
+    }
+  ],
+  "categories": [
+    {
+      "id": "core",
+      "nameHe": "פעולות ותגמולים",
+      "accent": "#7de9d3"
+    },
+    {
+      "id": "combat",
+      "nameHe": "ציוד ארקייד",
+      "accent": "#fd9b86"
+    },
+    {
+      "id": "fire",
+      "nameHe": "כיבוי וחילוץ",
+      "accent": "#ffb579"
+    },
+    {
+      "id": "facilities",
+      "nameHe": "מתקנים ומבנים",
+      "accent": "#a3d8ae"
+    },
+    {
+      "id": "racing",
+      "nameHe": "נהיגה ומרוצים",
+      "accent": "#9bc5ff"
+    },
+    {
+      "id": "alpine",
+      "nameHe": "שלג ומסלול",
+      "accent": "#a5dfff"
+    },
+    {
+      "id": "sports",
+      "nameHe": "מגרש ותחרות",
+      "accent": "#f9d58d"
+    },
+    {
+      "id": "sensors",
+      "nameHe": "ניווט ואיתות",
+      "accent": "#c5b8ff"
+    }
+  ],
+  "icons": [
+    {
+      "id": "coin",
+      "name": "Coin",
+      "nameHe": "מטבע",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "currency",
+        "pickup",
+        "reward"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/coin.svg",
+          "png": "png/normal/coin.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/coin.svg",
+          "png": "png/pressed/coin.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/coin.svg",
+          "png": "png/disabled/coin.png"
+        }
+      }
+    },
+    {
+      "id": "star",
+      "name": "Star",
+      "nameHe": "כוכב",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "rating",
+        "reward",
+        "collectible"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/star.svg",
+          "png": "png/normal/star.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/star.svg",
+          "png": "png/pressed/star.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/star.svg",
+          "png": "png/disabled/star.png"
+        }
+      }
+    },
+    {
+      "id": "heart",
+      "name": "Heart",
+      "nameHe": "לב",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "health",
+        "lives"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/heart.svg",
+          "png": "png/normal/heart.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/heart.svg",
+          "png": "png/pressed/heart.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/heart.svg",
+          "png": "png/disabled/heart.png"
+        }
+      }
+    },
+    {
+      "id": "clock",
+      "name": "Clock",
+      "nameHe": "שעון",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "time",
+        "duration"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/clock.svg",
+          "png": "png/normal/clock.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/clock.svg",
+          "png": "png/pressed/clock.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/clock.svg",
+          "png": "png/disabled/clock.png"
+        }
+      }
+    },
+    {
+      "id": "stopwatch",
+      "name": "Stopwatch",
+      "nameHe": "שעון עצר",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "time",
+        "trial",
+        "split"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/stopwatch.svg",
+          "png": "png/normal/stopwatch.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/stopwatch.svg",
+          "png": "png/pressed/stopwatch.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/stopwatch.svg",
+          "png": "png/disabled/stopwatch.png"
+        }
+      }
+    },
+    {
+      "id": "key",
+      "name": "Key",
+      "nameHe": "מפתח",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "inventory",
+        "access",
+        "unlock"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/key.svg",
+          "png": "png/normal/key.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/key.svg",
+          "png": "png/pressed/key.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/key.svg",
+          "png": "png/disabled/key.png"
+        }
+      }
+    },
+    {
+      "id": "lock",
+      "name": "Lock",
+      "nameHe": "מנעול",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "locked",
+        "access",
+        "secure"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/lock.svg",
+          "png": "png/normal/lock.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/lock.svg",
+          "png": "png/pressed/lock.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/lock.svg",
+          "png": "png/disabled/lock.png"
+        }
+      }
+    },
+    {
+      "id": "unlock",
+      "name": "Unlock",
+      "nameHe": "פתיחת מנעול",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "unlocked",
+        "access",
+        "secure"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/unlock.svg",
+          "png": "png/normal/unlock.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/unlock.svg",
+          "png": "png/pressed/unlock.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/unlock.svg",
+          "png": "png/disabled/unlock.png"
+        }
+      }
+    },
+    {
+      "id": "shield",
+      "name": "Shield",
+      "nameHe": "מגן",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "protection",
+        "armor",
+        "defense"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/shield.svg",
+          "png": "png/normal/shield.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/shield.svg",
+          "png": "png/pressed/shield.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/shield.svg",
+          "png": "png/disabled/shield.png"
+        }
+      }
+    },
+    {
+      "id": "boost",
+      "name": "Boost",
+      "nameHe": "האצה",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "speed",
+        "powerup",
+        "sprint"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/boost.svg",
+          "png": "png/normal/boost.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/boost.svg",
+          "png": "png/pressed/boost.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/boost.svg",
+          "png": "png/disabled/boost.png"
+        }
+      }
+    },
+    {
+      "id": "bonus-gift",
+      "name": "Bonus Gift",
+      "nameHe": "מתנת בונוס",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "pickup",
+        "gift",
+        "reward"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/bonus-gift.svg",
+          "png": "png/normal/bonus-gift.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/bonus-gift.svg",
+          "png": "png/pressed/bonus-gift.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/bonus-gift.svg",
+          "png": "png/disabled/bonus-gift.png"
+        }
+      }
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "nameHe": "יהלום",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "gem",
+        "pickup",
+        "reward"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/diamond.svg",
+          "png": "png/normal/diamond.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/diamond.svg",
+          "png": "png/pressed/diamond.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/diamond.svg",
+          "png": "png/disabled/diamond.png"
+        }
+      }
+    },
+    {
+      "id": "trophy",
+      "name": "Trophy",
+      "nameHe": "גביע",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "victory",
+        "reward",
+        "podium"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/trophy.svg",
+          "png": "png/normal/trophy.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/trophy.svg",
+          "png": "png/pressed/trophy.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/trophy.svg",
+          "png": "png/disabled/trophy.png"
+        }
+      }
+    },
+    {
+      "id": "medal",
+      "name": "Medal",
+      "nameHe": "מדליה",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "achievement",
+        "reward",
+        "ranking"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/medal.svg",
+          "png": "png/normal/medal.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/medal.svg",
+          "png": "png/pressed/medal.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/medal.svg",
+          "png": "png/disabled/medal.png"
+        }
+      }
+    },
+    {
+      "id": "checkpoint",
+      "name": "Checkpoint",
+      "nameHe": "דגל נקודת ביקורת",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "flag",
+        "progress",
+        "route"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/checkpoint.svg",
+          "png": "png/normal/checkpoint.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/checkpoint.svg",
+          "png": "png/pressed/checkpoint.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/checkpoint.svg",
+          "png": "png/disabled/checkpoint.png"
+        }
+      }
+    },
+    {
+      "id": "gate",
+      "name": "Gate",
+      "nameHe": "שער מעבר",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "finish",
+        "access",
+        "portal"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/gate.svg",
+          "png": "png/normal/gate.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/gate.svg",
+          "png": "png/pressed/gate.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/gate.svg",
+          "png": "png/disabled/gate.png"
+        }
+      }
+    },
+    {
+      "id": "pause",
+      "name": "Pause",
+      "nameHe": "השהיה",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "playback",
+        "control",
+        "pause"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/pause.svg",
+          "png": "png/normal/pause.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/pause.svg",
+          "png": "png/pressed/pause.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/pause.svg",
+          "png": "png/disabled/pause.png"
+        }
+      }
+    },
+    {
+      "id": "resume",
+      "name": "Resume",
+      "nameHe": "המשך",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "playback",
+        "control",
+        "start"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/resume.svg",
+          "png": "png/normal/resume.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/resume.svg",
+          "png": "png/pressed/resume.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/resume.svg",
+          "png": "png/disabled/resume.png"
+        }
+      }
+    },
+    {
+      "id": "restart",
+      "name": "Restart",
+      "nameHe": "התחלה מחדש",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "retry",
+        "reset",
+        "loop"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/restart.svg",
+          "png": "png/normal/restart.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/restart.svg",
+          "png": "png/pressed/restart.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/restart.svg",
+          "png": "png/disabled/restart.png"
+        }
+      }
+    },
+    {
+      "id": "settings",
+      "name": "Settings",
+      "nameHe": "הגדרות",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "options",
+        "sliders",
+        "audio"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/settings.svg",
+          "png": "png/normal/settings.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/settings.svg",
+          "png": "png/pressed/settings.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/settings.svg",
+          "png": "png/disabled/settings.png"
+        }
+      }
+    },
+    {
+      "id": "sound",
+      "name": "Sound",
+      "nameHe": "צליל",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "audio",
+        "volume",
+        "speaker"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/sound.svg",
+          "png": "png/normal/sound.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/sound.svg",
+          "png": "png/pressed/sound.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/sound.svg",
+          "png": "png/disabled/sound.png"
+        }
+      }
+    },
+    {
+      "id": "mute",
+      "name": "Mute",
+      "nameHe": "השתקה",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "audio",
+        "quiet",
+        "volume"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/mute.svg",
+          "png": "png/normal/mute.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/mute.svg",
+          "png": "png/pressed/mute.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/mute.svg",
+          "png": "png/disabled/mute.png"
+        }
+      }
+    },
+    {
+      "id": "combo",
+      "name": "Combo",
+      "nameHe": "רצף פעולות",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "streak",
+        "score",
+        "chained"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/combo.svg",
+          "png": "png/normal/combo.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/combo.svg",
+          "png": "png/pressed/combo.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/combo.svg",
+          "png": "png/disabled/combo.png"
+        }
+      }
+    },
+    {
+      "id": "battery",
+      "name": "Energy Cell",
+      "nameHe": "תא אנרגיה",
+      "category": "core",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "energy",
+        "charge",
+        "meter"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/battery.svg",
+          "png": "png/normal/battery.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/battery.svg",
+          "png": "png/pressed/battery.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/battery.svg",
+          "png": "png/disabled/battery.png"
+        }
+      }
+    },
+    {
+      "id": "blaster",
+      "name": "Arcade Blaster",
+      "nameHe": "בלסטר ארקייד",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "weapon",
+        "arcade",
+        "projectile"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/blaster.svg",
+          "png": "png/normal/blaster.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/blaster.svg",
+          "png": "png/pressed/blaster.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/blaster.svg",
+          "png": "png/disabled/blaster.png"
+        }
+      }
+    },
+    {
+      "id": "turret",
+      "name": "Turret",
+      "nameHe": "צריח",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "boarDefense",
+        "navalDuel"
+      ],
+      "tags": [
+        "weapon",
+        "arcade",
+        "defense"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/turret.svg",
+          "png": "png/normal/turret.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/turret.svg",
+          "png": "png/pressed/turret.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/turret.svg",
+          "png": "png/disabled/turret.png"
+        }
+      }
+    },
+    {
+      "id": "cannon",
+      "name": "Cannon",
+      "nameHe": "תותח ארקייד",
+      "category": "combat",
+      "games": [
+        "navalDuel"
+      ],
+      "tags": [
+        "weapon",
+        "naval",
+        "projectile"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/cannon.svg",
+          "png": "png/normal/cannon.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/cannon.svg",
+          "png": "png/pressed/cannon.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/cannon.svg",
+          "png": "png/disabled/cannon.png"
+        }
+      }
+    },
+    {
+      "id": "missile",
+      "name": "Arcade Missile",
+      "nameHe": "טיל ארקייד",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "navalDuel"
+      ],
+      "tags": [
+        "weapon",
+        "projectile",
+        "powerup"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/missile.svg",
+          "png": "png/normal/missile.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/missile.svg",
+          "png": "png/pressed/missile.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/missile.svg",
+          "png": "png/disabled/missile.png"
+        }
+      }
+    },
+    {
+      "id": "laser",
+      "name": "Laser Pulse",
+      "nameHe": "פולס לייזר",
+      "category": "combat",
+      "games": [
+        "alienDefense"
+      ],
+      "tags": [
+        "weapon",
+        "alien",
+        "energy"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/laser.svg",
+          "png": "png/normal/laser.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/laser.svg",
+          "png": "png/pressed/laser.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/laser.svg",
+          "png": "png/disabled/laser.png"
+        }
+      }
+    },
+    {
+      "id": "torpedo",
+      "name": "Arcade Torpedo",
+      "nameHe": "טורפדו ארקייד",
+      "category": "combat",
+      "games": [
+        "navalDuel"
+      ],
+      "tags": [
+        "weapon",
+        "naval",
+        "projectile"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/torpedo.svg",
+          "png": "png/normal/torpedo.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/torpedo.svg",
+          "png": "png/pressed/torpedo.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/torpedo.svg",
+          "png": "png/disabled/torpedo.png"
+        }
+      }
+    },
+    {
+      "id": "ammo",
+      "name": "Ammo Supply",
+      "nameHe": "אספקת תחמושת",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "navalDuel",
+        "catchCriminal"
+      ],
+      "tags": [
+        "ammo",
+        "inventory",
+        "refill"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/ammo.svg",
+          "png": "png/normal/ammo.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/ammo.svg",
+          "png": "png/pressed/ammo.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/ammo.svg",
+          "png": "png/disabled/ammo.png"
+        }
+      }
+    },
+    {
+      "id": "target",
+      "name": "Target Reticle",
+      "nameHe": "כוונת",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "navalDuel",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "aim",
+        "target",
+        "precision"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/target.svg",
+          "png": "png/normal/target.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/target.svg",
+          "png": "png/pressed/target.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/target.svg",
+          "png": "png/disabled/target.png"
+        }
+      }
+    },
+    {
+      "id": "target-lock",
+      "name": "Target Lock",
+      "nameHe": "נעילה על מטרה",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "navalDuel",
+        "catchCriminal"
+      ],
+      "tags": [
+        "aim",
+        "lock",
+        "tracking"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/target-lock.svg",
+          "png": "png/normal/target-lock.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/target-lock.svg",
+          "png": "png/pressed/target-lock.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/target-lock.svg",
+          "png": "png/disabled/target-lock.png"
+        }
+      }
+    },
+    {
+      "id": "reload",
+      "name": "Reload",
+      "nameHe": "טעינה מחדש",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "navalDuel",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "ammo",
+        "rotation",
+        "replenish"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/reload.svg",
+          "png": "png/normal/reload.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/reload.svg",
+          "png": "png/pressed/reload.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/reload.svg",
+          "png": "png/disabled/reload.png"
+        }
+      }
+    },
+    {
+      "id": "burst",
+      "name": "Burst Shot",
+      "nameHe": "מטח",
+      "category": "combat",
+      "games": [
+        "alienDefense",
+        "navalDuel"
+      ],
+      "tags": [
+        "weapon",
+        "spread",
+        "arcade"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/burst.svg",
+          "png": "png/normal/burst.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/burst.svg",
+          "png": "png/pressed/burst.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/burst.svg",
+          "png": "png/disabled/burst.png"
+        }
+      }
+    },
+    {
+      "id": "flare",
+      "name": "Flare",
+      "nameHe": "נור איתות",
+      "category": "combat",
+      "games": [
+        "navalDuel",
+        "fireRescue",
+        "alienDefense"
+      ],
+      "tags": [
+        "signal",
+        "rescue",
+        "defense"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/flare.svg",
+          "png": "png/normal/flare.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/flare.svg",
+          "png": "png/pressed/flare.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/flare.svg",
+          "png": "png/disabled/flare.png"
+        }
+      }
+    },
+    {
+      "id": "net-launch",
+      "name": "Capture Net",
+      "nameHe": "רשת לכידה",
+      "category": "combat",
+      "games": [
+        "catchCriminal"
+      ],
+      "tags": [
+        "capture",
+        "chase",
+        "utility"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/net-launch.svg",
+          "png": "png/normal/net-launch.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/net-launch.svg",
+          "png": "png/pressed/net-launch.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/net-launch.svg",
+          "png": "png/disabled/net-launch.png"
+        }
+      }
+    },
+    {
+      "id": "decoy",
+      "name": "Decoy",
+      "nameHe": "פיתיון",
+      "category": "combat",
+      "games": [
+        "boarDefense",
+        "alienDefense"
+      ],
+      "tags": [
+        "distraction",
+        "lure",
+        "defense"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/decoy.svg",
+          "png": "png/normal/decoy.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/decoy.svg",
+          "png": "png/pressed/decoy.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/decoy.svg",
+          "png": "png/disabled/decoy.png"
+        }
+      }
+    },
+    {
+      "id": "extinguisher",
+      "name": "Extinguisher",
+      "nameHe": "מטף כיבוי",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "fire",
+        "suppression",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/extinguisher.svg",
+          "png": "png/normal/extinguisher.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/extinguisher.svg",
+          "png": "png/pressed/extinguisher.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/extinguisher.svg",
+          "png": "png/disabled/extinguisher.png"
+        }
+      }
+    },
+    {
+      "id": "fire-hose",
+      "name": "Fire Hose",
+      "nameHe": "זרנוק כיבוי",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "water",
+        "spray",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/fire-hose.svg",
+          "png": "png/normal/fire-hose.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/fire-hose.svg",
+          "png": "png/pressed/fire-hose.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/fire-hose.svg",
+          "png": "png/disabled/fire-hose.png"
+        }
+      }
+    },
+    {
+      "id": "hydrant",
+      "name": "Hydrant",
+      "nameHe": "ברז כיבוי",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "water",
+        "supply",
+        "refill"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/hydrant.svg",
+          "png": "png/normal/hydrant.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/hydrant.svg",
+          "png": "png/pressed/hydrant.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/hydrant.svg",
+          "png": "png/disabled/hydrant.png"
+        }
+      }
+    },
+    {
+      "id": "water-drop",
+      "name": "Water Drop",
+      "nameHe": "טיפת מים",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "water",
+        "supply",
+        "resource"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/water-drop.svg",
+          "png": "png/normal/water-drop.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/water-drop.svg",
+          "png": "png/pressed/water-drop.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/water-drop.svg",
+          "png": "png/disabled/water-drop.png"
+        }
+      }
+    },
+    {
+      "id": "water-tank",
+      "name": "Water Tank",
+      "nameHe": "מכל מים",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "reserve",
+        "resource",
+        "fill"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/water-tank.svg",
+          "png": "png/normal/water-tank.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/water-tank.svg",
+          "png": "png/pressed/water-tank.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/water-tank.svg",
+          "png": "png/disabled/water-tank.png"
+        }
+      }
+    },
+    {
+      "id": "foam",
+      "name": "Foam",
+      "nameHe": "קצף כיבוי",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "suppression",
+        "bubbles",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/foam.svg",
+          "png": "png/normal/foam.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/foam.svg",
+          "png": "png/pressed/foam.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/foam.svg",
+          "png": "png/disabled/foam.png"
+        }
+      }
+    },
+    {
+      "id": "ladder",
+      "name": "Rescue Ladder",
+      "nameHe": "סולם חילוץ",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "access",
+        "rescue",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/ladder.svg",
+          "png": "png/normal/ladder.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/ladder.svg",
+          "png": "png/pressed/ladder.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/ladder.svg",
+          "png": "png/disabled/ladder.png"
+        }
+      }
+    },
+    {
+      "id": "helmet",
+      "name": "Rescue Helmet",
+      "nameHe": "קסדת כבאי",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "protection",
+        "rescue",
+        "gear"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/helmet.svg",
+          "png": "png/normal/helmet.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/helmet.svg",
+          "png": "png/pressed/helmet.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/helmet.svg",
+          "png": "png/disabled/helmet.png"
+        }
+      }
+    },
+    {
+      "id": "fire-engine",
+      "name": "Fire Engine",
+      "nameHe": "כבאית",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "vehicle",
+        "rescue",
+        "dispatch"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/fire-engine.svg",
+          "png": "png/normal/fire-engine.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/fire-engine.svg",
+          "png": "png/pressed/fire-engine.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/fire-engine.svg",
+          "png": "png/disabled/fire-engine.png"
+        }
+      }
+    },
+    {
+      "id": "flame",
+      "name": "Flame",
+      "nameHe": "להבה",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "fire",
+        "alert",
+        "hazard"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/flame.svg",
+          "png": "png/normal/flame.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/flame.svg",
+          "png": "png/pressed/flame.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/flame.svg",
+          "png": "png/disabled/flame.png"
+        }
+      }
+    },
+    {
+      "id": "smoke",
+      "name": "Smoke",
+      "nameHe": "עשן",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "hazard",
+        "visibility",
+        "alert"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/smoke.svg",
+          "png": "png/normal/smoke.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/smoke.svg",
+          "png": "png/pressed/smoke.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/smoke.svg",
+          "png": "png/disabled/smoke.png"
+        }
+      }
+    },
+    {
+      "id": "siren",
+      "name": "Siren",
+      "nameHe": "צופר חירום",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "alert",
+        "rescue",
+        "warning"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/siren.svg",
+          "png": "png/normal/siren.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/siren.svg",
+          "png": "png/pressed/siren.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/siren.svg",
+          "png": "png/disabled/siren.png"
+        }
+      }
+    },
+    {
+      "id": "rescue-ring",
+      "name": "Rescue Ring",
+      "nameHe": "גלגל הצלה",
+      "category": "fire",
+      "games": [
+        "fireRescue",
+        "navalDuel"
+      ],
+      "tags": [
+        "lifebuoy",
+        "safety",
+        "rescue"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/rescue-ring.svg",
+          "png": "png/normal/rescue-ring.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/rescue-ring.svg",
+          "png": "png/pressed/rescue-ring.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/rescue-ring.svg",
+          "png": "png/disabled/rescue-ring.png"
+        }
+      }
+    },
+    {
+      "id": "first-aid",
+      "name": "First Aid",
+      "nameHe": "ערכת עזרה ראשונה",
+      "category": "fire",
+      "games": [
+        "fireRescue"
+      ],
+      "tags": [
+        "health",
+        "rescue",
+        "refill"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/first-aid.svg",
+          "png": "png/normal/first-aid.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/first-aid.svg",
+          "png": "png/pressed/first-aid.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/first-aid.svg",
+          "png": "png/disabled/first-aid.png"
+        }
+      }
+    },
+    {
+      "id": "city-hall",
+      "name": "City Hall",
+      "nameHe": "בית העירייה",
+      "category": "facilities",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "building",
+        "civic",
+        "facility"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/city-hall.svg",
+          "png": "png/normal/city-hall.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/city-hall.svg",
+          "png": "png/pressed/city-hall.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/city-hall.svg",
+          "png": "png/disabled/city-hall.png"
+        }
+      }
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop",
+      "nameHe": "סדנת שדרוג",
+      "category": "facilities",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "building",
+        "upgrade",
+        "service"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/workshop.svg",
+          "png": "png/normal/workshop.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/workshop.svg",
+          "png": "png/pressed/workshop.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/workshop.svg",
+          "png": "png/disabled/workshop.png"
+        }
+      }
+    },
+    {
+      "id": "warehouse",
+      "name": "Warehouse",
+      "nameHe": "מחסן",
+      "category": "facilities",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "building",
+        "storage",
+        "inventory"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/warehouse.svg",
+          "png": "png/normal/warehouse.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/warehouse.svg",
+          "png": "png/pressed/warehouse.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/warehouse.svg",
+          "png": "png/disabled/warehouse.png"
+        }
+      }
+    },
+    {
+      "id": "farm",
+      "name": "Farm",
+      "nameHe": "חווה",
+      "category": "facilities",
+      "games": [
+        "boarDefense"
+      ],
+      "tags": [
+        "building",
+        "crops",
+        "facility"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/farm.svg",
+          "png": "png/normal/farm.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/farm.svg",
+          "png": "png/pressed/farm.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/farm.svg",
+          "png": "png/disabled/farm.png"
+        }
+      }
+    },
+    {
+      "id": "fence",
+      "name": "Fence",
+      "nameHe": "גדר",
+      "category": "facilities",
+      "games": [
+        "boarDefense",
+        "alpineRush",
+        "catchCriminal"
+      ],
+      "tags": [
+        "building",
+        "barrier",
+        "protection"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/fence.svg",
+          "png": "png/normal/fence.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/fence.svg",
+          "png": "png/pressed/fence.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/fence.svg",
+          "png": "png/disabled/fence.png"
+        }
+      }
+    },
+    {
+      "id": "watchtower",
+      "name": "Watchtower",
+      "nameHe": "מגדל תצפית",
+      "category": "facilities",
+      "games": [
+        "boarDefense",
+        "alienDefense",
+        "navalDuel",
+        "catchCriminal"
+      ],
+      "tags": [
+        "building",
+        "lookout",
+        "defense"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/watchtower.svg",
+          "png": "png/normal/watchtower.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/watchtower.svg",
+          "png": "png/pressed/watchtower.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/watchtower.svg",
+          "png": "png/disabled/watchtower.png"
+        }
+      }
+    },
+    {
+      "id": "fire-station",
+      "name": "Fire Station",
+      "nameHe": "תחנת כיבוי",
+      "category": "facilities",
+      "games": [
+        "fireRescue",
+        "catchCriminal"
+      ],
+      "tags": [
+        "building",
+        "depot",
+        "fire"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/fire-station.svg",
+          "png": "png/normal/fire-station.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/fire-station.svg",
+          "png": "png/pressed/fire-station.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/fire-station.svg",
+          "png": "png/disabled/fire-station.png"
+        }
+      }
+    },
+    {
+      "id": "harbor",
+      "name": "Harbor",
+      "nameHe": "נמל",
+      "category": "facilities",
+      "games": [
+        "navalDuel",
+        "fireRescue"
+      ],
+      "tags": [
+        "building",
+        "dock",
+        "naval"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/harbor.svg",
+          "png": "png/normal/harbor.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/harbor.svg",
+          "png": "png/pressed/harbor.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/harbor.svg",
+          "png": "png/disabled/harbor.png"
+        }
+      }
+    },
+    {
+      "id": "stadium",
+      "name": "Stadium",
+      "nameHe": "אצטדיון",
+      "category": "facilities",
+      "games": [
+        "soccer",
+        "streetSlam"
+      ],
+      "tags": [
+        "building",
+        "pitch",
+        "facility"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/stadium.svg",
+          "png": "png/normal/stadium.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/stadium.svg",
+          "png": "png/pressed/stadium.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/stadium.svg",
+          "png": "png/disabled/stadium.png"
+        }
+      }
+    },
+    {
+      "id": "court",
+      "name": "Sports Court",
+      "nameHe": "מגרש משחק",
+      "category": "facilities",
+      "games": [
+        "tennis",
+        "streetSlam"
+      ],
+      "tags": [
+        "facility",
+        "court",
+        "match"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/court.svg",
+          "png": "png/normal/court.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/court.svg",
+          "png": "png/pressed/court.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/court.svg",
+          "png": "png/disabled/court.png"
+        }
+      }
+    },
+    {
+      "id": "hangar",
+      "name": "Hangar",
+      "nameHe": "האנגר",
+      "category": "facilities",
+      "games": [
+        "alienDefense",
+        "fireRescue"
+      ],
+      "tags": [
+        "building",
+        "alien",
+        "vehicle"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/hangar.svg",
+          "png": "png/normal/hangar.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/hangar.svg",
+          "png": "png/pressed/hangar.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/hangar.svg",
+          "png": "png/disabled/hangar.png"
+        }
+      }
+    },
+    {
+      "id": "power-station",
+      "name": "Power Station",
+      "nameHe": "תחנת כוח",
+      "category": "facilities",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "building",
+        "energy",
+        "supply"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/power-station.svg",
+          "png": "png/normal/power-station.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/power-station.svg",
+          "png": "png/pressed/power-station.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/power-station.svg",
+          "png": "png/disabled/power-station.png"
+        }
+      }
+    },
+    {
+      "id": "water-tower",
+      "name": "Water Tower",
+      "nameHe": "מגדל מים",
+      "category": "facilities",
+      "games": [
+        "fireRescue",
+        "boarDefense"
+      ],
+      "tags": [
+        "building",
+        "water",
+        "utility"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/water-tower.svg",
+          "png": "png/normal/water-tower.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/water-tower.svg",
+          "png": "png/pressed/water-tower.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/water-tower.svg",
+          "png": "png/disabled/water-tower.png"
+        }
+      }
+    },
+    {
+      "id": "lift-station",
+      "name": "Lift Station",
+      "nameHe": "תחנת רכבל",
+      "category": "facilities",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "building",
+        "snow",
+        "lift"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/lift-station.svg",
+          "png": "png/normal/lift-station.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/lift-station.svg",
+          "png": "png/pressed/lift-station.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/lift-station.svg",
+          "png": "png/disabled/lift-station.png"
+        }
+      }
+    },
+    {
+      "id": "speedometer",
+      "name": "Speedometer",
+      "nameHe": "מד מהירות",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "speed",
+        "dashboard",
+        "gauge"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/speedometer.svg",
+          "png": "png/normal/speedometer.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/speedometer.svg",
+          "png": "png/pressed/speedometer.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/speedometer.svg",
+          "png": "png/disabled/speedometer.png"
+        }
+      }
+    },
+    {
+      "id": "steering-wheel",
+      "name": "Steering Wheel",
+      "nameHe": "הגה",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "drive",
+        "direction",
+        "control"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/steering-wheel.svg",
+          "png": "png/normal/steering-wheel.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/steering-wheel.svg",
+          "png": "png/pressed/steering-wheel.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/steering-wheel.svg",
+          "png": "png/disabled/steering-wheel.png"
+        }
+      }
+    },
+    {
+      "id": "turn-left",
+      "name": "Turn Left",
+      "nameHe": "פנייה שמאלה",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "direction",
+        "physical",
+        "left"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/turn-left.svg",
+          "png": "png/normal/turn-left.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/turn-left.svg",
+          "png": "png/pressed/turn-left.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/turn-left.svg",
+          "png": "png/disabled/turn-left.png"
+        }
+      }
+    },
+    {
+      "id": "turn-right",
+      "name": "Turn Right",
+      "nameHe": "פנייה ימינה",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "direction",
+        "physical",
+        "right"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/turn-right.svg",
+          "png": "png/normal/turn-right.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/turn-right.svg",
+          "png": "png/pressed/turn-right.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/turn-right.svg",
+          "png": "png/disabled/turn-right.png"
+        }
+      }
+    },
+    {
+      "id": "brake",
+      "name": "Brake",
+      "nameHe": "בלימה",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "drive",
+        "stopping",
+        "pedal"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/brake.svg",
+          "png": "png/normal/brake.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/brake.svg",
+          "png": "png/pressed/brake.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/brake.svg",
+          "png": "png/disabled/brake.png"
+        }
+      }
+    },
+    {
+      "id": "accelerator",
+      "name": "Accelerator",
+      "nameHe": "דוושת האצה",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "drive",
+        "throttle",
+        "pedal"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/accelerator.svg",
+          "png": "png/normal/accelerator.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/accelerator.svg",
+          "png": "png/pressed/accelerator.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/accelerator.svg",
+          "png": "png/disabled/accelerator.png"
+        }
+      }
+    },
+    {
+      "id": "tires",
+      "name": "Tires",
+      "nameHe": "צמיגים",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "traction",
+        "wheels",
+        "pit"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/tires.svg",
+          "png": "png/normal/tires.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/tires.svg",
+          "png": "png/pressed/tires.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/tires.svg",
+          "png": "png/disabled/tires.png"
+        }
+      }
+    },
+    {
+      "id": "pit-stop",
+      "name": "Pit Stop",
+      "nameHe": "פיט סטופ",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "service",
+        "repair",
+        "garage"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/pit-stop.svg",
+          "png": "png/normal/pit-stop.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/pit-stop.svg",
+          "png": "png/pressed/pit-stop.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/pit-stop.svg",
+          "png": "png/disabled/pit-stop.png"
+        }
+      }
+    },
+    {
+      "id": "finish-flag",
+      "name": "Finish Flag",
+      "nameHe": "דגל משובץ",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "race",
+        "finish",
+        "flag"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/finish-flag.svg",
+          "png": "png/normal/finish-flag.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/finish-flag.svg",
+          "png": "png/pressed/finish-flag.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/finish-flag.svg",
+          "png": "png/disabled/finish-flag.png"
+        }
+      }
+    },
+    {
+      "id": "nitro",
+      "name": "Nitro",
+      "nameHe": "ניטרו",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "boost",
+        "speed",
+        "charge"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/nitro.svg",
+          "png": "png/normal/nitro.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/nitro.svg",
+          "png": "png/pressed/nitro.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/nitro.svg",
+          "png": "png/disabled/nitro.png"
+        }
+      }
+    },
+    {
+      "id": "drift",
+      "name": "Drift",
+      "nameHe": "החלקת רכב",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "drive",
+        "skid",
+        "traction"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/drift.svg",
+          "png": "png/normal/drift.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/drift.svg",
+          "png": "png/pressed/drift.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/drift.svg",
+          "png": "png/disabled/drift.png"
+        }
+      }
+    },
+    {
+      "id": "gearbox",
+      "name": "Gearbox",
+      "nameHe": "תיבת הילוכים",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "drive",
+        "gear",
+        "transmission"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/gearbox.svg",
+          "png": "png/normal/gearbox.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/gearbox.svg",
+          "png": "png/pressed/gearbox.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/gearbox.svg",
+          "png": "png/disabled/gearbox.png"
+        }
+      }
+    },
+    {
+      "id": "fuel",
+      "name": "Fuel",
+      "nameHe": "דלק",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "resource",
+        "fuel",
+        "pit"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/fuel.svg",
+          "png": "png/normal/fuel.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/fuel.svg",
+          "png": "png/pressed/fuel.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/fuel.svg",
+          "png": "png/disabled/fuel.png"
+        }
+      }
+    },
+    {
+      "id": "lap",
+      "name": "Lap",
+      "nameHe": "הקפה",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "race",
+        "route",
+        "timer"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/lap.svg",
+          "png": "png/normal/lap.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/lap.svg",
+          "png": "png/pressed/lap.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/lap.svg",
+          "png": "png/disabled/lap.png"
+        }
+      }
+    },
+    {
+      "id": "traffic-lights",
+      "name": "Starting Lights",
+      "nameHe": "רמזור זינוק",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal"
+      ],
+      "tags": [
+        "race",
+        "start",
+        "status"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/traffic-lights.svg",
+          "png": "png/normal/traffic-lights.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/traffic-lights.svg",
+          "png": "png/pressed/traffic-lights.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/traffic-lights.svg",
+          "png": "png/disabled/traffic-lights.png"
+        }
+      }
+    },
+    {
+      "id": "roadblock",
+      "name": "Roadblock",
+      "nameHe": "מחסום כביש",
+      "category": "racing",
+      "games": [
+        "islandRacing",
+        "catchCriminal",
+        "fireRescue"
+      ],
+      "tags": [
+        "road",
+        "obstacle",
+        "chase"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/roadblock.svg",
+          "png": "png/normal/roadblock.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/roadblock.svg",
+          "png": "png/pressed/roadblock.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/roadblock.svg",
+          "png": "png/disabled/roadblock.png"
+        }
+      }
+    },
+    {
+      "id": "snowboard",
+      "name": "Snowboard",
+      "nameHe": "סנובורד",
+      "category": "alpine",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "winter",
+        "board",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/snowboard.svg",
+          "png": "png/normal/snowboard.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/snowboard.svg",
+          "png": "png/pressed/snowboard.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/snowboard.svg",
+          "png": "png/disabled/snowboard.png"
+        }
+      }
+    },
+    {
+      "id": "jump",
+      "name": "Jump",
+      "nameHe": "קפיצה",
+      "category": "alpine",
+      "games": [
+        "alpineRush",
+        "streetSlam",
+        "boarDefense"
+      ],
+      "tags": [
+        "air",
+        "ramp",
+        "action"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/jump.svg",
+          "png": "png/normal/jump.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/jump.svg",
+          "png": "png/pressed/jump.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/jump.svg",
+          "png": "png/disabled/jump.png"
+        }
+      }
+    },
+    {
+      "id": "slide",
+      "name": "Slide",
+      "nameHe": "החלקה נמוכה",
+      "category": "alpine",
+      "games": [
+        "alpineRush",
+        "soccer",
+        "boarDefense"
+      ],
+      "tags": [
+        "slide",
+        "snow",
+        "movement"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/slide.svg",
+          "png": "png/normal/slide.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/slide.svg",
+          "png": "png/pressed/slide.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/slide.svg",
+          "png": "png/disabled/slide.png"
+        }
+      }
+    },
+    {
+      "id": "slalom",
+      "name": "Slalom",
+      "nameHe": "סלאלום",
+      "category": "alpine",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "turn",
+        "snow",
+        "route"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/slalom.svg",
+          "png": "png/normal/slalom.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/slalom.svg",
+          "png": "png/pressed/slalom.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/slalom.svg",
+          "png": "png/disabled/slalom.png"
+        }
+      }
+    },
+    {
+      "id": "snowflake",
+      "name": "Snowflake",
+      "nameHe": "פתית שלג",
+      "category": "alpine",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "winter",
+        "ice",
+        "weather"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/snowflake.svg",
+          "png": "png/normal/snowflake.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/snowflake.svg",
+          "png": "png/pressed/snowflake.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/snowflake.svg",
+          "png": "png/disabled/snowflake.png"
+        }
+      }
+    },
+    {
+      "id": "mountain",
+      "name": "Mountain",
+      "nameHe": "פסגת הר",
+      "category": "alpine",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "winter",
+        "terrain",
+        "route"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/mountain.svg",
+          "png": "png/normal/mountain.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/mountain.svg",
+          "png": "png/pressed/mountain.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/mountain.svg",
+          "png": "png/disabled/mountain.png"
+        }
+      }
+    },
+    {
+      "id": "ramp",
+      "name": "Ramp",
+      "nameHe": "רמפה",
+      "category": "alpine",
+      "games": [
+        "alpineRush",
+        "islandRacing"
+      ],
+      "tags": [
+        "jump",
+        "obstacle",
+        "course"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/ramp.svg",
+          "png": "png/normal/ramp.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/ramp.svg",
+          "png": "png/pressed/ramp.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/ramp.svg",
+          "png": "png/disabled/ramp.png"
+        }
+      }
+    },
+    {
+      "id": "landing",
+      "name": "Landing",
+      "nameHe": "נחיתה",
+      "category": "alpine",
+      "games": [
+        "alpineRush",
+        "streetSlam"
+      ],
+      "tags": [
+        "air",
+        "impact",
+        "balance"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/landing.svg",
+          "png": "png/normal/landing.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/landing.svg",
+          "png": "png/pressed/landing.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/landing.svg",
+          "png": "png/disabled/landing.png"
+        }
+      }
+    },
+    {
+      "id": "air-trick",
+      "name": "Air Trick",
+      "nameHe": "תרגיל באוויר",
+      "category": "alpine",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "rotation",
+        "snowboard",
+        "aerial"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/air-trick.svg",
+          "png": "png/normal/air-trick.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/air-trick.svg",
+          "png": "png/pressed/air-trick.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/air-trick.svg",
+          "png": "png/disabled/air-trick.png"
+        }
+      }
+    },
+    {
+      "id": "avalanche",
+      "name": "Avalanche",
+      "nameHe": "מפולת שלג",
+      "category": "alpine",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "hazard",
+        "snow",
+        "warning"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/avalanche.svg",
+          "png": "png/normal/avalanche.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/avalanche.svg",
+          "png": "png/pressed/avalanche.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/avalanche.svg",
+          "png": "png/disabled/avalanche.png"
+        }
+      }
+    },
+    {
+      "id": "goggles",
+      "name": "Snow Goggles",
+      "nameHe": "משקפי שלג",
+      "category": "alpine",
+      "games": [
+        "alpineRush"
+      ],
+      "tags": [
+        "equipment",
+        "winter",
+        "vision"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/goggles.svg",
+          "png": "png/normal/goggles.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/goggles.svg",
+          "png": "png/pressed/goggles.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/goggles.svg",
+          "png": "png/disabled/goggles.png"
+        }
+      }
+    },
+    {
+      "id": "trail-marker",
+      "name": "Trail Marker",
+      "nameHe": "סמן מסלול",
+      "category": "alpine",
+      "games": [
+        "alpineRush",
+        "islandRacing"
+      ],
+      "tags": [
+        "route",
+        "snow",
+        "sign"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/trail-marker.svg",
+          "png": "png/normal/trail-marker.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/trail-marker.svg",
+          "png": "png/pressed/trail-marker.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/trail-marker.svg",
+          "png": "png/disabled/trail-marker.png"
+        }
+      }
+    },
+    {
+      "id": "soccer-ball",
+      "name": "Soccer Ball",
+      "nameHe": "כדור כדורגל",
+      "category": "sports",
+      "games": [
+        "soccer"
+      ],
+      "tags": [
+        "ball",
+        "soccer",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/soccer-ball.svg",
+          "png": "png/normal/soccer-ball.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/soccer-ball.svg",
+          "png": "png/pressed/soccer-ball.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/soccer-ball.svg",
+          "png": "png/disabled/soccer-ball.png"
+        }
+      }
+    },
+    {
+      "id": "soccer-goal",
+      "name": "Soccer Goal",
+      "nameHe": "שער כדורגל",
+      "category": "sports",
+      "games": [
+        "soccer"
+      ],
+      "tags": [
+        "soccer",
+        "goal",
+        "score"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/soccer-goal.svg",
+          "png": "png/normal/soccer-goal.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/soccer-goal.svg",
+          "png": "png/pressed/soccer-goal.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/soccer-goal.svg",
+          "png": "png/disabled/soccer-goal.png"
+        }
+      }
+    },
+    {
+      "id": "kick",
+      "name": "Kick",
+      "nameHe": "בעיטה",
+      "category": "sports",
+      "games": [
+        "soccer"
+      ],
+      "tags": [
+        "soccer",
+        "foot",
+        "shot"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/kick.svg",
+          "png": "png/normal/kick.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/kick.svg",
+          "png": "png/pressed/kick.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/kick.svg",
+          "png": "png/disabled/kick.png"
+        }
+      }
+    },
+    {
+      "id": "glove-save",
+      "name": "Keeper Glove",
+      "nameHe": "כפפת שוער",
+      "category": "sports",
+      "games": [
+        "soccer"
+      ],
+      "tags": [
+        "soccer",
+        "keeper",
+        "save"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/glove-save.svg",
+          "png": "png/normal/glove-save.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/glove-save.svg",
+          "png": "png/pressed/glove-save.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/glove-save.svg",
+          "png": "png/disabled/glove-save.png"
+        }
+      }
+    },
+    {
+      "id": "basketball",
+      "name": "Basketball",
+      "nameHe": "כדור כדורסל",
+      "category": "sports",
+      "games": [
+        "streetSlam"
+      ],
+      "tags": [
+        "ball",
+        "basketball",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/basketball.svg",
+          "png": "png/normal/basketball.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/basketball.svg",
+          "png": "png/pressed/basketball.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/basketball.svg",
+          "png": "png/disabled/basketball.png"
+        }
+      }
+    },
+    {
+      "id": "hoop",
+      "name": "Basketball Hoop",
+      "nameHe": "סל כדורסל",
+      "category": "sports",
+      "games": [
+        "streetSlam"
+      ],
+      "tags": [
+        "basketball",
+        "hoop",
+        "score"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/hoop.svg",
+          "png": "png/normal/hoop.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/hoop.svg",
+          "png": "png/pressed/hoop.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/hoop.svg",
+          "png": "png/disabled/hoop.png"
+        }
+      }
+    },
+    {
+      "id": "dunk",
+      "name": "Dunk",
+      "nameHe": "הטבעה",
+      "category": "sports",
+      "games": [
+        "streetSlam"
+      ],
+      "tags": [
+        "basketball",
+        "shot",
+        "close"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/dunk.svg",
+          "png": "png/normal/dunk.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/dunk.svg",
+          "png": "png/pressed/dunk.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/dunk.svg",
+          "png": "png/disabled/dunk.png"
+        }
+      }
+    },
+    {
+      "id": "dribble",
+      "name": "Dribble",
+      "nameHe": "כדרור",
+      "category": "sports",
+      "games": [
+        "streetSlam"
+      ],
+      "tags": [
+        "basketball",
+        "bounce",
+        "movement"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/dribble.svg",
+          "png": "png/normal/dribble.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/dribble.svg",
+          "png": "png/pressed/dribble.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/dribble.svg",
+          "png": "png/disabled/dribble.png"
+        }
+      }
+    },
+    {
+      "id": "tennis-ball",
+      "name": "Tennis Ball",
+      "nameHe": "כדור טניס",
+      "category": "sports",
+      "games": [
+        "tennis"
+      ],
+      "tags": [
+        "ball",
+        "tennis",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/tennis-ball.svg",
+          "png": "png/normal/tennis-ball.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/tennis-ball.svg",
+          "png": "png/pressed/tennis-ball.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/tennis-ball.svg",
+          "png": "png/disabled/tennis-ball.png"
+        }
+      }
+    },
+    {
+      "id": "racket",
+      "name": "Tennis Racket",
+      "nameHe": "מחבט טניס",
+      "category": "sports",
+      "games": [
+        "tennis"
+      ],
+      "tags": [
+        "tennis",
+        "racket",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/racket.svg",
+          "png": "png/normal/racket.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/racket.svg",
+          "png": "png/pressed/racket.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/racket.svg",
+          "png": "png/disabled/racket.png"
+        }
+      }
+    },
+    {
+      "id": "tennis-net",
+      "name": "Tennis Net",
+      "nameHe": "רשת טניס",
+      "category": "sports",
+      "games": [
+        "tennis"
+      ],
+      "tags": [
+        "tennis",
+        "court",
+        "equipment"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/tennis-net.svg",
+          "png": "png/normal/tennis-net.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/tennis-net.svg",
+          "png": "png/pressed/tennis-net.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/tennis-net.svg",
+          "png": "png/disabled/tennis-net.png"
+        }
+      }
+    },
+    {
+      "id": "serve",
+      "name": "Serve",
+      "nameHe": "הגשה",
+      "category": "sports",
+      "games": [
+        "tennis"
+      ],
+      "tags": [
+        "tennis",
+        "swing",
+        "opening"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/serve.svg",
+          "png": "png/normal/serve.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/serve.svg",
+          "png": "png/pressed/serve.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/serve.svg",
+          "png": "png/disabled/serve.png"
+        }
+      }
+    },
+    {
+      "id": "pass",
+      "name": "Pass",
+      "nameHe": "מסירה",
+      "category": "sports",
+      "games": [
+        "soccer",
+        "streetSlam"
+      ],
+      "tags": [
+        "team",
+        "projectile",
+        "ball"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/pass.svg",
+          "png": "png/normal/pass.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/pass.svg",
+          "png": "png/pressed/pass.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/pass.svg",
+          "png": "png/disabled/pass.png"
+        }
+      }
+    },
+    {
+      "id": "deflect",
+      "name": "Deflect",
+      "nameHe": "הדיפה",
+      "category": "sports",
+      "games": [
+        "soccer",
+        "streetSlam",
+        "tennis"
+      ],
+      "tags": [
+        "defense",
+        "block",
+        "rebound"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/deflect.svg",
+          "png": "png/normal/deflect.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/deflect.svg",
+          "png": "png/pressed/deflect.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/deflect.svg",
+          "png": "png/disabled/deflect.png"
+        }
+      }
+    },
+    {
+      "id": "whistle",
+      "name": "Whistle",
+      "nameHe": "משרוקית",
+      "category": "sports",
+      "games": [
+        "soccer",
+        "streetSlam",
+        "tennis"
+      ],
+      "tags": [
+        "referee",
+        "match",
+        "alert"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/whistle.svg",
+          "png": "png/normal/whistle.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/whistle.svg",
+          "png": "png/pressed/whistle.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/whistle.svg",
+          "png": "png/disabled/whistle.png"
+        }
+      }
+    },
+    {
+      "id": "scoreboard",
+      "name": "Scoreboard",
+      "nameHe": "לוח תוצאות",
+      "category": "sports",
+      "games": [
+        "soccer",
+        "streetSlam",
+        "tennis"
+      ],
+      "tags": [
+        "score",
+        "match",
+        "status"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/scoreboard.svg",
+          "png": "png/normal/scoreboard.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/scoreboard.svg",
+          "png": "png/pressed/scoreboard.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/scoreboard.svg",
+          "png": "png/disabled/scoreboard.png"
+        }
+      }
+    },
+    {
+      "id": "radar",
+      "name": "Radar",
+      "nameHe": "מכ״ם",
+      "category": "sensors",
+      "games": [
+        "navalDuel",
+        "alienDefense",
+        "catchCriminal",
+        "boarDefense"
+      ],
+      "tags": [
+        "sensor",
+        "scan",
+        "tracking"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/radar.svg",
+          "png": "png/normal/radar.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/radar.svg",
+          "png": "png/pressed/radar.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/radar.svg",
+          "png": "png/disabled/radar.png"
+        }
+      }
+    },
+    {
+      "id": "signal-wave",
+      "name": "Signal Wave",
+      "nameHe": "גל אותות",
+      "category": "sensors",
+      "games": [
+        "navalDuel",
+        "alienDefense",
+        "fireRescue",
+        "catchCriminal"
+      ],
+      "tags": [
+        "signal",
+        "waveform",
+        "detection"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/signal-wave.svg",
+          "png": "png/normal/signal-wave.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/signal-wave.svg",
+          "png": "png/pressed/signal-wave.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/signal-wave.svg",
+          "png": "png/disabled/signal-wave.png"
+        }
+      }
+    },
+    {
+      "id": "radio",
+      "name": "Radio",
+      "nameHe": "מכשיר קשר",
+      "category": "sensors",
+      "games": [
+        "fireRescue",
+        "navalDuel",
+        "catchCriminal",
+        "alienDefense"
+      ],
+      "tags": [
+        "signal",
+        "communications",
+        "rescue"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/radio.svg",
+          "png": "png/normal/radio.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/radio.svg",
+          "png": "png/pressed/radio.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/radio.svg",
+          "png": "png/disabled/radio.png"
+        }
+      }
+    },
+    {
+      "id": "compass",
+      "name": "Compass",
+      "nameHe": "מצפן",
+      "category": "sensors",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "direction",
+        "heading",
+        "map"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/compass.svg",
+          "png": "png/normal/compass.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/compass.svg",
+          "png": "png/pressed/compass.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/compass.svg",
+          "png": "png/disabled/compass.png"
+        }
+      }
+    },
+    {
+      "id": "heading",
+      "name": "Heading",
+      "nameHe": "כיוון תנועה",
+      "category": "sensors",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "direction",
+        "heading",
+        "arrow"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/heading.svg",
+          "png": "png/normal/heading.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/heading.svg",
+          "png": "png/pressed/heading.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/heading.svg",
+          "png": "png/disabled/heading.png"
+        }
+      }
+    },
+    {
+      "id": "waypoint",
+      "name": "Waypoint",
+      "nameHe": "נקודת יעד",
+      "category": "sensors",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "marker",
+        "route",
+        "destination"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/waypoint.svg",
+          "png": "png/normal/waypoint.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/waypoint.svg",
+          "png": "png/pressed/waypoint.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/waypoint.svg",
+          "png": "png/disabled/waypoint.png"
+        }
+      }
+    },
+    {
+      "id": "route",
+      "name": "Route",
+      "nameHe": "נתיב",
+      "category": "sensors",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "map",
+        "navigation",
+        "progress"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/route.svg",
+          "png": "png/normal/route.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/route.svg",
+          "png": "png/pressed/route.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/route.svg",
+          "png": "png/disabled/route.png"
+        }
+      }
+    },
+    {
+      "id": "warning",
+      "name": "Warning",
+      "nameHe": "אזהרה",
+      "category": "sensors",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "hazard",
+        "danger",
+        "status"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/warning.svg",
+          "png": "png/normal/warning.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/warning.svg",
+          "png": "png/pressed/warning.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/warning.svg",
+          "png": "png/disabled/warning.png"
+        }
+      }
+    },
+    {
+      "id": "sonar",
+      "name": "Sonar",
+      "nameHe": "סונאר",
+      "category": "sensors",
+      "games": [
+        "navalDuel"
+      ],
+      "tags": [
+        "sensor",
+        "naval",
+        "echo"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/sonar.svg",
+          "png": "png/normal/sonar.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/sonar.svg",
+          "png": "png/pressed/sonar.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/sonar.svg",
+          "png": "png/disabled/sonar.png"
+        }
+      }
+    },
+    {
+      "id": "map",
+      "name": "Map",
+      "nameHe": "מפה",
+      "category": "sensors",
+      "games": [
+        "islandRacing",
+        "alienDefense",
+        "fireRescue",
+        "navalDuel",
+        "soccer",
+        "tennis",
+        "streetSlam",
+        "alpineRush",
+        "boarDefense",
+        "catchCriminal"
+      ],
+      "tags": [
+        "map",
+        "terrain",
+        "navigation"
+      ],
+      "files": {
+        "normal": {
+          "svg": "svg/normal/map.svg",
+          "png": "png/normal/map.png"
+        },
+        "pressed": {
+          "svg": "svg/pressed/map.svg",
+          "png": "png/pressed/map.png"
+        },
+        "disabled": {
+          "svg": "svg/disabled/map.svg",
+          "png": "png/disabled/map.png"
+        }
+      }
+    }
+  ]
+}

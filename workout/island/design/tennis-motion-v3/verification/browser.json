@@ -1,0 +1,2635 @@
+{
+  "pass": true,
+  "browser": "Chromium 151.0.7922.173 / SwiftShader WebGL2",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "assetSha256": {
+    "/workout/island/design/tennis-motion-v3/tennis-motion-v3.glb": "28a9956ae1f5ae07726257238d3f8a08f2d21a0548041dd3864929f8c64dea7d",
+    "/workout/island/design/tennis-motion-v2/source/reference/grip-player.glb": "6f6a95bae86b471f1194b386f5cca3ef25ac01c341d799c624ad10384a357753"
+  },
+  "sourceSha256": {
+    "catalog.json": "b6b15b11606c7e37bc5d3c618ea2f25a75d5b0aba9b60120b518556a5f7407a4",
+    "preview.mjs": "71d5dd321887825192c52aae33a706ceaa2c87eec47ce5fb6b3c7c8537fd42ea",
+    "court.mjs": "62e6535cde8a93b158a1f36f102c8133bf9d14b1908afa7fb4e9de6c7d5d7ccf",
+    "preview.html": "25471f403ee9196271ab605f1d4419186b0f7bcc3c4e1d9e1d471e6e2a366d80",
+    "preview.css": "d3fd59c9851e449135fd43130827c5e1ec2b0496e715c7e24aacde0e03baaeb9"
+  },
+  "sheetCount": 18,
+  "renderedFrames": 144,
+  "framebufferPx": [
+    320,
+    278
+  ],
+  "minForegroundMarginPx": 17,
+  "silhouetteMethod": "At the same camera, per-frame max RGB difference >12 between the bare court and the court plus players and rackets. The sheets additionally include the ball and floor shadows.",
+  "poseDifference": "Every pair among the eight subject-only frames differs by >16 RGB levels in at least 20 pixels and 1.5% of the smaller player silhouette.",
+  "controls": {
+    "clipButtonsChecked": 18,
+    "scrubFrame": 19,
+    "playPause": true,
+    "eventFramesChecked": 68,
+    "sheetLinksChecked": 18,
+    "cameraSelection": true,
+    "speedSelection": true,
+    "frameStep": true,
+    "screenshot": {
+      "path": "preview-844x390.png",
+      "clip": "volley_low",
+      "frame": 21
+    }
+  },
+  "layout": {
+    "viewport": [
+      844,
+      390
+    ],
+    "document": [
+      844,
+      390
+    ],
+    "stage": {
+      "x": 0,
+      "y": 49,
+      "width": 649.890625,
+      "height": 282,
+      "top": 49,
+      "right": 649.890625,
+      "bottom": 331,
+      "left": 0
+    }
+  },
+  "errors": [],
+  "failedResponses": [],
+  "externalRequests": [],
+  "forbiddenDecoderRequests": [],
+  "clips": [
+    {
+      "id": "volley_low",
+      "sheet": "sheets/volley_low.webp",
+      "bytes": 100730,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "078be21f1ff7e291768eb1a5150b7c50696ca1a1eaaf91f557df6ec617c7103b",
+          "subjectSha256": "689545826ae51bc8ad2d0c2b9b711a14d2b8a7878b2ae15a4c00115aee889d1c",
+          "visiblePixels": 8140,
+          "foregroundBoxPx": [
+            140,
+            23,
+            210,
+            248
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 868
+        },
+        {
+          "frame": 6,
+          "seconds": 0.2,
+          "events": [],
+          "rgbSha256": "6aa6804e2be5557bcfc07dbeeb00a2872ad0bda49e3c40fdd8ea3f58ab16da04",
+          "subjectSha256": "b92d21ca345bd1b5600ccef347fd985c7412e560621691bfc031851655dc0a2b",
+          "visiblePixels": 8792,
+          "foregroundBoxPx": [
+            129,
+            41,
+            214,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 5650
+        },
+        {
+          "frame": 13,
+          "seconds": 0.433333,
+          "events": [
+            "plant"
+          ],
+          "rgbSha256": "c6fce7f025fd32bad1eb92b75865c0ad743efdb59290a5f773190a195260e760",
+          "subjectSha256": "4cf32be24f2601bb96c8f4eebd0835eddd493fe6f30921c4e9a7c5fbab58e65a",
+          "visiblePixels": 8490,
+          "foregroundBoxPx": [
+            97,
+            54,
+            226,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 7260
+        },
+        {
+          "frame": 21,
+          "seconds": 0.7,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "17f36320056db8f99190b27edff2649a1b828565567db277f757dba46a9cb3af",
+          "subjectSha256": "0ca0cf35a92496bca736fd5a71b87be87c5c5f3680aabbcc4b0715e47c5bef98",
+          "visiblePixels": 8720,
+          "foregroundBoxPx": [
+            105,
+            58,
+            226,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 6225
+        },
+        {
+          "frame": 28,
+          "seconds": 0.933333,
+          "events": [],
+          "rgbSha256": "a7f13560625b7e03b91317b750c77251810c5547ee2552c213b2de5026e9d95d",
+          "subjectSha256": "a0536f042e50ab9c351586124c372882ca56e8538dedb02f1480f59f43baa111",
+          "visiblePixels": 8207,
+          "foregroundBoxPx": [
+            126,
+            54,
+            227,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 6225
+        },
+        {
+          "frame": 35,
+          "seconds": 1.166667,
+          "events": [],
+          "rgbSha256": "92d9879f7f3256749eaaa9d8e2cf82bf5daccc439d620e2ec6f62ddf5ecdc617",
+          "subjectSha256": "c10b0bd971038a7a60b66d67c69c821a046e0eb2ad683a66f77387738f20dd6b",
+          "visiblePixels": 8074,
+          "foregroundBoxPx": [
+            140,
+            43,
+            226,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 7525
+        },
+        {
+          "frame": 42,
+          "seconds": 1.4,
+          "events": [],
+          "rgbSha256": "41eed162fca2bdad2b9e363716cb303db211f32171aa4b55bceed57218af1c93",
+          "subjectSha256": "bde9a9c0a0b9f16a72ce966b40235fc1d9e6fe7331a046dfa0a47440323f14c4",
+          "visiblePixels": 8185,
+          "foregroundBoxPx": [
+            140,
+            35,
+            219,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 5650
+        },
+        {
+          "frame": 49,
+          "seconds": 1.633333,
+          "events": [],
+          "rgbSha256": "e402421f057274f6c37ddcb0a869b776f13730faee2da9492555c5e80f111ec8",
+          "subjectSha256": "4472e4a9f776913a08e08207ffd050453f099a2ae3b86198e210f1b921296973",
+          "visiblePixels": 8137,
+          "foregroundBoxPx": [
+            140,
+            23,
+            211,
+            248
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 868
+        }
+      ]
+    },
+    {
+      "id": "volley_high",
+      "sheet": "sheets/volley_high.webp",
+      "bytes": 83864,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "b8812b7128de342ecb7f535795ea8f63891abb10e01d00d9f9a55667b9c9ef9a",
+          "subjectSha256": "2614f360a97123538c023ab570b184861c6e383b6c68b8305e88e0be0bd7f0ac",
+          "visiblePixels": 5512,
+          "foregroundBoxPx": [
+            138,
+            64,
+            196,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 611
+        },
+        {
+          "frame": 5,
+          "seconds": 0.166667,
+          "events": [],
+          "rgbSha256": "542cd20e24de5608922fa26eab6e774a25fe09cd932b956912b5a49253348a4e",
+          "subjectSha256": "360c92ac53d4d571279536cf19c7be591164f18c0ba4a48a313b54a5b809d41e",
+          "visiblePixels": 5750,
+          "foregroundBoxPx": [
+            133,
+            55,
+            208,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 3462
+        },
+        {
+          "frame": 10,
+          "seconds": 0.333333,
+          "events": [],
+          "rgbSha256": "28e2332faff99b017d911ca9c01e24c89a121b74a01be65c4ec85312f495ef7d",
+          "subjectSha256": "d092ddec5a21209de7c09f94e239977e1e40185da5ef6114a9ce2a8a9e796fb7",
+          "visiblePixels": 6012,
+          "foregroundBoxPx": [
+            127,
+            39,
+            204,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 3814
+        },
+        {
+          "frame": 20,
+          "seconds": 0.666667,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "03b7cef310aef8ef4e685e55b8c97f0f966901f16792631a4e688eec7207e5d6",
+          "subjectSha256": "142c64c749a0da9bc74d198cf6dae6f2581914db0118c9da7928c6a6b31d14d5",
+          "visiblePixels": 5979,
+          "foregroundBoxPx": [
+            138,
+            26,
+            207,
+            246
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 4165
+        },
+        {
+          "frame": 27,
+          "seconds": 0.9,
+          "events": [],
+          "rgbSha256": "5a6d1b348e14f1635b79e4b0868024c87503de70cbd351e66cc87dd6f6d7f733",
+          "subjectSha256": "6733c3d6bb2ba3c02eedfb577013ce889e9ef7e82bb89aafbef746542dd82af2",
+          "visiblePixels": 5604,
+          "foregroundBoxPx": [
+            138,
+            47,
+            207,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 3247
+        },
+        {
+          "frame": 34,
+          "seconds": 1.133333,
+          "events": [],
+          "rgbSha256": "3cd81338734dbb20ef0123fe8ef733099743e62b30454d4fe9d23d905b4a521b",
+          "subjectSha256": "d847771caac7353a7bb76067f6e062bcb24a75f19d5bca7a1e08352784098abb",
+          "visiblePixels": 5532,
+          "foregroundBoxPx": [
+            138,
+            55,
+            206,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 3247
+        },
+        {
+          "frame": 41,
+          "seconds": 1.366667,
+          "events": [],
+          "rgbSha256": "fae25b6964e54d49ffede372106efcf8af18577703dc30ec0211ac93c46e34cc",
+          "subjectSha256": "db3e1c40416d29baeb674cfe23d870e57b261d6042ea0abf5b679b2676ea9a29",
+          "visiblePixels": 5454,
+          "foregroundBoxPx": [
+            138,
+            60,
+            203,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 3654
+        },
+        {
+          "frame": 48,
+          "seconds": 1.6,
+          "events": [],
+          "rgbSha256": "3b265411b6854a5dc3db489479ed2cc6f9a9a164ae4987bf3a7c0fc4916730d0",
+          "subjectSha256": "e3c1fd5f4d1f24dca27b3c9fa9c557e02dbcd4959da03c877883e7cff9a5ab51",
+          "visiblePixels": 5509,
+          "foregroundBoxPx": [
+            138,
+            64,
+            196,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 611
+        }
+      ]
+    },
+    {
+      "id": "half_volley",
+      "sheet": "sheets/half_volley.webp",
+      "bytes": 96610,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "995b076d330c537cb7d3dd908ccb9b93b5b44520bc81152fa9948758051fdcd8",
+          "subjectSha256": "2178c2ac595c49f43a82a1bbdf1127d7eb75e2a2919d84eaf52a6761c1ec7151",
+          "visiblePixels": 7600,
+          "foregroundBoxPx": [
+            140,
+            28,
+            209,
+            245
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 959
+        },
+        {
+          "frame": 8,
+          "seconds": 0.266667,
+          "events": [],
+          "rgbSha256": "fc85930cf9baf389b74c86eb284039b4b3795cc5c1ba0eab5ffc104d0fc2a414",
+          "subjectSha256": "8f4a0406d41ced63f8253b02a8478500ea8d6ebd0c98edba81294bc0c040a713",
+          "visiblePixels": 8172,
+          "foregroundBoxPx": [
+            117,
+            54,
+            227,
+            245
+          ],
+          "edgeMarginPx": 33,
+          "minChangedSubjectPixels": 6524
+        },
+        {
+          "frame": 16,
+          "seconds": 0.533333,
+          "events": [
+            "bounce"
+          ],
+          "rgbSha256": "bddf743d1bc56b0fd4578afe377493ae7d117fcbaf533f17ee515791c1a44658",
+          "subjectSha256": "5dadf06deb1ecec3af8f7f1b47add3484723d176354a91a6683b0962ea7adc7f",
+          "visiblePixels": 8106,
+          "foregroundBoxPx": [
+            108,
+            78,
+            224,
+            252
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 5718
+        },
+        {
+          "frame": 24,
+          "seconds": 0.8,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "2d890bc3032b0c90ba352633ffa8641fe3c115736e1d520571dc3acd12647453",
+          "subjectSha256": "7e16a197c731a0c00b09918725d14af97d3afe150184890b37192e08034a3c50",
+          "visiblePixels": 7732,
+          "foregroundBoxPx": [
+            116,
+            78,
+            225,
+            245
+          ],
+          "edgeMarginPx": 33,
+          "minChangedSubjectPixels": 5718
+        },
+        {
+          "frame": 31,
+          "seconds": 1.033333,
+          "events": [],
+          "rgbSha256": "39fc729bb9d552498abe731354f939e1e84fc7e90ec44a459bddf7f5cb5a005b",
+          "subjectSha256": "b560f2091dcd2af1c41877705235b29ca07f2165c7c996de4a6326769c56764b",
+          "visiblePixels": 7290,
+          "foregroundBoxPx": [
+            128,
+            65,
+            220,
+            245
+          ],
+          "edgeMarginPx": 33,
+          "minChangedSubjectPixels": 6951
+        },
+        {
+          "frame": 38,
+          "seconds": 1.266667,
+          "events": [],
+          "rgbSha256": "1f012f5db35f31c47275642c11c0832d34d9514f8381d4b81957c6241f92ec1a",
+          "subjectSha256": "7f71e77c201a2fe3e130de607d52304cceb1b81d054b2998703bd19f20c5a341",
+          "visiblePixels": 7364,
+          "foregroundBoxPx": [
+            139,
+            52,
+            218,
+            245
+          ],
+          "edgeMarginPx": 33,
+          "minChangedSubjectPixels": 6524
+        },
+        {
+          "frame": 45,
+          "seconds": 1.5,
+          "events": [],
+          "rgbSha256": "c55a5b4f9cee97cf198d8668a575d3cab2029901b598c4d8ca09728fe28a6ba0",
+          "subjectSha256": "5a190cb679052dee514ec75cf49578d10707ee23d44b5963b67f3046aba5b91a",
+          "visiblePixels": 7529,
+          "foregroundBoxPx": [
+            140,
+            42,
+            216,
+            245
+          ],
+          "edgeMarginPx": 33,
+          "minChangedSubjectPixels": 6022
+        },
+        {
+          "frame": 52,
+          "seconds": 1.733333,
+          "events": [],
+          "rgbSha256": "ed935c798f93e14d70c0c24a404ae14a2fa5304b7274529861b393e68c3f745d",
+          "subjectSha256": "359ddc3344c25314f462da9e73b493bb94d5862962ce96ec29c59d217e0d5eaa",
+          "visiblePixels": 7588,
+          "foregroundBoxPx": [
+            140,
+            28,
+            209,
+            245
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 959
+        }
+      ]
+    },
+    {
+      "id": "lob",
+      "sheet": "sheets/lob.webp",
+      "bytes": 83324,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "748b102958529a71e73b7df46c54be7da2e4ac561fba3c2da5a71514bc6852dc",
+          "subjectSha256": "37d88329cdfb563a9476283b7f121cf41ffd95eaad8f8ab58d58fd5405b90afc",
+          "visiblePixels": 5490,
+          "foregroundBoxPx": [
+            156,
+            69,
+            215,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 591
+        },
+        {
+          "frame": 7,
+          "seconds": 0.233333,
+          "events": [],
+          "rgbSha256": "450fd22a279c9dfd4b357dcb1fd6d0c205504c971756e498c906800e5c578d3c",
+          "subjectSha256": "ffa8bc792d87fb07f5b3cc2d7ea8e4a040ccc0225a343f8083c5a33f8d6abd09",
+          "visiblePixels": 6057,
+          "foregroundBoxPx": [
+            132,
+            77,
+            217,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 3853
+        },
+        {
+          "frame": 14,
+          "seconds": 0.466667,
+          "events": [],
+          "rgbSha256": "f017c77843b49a6fb18b0c8c716fa70a8941800e89f8b98e73e24c1ce213950f",
+          "subjectSha256": "ab044a44df006f9b1c36cad926567da1775fdf2546e16ef67c4196e8f90e6a43",
+          "visiblePixels": 6000,
+          "foregroundBoxPx": [
+            93,
+            82,
+            224,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 4693
+        },
+        {
+          "frame": 21,
+          "seconds": 0.7,
+          "events": [],
+          "rgbSha256": "5f664d7c22a61d425f15731d5aa3c6f17b75ca5c641154e5268c975d80faf8c5",
+          "subjectSha256": "6291ffc324045e7383887fcbf17dc43af1dcc5ab941704f70e3e29e57638b1bd",
+          "visiblePixels": 6102,
+          "foregroundBoxPx": [
+            98,
+            87,
+            224,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 5003
+        },
+        {
+          "frame": 29,
+          "seconds": 0.966667,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "a6901bf6e90bf3f4f00e9e3fe7b05af2e87404795242fe23044ef4d6695517f8",
+          "subjectSha256": "7a9e7ae8865874c6d79f5dd3564ca484463111ff5aa3c03dab00d0bc872fdda3",
+          "visiblePixels": 5645,
+          "foregroundBoxPx": [
+            134,
+            81,
+            224,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 5003
+        },
+        {
+          "frame": 44,
+          "seconds": 1.466667,
+          "events": [
+            "track"
+          ],
+          "rgbSha256": "d813dcf344a7cb340a472ba8170249882cae52e537c42da1b2d4a15f4e713233",
+          "subjectSha256": "73c07441b62cf1f0303bc59b2493ff9c777548f4e9118c6ea1e51b88dfb42e7b",
+          "visiblePixels": 5913,
+          "foregroundBoxPx": [
+            156,
+            21,
+            228,
+            249
+          ],
+          "edgeMarginPx": 21,
+          "minChangedSubjectPixels": 4920
+        },
+        {
+          "frame": 56,
+          "seconds": 1.866667,
+          "events": [],
+          "rgbSha256": "16e5b8b09c3917a588c1b5201a1a4fb1f43f8afac69556138b78f9c7095e0383",
+          "subjectSha256": "1be420a6ae518b24abb4d0e26532d1dfcc2dca089f113566d8917f14b9a289c1",
+          "visiblePixels": 5754,
+          "foregroundBoxPx": [
+            156,
+            47,
+            224,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 4772
+        },
+        {
+          "frame": 67,
+          "seconds": 2.233333,
+          "events": [],
+          "rgbSha256": "da29f9a5bc7924929839299f52fbc43e99b8639e60edee15dc99eb391e30c447",
+          "subjectSha256": "90440b4d2190a270468e78e1c6346c19aeec4a33c3cf7107f4e235c1a6d0e757",
+          "visiblePixels": 5489,
+          "foregroundBoxPx": [
+            156,
+            68,
+            215,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 591
+        }
+      ]
+    },
+    {
+      "id": "overhead_backward",
+      "sheet": "sheets/overhead_backward.webp",
+      "bytes": 77764,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "73ad0825f035d081cc500cc63cceae97a01e0e05fb961aaac5c7cee60721845c",
+          "subjectSha256": "90c4ba38bfa4201920507f4b17746949c4ad96939e7314cd6fb03402cae35cea",
+          "visiblePixels": 4945,
+          "foregroundBoxPx": [
+            160,
+            88,
+            216,
+            258
+          ],
+          "edgeMarginPx": 20,
+          "minChangedSubjectPixels": 496
+        },
+        {
+          "frame": 13,
+          "seconds": 0.433333,
+          "events": [],
+          "rgbSha256": "ce588375b51750a8b4c81eff509901fe702fa445c4a77278bd7af989e0d0fadc",
+          "subjectSha256": "f8de2ec3e067dce6cf08449cc4adc5a5718492cf8d4e4b7f977d59633b96f13f",
+          "visiblePixels": 5395,
+          "foregroundBoxPx": [
+            117,
+            74,
+            208,
+            252
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 4637
+        },
+        {
+          "frame": 26,
+          "seconds": 0.866667,
+          "events": [
+            "load"
+          ],
+          "rgbSha256": "71c452834ffa02f01d25f1243df32db470534d94937aa553ca8bb2771e66a149",
+          "subjectSha256": "3add342be4333bb92ba2fcb3adf66f315d54266aae74ca79ca5bcd746d8a0ec6",
+          "visiblePixels": 5236,
+          "foregroundBoxPx": [
+            84,
+            88,
+            194,
+            247
+          ],
+          "edgeMarginPx": 31,
+          "minChangedSubjectPixels": 5931
+        },
+        {
+          "frame": 34,
+          "seconds": 1.133333,
+          "events": [
+            "takeoff"
+          ],
+          "rgbSha256": "ce2eae80ab2f0e91583655f41953ff57db49fceaa74d37f082fbb77be869b95f",
+          "subjectSha256": "ca1133a0fe53ebad88e1a33309cee8d347edfbd02bc0e258f05285cd1623d911",
+          "visiblePixels": 5072,
+          "foregroundBoxPx": [
+            90,
+            57,
+            191,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 4644
+        },
+        {
+          "frame": 37,
+          "seconds": 1.233333,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "1a2dfe07b9f1ea29b774ef0fbdb1c53f701a7f626796328e1cd252f0e51221eb",
+          "subjectSha256": "b20b09f68e84ee90f913cdf2ea6a108a8ec8a3e8eba1cb04bd7ae528dfa59c8b",
+          "visiblePixels": 4827,
+          "foregroundBoxPx": [
+            132,
+            21,
+            191,
+            238
+          ],
+          "edgeMarginPx": 21,
+          "minChangedSubjectPixels": 4644
+        },
+        {
+          "frame": 41,
+          "seconds": 1.366667,
+          "events": [
+            "land"
+          ],
+          "rgbSha256": "fd47b368b03badb6b8e751acd90c87d4f702b3af7f9ff9dd501e11395f5378a9",
+          "subjectSha256": "2c9cbdcdfe5c3e393be612bf42a49e7000f97cec3eb3f9e59c9e71f6c0fb8dbf",
+          "visiblePixels": 4046,
+          "foregroundBoxPx": [
+            144,
+            90,
+            225,
+            239
+          ],
+          "edgeMarginPx": 39,
+          "minChangedSubjectPixels": 4777
+        },
+        {
+          "frame": 61,
+          "seconds": 2.033333,
+          "events": [],
+          "rgbSha256": "c0685fe1d386aedc1e2b4aacd352a5750f111929b72c4b27bde73120c3f555fa",
+          "subjectSha256": "7440349b075418da509806adea785abc5d022b2d3115a81c89c20e32f8316fb9",
+          "visiblePixels": 4186,
+          "foregroundBoxPx": [
+            148,
+            91,
+            205,
+            252
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 4637
+        },
+        {
+          "frame": 81,
+          "seconds": 2.7,
+          "events": [],
+          "rgbSha256": "769e4b3a9940abcec00483742ed98e071d21f6d2d5771df102f640e26cb736ea",
+          "subjectSha256": "5979e2577ab664f399dd3dccbacd435211fe8ba2894911e8d7ea6e628c400db0",
+          "visiblePixels": 4937,
+          "foregroundBoxPx": [
+            160,
+            88,
+            216,
+            258
+          ],
+          "edgeMarginPx": 20,
+          "minChangedSubjectPixels": 496
+        }
+      ]
+    },
+    {
+      "id": "serve_return_aggressive",
+      "sheet": "sheets/serve_return_aggressive.webp",
+      "bytes": 94120,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "b282baa25483f69f14202f1910bfa698ab3ad1bac38110fec9d1cc5c9ef487d8",
+          "subjectSha256": "44acec928bdea285d0f3f8a557c53012959aed1e724cb0a23142073d34cc95dc",
+          "visiblePixels": 7016,
+          "foregroundBoxPx": [
+            134,
+            45,
+            200,
+            252
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 1207
+        },
+        {
+          "frame": 8,
+          "seconds": 0.266667,
+          "events": [
+            "split_land"
+          ],
+          "rgbSha256": "f80af97c4a26a39f8cabe175acc6b1d91249898cb8125b7be21c1061d7ad2e74",
+          "subjectSha256": "2c5d5f60d6b762bd489ca9677b4da4c2dd1781e0fb7b491b4dc7c7189be3b7d9",
+          "visiblePixels": 7914,
+          "foregroundBoxPx": [
+            88,
+            63,
+            210,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 5338
+        },
+        {
+          "frame": 15,
+          "seconds": 0.5,
+          "events": [],
+          "rgbSha256": "04bd8f169e1a1e72cc08a8cded03a5f80fbfcaba74fdd2be22d7f4751b5387c6",
+          "subjectSha256": "d910b947b27cddf6177f0b2d31fc2659ff231d07d190c36bbcffe9ef0f6b9e27",
+          "visiblePixels": 7899,
+          "foregroundBoxPx": [
+            49,
+            65,
+            219,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 5338
+        },
+        {
+          "frame": 22,
+          "seconds": 0.733333,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "6c7279c3b2ccfcd8ff13fa3adaca807411fe1ec43efe12beaf8d220a857c2f12",
+          "subjectSha256": "567aa74978a4a624fbc61bf545d44b05ad0c0adb9e8492a09dc4d84d02eca72c",
+          "visiblePixels": 7333,
+          "foregroundBoxPx": [
+            117,
+            61,
+            220,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 5530
+        },
+        {
+          "frame": 29,
+          "seconds": 0.966667,
+          "events": [],
+          "rgbSha256": "1841bec8bbd362ab60ddea50cd74ca293bcbedeed756cce81fe7c2fccf6adb45",
+          "subjectSha256": "2df53f1cb81b69caa63dfdeb39c6a4c305bae5650f5b8000df35d5304cc20658",
+          "visiblePixels": 7291,
+          "foregroundBoxPx": [
+            131,
+            22,
+            220,
+            255
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 5194
+        },
+        {
+          "frame": 36,
+          "seconds": 1.2,
+          "events": [],
+          "rgbSha256": "d85ed25165f7551d4f6c94f20a19d4d91fd51562b587ab4993bdd53fc9ca3a46",
+          "subjectSha256": "bfd1909a2691e6667451dc4e06bc26a068ca196d5d520ae01648e6bd54729463",
+          "visiblePixels": 7163,
+          "foregroundBoxPx": [
+            132,
+            38,
+            253,
+            251
+          ],
+          "edgeMarginPx": 27,
+          "minChangedSubjectPixels": 5194
+        },
+        {
+          "frame": 43,
+          "seconds": 1.433333,
+          "events": [],
+          "rgbSha256": "d10f17d47db2503a8e72b9233b9cf0eb7450635e51260c407e26b9d68aeb2a3a",
+          "subjectSha256": "10eeffa816fa4c5879c7978b794e7684014e74946a823d2333a76a92958b6546",
+          "visiblePixels": 7218,
+          "foregroundBoxPx": [
+            134,
+            35,
+            227,
+            252
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 7075
+        },
+        {
+          "frame": 50,
+          "seconds": 1.666667,
+          "events": [],
+          "rgbSha256": "0beabeb2744ebce5476e045190a8025fbe372715e52573118e641fd7850e0a02",
+          "subjectSha256": "db5479ba195b42ff34fc77a12deca9f914fbdbd0e4d6738f4b151bfbe8dac2e0",
+          "visiblePixels": 7006,
+          "foregroundBoxPx": [
+            134,
+            45,
+            201,
+            252
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 1207
+        }
+      ]
+    },
+    {
+      "id": "defensive_slice",
+      "sheet": "sheets/defensive_slice.webp",
+      "bytes": 100654,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "31c9c8df4ca9080260ce36c438c220d46fbf5176505a461755edefa8f7bb953a",
+          "subjectSha256": "71f969d4edd5f1babe77a56d6d152a5ff1e8667168cd3859c3797989e0b37c6b",
+          "visiblePixels": 8472,
+          "foregroundBoxPx": [
+            73,
+            23,
+            147,
+            253
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 1192
+        },
+        {
+          "frame": 9,
+          "seconds": 0.3,
+          "events": [],
+          "rgbSha256": "116aaa22943b8303fb821d37ef74bb88a4fd8bbf41149fe0209511c245ca5d40",
+          "subjectSha256": "074e98da7012830bf2076c5d699b35916ced0b988fe1fc653cbe92d6158c37b6",
+          "visiblePixels": 8086,
+          "foregroundBoxPx": [
+            76,
+            41,
+            188,
+            253
+          ],
+          "edgeMarginPx": 25,
+          "minChangedSubjectPixels": 5582
+        },
+        {
+          "frame": 19,
+          "seconds": 0.633333,
+          "events": [
+            "plant"
+          ],
+          "rgbSha256": "0624bdaef69afe07d34f1be4a1d6fd60d1f8f4115031899e1b701296974a343a",
+          "subjectSha256": "7ecc9a2c62082b944872d619525da3c6fd23153fe344dbfa0aea6b01183054e3",
+          "visiblePixels": 7270,
+          "foregroundBoxPx": [
+            78,
+            48,
+            195,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 6177
+        },
+        {
+          "frame": 29,
+          "seconds": 0.966667,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "e64ce3e15dd4ccb266e467b40fddf4151cb96dee1db665b5a143200ad3a3434d",
+          "subjectSha256": "86d9ae56e6af97d79ed92e559d87b6f27c29d715695b04fb74801845bb15f143",
+          "visiblePixels": 7134,
+          "foregroundBoxPx": [
+            91,
+            56,
+            218,
+            243
+          ],
+          "edgeMarginPx": 35,
+          "minChangedSubjectPixels": 4058
+        },
+        {
+          "frame": 38,
+          "seconds": 1.266667,
+          "events": [],
+          "rgbSha256": "950802ac71c0071205262f73a1aa81496f3f2bc324828412666960be22c4a50d",
+          "subjectSha256": "68f6dea93772176e61be44f71e3ccec4d831a5b30b4fadbd5e9a5a2da7001fff",
+          "visiblePixels": 7506,
+          "foregroundBoxPx": [
+            90,
+            53,
+            222,
+            242
+          ],
+          "edgeMarginPx": 36,
+          "minChangedSubjectPixels": 4058
+        },
+        {
+          "frame": 47,
+          "seconds": 1.566667,
+          "events": [],
+          "rgbSha256": "8629dcd438bc02c960534fa5a628ece50fbc62da42adf28260096c15f200250e",
+          "subjectSha256": "c15a36351e954aafe8055303a2fa6808f126d531e64ad70f0f06a019fc6c0573",
+          "visiblePixels": 8227,
+          "foregroundBoxPx": [
+            78,
+            43,
+            215,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 7719
+        },
+        {
+          "frame": 56,
+          "seconds": 1.866667,
+          "events": [],
+          "rgbSha256": "159a138482860c243eeab7f7978e1b0f04b207edc342d3d1778eb593793153c9",
+          "subjectSha256": "3c17711040040b908c7d288c83fba064f1cf140f00b8b250c0c87e412c53dbe2",
+          "visiblePixels": 8549,
+          "foregroundBoxPx": [
+            76,
+            35,
+            174,
+            253
+          ],
+          "edgeMarginPx": 25,
+          "minChangedSubjectPixels": 5582
+        },
+        {
+          "frame": 65,
+          "seconds": 2.166667,
+          "events": [],
+          "rgbSha256": "550823089a6e5dfe2bb2c5151d4127315c52122758d3be02993cadd6797586a9",
+          "subjectSha256": "f2ad0bf92da944d726b768283ada3fa3bf3e4399a60d395798c1460d20b95d90",
+          "visiblePixels": 8466,
+          "foregroundBoxPx": [
+            74,
+            23,
+            147,
+            253
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 1192
+        }
+      ]
+    },
+    {
+      "id": "lateral_crossover_run",
+      "sheet": "sheets/lateral_crossover_run.webp",
+      "bytes": 99358,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "9a9b7920fc1b3210c60868820436fa91fc3faf9955050288a54fc9055ffaee58",
+          "subjectSha256": "622347f50dc8a647a116d17b17442afc24ce951440b2c2f827f757c5373d8bd5",
+          "visiblePixels": 9067,
+          "foregroundBoxPx": [
+            62,
+            24,
+            140,
+            261
+          ],
+          "edgeMarginPx": 17,
+          "minChangedSubjectPixels": 10577
+        },
+        {
+          "frame": 9,
+          "seconds": 0.3,
+          "events": [],
+          "rgbSha256": "2facd4e21eaeeaafe49c342ca50d7bad51d1ea0ff97a952724c9cf9602d2e6c5",
+          "subjectSha256": "e8324b5c5b2bd20baf28b0911d12f4d69f6c91642dd1d2d9a09b86f73946864f",
+          "visiblePixels": 9257,
+          "foregroundBoxPx": [
+            66,
+            31,
+            166,
+            261
+          ],
+          "edgeMarginPx": 17,
+          "minChangedSubjectPixels": 10577
+        },
+        {
+          "frame": 18,
+          "seconds": 0.6,
+          "events": [
+            "crossover"
+          ],
+          "rgbSha256": "c17a5005261cfc083dfd15e33e710df4cca5bb95c116800d5e22aa9dec9298eb",
+          "subjectSha256": "d5b1406d4e27a69eb828f3f2ce90e9b7b2271494f7dc6ab709df608e40978e3e",
+          "visiblePixels": 7679,
+          "foregroundBoxPx": [
+            91,
+            41,
+            188,
+            245
+          ],
+          "edgeMarginPx": 33,
+          "minChangedSubjectPixels": 10921
+        },
+        {
+          "frame": 28,
+          "seconds": 0.933333,
+          "events": [],
+          "rgbSha256": "961e203207b14dda66d9a8953b5f8e8971529e68b1518bc0d8bc816048e21b20",
+          "subjectSha256": "2172ef57ec69c3b26d899a89939df075a96dc7f05eb7af9e5c5ddd04360d004d",
+          "visiblePixels": 6908,
+          "foregroundBoxPx": [
+            131,
+            26,
+            193,
+            250
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 9708
+        },
+        {
+          "frame": 39,
+          "seconds": 1.3,
+          "events": [
+            "crossover"
+          ],
+          "rgbSha256": "65cdb88ab9c905f8a983c59d022cb4c1e0c43d7617a29182181412f0b4576bb5",
+          "subjectSha256": "d95b4c7d5be25d716e9c4b643fb351e52907c7c85add1e161c19f608c7d56d66",
+          "visiblePixels": 6736,
+          "foregroundBoxPx": [
+            135,
+            40,
+            221,
+            234
+          ],
+          "edgeMarginPx": 40,
+          "minChangedSubjectPixels": 9046
+        },
+        {
+          "frame": 50,
+          "seconds": 1.666667,
+          "events": [],
+          "rgbSha256": "453f65a560754dc33bcfe0e0827bde89c011bb6adbd2c0884fe1bbf5ddec57c0",
+          "subjectSha256": "c934f9dcbcacf17ec626681d1c233f5e082fff523963204a47bd8290fbb1adb0",
+          "visiblePixels": 6329,
+          "foregroundBoxPx": [
+            171,
+            29,
+            229,
+            238
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 4089
+        },
+        {
+          "frame": 61,
+          "seconds": 2.033333,
+          "events": [
+            "settle"
+          ],
+          "rgbSha256": "3d77c3e3bf25be5f9339d9155345d2531b9c1f4fa2dd25d861d22a5541546928",
+          "subjectSha256": "96865cf28c96551d68041a38a097af5fcc88bfadda9a54ffc446cb75f8ad8da0",
+          "visiblePixels": 6210,
+          "foregroundBoxPx": [
+            168,
+            34,
+            236,
+            230
+          ],
+          "edgeMarginPx": 34,
+          "minChangedSubjectPixels": 3468
+        },
+        {
+          "frame": 69,
+          "seconds": 2.3,
+          "events": [],
+          "rgbSha256": "c5941166349171da2df7f2fdc4c6f4c3571c5503ece651426d1ebd3744bac24f",
+          "subjectSha256": "97e79e9f225b69f9aa4332e5aea17a19209a0f438c9d8d29b4e9ea328b405c62",
+          "visiblePixels": 6459,
+          "foregroundBoxPx": [
+            168,
+            31,
+            232,
+            230
+          ],
+          "edgeMarginPx": 31,
+          "minChangedSubjectPixels": 3468
+        }
+      ]
+    },
+    {
+      "id": "change_direction",
+      "sheet": "sheets/change_direction.webp",
+      "bytes": 102524,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "8c140f8715fa3f2b2cca32ae0310f0c38669c757dbb967fb68e6e7c9bd3f01d5",
+          "subjectSha256": "c5d7a3feb7b1c90930c821b14d4f96dae8cbc3499409d03c1fe805ea48263d53",
+          "visiblePixels": 8080,
+          "foregroundBoxPx": [
+            109,
+            24,
+            178,
+            249
+          ],
+          "edgeMarginPx": 24,
+          "minChangedSubjectPixels": 8469
+        },
+        {
+          "frame": 13,
+          "seconds": 0.433333,
+          "events": [],
+          "rgbSha256": "59b42b0e4f8e67ecda37bba53826de3598732ae67c690035d8ae3f022164c88a",
+          "subjectSha256": "7627c67b0324d2443179307ff9012518ca90e03bc40d57a938b55d38dd2c7921",
+          "visiblePixels": 7964,
+          "foregroundBoxPx": [
+            116,
+            35,
+            207,
+            235
+          ],
+          "edgeMarginPx": 35,
+          "minChangedSubjectPixels": 7444
+        },
+        {
+          "frame": 26,
+          "seconds": 0.866667,
+          "events": [
+            "outside_plant"
+          ],
+          "rgbSha256": "a4c90af9a255f105df72776d25603e7971392a6b19fd02f1adb46826deff6282",
+          "subjectSha256": "baedfe2208b171166bfc8fb39a433e667e85a173428301a378df7db2a3b5518e",
+          "visiblePixels": 6507,
+          "foregroundBoxPx": [
+            133,
+            42,
+            219,
+            240
+          ],
+          "edgeMarginPx": 38,
+          "minChangedSubjectPixels": 4063
+        },
+        {
+          "frame": 30,
+          "seconds": 1.0,
+          "events": [
+            "reverse"
+          ],
+          "rgbSha256": "8883b1fdeb1889229d04b608bae146d15a3d0eb70d0695b1d78b8bd35c096208",
+          "subjectSha256": "d109f271a5ca4a0cb57d91f0f7c14f316366dc38ab0b8f6db332c55d8a1661e3",
+          "visiblePixels": 6557,
+          "foregroundBoxPx": [
+            133,
+            45,
+            221,
+            235
+          ],
+          "edgeMarginPx": 43,
+          "minChangedSubjectPixels": 4063
+        },
+        {
+          "frame": 38,
+          "seconds": 1.266667,
+          "events": [
+            "push_off"
+          ],
+          "rgbSha256": "3648dc7398609249e180167e58797f22760eaab5da41f2f77161af1f2f46f791",
+          "subjectSha256": "ca57c7a93c05944ae3f5bc4c3ea0d6ea9445c26125e2ea8a839af40ad94a4668",
+          "visiblePixels": 7568,
+          "foregroundBoxPx": [
+            132,
+            30,
+            217,
+            240
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 7866
+        },
+        {
+          "frame": 45,
+          "seconds": 1.5,
+          "events": [],
+          "rgbSha256": "87a553609a042d2b67b4acebe4165d36c06643ce5614789675eb39309a466c2f",
+          "subjectSha256": "58e7d147861dbce7caed475414610bdfad0667b469335084e40a619d42cfe446",
+          "visiblePixels": 7488,
+          "foregroundBoxPx": [
+            129,
+            23,
+            195,
+            240
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 7444
+        },
+        {
+          "frame": 52,
+          "seconds": 1.733333,
+          "events": [],
+          "rgbSha256": "24a782767c4c6d4ed60a8411eebafca96bcc58dda8786c0920ee36ccf01dbbfb",
+          "subjectSha256": "25afbf9969c6c9d1a2d6ffa393cbed0aae2c2b4aa8884947f06dc769e98ffba7",
+          "visiblePixels": 8233,
+          "foregroundBoxPx": [
+            96,
+            36,
+            191,
+            238
+          ],
+          "edgeMarginPx": 36,
+          "minChangedSubjectPixels": 8469
+        },
+        {
+          "frame": 67,
+          "seconds": 2.233333,
+          "events": [],
+          "rgbSha256": "3d5ca4b3f27f99400c89cd93e968c75a88ccf969cb1b9069d72a1526d6245b0b",
+          "subjectSha256": "3230bccbcfd5b477c3e4545bae46bc4874b5e1ad279c82f7c4849a3132f6923f",
+          "visiblePixels": 8447,
+          "foregroundBoxPx": [
+            96,
+            23,
+            167,
+            253
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 10035
+        }
+      ]
+    },
+    {
+      "id": "slide_to_ball",
+      "sheet": "sheets/slide_to_ball.webp",
+      "bytes": 104638,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "cbbbddcecbf0af430b3e1d956d4bbd85506519b441cdf4e7fce7ccd1f33aa91a",
+          "subjectSha256": "fbd35323d9f7aefc140afc60e199b87bd4a148280302255e75a627da66bebf3a",
+          "visiblePixels": 6391,
+          "foregroundBoxPx": [
+            166,
+            32,
+            234,
+            229
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 6729
+        },
+        {
+          "frame": 10,
+          "seconds": 0.333333,
+          "events": [
+            "push_off"
+          ],
+          "rgbSha256": "e13b71cbcde722fe2e682ef23d980789c930eda0c953342cf3f00feb99de5513",
+          "subjectSha256": "3421c9a7d4c65cbdc61e4a23d09642da0d968804e099a289461091b5da464f9e",
+          "visiblePixels": 7100,
+          "foregroundBoxPx": [
+            121,
+            49,
+            232,
+            228
+          ],
+          "edgeMarginPx": 49,
+          "minChangedSubjectPixels": 6729
+        },
+        {
+          "frame": 17,
+          "seconds": 0.566667,
+          "events": [
+            "skid_begin"
+          ],
+          "rgbSha256": "ce3af983583d471fa3bd3381c25ee986d083e915df14c1af3987b3250652446d",
+          "subjectSha256": "629f8671c9912194c947a00138820ba737274e32d0dd8d1e47cabf043071f997",
+          "visiblePixels": 7147,
+          "foregroundBoxPx": [
+            81,
+            57,
+            224,
+            244
+          ],
+          "edgeMarginPx": 34,
+          "minChangedSubjectPixels": 10353
+        },
+        {
+          "frame": 30,
+          "seconds": 1.0,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "b12d4e3f6ca025053762505b69751cfe6ec1d9ee74ea6c3544f523709a030ad6",
+          "subjectSha256": "3bc3eb168c61cc068d5009413ec36f6aa97d1d400a7691744a4ca09f3844fd65",
+          "visiblePixels": 7669,
+          "foregroundBoxPx": [
+            79,
+            63,
+            204,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 9931
+        },
+        {
+          "frame": 41,
+          "seconds": 1.366667,
+          "events": [
+            "brake"
+          ],
+          "rgbSha256": "e7ca4b59599ba5a5e0335ebe4fa952ce59927e8f859ad8e343396b2eaf70e3a2",
+          "subjectSha256": "587dc5f73c21c2ab4171c93ca9a53abba6964359b8ad782f332cfbb52100fa36",
+          "visiblePixels": 7683,
+          "foregroundBoxPx": [
+            96,
+            42,
+            205,
+            261
+          ],
+          "edgeMarginPx": 17,
+          "minChangedSubjectPixels": 9080
+        },
+        {
+          "frame": 56,
+          "seconds": 1.866667,
+          "events": [
+            "recover_step"
+          ],
+          "rgbSha256": "568ec17e1377f82fdab8aaaf0736ee7f41d4cf37959774d9c5b7353fe37a9696",
+          "subjectSha256": "127959c0a83fc9a4fc884f4a45b8daf77e0873f999d06d877661d2fbdbfa72ad",
+          "visiblePixels": 8478,
+          "foregroundBoxPx": [
+            96,
+            25,
+            182,
+            261
+          ],
+          "edgeMarginPx": 17,
+          "minChangedSubjectPixels": 6110
+        },
+        {
+          "frame": 64,
+          "seconds": 2.133333,
+          "events": [],
+          "rgbSha256": "0eab6d1a9dc74ce6bac75048a653ed87eb5c369d4d0771067ef6600c91fb65c1",
+          "subjectSha256": "9740a8c617bce9570d52065511e1c5561b0d8190c41bb407063f8a779c6843c9",
+          "visiblePixels": 8898,
+          "foregroundBoxPx": [
+            96,
+            24,
+            176,
+            261
+          ],
+          "edgeMarginPx": 17,
+          "minChangedSubjectPixels": 3079
+        },
+        {
+          "frame": 72,
+          "seconds": 2.4,
+          "events": [],
+          "rgbSha256": "938c7a35f8f4786db73dfce322832ddb6e94cd13dd5dad97af711206d106ff09",
+          "subjectSha256": "ea545bd2bf880c6fefd2b98275bef07f96585eacc01ce4f6b18c021cb316970b",
+          "visiblePixels": 9008,
+          "foregroundBoxPx": [
+            96,
+            24,
+            177,
+            261
+          ],
+          "edgeMarginPx": 17,
+          "minChangedSubjectPixels": 3079
+        }
+      ]
+    },
+    {
+      "id": "court_fall",
+      "sheet": "sheets/court_fall.webp",
+      "bytes": 100012,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "8e2232eda2de88dbe5c26f7f93230bf61394c870ce97f290853d5a2220cb6bcb",
+          "subjectSha256": "1b628ab01f2643af864b416fca2cdd301011635cb3b7a3c190e341c7f4ab540f",
+          "visiblePixels": 7753,
+          "foregroundBoxPx": [
+            80,
+            31,
+            157,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 5722
+        },
+        {
+          "frame": 8,
+          "seconds": 0.266667,
+          "events": [
+            "stumble"
+          ],
+          "rgbSha256": "67500537e1b08cfca7f605643b5e5c332ab9e0e9e0efd3753d69acbed65536fb",
+          "subjectSha256": "16d5afbe5767b312764a844b3a2840e246c20ccdbfd40597e3c38493526da2c1",
+          "visiblePixels": 7829,
+          "foregroundBoxPx": [
+            82,
+            25,
+            164,
+            249
+          ],
+          "edgeMarginPx": 25,
+          "minChangedSubjectPixels": 5722
+        },
+        {
+          "frame": 13,
+          "seconds": 0.433333,
+          "events": [],
+          "rgbSha256": "11c1d841e6089bd2822fd4cb96e3f1d4d4df46aba529a64e366ddacc07314e5e",
+          "subjectSha256": "5d76d866a44bc0943480047ecd41f94de7d254f4cf19d69207f979719e7d1d12",
+          "visiblePixels": 7870,
+          "foregroundBoxPx": [
+            82,
+            24,
+            181,
+            249
+          ],
+          "edgeMarginPx": 24,
+          "minChangedSubjectPixels": 8826
+        },
+        {
+          "frame": 19,
+          "seconds": 0.633333,
+          "events": [
+            "brace"
+          ],
+          "rgbSha256": "010606b8e86f29011909dba009f5e4d7810ca09fe960fd7c95af6f960d83ed1c",
+          "subjectSha256": "78bc6b1c72c8a6089d3683f0f63433cd728cb7a4769eeb92fbc520c199ec231c",
+          "visiblePixels": 7364,
+          "foregroundBoxPx": [
+            82,
+            43,
+            209,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 9796
+        },
+        {
+          "frame": 27,
+          "seconds": 0.9,
+          "events": [
+            "palm_plant"
+          ],
+          "rgbSha256": "8ef4ac25952863f8837453d85d4977cc4a8a84358f439213167ef5cdf89b3bcc",
+          "subjectSha256": "04295b55cd55a1fa8336d2ff3bca4ea06a03437c54cff593aed3cfec72a66dd8",
+          "visiblePixels": 6344,
+          "foregroundBoxPx": [
+            82,
+            87,
+            232,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 6510
+        },
+        {
+          "frame": 35,
+          "seconds": 1.166667,
+          "events": [
+            "hip_down"
+          ],
+          "rgbSha256": "f34c9b81129229cf6982039fd69f85e3ba1c0a974755baa9a61f10065b246700",
+          "subjectSha256": "2db2b538564944d41723955942d4e164ab06c187e7626753c47b3fc596d60dd2",
+          "visiblePixels": 5897,
+          "foregroundBoxPx": [
+            82,
+            107,
+            234,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 1800
+        },
+        {
+          "frame": 41,
+          "seconds": 1.366667,
+          "events": [],
+          "rgbSha256": "0add337df9ab2fa2cc6167a0d4c8e31aea767a11045c32d0a1e8e767ef179fc3",
+          "subjectSha256": "93856f7323da9717368f2ea0c8ff8eaea5be401b7f1c358865ab5eb0f6206e1d",
+          "visiblePixels": 5877,
+          "foregroundBoxPx": [
+            82,
+            107,
+            232,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 618
+        },
+        {
+          "frame": 48,
+          "seconds": 1.6,
+          "events": [],
+          "rgbSha256": "fccd531912609a3ee64c36c001f858f6012786e6d9509cd88d5190b12aaab602",
+          "subjectSha256": "55dc840f572c7ccf493dc83a07ef82fa342c0e18a4ea49d3a5e1becabe6a88f2",
+          "visiblePixels": 5869,
+          "foregroundBoxPx": [
+            82,
+            108,
+            232,
+            249
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 618
+        }
+      ]
+    },
+    {
+      "id": "court_get_up",
+      "sheet": "sheets/court_get_up.webp",
+      "bytes": 102918,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "ef5267db173fd00a9250cf8dc341a80bd8b823840f1e90d22094ac3438dd1d80",
+          "subjectSha256": "7aa2e3855b0a2ab27f38dc2e37bf80e1307ec1a378a88e71e7c013c028a52a7b",
+          "visiblePixels": 6723,
+          "foregroundBoxPx": [
+            77,
+            103,
+            238,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 4045
+        },
+        {
+          "frame": 10,
+          "seconds": 0.333333,
+          "events": [
+            "palm_push"
+          ],
+          "rgbSha256": "70175df5dc3b88a4125b159caf9ebf082a3ef10c330344c97a769c712178f404",
+          "subjectSha256": "22c98823c163e6be1be23892db3cd62a47a2ceb803c8221c3a95ad45a03bec74",
+          "visiblePixels": 6866,
+          "foregroundBoxPx": [
+            77,
+            99,
+            238,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 4045
+        },
+        {
+          "frame": 18,
+          "seconds": 0.6,
+          "events": [],
+          "rgbSha256": "5cce2617766302f493a82201d1fa6e6cbc8b0e94d3fc18c2377d2d2115bb8dae",
+          "subjectSha256": "7e4f7b7e5e23f296c421c0d4611688f233b9e92f2caa9836c5d6478a50568540",
+          "visiblePixels": 7119,
+          "foregroundBoxPx": [
+            77,
+            88,
+            239,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 7555
+        },
+        {
+          "frame": 27,
+          "seconds": 0.9,
+          "events": [
+            "foot_under"
+          ],
+          "rgbSha256": "849fbfc6948f3773dcf7e92ec4f7b9ce80ed8cafa41ad37ff480c598407ef728",
+          "subjectSha256": "7c126e33079a28bbeb3333dd2decedeb2058891504b740d772fc032d575c1c6c",
+          "visiblePixels": 7795,
+          "foregroundBoxPx": [
+            77,
+            81,
+            237,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 8200
+        },
+        {
+          "frame": 38,
+          "seconds": 1.266667,
+          "events": [
+            "palm_lift"
+          ],
+          "rgbSha256": "1071c637bbb47e9acf5a9a4b9415ed84654aa38422631ec39858c3f4ccecfb0e",
+          "subjectSha256": "2eda66e2aa5de46988738d3cd12a9dafd1b81a65f0a4526cc0e9928b16a3400d",
+          "visiblePixels": 7746,
+          "foregroundBoxPx": [
+            77,
+            62,
+            223,
+            255
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 8200
+        },
+        {
+          "frame": 53,
+          "seconds": 1.766667,
+          "events": [
+            "rise"
+          ],
+          "rgbSha256": "d0f2d16c494d29cdbf8de377bb916e209daa1579d6d9ce0b4906f5336194423d",
+          "subjectSha256": "26538833cb1320f19830fc88a94b534cfbae64754d671f0f52ed34263fdd1614",
+          "visiblePixels": 8132,
+          "foregroundBoxPx": [
+            108,
+            33,
+            207,
+            241
+          ],
+          "edgeMarginPx": 33,
+          "minChangedSubjectPixels": 7253
+        },
+        {
+          "frame": 61,
+          "seconds": 2.033333,
+          "events": [],
+          "rgbSha256": "f2f34919fe726c0d05ad1bdb7589ed625ade4cd42fdf7e3084dd83967bb2faa6",
+          "subjectSha256": "a16d0aba6966ec0acc7c1de34351a7568fd7f5e8695427600bec17bb9759d480",
+          "visiblePixels": 7656,
+          "foregroundBoxPx": [
+            125,
+            26,
+            202,
+            245
+          ],
+          "edgeMarginPx": 26,
+          "minChangedSubjectPixels": 3141
+        },
+        {
+          "frame": 69,
+          "seconds": 2.3,
+          "events": [
+            "ready"
+          ],
+          "rgbSha256": "5d82e7a581250c6bb1a85fcb637129d04f5b3f48fc6bd30113bf57f66c08fd0e",
+          "subjectSha256": "c90427230e4ea5a99d58798cac3bed4be9f0a562cf48a4e2b597b8e8881ac7a9",
+          "visiblePixels": 7955,
+          "foregroundBoxPx": [
+            125,
+            23,
+            201,
+            245
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 3141
+        }
+      ]
+    },
+    {
+      "id": "point_win",
+      "sheet": "sheets/point_win.webp",
+      "bytes": 103678,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "d16dacf4d919bf627c1414579dc858eab77d5279999db4cbc7e96fa2211f8bfe",
+          "subjectSha256": "1f10eba13761228c98ed9032ebd2162cc857a95d0b1091647b17df76272f89e6",
+          "visiblePixels": 8220,
+          "foregroundBoxPx": [
+            124,
+            23,
+            202,
+            248
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 682
+        },
+        {
+          "frame": 11,
+          "seconds": 0.366667,
+          "events": [
+            "recognition"
+          ],
+          "rgbSha256": "5498b5dd3a4730b104cd374be245127221a107dfe6b131000eb864698eee4681",
+          "subjectSha256": "fc6c163baf82dd46a22042d676e2a69a9089d75a7ab048dd3927d88ce5bdbe0d",
+          "visiblePixels": 8558,
+          "foregroundBoxPx": [
+            111,
+            35,
+            206,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 4559
+        },
+        {
+          "frame": 22,
+          "seconds": 0.733333,
+          "events": [
+            "fist_raise"
+          ],
+          "rgbSha256": "48167b4aaeb2078d80d2ba2edec349e464cd74a9bc0d276057e1b0f181f9e1af",
+          "subjectSha256": "503d7fdb51be57134e6db01fe2e7333e5ab26ccb8c1778c2abffec85c052d848",
+          "visiblePixels": 9062,
+          "foregroundBoxPx": [
+            106,
+            30,
+            207,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 5182
+        },
+        {
+          "frame": 30,
+          "seconds": 1.0,
+          "events": [
+            "fist_pump"
+          ],
+          "rgbSha256": "14db433caa691a33639bce057e35fffc162fd4451c44434260b1f26d6c722a53",
+          "subjectSha256": "07643f6f69ca021ceb84960b45a96a2661004c3d3e68bc67fe00a8a87657890b",
+          "visiblePixels": 8223,
+          "foregroundBoxPx": [
+            113,
+            37,
+            213,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 3316
+        },
+        {
+          "frame": 37,
+          "seconds": 1.233333,
+          "events": [],
+          "rgbSha256": "5ccf108ecaa467a95c963956b40d917eab4b3d206408dd508dc83e219e42435a",
+          "subjectSha256": "3280b8d18ed927e61c55aecd7afba107fe44511fdb151bee020c917fc26736ab",
+          "visiblePixels": 8538,
+          "foregroundBoxPx": [
+            116,
+            36,
+            207,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 3316
+        },
+        {
+          "frame": 45,
+          "seconds": 1.5,
+          "events": [
+            "exhale"
+          ],
+          "rgbSha256": "cabab5f3b03110f8badcde1561cf920cf5ba663c2efe1d63523f377aafbdf3a0",
+          "subjectSha256": "d8f19196cc48f22f60e968a4274f93b35bdc3fbce29f87b77a10702887c9e674",
+          "visiblePixels": 8645,
+          "foregroundBoxPx": [
+            110,
+            31,
+            200,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 4718
+        },
+        {
+          "frame": 53,
+          "seconds": 1.766667,
+          "events": [],
+          "rgbSha256": "e3ee3297a348697cced87e9b4199789d918320f6f452d3898a070fa71309ac4d",
+          "subjectSha256": "0172a055b31f965308b1ce83314bf4a631d63d2e53abf945ac823d895a84cff2",
+          "visiblePixels": 7998,
+          "foregroundBoxPx": [
+            116,
+            27,
+            201,
+            248
+          ],
+          "edgeMarginPx": 27,
+          "minChangedSubjectPixels": 3968
+        },
+        {
+          "frame": 60,
+          "seconds": 2.0,
+          "events": [],
+          "rgbSha256": "bc6a4353b94c15552960db999bdd256153e1273d5ad3b2739c8ba532bf5a84de",
+          "subjectSha256": "27fb68b760355d9fbdbd57b1c6b629e21f08cb8dba6e244505e8a20db3a67ae6",
+          "visiblePixels": 8207,
+          "foregroundBoxPx": [
+            124,
+            23,
+            202,
+            248
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 682
+        }
+      ]
+    },
+    {
+      "id": "childlike_joy",
+      "sheet": "sheets/childlike_joy.webp",
+      "bytes": 77836,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "6726404a707dec16aaf0f821f9edd7d090ea621431bc199f8003bf7d76164c73",
+          "subjectSha256": "506c172a441c37b408ee6f25b712cd02603acff792a2ce04e9d1e7fb857a3500",
+          "visiblePixels": 4534,
+          "foregroundBoxPx": [
+            141,
+            85,
+            199,
+            247
+          ],
+          "edgeMarginPx": 31,
+          "minChangedSubjectPixels": 677
+        },
+        {
+          "frame": 13,
+          "seconds": 0.433333,
+          "events": [
+            "takeoff"
+          ],
+          "rgbSha256": "0398c56d5f756b7cdb9c6aac94dcc2d78efc7e3ac57e8a528a866968000db01f",
+          "subjectSha256": "f35d812d8bc19b423e55bbb35c1cb0bab3b48ad6be4dcd2a9b24d8bcca0b18fd",
+          "visiblePixels": 4974,
+          "foregroundBoxPx": [
+            124,
+            77,
+            202,
+            247
+          ],
+          "edgeMarginPx": 31,
+          "minChangedSubjectPixels": 2951
+        },
+        {
+          "frame": 25,
+          "seconds": 0.833333,
+          "events": [
+            "land"
+          ],
+          "rgbSha256": "92058975aab23f84f8333b3f7f5a5d0367547f7e03f3ac1045b35bb94652c82c",
+          "subjectSha256": "0481e3dd8457d1a2ca1bc7326f535301dbad9c9e0c149887e1445d928377f99f",
+          "visiblePixels": 5086,
+          "foregroundBoxPx": [
+            115,
+            72,
+            207,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 3379
+        },
+        {
+          "frame": 38,
+          "seconds": 1.266667,
+          "events": [
+            "takeoff"
+          ],
+          "rgbSha256": "35aff8c5a1bfe82a38bf73c8760e052ee3bd0fd018752e5b75845930e73e97aa",
+          "subjectSha256": "571bc1ea1e173c5cd581c09791b35c28567ac527a96d6f70c94b33a086a64f5b",
+          "visiblePixels": 5036,
+          "foregroundBoxPx": [
+            132,
+            58,
+            208,
+            246
+          ],
+          "edgeMarginPx": 32,
+          "minChangedSubjectPixels": 3379
+        },
+        {
+          "frame": 45,
+          "seconds": 1.5,
+          "events": [],
+          "rgbSha256": "351423ce0626ddd8af826e2d33076dde2818cf86fd8f80ae96e25591869d9123",
+          "subjectSha256": "1cb7eea183e40f67a2acf75e71be5c450d37ce1b6e193aef6f772cbcfffc169a",
+          "visiblePixels": 5174,
+          "foregroundBoxPx": [
+            127,
+            20,
+            210,
+            222
+          ],
+          "edgeMarginPx": 20,
+          "minChangedSubjectPixels": 6669
+        },
+        {
+          "frame": 53,
+          "seconds": 1.766667,
+          "events": [
+            "land"
+          ],
+          "rgbSha256": "4498577fa148871bfb0258432edeb7068d523932ddb2891e109d5eac292c8629",
+          "subjectSha256": "82f04cf3dac2689455a6e48672dfc5e4264111c4bea7f25f87fe7db78fa4e9bc",
+          "visiblePixels": 5093,
+          "foregroundBoxPx": [
+            130,
+            62,
+            209,
+            247
+          ],
+          "edgeMarginPx": 31,
+          "minChangedSubjectPixels": 2951
+        },
+        {
+          "frame": 66,
+          "seconds": 2.2,
+          "events": [
+            "settle"
+          ],
+          "rgbSha256": "0fa3b29ed3ec46e9aa7795dd6a9914281f91be2e212066dc4bf502afc4217843",
+          "subjectSha256": "e2123036780c550cddf783eb3917c00d26a32a53fe1715ee031030bae69bc0ae",
+          "visiblePixels": 4488,
+          "foregroundBoxPx": [
+            133,
+            83,
+            203,
+            247
+          ],
+          "edgeMarginPx": 31,
+          "minChangedSubjectPixels": 2668
+        },
+        {
+          "frame": 73,
+          "seconds": 2.433333,
+          "events": [],
+          "rgbSha256": "c609c3b214743ba6d4de9e2d0930e4f1545ea0834fdf32d88ae8b02d32fd9e87",
+          "subjectSha256": "7d5a1683b5fecdc1862b57291d6299e713bf65eae388ae34b32a1b7fb0eab499",
+          "visiblePixels": 4536,
+          "foregroundBoxPx": [
+            141,
+            85,
+            199,
+            247
+          ],
+          "edgeMarginPx": 31,
+          "minChangedSubjectPixels": 677
+        }
+      ]
+    },
+    {
+      "id": "point_disappointment",
+      "sheet": "sheets/point_disappointment.webp",
+      "bytes": 104854,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "28465c5d183a1508a2ae11647421b8cd79df278ff7df64a184231688906ea4f8",
+          "subjectSha256": "200a309ff6a8a88d5e348a736e97303320cc8fcf7c7d39642dd1928219de98f6",
+          "visiblePixels": 8232,
+          "foregroundBoxPx": [
+            135,
+            23,
+            213,
+            248
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 1154
+        },
+        {
+          "frame": 10,
+          "seconds": 0.333333,
+          "events": [
+            "look"
+          ],
+          "rgbSha256": "e00f3c0b248103b4ac314f9294d015c86251e63def8f6f1cc5dec1e8c7c9b638",
+          "subjectSha256": "516e5084b8aa5bd4a83f07f7ac8f0bf977667f548ecfea9c2a03f6e5fe842e78",
+          "visiblePixels": 8172,
+          "foregroundBoxPx": [
+            135,
+            29,
+            215,
+            248
+          ],
+          "edgeMarginPx": 29,
+          "minChangedSubjectPixels": 3281
+        },
+        {
+          "frame": 21,
+          "seconds": 0.7,
+          "events": [],
+          "rgbSha256": "86758233217c9f75bbc5ce89f622e7379f6f2e03166d1d3c03734ecb40ace318",
+          "subjectSha256": "ce1617157fa5ab311a510c84c8534180c27e09a1709129631cf1fbe9771d2688",
+          "visiblePixels": 7956,
+          "foregroundBoxPx": [
+            128,
+            33,
+            212,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 3281
+        },
+        {
+          "frame": 32,
+          "seconds": 1.066667,
+          "events": [
+            "racket_lower"
+          ],
+          "rgbSha256": "70993c9b54a38fd73aaee15261b3f367ab38f4db603524456489ce8c576bb6ff",
+          "subjectSha256": "fd4ad076f06fd672154945035a560267915f5f5cef4e9d250ffd193be2a6ce04",
+          "visiblePixels": 9092,
+          "foregroundBoxPx": [
+            112,
+            39,
+            204,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 4280
+        },
+        {
+          "frame": 47,
+          "seconds": 1.566667,
+          "events": [
+            "exhale"
+          ],
+          "rgbSha256": "e5b604601ca3ad097de64d0c29b8f5bb79c9706ac364eeb9f1ad1a27fd009fe2",
+          "subjectSha256": "a9128ff1bf09b8344ffb6491445e99a22821d293f56cd10de0528043b4b83d51",
+          "visiblePixels": 9028,
+          "foregroundBoxPx": [
+            112,
+            47,
+            204,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 2294
+        },
+        {
+          "frame": 59,
+          "seconds": 1.966667,
+          "events": [],
+          "rgbSha256": "979fce715f2a004402c02968050f0d84dcc6c56b37cb68f1e7e0daeb5c7d72c4",
+          "subjectSha256": "bb952ebaf969e611cb60b43dc21986043bcf6d09a4afcbfe3a1f53c2531777c5",
+          "visiblePixels": 9060,
+          "foregroundBoxPx": [
+            112,
+            45,
+            204,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 2294
+        },
+        {
+          "frame": 71,
+          "seconds": 2.366667,
+          "events": [
+            "reset"
+          ],
+          "rgbSha256": "a3b5e502fb80d95d2a0f35464a5ae5782681d8da3ea0d33578b815ca41a3a97e",
+          "subjectSha256": "3834cb8eaf06e935518287796206a57daa59616b6609e47628911abb6eac0097",
+          "visiblePixels": 8848,
+          "foregroundBoxPx": [
+            115,
+            34,
+            204,
+            248
+          ],
+          "edgeMarginPx": 30,
+          "minChangedSubjectPixels": 4280
+        },
+        {
+          "frame": 89,
+          "seconds": 2.966667,
+          "events": [],
+          "rgbSha256": "657cac68b8c894a7c4833df194d41a0c01180dd1d6586eb8a037f48e6409c067",
+          "subjectSha256": "46bc2ba251d7903f015f9b8b847c4a711d2a768c324e6d91bf17b9cf98e31a45",
+          "visiblePixels": 8207,
+          "foregroundBoxPx": [
+            135,
+            23,
+            213,
+            248
+          ],
+          "edgeMarginPx": 23,
+          "minChangedSubjectPixels": 1154
+        }
+      ]
+    },
+    {
+      "id": "match_handshake",
+      "sheet": "sheets/match_handshake.webp",
+      "bytes": 115350,
+      "samples": [
+        {
+          "frame": 0,
+          "seconds": 0.0,
+          "events": [],
+          "rgbSha256": "2075b16ef3f24ab78beef25c7a60879196025edf5625a7866c7e25dc91a56ab3",
+          "subjectSha256": "29bf949b94730efd7a86e98b1339b8345810792fd814e513737c366be06876bf",
+          "visiblePixels": 13761,
+          "foregroundBoxPx": [
+            72,
+            30,
+            243,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 644
+        },
+        {
+          "frame": 15,
+          "seconds": 0.5,
+          "events": [
+            "step_in"
+          ],
+          "rgbSha256": "361411381acf403d56845c291e8d9cbedfcc4bdcbfda0090622c06b109dfe510",
+          "subjectSha256": "c8caadea1eccf112c0163ff3934de84c7740f8988d76e2adb627bcdb7acebab0",
+          "visiblePixels": 14528,
+          "foregroundBoxPx": [
+            64,
+            38,
+            241,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 9752
+        },
+        {
+          "frame": 25,
+          "seconds": 0.833333,
+          "events": [],
+          "rgbSha256": "65a4514004e12f809025fb9141b2be88a415fd8d04e9b8bc5b4ff80081dc97d2",
+          "subjectSha256": "d5034027bf9ff8ff307fed53de1627c50525aaa4c30e5863e46c497089cb5f04",
+          "visiblePixels": 15469,
+          "foregroundBoxPx": [
+            72,
+            38,
+            239,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 5637
+        },
+        {
+          "frame": 35,
+          "seconds": 1.166667,
+          "events": [
+            "clasp"
+          ],
+          "rgbSha256": "b8d5dcca84a460ec2ed37d558aa1ff32cba005081df2e3080280ba89e0a27407",
+          "subjectSha256": "e72c840d60a224f6258d1f4779f118f6a43052422a43026e426b55dcf5882b57",
+          "visiblePixels": 15655,
+          "foregroundBoxPx": [
+            72,
+            38,
+            239,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 5637
+        },
+        {
+          "frame": 48,
+          "seconds": 1.6,
+          "events": [
+            "shake"
+          ],
+          "rgbSha256": "07f658548ea69ba150172f8579567632a37545f22a7cf4e6889f2efb54d3045c",
+          "subjectSha256": "91d5442aee21675e554b2a04a322e320eb6b93640c3abb50fae26d575f2a83e4",
+          "visiblePixels": 15300,
+          "foregroundBoxPx": [
+            72,
+            41,
+            239,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 6851
+        },
+        {
+          "frame": 58,
+          "seconds": 1.933333,
+          "events": [
+            "release_hand"
+          ],
+          "rgbSha256": "955b5cb0aae2d9d69584bd46c578147e3ce68e9a57ca3ae4d42496396957267e",
+          "subjectSha256": "9fdbae6dc08e43a8c54fdc93c10d2d649ca475d1e6229edbef02a0cdaead5a49",
+          "visiblePixels": 15115,
+          "foregroundBoxPx": [
+            72,
+            37,
+            239,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 5771
+        },
+        {
+          "frame": 72,
+          "seconds": 2.4,
+          "events": [
+            "step_back"
+          ],
+          "rgbSha256": "11a5b34cb256fba476ed3ec0fc7a4eab002d08fc6b40428685dfa07f207adbe3",
+          "subjectSha256": "1db64ce002e14725223985bcd813f9a785b910a34018358a287152825ed712db",
+          "visiblePixels": 14484,
+          "foregroundBoxPx": [
+            72,
+            38,
+            239,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 9752
+        },
+        {
+          "frame": 85,
+          "seconds": 2.833333,
+          "events": [],
+          "rgbSha256": "8219f773c85fc7ad790a4ddcf8224955c9770385dd555ab15e027b21387e2cd2",
+          "subjectSha256": "977570e05fbe48d1b3855edd94fc7e876bb5048f2d895d60c62138f2a9bbaeb3",
+          "visiblePixels": 13747,
+          "foregroundBoxPx": [
+            72,
+            30,
+            243,
+            256
+          ],
+          "edgeMarginPx": 22,
+          "minChangedSubjectPixels": 644
+        }
+      ]
+    },
+    {
+      "id": "coach_serve_demo",
+      "sheet": "sheets/coach_serve_demo.webp",
+      "bytes": 96716,
+      "samples": [
+        {
+          "frame": 19,
+          "seconds": 0.633333,
+          "events": [
+            "invite"
+          ],
+          "rgbSha256": "aeb23b2dd825ab3a87598e0c98d79750df659b79484df0c6925dc1b5ecf73f86",
+          "subjectSha256": "e8ea95fad5d2f2b962247b3905bdd0a773849e61a6ebfee702de12937d1bdfb5",
+          "visiblePixels": 7162,
+          "foregroundBoxPx": [
+            104,
+            91,
+            228,
+            251
+          ],
+          "edgeMarginPx": 27,
+          "minChangedSubjectPixels": 4652
+        },
+        {
+          "frame": 42,
+          "seconds": 1.4,
+          "events": [
+            "racket_path"
+          ],
+          "rgbSha256": "f08d4831ad939b55b0d92be29da9c7a0979e646033dc6c2f710fb29fd003a9d1",
+          "subjectSha256": "52082b071d670d48e937d38625dd82074e4e3767b475374036eeb4326fd5d528",
+          "visiblePixels": 7684,
+          "foregroundBoxPx": [
+            57,
+            80,
+            228,
+            251
+          ],
+          "edgeMarginPx": 27,
+          "minChangedSubjectPixels": 4169
+        },
+        {
+          "frame": 57,
+          "seconds": 1.9,
+          "events": [
+            "set"
+          ],
+          "rgbSha256": "acf115431214193751fdf7d22f47befae982054d02db7fb34ba77ae74975da42",
+          "subjectSha256": "4e767566cecd6d886d7041ef9cd92271e79cc217be41aa2c0028e4a73dfaca4b",
+          "visiblePixels": 7422,
+          "foregroundBoxPx": [
+            65,
+            95,
+            228,
+            251
+          ],
+          "edgeMarginPx": 27,
+          "minChangedSubjectPixels": 3959
+        },
+        {
+          "frame": 68,
+          "seconds": 2.266667,
+          "events": [
+            "release"
+          ],
+          "rgbSha256": "47992b3cf3d64926174ebab743474d58b93d9f2043df9a1033bc9b165f3989b7",
+          "subjectSha256": "d62377cedb13cbfe111a483adf9295bf43b7bc260a7ede2e9c65015c9d0711b3",
+          "visiblePixels": 7545,
+          "foregroundBoxPx": [
+            54,
+            83,
+            228,
+            251
+          ],
+          "edgeMarginPx": 27,
+          "minChangedSubjectPixels": 3959
+        },
+        {
+          "frame": 89,
+          "seconds": 2.966667,
+          "events": [
+            "contact"
+          ],
+          "rgbSha256": "4f692e48ff798001ad4fc7ebf94b890958ad53440049caa567f2f336407e5c0a",
+          "subjectSha256": "7a8c69199dd4d6cf9648ac66c9378cf5e3ddad0c3b5f8c8e361a2f0171165487",
+          "visiblePixels": 7574,
+          "foregroundBoxPx": [
+            118,
+            21,
+            229,
+            251
+          ],
+          "edgeMarginPx": 21,
+          "minChangedSubjectPixels": 5581
+        },
+        {
+          "frame": 122,
+          "seconds": 4.066667,
+          "events": [
+            "your_turn"
+          ],
+          "rgbSha256": "e6143bec287f65853c2ac9477192ddf6e056458cf0291ea795ac502fffc0121d",
+          "subjectSha256": "6332ebf39d42b18462e3bcbe2b66a72aa0f1dac40ac7bfe5997faded5bd4edb3",
+          "visiblePixels": 7049,
+          "foregroundBoxPx": [
+            113,
+            91,
+            231,
+            254
+          ],
+          "edgeMarginPx": 24,
+          "minChangedSubjectPixels": 4454
+        },
+        {
+          "frame": 176,
+          "seconds": 5.866667,
+          "events": [
+            "watch"
+          ],
+          "rgbSha256": "90a9fcaa28495c02be4a272290b2a30cd6e1db94bd94fc31367741671f52c17c",
+          "subjectSha256": "972edc4ca2d53702e8fce3950cd9fbf92526e852e4a394174f92b14ed4ac0d08",
+          "visiblePixels": 7342,
+          "foregroundBoxPx": [
+            108,
+            87,
+            235,
+            254
+          ],
+          "edgeMarginPx": 24,
+          "minChangedSubjectPixels": 4133
+        },
+        {
+          "frame": 201,
+          "seconds": 6.7,
+          "events": [
+            "nod"
+          ],
+          "rgbSha256": "f62ce3cbc5954e1faf26efb24c26931f0e4f2a90e893697cc295abaa44f4fe24",
+          "subjectSha256": "b0b2935486335d40271ac58fc86a76c979984ff84c9a7eb88fa30f3c6c30616b",
+          "visiblePixels": 6967,
+          "foregroundBoxPx": [
+            114,
+            92,
+            231,
+            254
+          ],
+          "edgeMarginPx": 24,
+          "minChangedSubjectPixels": 4133
+        }
+      ]
+    },
+    {
+      "id": "child_serve_rehearsal",
+      "sheet": "sheets/child_serve_rehearsal.webp",
+      "bytes": 96394,
+      "samples": [
+        {
+          "frame": 23,
+          "seconds": 0.766667,
+          "events": [
+            "watch"
+          ],
+          "rgbSha256": "03d593af2f3ef6ca992e5d3fbe06678f10016aa999d7281a5b9df9c869f777e1",
+          "subjectSha256": "8aba9f40f15d3b92575fdcda39a31d06b9de19f97f0ad5ff5dac824a3288547b",
+          "visiblePixels": 4782,
+          "foregroundBoxPx": [
+            130,
+            86,
+            191,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 1802
+        },
+        {
+          "frame": 72,
+          "seconds": 2.4,
+          "events": [
+            "track_toss"
+          ],
+          "rgbSha256": "a8547d69d2f165bbc6525ca478bc78c14668dd2b0ef37bf2e3e766f89c05811f",
+          "subjectSha256": "9d567ce0234c038e8929d0464e11cf1c7867c6e5b5163421e9b61d23be99bf7f",
+          "visiblePixels": 4793,
+          "foregroundBoxPx": [
+            131,
+            86,
+            192,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 1802
+        },
+        {
+          "frame": 118,
+          "seconds": 3.933333,
+          "events": [
+            "take_turn"
+          ],
+          "rgbSha256": "9c0fffbd57e41377f5bec8dd2cd0c3d2246212e5a49df7d78de2117a6421f0d5",
+          "subjectSha256": "d55cf6c9cc949c1132298b4d98262005608ed1e95255a631b040aa888f712e85",
+          "visiblePixels": 4917,
+          "foregroundBoxPx": [
+            127,
+            90,
+            197,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 2611
+        },
+        {
+          "frame": 147,
+          "seconds": 4.9,
+          "events": [
+            "check_pose"
+          ],
+          "rgbSha256": "7050a9ab339fc5dde80e12189d321925b7ff032708975bab8064d4be4767654b",
+          "subjectSha256": "33104d8d628d1393583be242f0ea0bdcee9f043ebdc618e24f2f433804052263",
+          "visiblePixels": 5629,
+          "foregroundBoxPx": [
+            81,
+            70,
+            198,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 3199
+        },
+        {
+          "frame": 163,
+          "seconds": 5.433333,
+          "events": [
+            "shadow_toss"
+          ],
+          "rgbSha256": "c3329661d9db94d1fc4f1344ffeba3928f712c48c78ded54cf5e7b6ce6657004",
+          "subjectSha256": "499423cbfe56f2c3d017dc9f3e0bb9046d8b0eca5a5c3d9b448664d9b778ae6a",
+          "visiblePixels": 5559,
+          "foregroundBoxPx": [
+            73,
+            85,
+            198,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 3199
+        },
+        {
+          "frame": 179,
+          "seconds": 5.966667,
+          "events": [
+            "shadow_reach"
+          ],
+          "rgbSha256": "56510990ee5e09f94eb129d8afafadd9ee0184e9c061e3ec9946dcb37fb69725",
+          "subjectSha256": "69b0cce77f329cad5e9ec5f511f4c4abd88846fb7b4d442e9958c1dc14d81490",
+          "visiblePixels": 5315,
+          "foregroundBoxPx": [
+            137,
+            21,
+            199,
+            250
+          ],
+          "edgeMarginPx": 21,
+          "minChangedSubjectPixels": 4150
+        },
+        {
+          "frame": 198,
+          "seconds": 6.6,
+          "events": [
+            "look_back"
+          ],
+          "rgbSha256": "705e54987a1f3c691b9412146260d3d8a1ca92f23311c5430281f12cbb033265",
+          "subjectSha256": "ea5759e273798dd54a62eec07e3c6f921c0e0daad8e173ccbdf727029f168b51",
+          "visiblePixels": 4700,
+          "foregroundBoxPx": [
+            135,
+            90,
+            198,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 3430
+        },
+        {
+          "frame": 222,
+          "seconds": 7.4,
+          "events": [],
+          "rgbSha256": "5d7fc083859fe46963243f156bc934af25d52a465e0a4aad13847907f50f133c",
+          "subjectSha256": "bd4546a36dc126e967787b33b9a30222770b1d5148d1999cdda1bcbe34e31fc9",
+          "visiblePixels": 4790,
+          "foregroundBoxPx": [
+            138,
+            84,
+            198,
+            250
+          ],
+          "edgeMarginPx": 28,
+          "minChangedSubjectPixels": 3340
+        }
+      ]
+    }
+  ]
+}

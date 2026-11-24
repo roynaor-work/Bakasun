@@ -37,7 +37,10 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   const prefetch=url=>{const key=String(url);if(!prefetched.has(key)){const p=fetch(key).then(res=>{if(!res.ok)throw Error(key+' '+res.status);return res.arrayBuffer();});p.catch(()=>{});prefetched.set(key,p);}return prefetched.get(key);};
   class PrefetchGLTFLoader extends GLTFLoader{loadAsync(url,onProgress){const hit=prefetched.get(String(url));return hit?hit.then(buffer=>this.parseAsync(buffer,new URL('./',url).href)):super.loadAsync(url,onProgress);}}
   let motion=null;const motionApi={};
-  const startMotion=()=>import('./tennis-motion.mjs?v=island-v2-20261107-23').then(async api=>{Object.assign(motionApi,api);motion=await api.loadMotion({base:import.meta.url,params});}).catch(()=>{motion=null;});
+  // v25.0 motion v3 (?tennisMotionV3=0 keeps v24.9): more clips on the same skeleton, pose data only; it loads after v1 and a failure keeps v1 alone.
+  let motion3=null;const motion3Api={};
+  const startMotion=()=>import('./tennis-motion.mjs?v=island-v2-20261107-23').then(async api=>{Object.assign(motionApi,api);motion=await api.loadMotion({base:import.meta.url,params});}).catch(()=>{motion=null;})
+    .then(()=>motion&&params.get('tennisMotionV3')!=='0'&&import('./tennis-motion-v3.mjs?v=island-v2-20261107-23').then(async api=>{Object.assign(motion3Api,api);motion3=await api.loadMotionV3({base:import.meta.url,params});})).catch(()=>{motion3=null;});
   const characterBuffer=lazyLoad?prefetch(new URL(characterUrl).href):null;
   // The motion clips and the 3D crowd fans wait for the player model's bytes, so they do not share the link with it.
   const modelArrived=lazyLoad?characterBuffer.then(()=>{},()=>{}):null;
@@ -131,25 +134,44 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   // tennis motion v1 (Codex clips): thighs, shins and spine follow the clip; arms and racket stay with the contact IK.
   if(!lazyLoad)startMotion();
   const LEG_MAP=[['Spine','Spine','Chest'],['Chest','Chest',null],['LeftUpLeg','UpperLeg_L','LowerLeg_L'],['LeftLeg','LowerLeg_L','Foot_L'],['RightUpLeg','UpperLeg_R','LowerLeg_R'],['RightLeg','LowerLeg_R','Foot_R']];
-  function applyMotion(ch,i,state,p,dt){
+  const ARM_KEYS=[['R','Right','rightElbow','rightHand'],['L','Left','leftElbow','leftHand']];
+  function applyMotion(ch,i,state,p,dt,pose){
     if(!motion)return;
-    const name=motionApi.clipFor({index:i,player:p,phase:state.phase,serving:p.serving,tossing:state.phase==='toss'&&state.server===i,winner:state.event?.winner},motion.clips),m=ch.motion||(ch.motion={name:null,time:0,from:null,blend:1,dirs:null,w:0});
+    const m=ch.motion||(ch.motion={name:null,time:0,from:null,blend:1,dirs:null,w:0}),tossing=state.phase==='toss'&&state.server===i,winner=state.event?.winner;
+    // v3: a run or a reaction that has played through gives the body back (the game's own pose, or v1) until the moment changes.
+    const v3=motion3?motion3Api.clipForV3({index:i,player:p,phase:state.phase,serving:p.serving,tossing,winner,shot:state.shot,rallyHits:state.rallyHits,halfLength:config.court.halfLength},motion3.clips):null,key3=v3?`v3:${v3.name}${v3.mirror?':m':''}`:null;
+    if(key3!==m.key3){m.key3=key3;m.done3=false;}
+    if(v3&&v3.kind!=='stroke'&&m.name===key3&&m.time>=motion3.clips[v3.name].dur)m.done3=true;
+    const use3=Boolean(v3&&!m.done3),name=use3?key3:v3?.kind==='react'?null:motionApi.clipFor({index:i,player:p,phase:state.phase,serving:p.serving,tossing,winner},motion.clips);
+    if(motion3&&ch.flipX===undefined){ch.root.updateWorldMatrix(true,true);const at=b=>ch.root.worldToLocal(b.getWorldPosition(new T.Vector3())),scale=ch.root.getWorldScale(new T.Vector3()).y||1,world=b=>b.getWorldPosition(new T.Vector3());
+      ch.flipX=at(ch.bones.UpperLeg_L).x>=0?1:-1;/* the clips' +X is the character's left */
+      ch.legScale=(world(ch.bones.UpperLeg_L).distanceTo(world(ch.bones.LowerLeg_L))+world(ch.bones.LowerLeg_L).distanceTo(world(ch.bones.Foot_L)))/.78;
+      ch.armLen=Object.fromEntries(['R','L'].map(k=>[k,[world(ch.bones['UpperArm_'+k]).distanceTo(world(ch.bones['LowerArm_'+k]))/scale,world(ch.bones['LowerArm_'+k]).distanceTo(world(ch.bones['Hand_'+k]))/scale]]));ch.hipsDrop=0;}
     // Clips the package did not admit (standing, running right, celebration) return null: the game's own pose is kept, and the clip pose is faded in/out
     // over 0.15 s against the pose the bones already hold, so nothing pops on entering or leaving a clip.
     m.w=T.MathUtils.clamp(m.w+(name?1:-1)*dt/.15,0,1);
     if(name){
-      const clip=motion.clips[name];
-      if(m.name!==name){m.from=m.dirs;m.name=name;m.time=0;m.blend=m.from?0:1;}
-      const stroke=p.swing>0&&state.phase==='rally'&&!p.serving&&/^(forehand|backhand)/.test(name);
+      const clip=use3?motion3.clips[v3.name]:motion.clips[name];
+      if(m.name!==name){m.from=m.dirs;m.name=name;m.time=0;m.blend=m.from?0:1;m.arms=null;}
+      const stroke=p.swing>0&&state.phase==='rally'&&!p.serving&&(use3?v3.kind==='stroke':/^(forehand|backhand)/.test(name));
       if(stroke)m.time=motionApi.strokeTime(clip,1-p.swing/(p.swingDuration||config.player.swingSeconds),config.animation.contactFraction);
       else if(name==='serve_toss')m.time=Math.min(clip.dur,(state.tossProgress||0)*clip.dur);
-      else m.time+=dt*(/^run/.test(name)?T.MathUtils.clamp(Math.hypot(p.vx||0,p.vz||0)/3.5,.6,1.6):1);
+      else m.time+=dt*(use3&&v3.kind==='react'?motion3Api.V3_RULES.reactSpeed:(use3?v3.kind==='run':/^run/.test(name))?T.MathUtils.clamp(Math.hypot(p.vx||0,p.vz||0)/3.5,.6,1.6):1);
       m.blend=Math.min(1,m.blend+dt/.15);
-      const dirs=motionApi.segmentDirections(motion.bones,motionApi.sampleClip(clip,m.time));m.dirs=dirs;m.shown=m.from&&m.blend<1?motionApi.blendDirections(m.from,dirs,T.MathUtils.smoothstep(m.blend,0,1)):dirs;
+      let dirs;m.hips=0;
+      if(use3){const sampled=motion3Api.poseV3(motion3.bones,clip,m.time,v3.mirror);dirs=sampled.dirs;m.hips=sampled.hips;if(ch.flipX<0)for(const d of Object.values(dirs))d[0]=-d[0];if(v3.kind==='react')m.arms=dirs;}
+      else dirs=motionApi.segmentDirections(motion.bones,motionApi.sampleClip(clip,m.time));
+      m.dirs=dirs;m.shown=m.from&&m.blend<1?motionApi.blendDirections(m.from,dirs,T.MathUtils.smoothstep(m.blend,0,1)):dirs;
     }else if(m.name){m.name=null;m.from=null;}
     ch.motionName=name;
+    // v3 hip height: a crouch lowers the body by the clip's amount (scaled to this character's legs), eased so entering and leaving never pops.
+    if(motion3){const goal=(name&&use3?m.hips:0)*ch.legScale;ch.hipsDrop+=(goal-ch.hipsDrop)*(1-Math.exp(-Math.max(0,dt)*14));if(Math.abs(ch.hipsDrop)>1e-4){ch.root.position.y+=ch.hipsDrop/(holders[i].getWorldScale(new T.Vector3()).y||1);ch.root.updateWorldMatrix(true,true);}}
     if(m.w<=0||!m.shown)return;
     const rootQ=ch.root.getWorldQuaternion(new T.Quaternion()),rootInv=rootQ.clone().invert(),weight=T.MathUtils.smoothstep(m.w,0,1);
+    // v3 reactions after the point: both arms follow the clip too (no stroke is in play, the contact IK is idle); the hand targets are replaced before the arm solve.
+    if(m.arms&&pose&&weight>0)for(const [k,side,elbowKey,handKey] of ARM_KEYS){const upper=ch.bones['UpperArm_'+k];if(!upper)continue;
+      const shoulder=ch.root.worldToLocal(upper.getWorldPosition(new T.Vector3())).toArray(),t=motion3Api.armTargets(m.arms,side,shoulder,ch.armLen[k][0],ch.armLen[k][1]);
+      pose[elbowKey]=pose[elbowKey].map((v,j)=>v+(t.elbow[j]-v)*weight);pose[handKey]=pose[handKey].map((v,j)=>v+(t.hand[j]-v)*weight);}
     for(const [key,boneName,childName] of LEG_MAP){
       const bone=ch.bones[boneName];if(!bone)continue;
       const child=childName?ch.bones[childName]:(ch.bones.UpperChest||ch.bones.Neck);if(!child)continue;
@@ -190,7 +212,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
       ch.root.position.set(0,0,pose.step);
       if(!p.running){ch.bones.UpperLeg_L.rotation.x-=pose.step*1.6;ch.bones.LowerLeg_L.rotation.x+=pose.knee;ch.bones.Foot_L.rotation.x-=pose.knee*.5;ch.bones.LowerLeg_R.rotation.x+=pose.knee*.5;}
       ch.bones.Chest.rotation.y+=pose.chest;ch.root.updateWorldMatrix(true,true);
-      applyMotion(ch,i,state,p,dt);ch.root.updateWorldMatrix(true,true);
+      applyMotion(ch,i,state,p,dt,pose);ch.root.updateWorldMatrix(true,true);
       const rk=config.animation.racket,u=1-p.swing/(p.swingDuration||config.player.swingSeconds);
       const base=p.serving||state.phase==='toss'&&state.server===i?rk.serveRotation:p.stroke==='backhand'?rk.backhandRotation:rk.handRotation,rotation=[...base];
       if(p.swing>0){let follow=T.MathUtils.clamp((u-config.animation.contactFraction)/(config.animation.recoveryFraction-config.animation.contactFraction),0,1);follow=follow*follow*(3-2*follow);const end=p.serving?rk.serveFollowAngle:(p.stroke==='backhand'?-1:1)*rk.followAngle;rotation[2]=T.MathUtils.lerp(base[2],end,follow);}
@@ -273,7 +295,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   function pose25(){const local=(ch,o)=>{if(!o)return null;const v=ch.root.worldToLocal(o.getWorldPosition(new T.Vector3()));return [+v.x.toFixed(2),+v.y.toFixed(2),+v.z.toFixed(2)];},
     screen=o=>{if(!o)return null;const v=o.getWorldPosition(new T.Vector3()).project(camera);return [Math.round((v.x+1)*canvas.clientWidth/2),Math.round((1-v.y)*canvas.clientHeight/2)];};
    return characters.map(ch=>{const head=ch.headBone||(ch.headBone=ch.root.getObjectByName('Head'));return {on:Boolean(poseHolds),mode:ch.pose25Ease>0?ch.pose25:'none',w:+(ch.pose25Ease||0).toFixed(2),racket:local(ch,ch.racketHead),hand:local(ch,ch.hand),head:local(ch,head),screen:{racket:screen(ch.racketHead),hand:screen(ch.hand),head:screen(head),hips:screen(ch.bones.Hips)}};});}
-  function metrics(){return {pose25:pose25(),decals:{outX:outX.visible,outXAt:outX.visible?[+outX.position.x.toFixed(2),+outX.position.z.toFixed(2)]:null,drawnX:faultMark.visible,receiveArrow:receiveArrow.visible,receiveArrowX:receiveArrow.visible?+receiveArrow.position.x.toFixed(2):null},load:{mode:lazyLoad?'v25':'v24',venueMs:Math.round(loadMarks.venue??-1),charactersMs:Math.round(loadMarks.characters??-1),prefetched:prefetched.size,crowd:stadium12?.metrics?.crowd??null,crowdLate:stadium12?.metrics?.crowdLate??null},grip:characters.map(c=>c.grip?{curled:c.grip.curled.length,racket:'tennis-grip-v1'}:null),ready:characters.map(c=>{const hand=c.hand?.getWorldPosition(new T.Vector3()),head=c.racketHead?.getWorldPosition(new T.Vector3());return {on:Boolean(readyPose),ease:+(c.readyEase||0).toFixed(2),headAboveHand:hand&&head?+(head.y-hand.y).toFixed(3):null};}),tennisV7:false,stadium11:stadium11?.metrics??null,stadium12:stadium12?.metrics??null,motion:{loaded:Boolean(motion),clips:characters.map(c=>c.motionName||null)},v7Fallbacks,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,quality,pixelRatio:renderer.getPixelRatio(),...environment.metrics(),...courtPresentation.metrics(),...effects.metrics(),ballSurfaceOffset:.09,cameraFollow,cameraInspected,reachOffsetLimit:.55,reachSpeedLimit:3.2,shadows:renderer.shadowMap.enabled,characterLoaded,shirtColors:[r.shirtColor,config.opponentShirtColor],frames:frameCount,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,rig:characters.map((ch,i)=>({bodyHeight:ch.bodyHeight,facing:holders[i].rotation.y,hips:ch.bones.Hips.rotation.toArray().slice(0,3),chest:ch.bones.Chest.rotation.toArray().slice(0,3),rightArm:ch.bones.UpperArm_R.quaternion.toArray(),legs:['UpperLeg_L','LowerLeg_L','Foot_L','UpperLeg_R','LowerLeg_R','Foot_R'].map(n=>ch.bones[n].quaternion.toArray()),step:ch.root.position.z,reachOffset:ch.reachOffset.toArray(),reachSpeed:ch.reachSpeed,displayLunge:ch.displayLunge,contactWeight:ch.contactWeight,contactIKWeight:ch.contactIKWeight,contactDistance:ch.contactDistance,rightHand:ch.hand.getWorldPosition(new T.Vector3()).toArray(),racketHead:ch.racketHead.getWorldPosition(new T.Vector3()).toArray()}))};}
+  function metrics(){return {pose25:pose25(),motion3:{on:Boolean(motion3),hips:characters.map(c=>+(c.hipsDrop||0).toFixed(3)),flipX:characters.map(c=>c.flipX??null)},decals:{outX:outX.visible,outXAt:outX.visible?[+outX.position.x.toFixed(2),+outX.position.z.toFixed(2)]:null,drawnX:faultMark.visible,receiveArrow:receiveArrow.visible,receiveArrowX:receiveArrow.visible?+receiveArrow.position.x.toFixed(2):null},load:{mode:lazyLoad?'v25':'v24',venueMs:Math.round(loadMarks.venue??-1),charactersMs:Math.round(loadMarks.characters??-1),prefetched:prefetched.size,crowd:stadium12?.metrics?.crowd??null,crowdLate:stadium12?.metrics?.crowdLate??null},grip:characters.map(c=>c.grip?{curled:c.grip.curled.length,racket:'tennis-grip-v1'}:null),ready:characters.map(c=>{const hand=c.hand?.getWorldPosition(new T.Vector3()),head=c.racketHead?.getWorldPosition(new T.Vector3());return {on:Boolean(readyPose),ease:+(c.readyEase||0).toFixed(2),headAboveHand:hand&&head?+(head.y-hand.y).toFixed(3):null};}),tennisV7:false,stadium11:stadium11?.metrics??null,stadium12:stadium12?.metrics??null,motion:{loaded:Boolean(motion),clips:characters.map(c=>c.motionName||null)},v7Fallbacks,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,quality,pixelRatio:renderer.getPixelRatio(),...environment.metrics(),...courtPresentation.metrics(),...effects.metrics(),ballSurfaceOffset:.09,cameraFollow,cameraInspected,reachOffsetLimit:.55,reachSpeedLimit:3.2,shadows:renderer.shadowMap.enabled,characterLoaded,shirtColors:[r.shirtColor,config.opponentShirtColor],frames:frameCount,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,rig:characters.map((ch,i)=>({bodyHeight:ch.bodyHeight,facing:holders[i].rotation.y,hips:ch.bones.Hips.rotation.toArray().slice(0,3),chest:ch.bones.Chest.rotation.toArray().slice(0,3),rightArm:ch.bones.UpperArm_R.quaternion.toArray(),legs:['UpperLeg_L','LowerLeg_L','Foot_L','UpperLeg_R','LowerLeg_R','Foot_R'].map(n=>ch.bones[n].quaternion.toArray()),step:ch.root.position.z,reachOffset:ch.reachOffset.toArray(),reachSpeed:ch.reachSpeed,displayLunge:ch.displayLunge,contactWeight:ch.contactWeight,contactIKWeight:ch.contactIKWeight,contactDistance:ch.contactDistance,rightHand:ch.hand.getWorldPosition(new T.Vector3()).toArray(),racketHead:ch.racketHead.getWorldPosition(new T.Vector3()).toArray()}))};}
   function dispose(){if(disposed)return;disposed=true;observer?.disconnect();v7?.dispose();stadium11?.dispose();stadium12?.dispose();sun.shadow.dispose?.();characters.forEach(c=>{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);});scene.traverse(disposeObject);resources.forEach(o=>o.dispose?.());resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();scene.clear();}
   setQuality(0);resize();
   return {render,observeFrame,metrics,dispose,setQuality,playerScreenPosition(s){const v=new T.Vector3(s.players[0].x,1.2,s.players[0].z).project(camera);return {x:(v.x+1)*canvas.clientWidth/2,y:(1-v.y)*canvas.clientHeight/2};},inspectCamera(position,target){cameraInspected=Boolean(position);if(position){camera.position.fromArray(position);camera.lookAt(...target);}else positionCamera();camera.updateProjectionMatrix();}};
