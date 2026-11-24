@@ -1,0 +1,29 @@
+{
+ "note": "Soccer v25.0, 24/11/2026. Simulation: node workout/island/tools/soccer-v250-sim.mjs (full 11 v 11, the child proxy of the gameplay tools, 16 matches a stage, seeds 1000-1015, the same seeds in both columns). Browser: workout/island/tools/soccer-v250-touch.mjs (Chromium + SwiftShader, 844x390, CDP touches). The proxy does not tap the pitch and does not curl, so those two parts are not in the simulation.",
+ "simulation": {
+  "matchesPerStage": 16,
+  "columns": ["childGoals", "rivalGoals", "wins", "draws", "childShots", "rivalKeeperSaveRate"],
+  "v24.9": {"1": [9.50, 0.00, 1.00, 0.00, 15.8, 0.35], "2": [6.44, 0.00, 1.00, 0.00, 13.4, 0.43], "3": [5.63, 0.19, 1.00, 0.00, 11.8, 0.41], "4": [4.31, 0.44, 1.00, 0.00, 11.3, 0.46], "5": [2.81, 0.81, 0.75, 0.13, 9.8, 0.54]},
+  "v25.0": {"1": [8.63, 0.00, 1.00, 0.00, 15.2, 0.45], "2": [5.19, 0.00, 1.00, 0.00, 13.6, 0.59], "3": [4.00, 0.00, 1.00, 0.00, 12.1, 0.58], "4": [3.19, 0.44, 0.94, 0.06, 9.9, 0.57], "5": [2.69, 1.00, 0.69, 0.13, 8.6, 0.54]}
+ },
+ "tuningRuns": {
+  "note": "8-12 matches a stage, stages 2 and 5, the same seeds as the v24.9 column of each run. What was tried before the shipped defence.",
+  "manToManFromEveryRole": {"stage2": [7.42, 0.00], "stage5": [3.25, 0.58], "v24.9SameSeeds": {"stage2": [6.17, 0.00], "stage5": [2.83, 0.67]}, "finding": "markers taken from passing lanes opened the middle: easier for the child. The shipped markers come only from covering zones."},
+  "secondManHoldsOff2.6m": {"stage2": [6.25, 0.00], "stage5": [2.88, 1.00]},
+  "secondManDivesIn0.9m": {"stage2": [6.13, 0.25], "stage5": [3.25, 1.13]},
+  "v24.9SameSeeds": {"stage2": [6.25, 0.00], "stage5": [2.88, 0.75]}
+ },
+ "browser": {
+  "viewport": "844x390, touch",
+  "selectedPlayerHeightPixels": {"v24.9": 32.8, "v25.0": 40.5, "cameraDistanceMetres": {"v24.9": 25.6, "v25.0": 20.9}},
+  "tapPass": {"tapAtPixels": [476, 105], "event": "tap-pass to the tapped team-mate, ground pass", "selectedAfter": "the receiver", "ballOwnerAfter": "the receiver"},
+  "tapSpace": {"tapAtPixels": [689, 85], "event": "tap-pass, space, a through ball for the nearest runner"},
+  "tapSwitch": {"event": "switch (tap) to the tapped team-mate while the rival has the ball"},
+  "freeKick": {"wallMen": 3, "wallDistanceMetres": [9.41, 9.4, 9.44], "targetMovedByStickMetres": [-2.2, -3.24], "shot": "curl: free", "peakHeightMetres": 3.02, "curlRadPerSecond": 1.15, "outcome": "goal"},
+  "corner": {"targetMovedByStick": [[45, -1.46], [41.9, 0.39]], "event": "loft to the target for a team-mate"},
+  "curl": {"shot": "curl: curl", "bendOffStraightLineMetres": 1.26, "outcome": "goal"},
+  "rivalFreeKick": {"wallMen": 3, "wallTeam": "the child's", "wallDistanceMetres": [9.41, 9.41, 9.45]},
+  "defenceStage5": {"gameSeconds": 20, "framesTheChildHadTheBall": 195, "aRivalHadTheSecondManJob": 0.22, "aRivalHadAMarkingJobFromTheTacticsOrV250": 0.97, "twoRivalsWithin4Metres": 0.087}
+ },
+ "offline": {"assetsMB": 91.1, "capMB": 92, "withAppCodeMB": 105.5}
+}
