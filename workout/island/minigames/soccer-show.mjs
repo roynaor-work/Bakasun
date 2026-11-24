@@ -190,7 +190,9 @@ export function createSoccerShowTimeline(cfg=SOCCER_SHOW_DEFAULTS,pitch={length:
     metrics(){return {phase,hold,elapsed:t,starts,shorts,reason,cast:cast?{scorer:cast.scorer,mates:cast.mates,keeper:cast.keeper,team:cast.team}:null,wall:cuts?.wall??null,cuts:cuts?.segments.map(s=>({cam:s.cam,span:+(s.to-s.from).toFixed(3),rate:s.rate,wall:+s.wall.toFixed(3)}))??null};},
     skip(){tap=true;},
     /** Match events (drained by the session after the frame): a post and a keeper dive may earn a short replay. */
-    event(e,clock){if(e?.type==='post')pendingPost={at:clock};else if(e?.type==='dive')pendingDive={player:e.player,at:clock};},
+    event(e,clock){if(e?.type==='post')pendingPost={at:clock};else if(e?.type==='dive')pendingDive={player:e.player,at:clock};
+      // v25.0 (`short.parry`, set by soccer-r250.mjs): a save pushed round the post is replayed while the corner is set up.
+      else if(e?.type==='parry'&&e.kind==='corner'&&cfg.short.parry)pendingPost={at:clock,save:true};},
     update(live,dt,recorder){
       const step=Math.max(0,Number.isFinite(dt)?dt:0),enteredGoal=live.phase==='goal'&&lastPhase!=='goal',enteredFinish=live.phase==='finished'&&lastPhase!=='finished';lastPhase=live.phase;
       if(!hold)shortCooldown=Math.max(0,shortCooldown-step);playSeconds=live.phase==='playing'?playSeconds+step:0;
@@ -219,10 +221,10 @@ export function createSoccerShowTimeline(cfg=SOCCER_SHOW_DEFAULTS,pitch={length:
           if(shortCooldown>0||!(saved||post))break;
           const at=saved?clock:pendingPost.at,anchor={x:0,y:0,z:0};recorder.ballAt(at,anchor);
           const next=shortCuts({at,oldest:recorder.oldest,latest:recorder.latest},cfg.short);
-          pendingPost=pendingDive=null;
+          const parried=Boolean(!saved&&pendingPost?.save);pendingPost=pendingDive=null;
           if(!next||playSeconds<cfg.short.minPlaySeconds&&saved)break;
           cuts=next;cursor=replayCursor(cuts,0);shortCooldown=cfg.short.cooldown;
-          shortAnchor={anchor,goalDir:Math.sign(anchor.x)||1,cameraSide:Math.sign(live.attackDir||1)||1,kind:saved?'save':'post'};
+          shortAnchor={anchor,goalDir:Math.sign(anchor.x)||1,cameraSide:Math.sign(live.attackDir||1)||1,kind:saved||parried?'save':'post'};
           begin('short',{holdModel:true});reason=shortAnchor.kind;
         }
       }

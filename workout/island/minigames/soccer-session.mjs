@@ -29,6 +29,8 @@ import {soccerFullEnabled,applySoccerFull,soccerRadarLayout,drawSoccerRadar} fro
 import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soccer-r241.mjs?v=island-v2-20261107-23';
 // v24.9 (soccer-r249.mjs, `?soccerV249=0` = v24.8): closer camera and brighter markers, no text pill for ordinary touches, the stage card steps aside.
 import {applySoccerV249View,soccerHud249Enabled,soccerCueShown,SOCCER_V249} from './soccer-r249.mjs';
+// v25.0 (soccer-r250.mjs, `?soccerV250=0` = v24.9): closer camera, taps on the pitch (pass to a team-mate, into space, select in defence), aimed set pieces.
+import {applySoccerV250View,soccerTap250Enabled,soccerTapMate,soccerIsTap} from './soccer-r250.mjs';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -70,7 +72,7 @@ export function soccerActionLabels(state,config){
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
   const {balance:sourceBalance,canvas,controls,status,t}=ctx,fullOn=!ctx.drill&&soccerFullEnabled(),teamsKey=fullOn?'11':resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS);
-  const balance=applySoccerV249View(applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey)))),ctx.drill?{enabled:false,look:false}:{}),hud249=!ctx.drill&&soccerHud249Enabled();
+  const balance=applySoccerV250View(applySoccerV249View(applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey)))),ctx.drill?{enabled:false,look:false}:{}),ctx.drill?{enabled:false,saveReplay:false}:{}),hud249=!ctx.drill&&soccerHud249Enabled();
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
@@ -214,13 +216,37 @@ export function startSoccer(ctx) {
       if(event.type==='foul'){feedback.textContent=event.penalty?'עבירה · פנדל':event.advantage?'עבירה · בעיטה חופשית':'עבירה';feedback.dataset.action='foul';feedback.hidden=false;feedbackTime=1.6;return;}
       // Full match: the referee lets play go on after a foul (Law 5); the free kick comes back only if the ball is lost within a few seconds.
       if(event.type==='advantage'){feedback.textContent='יתרון · ממשיכים';feedback.dataset.action='advantage';feedback.hidden=false;feedbackTime=1.6;return;}
+      // v25.0: the wall's block shows for both teams; the child's curled shot and his ball into space get a short word.
+      if(event.type==='wall-block'){feedback.textContent='החומה חסמה';feedback.dataset.action='blocked';feedback.hidden=false;feedbackTime=1.2;return;}
       if(event.team===1||event.player!==undefined&&model.getState().players[event.player]?.team===1)return;
+      if(event.type==='shot'&&event.curl){feedback.textContent='בעיטה מסובבת';feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
+      if(event.type==='tap-pass'&&event.space){feedback.textContent='כדור לעומק';feedback.dataset.action='pass';feedback.hidden=false;feedbackTime=1;return;}
       if(event.type==='shot'&&event.aerial&&SOCCER_AIR_LABELS[event.aerial]){feedback.textContent=SOCCER_AIR_LABELS[event.aerial];feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
       const key={pass:'pass',loft:'loft',shot:'shot',header:'header',clearance:'header',steal:event.won?'steal':'blocked','slide-contact':event.won?'steal':'blocked',possession:'received',switch:'switch','heavy-touch':'heavyTouch',dive:'dive'}[event.type];
       if(!key||!soccerCueShown(key,{enabled:hud249}))return;
       // Ordinary AI touches stay quiet; the selected player's actions get a cue.
       if(event.type==='possession'&&event.player!==model.getState().controlled)return;
       feedback.textContent=t(key==='pass'&&event.target==null?'soccer.pass':`soccer.feedback.${key}`,{number:number(event.target??event.player)});feedback.dataset.action=key;feedback.hidden=false;feedbackTime=1.1;
+    }
+    // v25.0 taps on the pitch (`?soccerTap250=0`): a short, still touch on the grass or on the stick's pad. On a team-mate: the pass to him (in
+    // defence he is selected); on open grass ahead, with the ball: the ball into that space. A drag is the stick as before.
+    const tapOn=fullOn&&soccerTap250Enabled(),tapDown=new Map();let tapOrder=null;
+    if(tapOn){
+      const hx=balance.pitch.length/2,hz=balance.pitch.width/2;
+      const onDown=event=>{if(paused||!view||!contractsReady||view.loading()||view.replaying||shootout)return;const node=event.target;if(node!==canvas&&node!==pad&&node!==zone)return;tapDown.set(event.pointerId,{x:event.clientX,y:event.clientY,at:performance.now(),grass:node===canvas});};
+      const onUp=event=>{
+        const down=tapDown.get(event.pointerId);tapDown.delete(event.pointerId);
+        if(!down||event.type==='pointercancel'||paused||!soccerIsTap(performance.now()-down.at,Math.hypot(event.clientX-down.x,event.clientY-down.y)))return;
+        const s=model.getState(),playing=s.phase==='playing';if(s.role==='keeper'||!playing&&!(s.phase==='restartReady'&&s.restart?.team===0))return;
+        const rect=canvas.getBoundingClientRect(),at={x:down.x-rect.left,y:down.y-rect.top},shown=[],skip=playing?s.controlled:s.restart.player;
+        for(const p of s.players){if(p.team!==0||p.role==='keeper'||p.id===skip)continue;const q=view.screenPoint(p.x,.9,p.z);if(q.front)shown.push({id:p.id,x:q.x,y:q.y});}
+        const mate=soccerTapMate(shown,at);
+        if(mate!==null)tapOrder={mate};
+        else if(down.grass&&playing&&s.mode==='attack'&&s.ball.owner===s.controlled){const grass=view.groundPoint(at.x,at.y);if(!grass||Math.abs(grass.x)>hx||Math.abs(grass.z)>hz)return;tapOrder={x:grass.x,z:grass.z};}
+        else return;
+        const ring=element('span','soccer-tap-ring');ring.setAttribute('aria-hidden','true');ring.style.left=`${down.x}px`;ring.style.top=`${down.y}px`;document.body.append(ring);setTimeout(()=>ring.remove(),420);events.signal.addEventListener('abort',()=>ring.remove(),{once:true});
+      };
+      window.addEventListener('pointerdown',onDown,{...options,capture:true});window.addEventListener('pointerup',onUp,{...options,capture:true});window.addEventListener('pointercancel',onUp,{...options,capture:true});
     }
     view=createSoccerView({canvas,config:viewConfig,lite:Boolean(ctx.lite),onEdge:point=>{edge.hidden=!point;if(point){edge.style.left=`${point.x}px`;edge.style.top=`${point.y}px`;edge.style.transform=`translate(-50%,-50%) rotate(${point.angle}rad)`;}},onContextLost:()=>{if(!disposed){ctx.onError?.('minigame.soccer.webglError');ctx.cancel();}}});
     const plans=new Map(),icons={shot:'shoot',pass:'pass',sprint:'sprint',slide:'slide',switch:'switch',tackle:'steal',throw:'pass',corner:'pass',short:'pass',goal_kick:'shoot',free_kick:'shoot',dive:'slide',rush:'sprint',roll:'pass',punt:'shoot'};
@@ -270,10 +296,10 @@ export function startSoccer(ctx) {
       // stadium every frame compiled its shaders for nothing and starved the main
       // thread that decodes the real assets (measured 01/11/2026: 6.7 s to 3.4 s).
       // soccerShow v1: while the view holds (replay, celebration) the model is not stepped and the frame's input is dropped (a tap skips the replay).
-      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0){const sampled=input.sample(model.getState().attackDir);if(lobMode(model.getState())&&sampled.switchPlayer){sampled.lobPressed=true;sampled.switchPlayer=false;}else if(sampled.switchPlayer&&(trickAlt||airChoice(model.getState())?.alt)){trickAlt=true;sampled.airAlt=true;sampled.switchPlayer=false;}if(!sampled.switchPlayer&&!sampled.airAlt)trickAlt=false;if(!view.hold)model.update(dt,sampled);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
+      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0){const sampled=input.sample(model.getState().attackDir);if(lobMode(model.getState())&&sampled.switchPlayer){sampled.lobPressed=true;sampled.switchPlayer=false;}else if(sampled.switchPlayer&&(trickAlt||airChoice(model.getState())?.alt)){trickAlt=true;sampled.airAlt=true;sampled.switchPlayer=false;}if(!sampled.switchPlayer&&!sampled.airAlt)trickAlt=false;if(tapOrder)sampled.tap=tapOrder;if(!view.hold)model.update(dt,sampled);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       pad.style.pointerEvents=view.replaying?'none':'';banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
-      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅',freeKick:'בעיטה חופשית',penalty:'פנדל'}[s.restart.type]:s.phase==='halftime'?'↔':'';
+      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':s.phase.startsWith('restart')?(s.restart.aim250?{corner:'🚩 המקל מכוון את ההגבהה',freeKick:'בעיטה חופשית · המקל מכוון'}[s.restart.type]:null)||{throwIn:'🙌',corner:'🚩',goalKick:'🥅',freeKick:'בעיטה חופשית',penalty:'פנדל'}[s.restart.type]:s.phase==='halftime'?'↔':'';
       phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;const showTag=view.replaying?'replay':'';if(phaseBanner.dataset.show!==showTag)phaseBanner.dataset.show=showTag;
       audio.update(s,view.crowdMood);
       for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);buzz(event);telemetry?.event(event);view.noteEvent?.(event);}
