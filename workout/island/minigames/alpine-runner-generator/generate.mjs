@@ -1,5 +1,5 @@
 import { API_VERSION, SEGMENT_LENGTH_M, EPOCH_SEGMENTS, MAX_SEGMENTS, MAX_BATCH_SEGMENTS,
-  LANES, DIFFICULTIES, THEMES, PATTERNS, configuration, integer, freeze, round } from './profiles.mjs?v=island-v2-20261107-23';
+  LANES, DIFFICULTIES, THEMES, PATTERNS, configuration, integer, freeze, round } from './profiles.mjs?v=island-v2-20261107-24';
 
 // FNV-1a over UTF-16 units, followed by Mulberry32. No ambient state or random source.
 function randomFor(config, epoch, domain) {

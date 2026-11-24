@@ -1,10 +1,10 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-23';
-import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-23';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-23';
-import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-23';
-import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-23';
-import {navalHarderPick} from './naval-harder.mjs?v=island-v2-20261107-23';
-import {navalAimV24,navalSubV24,navalV24Config} from './naval-v24.mjs?v=island-v2-20261107-23';
+import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-24';
+import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-24';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-24';
+import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-24';
+import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-24';
+import {navalHarderPick} from './naval-harder.mjs?v=island-v2-20261107-24';
+import {navalAimV24,navalSubV24,navalV24Config} from './naval-v24.mjs?v=island-v2-20261107-24';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){

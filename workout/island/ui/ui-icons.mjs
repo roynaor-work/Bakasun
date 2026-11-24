@@ -9,7 +9,7 @@ const param=(name,search)=>{try{return new URLSearchParams(search).get(name);}ca
 export function uiIconsEnabled(search=globalThis.location?.search||''){return param('uiIcons',search)!=='0';}
 /** The ids copied to assets/ui-icons-v2 (normal and pressed). */
 export const UI_ICONS=Object.freeze(['pause','resume','sound','mute','coin']);
-export const uiIconUrl=(id,state='normal',base=import.meta.url)=>new URL(`../assets/ui-icons-v2/${state}/${id}.svg?v=island-v2-20261107-23`,base).href;
+export const uiIconUrl=(id,state='normal',base=import.meta.url)=>new URL(`../assets/ui-icons-v2/${state}/${id}.svg?v=island-v2-20261107-24`,base).href;
 /** Decorative image of one icon (the button keeps its own aria-label). */
 export function uiIcon(id,size=32,state='normal'){
  const img=document.createElement('img');img.src=uiIconUrl(id,state);img.width=size;img.height=size;img.alt='';img.decoding='async';img.draggable=false;

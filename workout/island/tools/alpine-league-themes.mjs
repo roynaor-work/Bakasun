@@ -1,6 +1,6 @@
-import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-23';
-import {stageInfo, equipmentFor, RIVALS, STAGE_COUNT} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-23';
-import {stageGoals} from '../minigames/alpine-league-stages.mjs?v=island-v2-20261107-23';
+import {runAlpineSession} from '../minigames/alpine-session.mjs?v=island-v2-20261107-24';
+import {stageInfo, equipmentFor, RIVALS, STAGE_COUNT} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-24';
+import {stageGoals} from '../minigames/alpine-league-stages.mjs?v=island-v2-20261107-24';
 
 /** Ski league theme page (review tool, not part of the app): the real session (engine, controls, view, HUD) on league stage `?stage=n`,
  * with the setup the island engine would hand it. Used by tools/alpine-league-browser.mjs to show each theme at full size, steered by real

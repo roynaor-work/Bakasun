@@ -6,7 +6,7 @@
  * `?soccerFull=0` (or an explicit `?soccerTeams=`) gives back the v24 small match exactly: nothing below is read then.
  * Pure: no three.js and no DOM; the URL is read only when a browser location exists. */
 import {applySoccerTeams} from './soccer-teams.mjs';
-import {soccerSlideRecoverV241Enabled,SOCCER_SLIDE_V241} from './soccer-r241.mjs?v=island-v2-20261107-23';
+import {soccerSlideRecoverV241Enabled,SOCCER_SLIDE_V241} from './soccer-r241.mjs?v=island-v2-20261107-24';
 
 const read=(name,search=globalThis.location?.search)=>{try{return typeof search==='string'?new URLSearchParams(search).get(name):null;}catch{return null;}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));

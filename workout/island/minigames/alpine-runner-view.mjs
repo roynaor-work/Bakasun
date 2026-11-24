@@ -1,7 +1,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {alpineThemesEnabled, createThemeStage, loadThemePack, START_SIGN_M} from './alpine-runner-themes.mjs?v=island-v2-20261107-23';
+import {alpineThemesEnabled, createThemeStage, loadThemePack, START_SIGN_M} from './alpine-runner-themes.mjs?v=island-v2-20261107-24';
 
 const ASSETS = new URL('../assets/alpine-runner/', import.meta.url);
 const SKIER = 'runner/characters/skier-coral.glb';

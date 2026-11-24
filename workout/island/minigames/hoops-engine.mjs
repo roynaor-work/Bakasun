@@ -3,9 +3,9 @@
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
 import {specialGain,stickAssist,reboundTiming,reboundWeight,reboundCue,shotCue} from './hoops-v250.mjs';
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-23';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261107-23';
-import {teamThink} from './hoops-ai.mjs?v=island-v2-20261107-23';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-24';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261107-24';
+import {teamThink} from './hoops-ai.mjs?v=island-v2-20261107-24';
 import {runtimeRatings,playerAbilities,positionName} from './hoops-roles.mjs';
 import {createHoopsTacticsController} from './hoops-tactics.mjs';
 

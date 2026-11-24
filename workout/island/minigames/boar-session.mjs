@@ -1,5 +1,5 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-23';
-import { pinBoarResults } from '../ui/kid-ux-result.mjs?v=island-v2-20261107-23';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-24';
+import { pinBoarResults } from '../ui/kid-ux-result.mjs?v=island-v2-20261107-24';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */

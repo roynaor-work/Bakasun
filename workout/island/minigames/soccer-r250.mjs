@@ -20,7 +20,7 @@
  *                        set up; the goal replay and the replay of a shot off the post were already there).
  * Engine rules follow soccer-r249.mjs: on in a page unless switched off, off in node unless an option or `search` asks, so every contract
  * written for the earlier match keeps testing that match. Pure: no three.js and no DOM. */
-import {rollBall} from './soccer-physics.mjs?v=island-v2-20261107-23';
+import {rollBall} from './soccer-physics.mjs?v=island-v2-20261107-24';
 const read=(name,search)=>{try{const q=typeof search==='string'?search:globalThis.location?.search;return typeof q==='string'?new URLSearchParams(q).get(name):null;}catch{return null;}};
 const hasPage=search=>typeof (typeof search==='string'?search:globalThis.location?.search)==='string';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));

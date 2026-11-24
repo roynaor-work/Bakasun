@@ -1,15 +1,15 @@
-import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-23';
+import {createUltraTennisCourt,createUltraTennisEffects} from './ultra-tennis-court.mjs?v=island-v2-20261107-24';
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {clone as cloneSkinned} from '../vendor/SkeletonUtils.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {seededRandom} from './tennis.mjs?v=island-v2-20261107-23';
-import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-23';
-import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-23';
-import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-23';
-import {tennisGripEnabled,gripConfig,loadGripRacket,attachGrip,tennisReadyEnabled,readyConfig,readyStance,readyHold,tennisPoseEnabled,pose25Config,pose25Mode,hold25} from './tennis-grip.mjs?v=island-v2-20261107-23';
+import {seededRandom} from './tennis.mjs?v=island-v2-20261107-24';
+import {tennisPose} from './tennis-pose.mjs?v=island-v2-20261107-24';
+import {createTennisEnvironment} from './tennis-environment.mjs?v=island-v2-20261107-24';
+import {v7Enabled,surfaceFor} from './tennis-v7.mjs?v=island-v2-20261107-24';
+import {tennisGripEnabled,gripConfig,loadGripRacket,attachGrip,tennisReadyEnabled,readyConfig,readyStance,readyHold,tennisPoseEnabled,pose25Config,pose25Mode,hold25} from './tennis-grip.mjs?v=island-v2-20261107-24';
 
-export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-23',import.meta.url)}={}) {
+export async function createTennisView(canvas,config,{onQuality=()=>{},characterUrl=new URL('../assets/kid-full.glb?v=island-v2-20261107-24',import.meta.url)}={}) {
   const r=config.render, colors=r.colors, scene=new T.Scene();
   scene.background=new T.Color('#c4dcdf');scene.fog=new T.Fog('#c4dcdf',r.environment.fogNear,r.environment.fogFar);
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
@@ -39,20 +39,20 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   let motion=null;const motionApi={};
   // v25.0 motion v3 (?tennisMotionV3=0 keeps v24.9): more clips on the same skeleton, pose data only; it loads after v1 and a failure keeps v1 alone.
   let motion3=null;const motion3Api={};
-  const startMotion=()=>import('./tennis-motion.mjs?v=island-v2-20261107-23').then(async api=>{Object.assign(motionApi,api);motion=await api.loadMotion({base:import.meta.url,params});}).catch(()=>{motion=null;})
-    .then(()=>motion&&params.get('tennisMotionV3')!=='0'&&import('./tennis-motion-v3.mjs?v=island-v2-20261107-23').then(async api=>{Object.assign(motion3Api,api);motion3=await api.loadMotionV3({base:import.meta.url,params});})).catch(()=>{motion3=null;});
+  const startMotion=()=>import('./tennis-motion.mjs?v=island-v2-20261107-24').then(async api=>{Object.assign(motionApi,api);motion=await api.loadMotion({base:import.meta.url,params});}).catch(()=>{motion=null;})
+    .then(()=>motion&&params.get('tennisMotionV3')!=='0'&&import('./tennis-motion-v3.mjs?v=island-v2-20261107-24').then(async api=>{Object.assign(motion3Api,api);motion3=await api.loadMotionV3({base:import.meta.url,params});})).catch(()=>{motion3=null;});
   const characterBuffer=lazyLoad?prefetch(new URL(characterUrl).href):null;
   // The motion clips and the 3D crowd fans wait for the player model's bytes, so they do not share the link with it.
   const modelArrived=lazyLoad?characterBuffer.then(()=>{},()=>{}):null;
-  if(lazyLoad){modelArrived.then(startMotion);import('./tennis-v12-stadium.mjs?v=island-v2-20261107-23').then(m=>{for(const n of m.STADIUM_FILES)prefetch(new URL(`../assets/tennis-stadium-v1/${n}.glb?v=island-v2-20261107-23`,import.meta.url).href);}).catch(()=>{});}
+  if(lazyLoad){modelArrived.then(startMotion);import('./tennis-v12-stadium.mjs?v=island-v2-20261107-24').then(m=>{for(const n of m.STADIUM_FILES)prefetch(new URL(`../assets/tennis-stadium-v1/${n}.glb?v=island-v2-20261107-24`,import.meta.url).href);}).catch(()=>{});}
   // v24.4 ready stance (?tennisReady=0 off): between strokes the racket is held up in front with both hands (tennis-grip.mjs readyHold).
   const readyOn=tennisReadyEnabled(),readyCfg=readyConfig(config),readyPose=readyOn?readyHold(T,readyCfg):null;
   // v24.5 (?tennisPose=0 off): the racket rises beside the head in the toss and is held a little to the side for a backhand (tennis-grip.mjs).
   const poseCfg=pose25Config(config),poseHolds=tennisPoseEnabled()?{trophy:hold25(T,poseCfg.trophy),backhand:hold25(T,poseCfg.backhand)}:null;
-  const gripCfg=gripConfig(config),gripTemplate=tennisGripEnabled()?loadGripRacket({GLTFLoader,base:import.meta.url,buffer:lazyLoad?prefetch(new URL('../assets/tennis-grip-v1/racket.glb?v=island-v2-20261107-23',import.meta.url).href):undefined}).catch(()=>{v7Fallbacks.push('tennis grip racket');return null;}):null;
+  const gripCfg=gripConfig(config),gripTemplate=tennisGripEnabled()?loadGripRacket({GLTFLoader,base:import.meta.url,buffer:lazyLoad?prefetch(new URL('../assets/tennis-grip-v1/racket.glb?v=island-v2-20261107-24',import.meta.url).href):undefined}).catch(()=>{v7Fallbacks.push('tennis grip racket');return null;}):null;
   if(v7Enabled(config.environment,0,params)){
     try{
-      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-23');
+      const {createTennisV7}=await import('./tennis-v7-venue.mjs?v=island-v2-20261107-24');
       v7=await createTennisV7({scene,config,keep,params,surface:surfaceFor(config.environment.v7,config.stage,params),quality:0,camera});
       if(disposed){v7.dispose();v7=null;}
     }catch(error){v7=null;v7Fallbacks.push('tennis v7 venue');}
@@ -63,8 +63,8 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   }
   // v11: evening sky, skyline, sponsor boards, glow and a billboard crowd between the 3D spectators (?tennisStadium=0 removes it).
   let stadium12=null,stadium11=null;
-  if(v7){try{const {createTennisV12Stadium}=await import('./tennis-v12-stadium.mjs?v=island-v2-20261107-23'),{GLTFLoader:Imported}=await import('../vendor/GLTFLoader.js'),Loader=lazyLoad?PrefetchGLTFLoader:Imported;stadium12=await createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,lateCrowd:lazyLoad?modelArrived:false,GLTFLoader:Loader,base:import.meta.url,camera});if(disposed&&stadium12){stadium12.dispose();stadium12=null;}}catch(error){stadium12=null;v7Fallbacks.push('tennis v12 stadium');}}
-  if(v7){try{const {createTennisV11Stadium}=await import('./tennis-v11-stadium.mjs?v=island-v2-20261107-23');stadium11=await createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,surroundOnly:Boolean(stadium12)});if(disposed&&stadium11){stadium11.dispose();stadium11=null;}}catch(error){stadium11=null;v7Fallbacks.push('tennis v11 stadium');}}
+  if(v7){try{const {createTennisV12Stadium}=await import('./tennis-v12-stadium.mjs?v=island-v2-20261107-24'),{GLTFLoader:Imported}=await import('../vendor/GLTFLoader.js'),Loader=lazyLoad?PrefetchGLTFLoader:Imported;stadium12=await createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,lateCrowd:lazyLoad?modelArrived:false,GLTFLoader:Loader,base:import.meta.url,camera});if(disposed&&stadium12){stadium12.dispose();stadium12=null;}}catch(error){stadium12=null;v7Fallbacks.push('tennis v12 stadium');}}
+  if(v7){try{const {createTennisV11Stadium}=await import('./tennis-v11-stadium.mjs?v=island-v2-20261107-24');stadium11=await createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,surroundOnly:Boolean(stadium12)});if(disposed&&stadium11){stadium11.dispose();stadium11=null;}}catch(error){stadium11=null;v7Fallbacks.push('tennis v11 stadium');}}
   const courtPresentation=v7?{metrics:v7.courtMetrics}:createUltraTennisCourt(scene,config,keep,renderer),effects=createUltraTennisEffects(scene,keep);
   const environment=v7||await createTennisEnvironment(scene,config,keep,renderer,camera),rand=seededRandom(config.seed);
   const ball=v7?v7.ball:new T.Mesh(keep(new T.SphereGeometry(config.ball.radius,20,12)),material(colors.ball,{roughness:.97,emissive:colors.ball,emissiveIntensity:.16}));scene.add(ball);
@@ -81,7 +81,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   // v25 court decals from the Codex tennis-ui-fx-v1 package (assets/tennis-ui-fx-v1, CC0): the red X on the landing point of an out ball for 1.5 s
   // (marks with an id come from the model's stopDead mode; ?tennisOut=v24 keeps the old mark), and the arrow that shows where the child will stand
   // to receive the serve (state.receive, ?tennisReceive=0 has none). Textures load in the background; until then the drawn mark stands in.
-  const decalUrl=name=>new URL(`../assets/tennis-ui-fx-v1/${name}.png?v=island-v2-20261107-23`,import.meta.url).href,texLoader=new T.TextureLoader();
+  const decalUrl=name=>new URL(`../assets/tennis-ui-fx-v1/${name}.png?v=island-v2-20261107-24`,import.meta.url).href,texLoader=new T.TextureLoader();
   const decal=(size,order)=>{const m=new T.Mesh(keep(new T.PlaneGeometry(size,size)),keep(new T.MeshBasicMaterial({transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2,toneMapped:false})));m.rotation.x=-Math.PI/2;m.renderOrder=order;m.visible=false;scene.add(m);return m;};
   const outX=decal(1.9,3),receiveArrow=decal(1.5,3),decalTex={};let outShown=null,outAge=0,lastMarkId=null;
   for(const name of ['out-cross','serve-arrow-left','serve-arrow-center','serve-arrow-right'])texLoader.loadAsync(decalUrl(name)).then(t=>{if(disposed){t.dispose();return;}t.colorSpace=T.SRGBColorSpace;decalTex[name]=keep(t);}).catch(()=>{v7Fallbacks.push('tennis decal '+name);});

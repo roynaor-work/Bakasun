@@ -5,7 +5,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {markHoopsRim} from './hoops-polish-view.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-v2-20261107-23';
+import {parquetTextures,centerLogo,ledTexture,displayCanvas} from './hoops-textures.mjs?v=island-v2-20261107-24';
 
 const LINE=0.05;
 

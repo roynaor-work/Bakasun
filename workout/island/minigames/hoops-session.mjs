@@ -1,22 +1,22 @@
 /** Island Pro Basketball session: connects the 5 on 5 engine, the arena view, input, sound
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
-import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-23';
-import {installHoopsPassDemo} from './kid-hoops-pass-demo.mjs?v=island-v2-20261107-23';
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-24';
+import {installHoopsPassDemo} from './kid-hoops-pass-demo.mjs?v=island-v2-20261107-24';
 import {readHoopsPolish} from './hoops-polish-flags.mjs';
 import {createHoopsScreens} from './hoops-screens.mjs';
-import {gameContext} from './context.mjs?v=island-v2-20261107-23';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-23';
-import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-23';
+import {gameContext} from './context.mjs?v=island-v2-20261107-24';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-24';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-24';
 import {loadHoopsTactics} from './hoops-tactics.mjs';
 import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-23';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-23';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-23';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-23';
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-23';
-import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-23';
-import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-23';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-24';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-24';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-24';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-24';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-24';
+import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-24';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-24';
 import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
 import {hoopsV250Flags,engineV250,basketReplayTrigger} from './hoops-v250.mjs';
 import {createHoopsV250Hud} from './hoops-v250-hud.mjs';
@@ -65,7 +65,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-23',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-24',import.meta.url).href;screenEl.append(css);
  screenEl.dataset.hoopsShow=show?'v1':'0';
  if(v250.on){const css250=doc.createElement('link');css250.rel='stylesheet';css250.href=new URL('./hoops-v250.css',import.meta.url).href;screenEl.append(css250);}
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
@@ -151,7 +151,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-23');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-24');
   Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,polish,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}

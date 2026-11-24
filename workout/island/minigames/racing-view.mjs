@@ -1,13 +1,13 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {createRacingScenery} from './racing-scenery.mjs?v=island-v2-20261107-23';
-import {createRacingEffects} from './racing-effects.mjs?v=island-v2-20261107-23';
+import {createRacingScenery} from './racing-scenery.mjs?v=island-v2-20261107-24';
+import {createRacingEffects} from './racing-effects.mjs?v=island-v2-20261107-24';
 import {v7Enabled} from './racing-v7.mjs';
 import {createRacingF1, racingLookEnabled} from './racing-f1.mjs';
 import {envV2Enabled, loadEnvV2, buildEnvV2, bake as envBake} from './racing-env-v2.mjs';
 import {tunePaint, tuneMaterial, dressCar, createStandIn, createSpeedLines, CAR_COLORS, CAR_NUMBERS, teamOf} from './racing-car-look.mjs';
-import {racingWallsOn, CLEAR_ZONE} from './racing-offtrack.mjs?v=island-v2-20261107-23';
-import {v3LookOf, loadV3Env, buildV3Env} from './racing-tracks-v3-env.mjs?v=island-v2-20261107-23';
+import {racingWallsOn, CLEAR_ZONE} from './racing-offtrack.mjs?v=island-v2-20261107-24';
+import {v3LookOf, loadV3Env, buildV3Env} from './racing-tracks-v3-env.mjs?v=island-v2-20261107-24';
 
 const PALETTES={
  coast:{sky:'#b7dfed',fog:'#b9dfe7',sea:'#1eafa9',land:'#68a879',sand:'#e4cda1',curb:'#e77950',rock:'#b8a98a'},
@@ -145,7 +145,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  }
  // Reuse GLB meshes with instancing: texture/material identity is retained.
  function ownAsset(root){root.updateMatrixWorld(true);root.traverse(o=>{if(o.isMesh){keep(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material]){keep(m);for(const v of Object.values(m))if(v?.isTexture)keep(v);}}});}
- async function loadAsset(path){const asset=await new GLTFLoader().loadAsync(new URL(path+'?v=island-v2-20261107-23',import.meta.url).href);ownAsset(asset.scene);return asset.scene;}
+ async function loadAsset(path){const asset=await new GLTFLoader().loadAsync(new URL(path+'?v=island-v2-20261107-24',import.meta.url).href);ownAsset(asset.scene);return asset.scene;}
  function plant(source,rows,height){const bounds=new T.Box3().setFromObject(source),size=bounds.getSize(new T.Vector3()),center=bounds.getCenter(new T.Vector3()),scale=height/size.y,base=new T.Matrix4().makeTranslation(-center.x,-bounds.min.y,-center.z);source.traverse(o=>{if(!o.isMesh)return;const inst=new T.InstancedMesh(o.geometry,o.material,rows.length),part=o.matrixWorld.clone(),matrices=[];for(let i=0;i<rows.length;i++){const p=rows[i];dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.heading,0);dummy.scale.setScalar(1);dummy.updateMatrix();const fit=new T.Matrix4().makeScale(scale*p.size,scale*p.size,scale*p.size).multiply(base).multiply(part);matrices.push(dummy.matrix.clone().multiply(fit));}inst.count=0;inst.frustumCulled=false;inst.castShadow=true;inst.receiveShadow=true;foliageParts.push({inst,matrices});scene.add(inst);});}
  const treeRows=[];for(let s=14;s<track.length;s+=17){const p=track.sample(s);for(const sign of [-1,1]){const lane=sign*(track.width/2+(clear?clear+1.5:5)+rnd()*10),row={x:p.x+p.normal.x*lane,y:p.y-1.6,z:p.z+p.normal.z*lane,heading:rnd()*6.28,size:.7+rnd()*.6};if(!clear||track.project(row.x,row.z).distance>track.width/2+clear+1.2)treeRows.push(row);}}
  const failures=[];
@@ -175,7 +175,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  // racing-env-v2: Codex trackside models and textures on the F1 circuits (?racingEnv=v1 or any load problem keeps the procedural trackside)
  let envV2=null,gantry=null,gantryModel=null,artMod=null;
  // racing-broadcast-v1: Codex start gantry (five lamps that follow the start lights). ?racingBroadcastArt=0 or any load problem keeps the env-v2 gantry.
- if(f1Look&&envV2Enabled()&&!disposed){try{artMod=await import('./racing-broadcast-art.mjs?v=island-v2-20261107-23');if(artMod.broadcastArtEnabled())gantryModel=await artMod.loadGantry({GLTFLoader});}catch(e){gantryModel=null;failures.push('broadcast-art');console.warn('broadcast art',e?.message||e);}}
+ if(f1Look&&envV2Enabled()&&!disposed){try{artMod=await import('./racing-broadcast-art.mjs?v=island-v2-20261107-24');if(artMod.broadcastArtEnabled())gantryModel=await artMod.loadGantry({GLTFLoader});}catch(e){gantryModel=null;failures.push('broadcast-art');console.warn('broadcast art',e?.message||e);}}
  if(f1Look&&envV2Enabled()&&!disposed){try{const kit=await loadEnvV2({T,GLTFLoader,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});if(!disposed){envV2=buildEnvV2({T,scene,track,keep,f1:f1Look,kit,night,clear,skip:gantryModel?['start-gantry']:[]});if(gantryModel)try{gantry=artMod.buildGantry({T,scene,track,keep,f1:f1Look,model:gantryModel,bake:envBake});}catch(e){failures.push('gantry');console.warn('gantry',e?.message||e);}}}catch(e){failures.push('env-v2');console.warn('env v2',e?.message||e);}}
  // racing-v24.7: the v3 circuit's sky and trackside models (any load problem keeps the colours only)
  let envV3=null;
@@ -184,7 +184,7 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  if(gantry||(envV2&&!gantryModel))for(const side of [-1,1])leg(track.length-10,side*((track.width+3)/2-.35),.75);
  // racing-crash-fx-v1: Codex spark and dust atlases, six body fragments and a formula tyre for the crash show (?racingCrashAssets=0 or any load problem keeps the boxes and cylinder)
  let crashAssets=false;
- if(crashFxOn&&!disposed){const crashMod=await import('./racing-crash-assets.mjs?v=island-v2-20261107-23');if(crashMod.crashAssetsEnabled()){try{const pack=await crashMod.loadCrashAssets({T,GLTFLoader});if(!disposed)crashAssets=effects.setCrashAssets(pack);}catch(e){failures.push('crash-fx');console.warn('crash fx',e?.message||e);}}}
+ if(crashFxOn&&!disposed){const crashMod=await import('./racing-crash-assets.mjs?v=island-v2-20261107-24');if(crashMod.crashAssetsEnabled()){try{const pack=await crashMod.loadCrashAssets({T,GLTFLoader});if(!disposed)crashAssets=effects.setCrashAssets(pack);}catch(e){failures.push('crash-fx');console.warn('crash fx',e?.message||e);}}}
  let carAsset=null,lowCarAsset=null,treeAsset=null;
  // racing-v11 formula car (Codex asset, 11,868 triangles, no Draco): all five cars, or the player only at low quality. ?racingFormulaCar=0 disables it; any failure keeps the previous cars.
  // Weak device or lite restart (ctx.lite): the previous cars, no 11.8K-triangle formula model at all. ?racingFormulaCar=1 forces it back on, =0 off.
@@ -258,18 +258,18 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
  // racing-v24 (Roy: "only three cars including mine look normal, all the rest look like a toy"): every rival becomes the Codex formula car in three levels of detail
  // picked by the distance (racing-formula-all.mjs); the player keeps the formula car above. ?racingFormulaAll=0 or any load problem keeps the models above.
  let formulaAll=null;
- if(!disposed&&carCount>1){try{const fa=await import('./racing-formula-all.mjs?v=island-v2-20261107-23');if(fa.formulaAllEnabled()){const templates=await fa.loadFormulaAll({T,GLTFLoader});
+ if(!disposed&&carCount>1){try{const fa=await import('./racing-formula-all.mjs?v=island-v2-20261107-24');if(fa.formulaAllEnabled()){const templates=await fa.loadFormulaAll({T,GLTFLoader});
   if(disposed){for(const t of templates){t.body.dispose();for(const w of t.wheels)w.geometry.dispose();}}else formulaAll=fa.attachFormulaAll({T,cars,templates,colors:carColors,accents:cars.map((_,i)=>teamOf(i).accent),keep,minLod:lite?1:0,shadows:quality===0});}}
   catch(e){failures.push('formula-all');console.warn('formula all',e?.message||e);}}
  // racing-v24 pits: a painted box for every car in the pit lane (racing-pit-view.mjs), only in a race with stops (racing-v24.1: the session passes the model's
  // answer, `pits`, since two-lap races stop too; without it the v24 rule of 3 laps and more)
  // and the Codex pit crew at the player's box (racing-pit-crew.mjs, 3.5 MB): loaded in the background, never on a weak device, ?racingPitCrew=0 never
  let pitCrew=null;
- if(f1Look&&!disposed){try{const pv=await import('./racing-pit-view.mjs?v=island-v2-20261107-23');if(pitsOn!==undefined?pitsOn:pv.pitBoxesOn(stage)){pv.paintPitBoxes({T,scene,track,keep,count:carCount,colors:carColors});
+ if(f1Look&&!disposed){try{const pv=await import('./racing-pit-view.mjs?v=island-v2-20261107-24');if(pitsOn!==undefined?pitsOn:pv.pitBoxesOn(stage)){pv.paintPitBoxes({T,scene,track,keep,count:carCount,colors:carColors});
   // racing-v24.4: the Codex pit sequence v2 (racing-pit-seq.mjs: four old wheels off, four new on, two jacks) on the player's formula car; ?racingPitSeq=0, a car
   // without the formula wheels or any load problem: the v1 crew below
-  const crewV1=()=>{if(!lite)import('./racing-pit-crew.mjs?v=island-v2-20261107-23').then(m=>m.pitCrewEnabled()?m.loadPitCrew({T,GLTFLoader,track,count:carCount,team:carColors[0],keep}):null).then(c=>{if(!c)return;if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-crew');console.warn('pit crew',e?.message||e);});};
-  if(!lite&&cars[0]?.formula&&new URLSearchParams(globalThis.location?.search||'').get('racingPitSeq')!=='0'&&new URLSearchParams(globalThis.location?.search||'').get('racingPitCrew')!=='0')import('./racing-pit-seq.mjs?v=island-v2-20261107-23').then(m=>m.loadPitSeq({T,GLTFLoader,track,count:carCount,team:carColors[0],keep,car:cars[0]})).then(c=>{if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-seq');console.warn('pit seq',e?.message||e);crewV1();});
+  const crewV1=()=>{if(!lite)import('./racing-pit-crew.mjs?v=island-v2-20261107-24').then(m=>m.pitCrewEnabled()?m.loadPitCrew({T,GLTFLoader,track,count:carCount,team:carColors[0],keep}):null).then(c=>{if(!c)return;if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-crew');console.warn('pit crew',e?.message||e);});};
+  if(!lite&&cars[0]?.formula&&new URLSearchParams(globalThis.location?.search||'').get('racingPitSeq')!=='0'&&new URLSearchParams(globalThis.location?.search||'').get('racingPitCrew')!=='0')import('./racing-pit-seq.mjs?v=island-v2-20261107-24').then(m=>m.loadPitSeq({T,GLTFLoader,track,count:carCount,team:carColors[0],keep,car:cars[0]})).then(c=>{if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-seq');console.warn('pit seq',e?.message||e);crewV1();});
   else crewV1();}}
   catch(e){failures.push('pit-boxes');console.warn('pit boxes',e?.message||e);}}
  const nearRank=new Map(),FULL_RIVALS=4;

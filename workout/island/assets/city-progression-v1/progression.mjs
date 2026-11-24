@@ -1,8 +1,8 @@
-import { calculateMetrics, population } from '../../engine/metrics.mjs?v=island-v2-20261107-23';
+import { calculateMetrics, population } from '../../engine/metrics.mjs?v=island-v2-20261107-24';
 import {
   BUILDINGS, CONSTRUCTION_STAGES, DAY_SECONDS, LAND_MILESTONES, MONEY_ABOVE_CAP_FACTOR,
   MONEY_SOFT_CAP, RECOVERY_MONEY_PER_MINUTE, STARTER_SUPPLIES, UNLOCK_GRACE_DAYS,
-} from './catalog.mjs?v=island-v2-20261107-23';
+} from './catalog.mjs?v=island-v2-20261107-24';
 
 const [FOUNDATION, HALF_BUILT, COMPLETE] = CONSTRUCTION_STAGES;
 const buildingIds = Object.keys(BUILDINGS);
