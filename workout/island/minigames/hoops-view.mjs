@@ -16,6 +16,7 @@ import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
+import {broadcastReplayCamera,hoopsV250Flags,FEET} from './hoops-v250.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
 import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-23';
 import {hoopsLookEnabled,HOOPS_LOOK_CROWD_TINT} from './hoops-look-v249.mjs?v=island-v2-20261107-23';
@@ -106,7 +107,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    referee=loaded;scene.add(loaded.group);refereeState.status='ready';
   }).catch(error=>{refereeState.status='fallback';refereeState.error=String(error?.message||error);});
  }
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;if(hoopsV250Flags(new URLSearchParams(globalThis.location?.search||'')).feet)assets.feet250=FEET;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();
@@ -403,7 +404,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const w=backBlend(seg.u);camera.position.lerp(r.last.pos,1-w);camera.quaternion.slerp(r.last.quat,1-w);camera.fov=lerp(r.last.fov,camera.fov,w);
    camera.updateProjectionMatrix();return;
   }
-  const want=seg.cam==='chase'?chaseCamera(scorer,r.side,court,{landscape:state.landscape}):baselineCamera(scorer,r.side,court,{landscape:state.landscape});
+  const want=r.trigger.cam==='broadcast'?broadcastReplayCamera(scorer,r.side,court,{landscape:state.landscape}):seg.cam==='chase'?chaseCamera(scorer,r.side,court,{landscape:state.landscape}):baselineCamera(scorer,r.side,court,{landscape:state.landscape});
   // cut: the first frame of a segment jumps, the following frames follow the scorer softly (a camera operator, not a tripod)
   const k=r.segCam!==seg.cam?1:1-Math.exp(-dt*(seg.cam==='chase'?6:4));r.segCam=seg.cam;
   showPose.pos.set(want.pos[0],want.pos[1],want.pos[2]);showPose.look.set(want.look[0],want.look[1],want.look[2]);
@@ -463,7 +464,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  /** The automatic replay (show): the recorded frames with the two-angle cut around the contact frame of `trigger`'s shot. */
  function startShowReplay(frames,trigger,done){
   if(!show||!frames?.length||!trigger)return false;
-  const hz=config.replay.hz,contact=contactFrame(frames,trigger,hz),timeline=cutTimeline(contact/hz,(frames.length-1)/hz);
+  const hz=config.replay.hz,contact=contactFrame(frames,trigger,hz),timeline=cutTimeline(contact/hz,(frames.length-1)/hz,trigger.cut||SHOW.cut);
   if(timeline.wall<0.5)return false;
   const side=frames[contact].dir?.[trigger.team]??1;
   state.cut=null;

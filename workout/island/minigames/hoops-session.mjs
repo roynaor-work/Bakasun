@@ -18,6 +18,8 @@ import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-23';
 import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-23';
 import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-23';
 import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
+import {hoopsV250Flags,engineV250,basketReplayTrigger} from './hoops-v250.mjs';
+import {createHoopsV250Hud} from './hoops-v250-hud.mjs';
 
 const PASS_HE={chest:'מסירת חזה',bounce:'מסירת קרקע',lob:'מסירה מעל הראש',jump:'מסירה בקפיצה',oop:'אלי-הופ'};
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
@@ -44,8 +46,10 @@ export function startHoops(ctx){
  const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
  // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
  const timeoutFeedback=kidUx('039');
+ // v25.0 (24/11): shot meter, quiet HUD, tap pass, rebound timing, auto-stick, basket replay, special meter; `?hoopsV250=0` restores v24.9
+ const v250=hoopsV250Flags(params),basketReplay={lastWall:null,green:new Set()};let v250Hud=null;
  const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:(params.get('hoopsV249')==='0'||params.get('hoopsMotion249')==='0')&&balance.play?{...balance.play,motion:null}:undefined,
-  rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio,timeoutFeedback});
+  rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio,timeoutFeedback,v250:engineV250(v250)});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
@@ -53,16 +57,17 @@ export function startHoops(ctx){
  try{audio=createHoopsAudio({config:balance.audio,storage,impactPolish:polish.audio});}catch{audio=createHoopsAudio({config:balance.audio,storage:null,impactPolish:polish.audio});}
  const session={
   setPaused(value){paused=!!value;last=0;loop.reset();const hidden=!!ctx.canvas?.ownerDocument?.hidden;controls?.setEnabled(!paused&&!hidden&&!view?.replaying);audio.setPaused(paused||hidden);view?.setPaused?.(paused||hidden);},
-  dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
+  dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();v250Hud?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
    try{if(document.fullscreenElement)void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}},
   get ready(){return Boolean(view)&&!error;},get loadFailed(){return error;},
-  get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying,replayInfo:view?.replayInfo||null,show:{enabled:show,...showCounts,pending:!!autoReplay}};},
+  get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying,replayInfo:view?.replayInfo||null,show:{enabled:show,...showCounts,pending:!!autoReplay},v250:{flags:v250,hud:v250Hud?.metrics||null}};},
  };
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
  const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-23',import.meta.url).href;screenEl.append(css);
  screenEl.dataset.hoopsShow=show?'v1':'0';
+ if(v250.on){const css250=doc.createElement('link');css250.rel='stylesheet';css250.href=new URL('./hoops-v250.css',import.meta.url).href;screenEl.append(css250);}
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
 
@@ -107,12 +112,17 @@ export function startHoops(ctx){
  const staminaTrack=node('span','hoops-stamina-track'),staminaFill=node('i'),staminaValue=node('bdi','hoops-stamina-value','100');staminaValue.dir='ltr';staminaTrack.append(staminaFill);stamina.append(staminaTrack,staminaValue);
  stageEl.append(bug,meter,grade,toast,stepEl,replayBtn,replayTag,benchPanel,loading,stamina);
  // ?hoopsLabels=all puts a position label over all ten players (old behaviour).
- roleLabels=createHoopsRoleLabels(stageEl,{scope:params.get('hoopsLabels')==='all'?'all':'team'});
+ // v25.0 quiet HUD: no floating labels at all (the ring and the arrow mark the child's player); ?hoopsLabels=team|all brings them back
+ if(!v250.hud||params.get('hoopsLabels'))roleLabels=createHoopsRoleLabels(stageEl,{scope:params.get('hoopsLabels')==='all'?'all':'team'});
+ if(v250.hud)stepEl.append(node('i'),node('i'),node('i'));
  screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
   onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
   onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
  controls=createHoopsControls({root,doc,config:{...balance.controls,doubleTap:(balance.play?.doubleTapMs??260)/1000},onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
  root.classList.add('hoops-controls');controls.setEnabled(!paused);
+ if(v250.on)v250Hud=createHoopsV250Hud({stageEl,screenEl,doc,flags:v250,balance,controls,signal:abort.signal,icon:hoopsIcon,bug});
+ /** One input per fixed step: the buttons and the stick, plus a tap on a team-mate when there was one. */
+ const readInput=()=>{const inp=consumeHoopsInput(controls,cur),tap=v250Hud?.takeTap();if(tap!=null)inp.passTo=tap;return inp;};
  if(kidUx('019'))installHoopsPassDemo({screen:screenEl,help:controls.elements.help,signal:abort.signal,
   onOpen(){session.setPaused(true);},
   onClose(){if(!disposed&&screenEl.dataset.paused!=='true')session.setPaused(false);}
@@ -161,7 +171,7 @@ export function startHoops(ctx){
   return ok;
  }
  if(dev)session.debug={engine,controls,get screens(){return screens;},get view(){return view;},
-  step(n=1,input){for(let i=0;i<n;i++){prev=cur;engine.step(input||consumeHoopsInput(controls,cur));cur=engine.snapshot();handleEvents(engine.drainEvents());}if(view){if(n>1)view.snapCamera();view.render(prev,cur,1,1/60);}hud(cur,performance.now());return cur;},
+  step(n=1,input){for(let i=0;i<n;i++){prev=cur;engine.step(input||readInput());cur=engine.snapshot();handleEvents(engine.drainEvents());}if(view){if(n>1)view.snapCamera();view.render(prev,cur,1,1/60);}hud(cur,performance.now());return cur;},
   render(){if(view){view.render(prev,cur,1,1/60);hud(cur,performance.now());}},
   // show stills: `holdReplay` keeps an armed automatic replay waiting until the harness releases it
   holdReplay:false};
@@ -169,15 +179,17 @@ export function startHoops(ctx){
 
  function showToast(content,kind,ms=900){toast.hidden=false;toast.dataset.kind=kind;toast.replaceChildren(content);toastUntil=performance.now()+ms;}
  function handleEvents(events){
-  if(!events.length)return;view?.effects(events,cur);audio.events(events,{show,userTeam:0});
+  if(!events.length)return;view?.effects(events,cur);audio.events(events,{show,userTeam:0});v250Hud?.events(events,cur,performance.now());
   for(const e of events)if(e.type==='score'&&e.shotType==='dunk')showCounts.dunks++;
   if(show){const triggers=replayTriggers(events,cur,{userTeam:0});for(const t of triggers){showCounts.triggers++;if(t.reason==='alleyoop')showCounts.alleyoops++;else if(t.reason==='buzzer')showCounts.buzzer++;else if(t.reason==='winner')showCounts.winner++;}
    // one automatic replay per basket, SHOW.replayDelay seconds after the make (the live celebration first; the inbound has not started)
-   if(triggers.length&&!autoReplay&&!view?.replaying)autoReplay={trigger:triggers[0],at:performance.now()+SHOW.replayDelay*1000};}
+   if(triggers.length&&!autoReplay&&!view?.replaying)autoReplay={trigger:triggers[0],at:performance.now()+SHOW.replayDelay*1000};
+   // v25.0: a three or a green-release basket of the child's team gets a short slow-motion replay from the broadcast side
+   if(v250.replay){const b=basketReplayTrigger(events,{userTeam:0,existing:triggers,state:basketReplay,wall:autoReplay||view?.replaying?-1e9:performance.now()/1000});if(b&&!autoReplay&&!view?.replaying){showCounts.basket=(showCounts.basket||0)+1;autoReplay={trigger:b,at:performance.now()+SHOW.replayDelay*1000};}}}
   for(const e of events){
    if(e.type==='timing'&&e.playerId===cur.controlled){const g=e.zone==='green'?'perfect':e.zone==='yellow'?'good':e.early?'early':'late';grade.hidden=false;grade.dataset.grade=g;grade.replaceChildren(hoopsIcon(g,doc));gradeUntil=performance.now()+800;}
    if(e.type==='score'){if(statusEl)statusEl.textContent=t('hoops.scoreStatus',{home:e.score[0],away:e.score[1]});replayOffer=performance.now()+4500;showToast(doc.createTextNode('+'+e.points),e.team===0?'home':'away',900);}
-   if(e.type==='violation'&&(e.kind==='travel'||e.kind==='doubleDribble')){const w=doc.createElement('span');w.textContent=e.kind==='travel'?'צעדים':'כדרור כפול';showToast(w,'whistle',1100);}
+   if(!v250.hud&&e.type==='violation'&&(e.kind==='travel'||e.kind==='doubleDribble')){const w=doc.createElement('span');w.textContent=e.kind==='travel'?'צעדים':'כדרור כפול';showToast(w,'whistle',1100);}
    else if(e.type==='foul'||e.type==='violation'){showToast(hoopsIcon('whistle',doc),'whistle',900);}
    if(e.type==='block'&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('block',doc),'home',700);
    if((e.type==='steal'||e.type==='interception')&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('steal',doc),'home',700);
@@ -187,8 +199,8 @@ export function startHoops(ctx){
     showToast(doc.createTextNode(reason[e.reason]),'timeout-rejected',3200);
    }
    // M3: the kind of pass the child threw, in words, for the moment it leaves the hands; the alley-oop when it drops
-   if(e.type==='pass'&&e.human&&params.get('hoopsPlay')!=='0'){const w=doc.createElement('span');w.dir='rtl';w.textContent=e.oop?PASS_HE.oop:PASS_HE[e.kind]||PASS_HE.chest;showToast(w,'home',700);}
-   if(e.type==='alleyoop'&&e.result==='score'){const w=doc.createElement('span');w.dir='rtl';w.textContent=PASS_HE.oop;showToast(w,e.team===0?'home':'away',1100);}
+   if(!v250.hud&&e.type==='pass'&&e.human&&params.get('hoopsPlay')!=='0'){const w=doc.createElement('span');w.dir='rtl';w.textContent=e.oop?PASS_HE.oop:PASS_HE[e.kind]||PASS_HE.chest;showToast(w,'home',700);}
+   if(!v250.hud&&e.type==='alleyoop'&&e.result==='score'){const w=doc.createElement('span');w.dir='rtl';w.textContent=PASS_HE.oop;showToast(w,e.team===0?'home':'away',1100);}
   }
  }
 
@@ -209,7 +221,7 @@ export function startHoops(ctx){
 
  const foulDots=[[...home.fouls.children],[...away.fouls.children]],pipDots=[...pips.children];let boardKey='';
  function hud(s,now){
-  roleLabels?.update(s,view);
+  roleLabels?.update(s,view);v250Hud?.update(s,view,now);
   setText(home.sc,String(s.score[0]));setText(away.sc,String(s.score[1]));
   markFirst(foulDots[0],s.teamFouls[0]);markFirst(foulDots[1],s.teamFouls[1]);
   home.poss.classList.toggle('on',s.possession===0);away.poss.classList.toggle('on',s.possession===1);
@@ -221,7 +233,7 @@ export function startHoops(ctx){
   let me=null;for(const p of s.players)if(p.id===s.controlled){me=p;break;}
   if(me){const value=Math.round((me.boost??me.energy)*100);setText(staminaValue,String(value));setAttr(stamina,'aria-valuenow',String(value));setData(stamina,'sprinting',String(!!me.sprinting));setData(stamina,'exhausted',String(!!me.boostLocked||!!me.exhausted));const width=value+'%';if(staminaFill.style.width!==width)staminaFill.style.width=width;}
   controls.setMode(controlMode(s));controls.setDribbleDead(!!(me&&me.hasBall&&me.steps>=0&&me.dribbling===false));
-  stepEl.hidden=!(me&&me.hasBall&&me.dribbling===false&&s.phase==='live');if(!stepEl.hidden){const n=Math.min(3,me.steps||0);setText(stepEl,n?t('hoops.steps',{n}):t('hoops.noDribble'));setData(stepEl,'n',String(n));}
+  stepEl.hidden=!(me&&me.hasBall&&me.dribbling===false&&s.phase==='live');if(!stepEl.hidden){const n=Math.min(3,me.steps||0);if(v250.hud){if(stepEl.dataset.n!==String(n)){[...stepEl.children].forEach((d,i)=>d.classList.toggle('on',i<n));setAttr(stepEl,'aria-label',n?t('hoops.steps',{n}):t('hoops.noDribble'));}}else setText(stepEl,n?t('hoops.steps',{n}):t('hoops.noDribble'));setData(stepEl,'n',String(n));}
   // shot meter above the shooter while a timed shot is held: red, yellow, green, yellow, red
   const shooting=!!(me&&me.act==='shoot'&&me.hasBall&&me.shotHeld);
   setHidden(meter,!shooting);
@@ -236,7 +248,7 @@ export function startHoops(ctx){
   if(!grade.hidden&&now>gradeUntil)grade.hidden=true;
   if(!toast.hidden&&now>toastUntil)toast.hidden=true;
   if(autoReplay&&now>=autoReplay.at&&view&&!view.replaying&&!session.debug?.holdReplay)startAutoReplay(now);
-  setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));setHidden(replayTag,!view?.replaying);
+  setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));setHidden(replayTag,!view?.replaying);if(v250.hud)setData(screenEl,'hoopsReplaying',String(!!view?.replaying));
   if(s.phase!=='timeout'&&!benchPanel.hidden&&(childBench||timeoutFeedback||s.phase==='live'))benchPanel.hidden=true;
   setData(screenEl,'hoopsPhase',s.phase);
  }
@@ -247,7 +259,7 @@ export function startHoops(ctx){
   if(!view)return;
   if(session.debug?.hold)return; // dev only: keeps the last frame for a screenshot
   if(!paused&&!doc.hidden&&!view.replaying&&cur.phase!=='final'){
-   loop.advance(dt,()=>{prev=cur;engine.step(consumeHoopsInput(controls,cur));cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
+   loop.advance(dt,()=>{prev=cur;engine.step(readInput());cur=engine.snapshot();stepsRun++;handleEvents(engine.drainEvents());return cur.phase!=='final';});
   }
   let holder=null;for(const p of cur.players)if(p.hasBall){holder=p;break;}
   if(holder&&holder.dribbling!==false&&cur.phase==='live'&&!paused&&!doc.hidden&&!view.replaying){dribbleClock+=dt;const per=balance.view.dribblePeriod;if(dribbleClock>per){dribbleClock=0;audio.dribble(Math.hypot(holder.vx,holder.vz));}}
