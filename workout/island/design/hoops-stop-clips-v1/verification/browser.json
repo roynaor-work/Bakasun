@@ -224,11 +224,13 @@
     }
   ],
   "errors": [],
-  "mobileOverflow": true,
+  "mobileOverflow": false,
   "webAssemblyBlocked": true,
   "wasmRequests": [],
   "networkOrigins": [
     "http://127.0.0.1:8765"
   ],
-  "passed": false
+  "passed": true,
+  "mobileOverflowBeforeFix": true,
+  "mobileOverflowRecheck": "preview.css grid minmax fix; 390px scrollWidth 390, no element beyond the viewport (separate Playwright check, sheets not re-captured)"
 }
