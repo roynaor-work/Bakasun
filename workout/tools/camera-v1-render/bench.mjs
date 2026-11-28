@@ -230,7 +230,8 @@ window.runVideo = async cfg => {
       frames.push({ t, active: true, ms: round(performance.now() - sent, 1), light: answer.light, scene: answer.scene, truth: {},
         poses: answer.poses.map(person => ({
           landmarks: person.landmarks.map(q => ({ x: round(q.x), y: round(q.y), z: round(q.z, 3), visibility: round(q.visibility, 3), presence: round(q.presence ?? 1, 3) })),
-          world: [] })) });
+          // World landmarks (metres) are kept for the body-proportion measurement (body.mjs).
+          world: (person.world || []).map(q => ({ x: round(q.x, 3), y: round(q.y, 3), z: round(q.z, 3), visibility: round(q.visibility, 3), presence: round(q.presence ?? 1, 3) })) })) });
     }
   } finally { pose.terminate(); }
   return { cfg, aspect: bw / bh, bitmap: [bw, bh], total: (to - from) * 1000, frames, sheet: board?.toDataURL('image/jpeg', .8) };

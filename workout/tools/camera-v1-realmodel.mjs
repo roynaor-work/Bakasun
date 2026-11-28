@@ -12,7 +12,9 @@ const here = new URL('../js/camera-v1/', import.meta.url);
 export async function load(dir) {
   const base = dir ? pathToFileURL(path.resolve(dir) + '/') : here;
   const [motion, tracking, guiding] = await Promise.all(['motion.mjs', 'tracking.mjs', 'guide.mjs'].map(name => import(new URL(name, base))));
-  return { ...motion, ...tracking, ...guiding };
+  // body.mjs exists only from the real-people round on; an older module directory simply has no flags to try.
+  const body = await import(new URL('body.mjs', base)).catch(() => ({}));
+  return { ...motion, ...tracking, ...guiding, ...body };
 }
 
 const byId = Object.fromEntries(EXERCISES.map(ex => [ex.id, ex]));
@@ -61,7 +63,8 @@ function trulyCut(frame) {
 }
 
 /** Replays one recorded clip (optionally for another exercise's counter) and returns what the page would have done. */
-export function replay(clip, api, id = clip.cfg.id) {
+// flags: { body, steps } as in the page's address flags (camBody, camSteps); both off by default.
+export function replay(clip, api, id = clip.cfg.id, flags = {}) {
   const policy = api.CAMERA_EXERCISES[id], ex = byId[id];
   const tracker = new api.PoseTracker({ view: policy.view === 'diagonal' ? 'either' : policy.view, setup: policy.setup, required: policy.required });
   const counter = new api.MotionCounter(id, { goal: 100 });
@@ -80,7 +83,7 @@ export function replay(clip, api, id = clip.cfg.id) {
     bump(statuses, status);
     if (slow) counter.pause();
     else if (!result.ready) {
-      const instruction = api.guide(sample, result.status, policy, memory);
+      const instruction = api.guide(sample, result.status, flags.steps ? { ...policy, steps: true } : policy, memory);
       if (instruction && frame.t >= 500) {
         bump(moves, instruction.move ?? 'none');
         bump(lines, instruction.code);
@@ -91,7 +94,9 @@ export function replay(clip, api, id = clip.cfg.id) {
       firstReady ??= frame.t;
       if (result.calibration && result.calibration !== reference) {
         reference = result.calibration;
-        counter.setReference(reference.reference.landmarks, { aspect: sample.aspect });
+        const body = flags.body && api.bodyFromFrames ? api.bodyFromFrames(reference.worlds) : null;
+        if (body?.torsoMeters) memory.torsoMeters = body.torsoMeters;
+        counter.setReference(reference.reference.landmarks, { aspect: sample.aspect, scales: body ? api.scalesOf(body) : null });
       }
       motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect });
       if (motion.event) bump(events, motion.event);

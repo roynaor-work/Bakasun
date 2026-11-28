@@ -301,7 +301,7 @@ export class PoseTracker {
       this.stableSince = time;
     }
     const floor = median(pointsAt(pose.landmarks, FEET, .45).map(p => p.y));
-    this.samples.push({ torso: shape.torso, floor, center: shape.center });
+    this.samples.push({ torso: shape.torso, floor, center: shape.center, world: pose.world });
     if (this.samples.length > maxCalibrationSamples) this.samples.shift();
     if (this.samples.length < 4 || time - this.stableSince < this.calibrationMs) return null;
     return {
@@ -312,6 +312,8 @@ export class PoseTracker {
         y: median(this.samples.map(sample => sample.center.y)),
       },
       reference: pose,
+      // The world landmarks of the same still frames: the child's proportions are read from them (body.mjs).
+      worlds: this.samples.map(sample => sample.world).filter(world => Array.isArray(world) && world.length > 28),
     };
   }
 

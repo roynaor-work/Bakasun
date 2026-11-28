@@ -8,7 +8,8 @@ import { PoseTracker } from './tracking.mjs?v=20261010-camera-1';
 import { guide, GuideVoice, GUIDE_COPY, CueLimiter } from './guide.mjs?v=20261010-camera-1';
 
 const { landscape: LANDSCAPE, goal: GOAL, tight: TIGHT } = GUIDE_COPY.LINES;
-import { cameraV1Enabled } from './flag.mjs?v=20261010-camera-1';
+import { cameraV1Enabled, cameraFlags } from './flag.mjs?v=20261010-camera-1';
+import { bodyFromFrames, scalesOf } from './body.mjs?v=20261010-camera-1';
 
 const node = id => document.getElementById(id);
 function text(id, value) {
@@ -63,6 +64,7 @@ let mode;
 let tracker;
 let counter;
 let reference;
+const flags = cameraFlags();
 let capture;
 let cameraDone = 0;
 let trustDone = 0;
@@ -124,6 +126,7 @@ function quiet() {
   backSince = null;
   visible('range', false);
   delete seenAt.last;
+  delete seenAt.torsoMeters;
   showMove();
   try { speech?.stopSpeak(); } catch { /* no voice on this device */ }
 }
@@ -243,7 +246,7 @@ function onPose(sample) {
       counter.pause();
       status('slow', 'המצלמה מצלמת לאט כרגע. אפשר להמשיך בלי מצלמה.');
     } else {
-      let instruction = guide(sample, result.status, policy, seenAt);
+      let instruction = guide(sample, result.status, flags.steps ? { ...policy, steps: true } : policy, seenAt);
       // "Move back" that does not help for a while means the room is too small for this picture shape,
       // which happens sooner the taller the child: say what else can be done.
       if (instruction?.move === 'back') backSince ??= sample.time;
@@ -272,7 +275,10 @@ function onPose(sample) {
   if (result.calibration && result.calibration !== reference) {
     reference = result.calibration;
     const { landmarks, world } = reference.reference;
-    counter.setReference(landmarks, { aspect: sample.aspect, world });
+    // camBody=1: the child's proportions from the still frames of the calibration (see body.mjs).
+    const body = flags.body ? bodyFromFrames(reference.worlds) : null;
+    if (body?.torsoMeters) seenAt.torsoMeters = body.torsoMeters;
+    counter.setReference(landmarks, { aspect: sample.aspect, world, scales: body ? scalesOf(body) : null });
   }
   const motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect, world: result.pose.world });
   const cameraProgress = isTimed() ? motion.activeMs / 1000 : motion.count;
