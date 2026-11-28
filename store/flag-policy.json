@@ -1,0 +1,181 @@
+{
+  "note": "מחליט מה קורה לכל דגל URL שהאי קורא, בבנייה לחנות בלבד. הבנייה מחליפה כל קריאה ל-location.search בקבוע STORE_SEARCH, ולכן כל דגל מקבל את ברירת המחדל שבקוד. האתר החי לא משתנה. עורכים כאן ומריצים: node scripts/build-web.mjs",
+  "pin": {},
+  "pinNote": "דגלים ב-pin נכתבים כערך קבוע בתוך STORE_SEARCH, למשל {\"someFlag\":\"1\"}. ריק: כל דגל נשאר בברירת המחדל שכבר בקוד.",
+  "transforms": [
+    {
+      "id": "offline-worker-off",
+      "file": "ui/offline.mjs",
+      "from": "&&/^https?:$/.test(location.protocol)",
+      "to": "&&false",
+      "count": 1,
+      "why": "בחנות כל הנכסים בתוך החבילה. עובד השירות וההורדה לפי משחק היו מעתיקים שוב כ-100MB למטמון. offlineSupported() מחזיר false, לכן העובד לא נרשם ובדיקת הגרסה לא פונה לרשת."
+    },
+    {
+      "id": "boar-bench-hash",
+      "file": "minigames/boar-island/game.js",
+      "from": "location.hash==='#bench'",
+      "to": "false",
+      "count": 1,
+      "why": "כתובת #bench מפעילה מצב מדידה של משחק החזירים. אין דרך להזין כתובת באפליקציה, והמצב לא משתתף בהגשה."
+    },
+    {
+      "id": "offline-panel-hidden",
+      "file": "ui/offline-panel.mjs",
+      "from": "export function offlinePanel(options={}){return v25On()?offlinePanel25(options):offlinePanel24(options);}",
+      "to": "export function offlinePanel(options={}){const hidden=document.createElement('section');hidden.hidden=true;return hidden;}",
+      "count": 1,
+      "why": "חלונית \"הורדת המשחקים למכשיר\" (הורדה, בדיקת עדכון, איך מתקינים את האפליקציה) מיותרת בחנות: הכול כבר בחבילה. החלונית מוחלפת באלמנט מוסתר, והפונקציות המקוריות נשארות בקובץ."
+    }
+  ],
+  "rules": [
+    {
+      "group": "guard",
+      "decision": "נשאר כברירת מחדל קבועה מגינה",
+      "why": "שומר התאוששות או בטיחות. הנתיב בקוד נשאר, ברירת המחדל היא המגינה, רק מתג הכתובת הוסר.",
+      "keys": [
+        "fireLoadRecovery",
+        "fireContextRecovery",
+        "fireRoomBarrier",
+        "hoopsRollbackOffline",
+        "loadStuckMs",
+        "quality",
+        "adapt",
+        "autodownload",
+        "alpineModel",
+        "soccerKitLines",
+        "soccerCrowd3d",
+        "hoopsCrowd3d",
+        "kidUxOff"
+      ]
+    },
+    {
+      "group": "privacy",
+      "decision": "הוסר, נשאר המצב המגן",
+      "why": "privacy=v246 מחזיר קולות רשת (הטקסט יוצא מהמכשיר). בלי הדגל מקריאים רק קולות שמותקנים במכשיר.",
+      "keys": [
+        "privacy"
+      ]
+    },
+    {
+      "group": "dev",
+      "decision": "הוסר, ברירת מחדל קבועה",
+      "why": "מתג פיתוח, בדיקות, תצוגה מקדימה או כשל מכוון. לא חלק מההתנהגות שמוגשת.",
+      "keys": [
+        "dev",
+        "qa",
+        "island",
+        "cityPreview",
+        "env",
+        "hoopsFail",
+        "hoopsAuto",
+        "touch",
+        "autoIdleMs",
+        "v",
+        "v25"
+      ]
+    },
+    {
+      "group": "tuning",
+      "decision": "הוסר, ברירת מחדל קבועה",
+      "why": "מתג מספרי או מדידה לכוונון. ברירת המחדל היא הערך שכוונן.",
+      "keys": [
+        "racingKink",
+        "racingKinkAmp",
+        "racingKinkFade",
+        "racingRoundSigma",
+        "racingShortR",
+        "racingTightA",
+        "v2samples",
+        "v2scale",
+        "v2width",
+        "fingerCurl",
+        "hoopsQuality",
+        "hoopsProfile",
+        "soccerTier",
+        "racingField",
+        "racingAiCorner",
+        "racingFormulaCar",
+        "racingShift",
+        "racingWheel",
+        "soccerChars",
+        "alpineRunnerSeed",
+        "fireLevel",
+        "hoopsCharacters",
+        "racingTracks",
+        "soccerTeams",
+        "soccerAI",
+        "soccerFeel",
+        "soccerRules",
+        "soccerShow",
+        "soccerFull",
+        "soccerFormation",
+        "catchSiren",
+        "hoopsLabels",
+        "hoopsV241"
+      ]
+    },
+    {
+      "group": "kidux",
+      "decision": "הוסר, מוגש הממשק המשופר",
+      "why": "kidUx=0 מחזיר את הממשק הקודם ו-kidUx=005,012 בוחר תיקונים. בדף התיקונים דלוקים כברירת מחדל.",
+      "keys": [
+        "kidUx"
+      ]
+    },
+    {
+      "group": "optin-product",
+      "decision": "הוסר, נשאר כבוי (רועי מאשר)",
+      "why": "תכונה שמצטרפים אליה ומשנה את המשחק. הגרסה המוגשת נשארת בברירת המחדל (כבוי). אם רועי רוצה אותה בגרסת החנות היא נכנסת ל-pin.",
+      "keys": [
+        "cityProgression",
+        "cityProgress",
+        "boarsLevels",
+        "games",
+        "soccerKeeperV11",
+        "hoopsSqueak",
+        "soccerCrowdHiss",
+        "soccerBed",
+        "soccerAutoSprint",
+        "navalVoice",
+        "racingShiftBeep",
+        "racingEngineLoops",
+        "racingKinkAll",
+        "racingAutoLift",
+        "tennisVoiceRec",
+        "balanceSoccerGoals",
+        "balanceFireCertificate"
+      ]
+    }
+  ],
+  "defaults": {
+    "on": {
+      "group": "rollback",
+      "decision": "הוסר, מוגש הנתיב החדש (ברירת מחדל דלוקה)",
+      "why": "מתג שמחזיר גרסה קודמת (=0, =old, =v24). הגרסה הקודמת לא מוגשת."
+    },
+    "off": {
+      "group": "optin",
+      "decision": "הוסר, נשאר כבוי",
+      "why": "מתג הצטרפות או התנהגות ישנה, כבוי כברירת מחדל."
+    },
+    "mixed": {
+      "group": "review",
+      "decision": "הוסר, ברירת מחדל קבועה (נקרא ביד)",
+      "why": "הקוד משווה את הדגל בשני כיוונים. ברירת המחדל היא מה שקורה כשהוא חסר."
+    },
+    "value": {
+      "group": "review",
+      "decision": "הוסר, ברירת מחדל קבועה (נקרא ביד)",
+      "why": "נקרא דרך פונקציית עזר. ברירת המחדל היא מה שקורה כשהוא חסר."
+    }
+  },
+  "keepQueryDirs": [
+    "minigames/boar-island/"
+  ],
+  "internal": {
+    "group": "internal",
+    "decision": "נשאר",
+    "why": "חלון המשחק (iframe) מקבל את הפרמטרים מהכתובת שהמשחק ההורה בונה (island, v, kidUx ועוד). זה פרוטוקול פנימי, לא דגל שמשתמש מזין. ההורה כבר בנוי על ברירות המחדל, ולכן אין דגל ניסוי שמגיע לשם."
+  }
+}
