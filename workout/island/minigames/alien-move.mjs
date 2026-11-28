@@ -44,3 +44,23 @@ export function alienMoveStep(player,input,dt,balance,width,cfg=MOVE_DEFAULTS){
 }
 /** Draw offset of the ship (model units, positive = toward the player) for the current recoil. */
 export function recoilOffset(player,cfg=MOVE_DEFAULTS){return (player?.recoil||0)*cfg.recoilPixels;}
+
+/** v25.2 (QA of v25.1): in the 3D picture the player's ship is drawn larger than its hit circle, around a point 38 units from the bottom
+ * edge, so its tail was cut by the bottom of the screen; and passing behind the stick it was hidden by it. Now the session measures the drawn
+ * ship and lifts the flight line and narrows the sideways range just enough for the whole ship to be on screen with a small margin, and the stick turns see-through while
+ * the ship is behind it. ?alienBounds=old keeps the old flight line. */
+export function alienBoundsOn(search=globalThis.location?.search||''){try{return new URLSearchParams(search).get('alienBounds')!=='old';}catch{return true;}}
+export const ALIEN_BOUNDS_MARGIN=8; // CSS px kept free under the drawn ship
+/** Pure: the flight line (player.y, model units) for a ship drawn `belowPx` CSS px under its centre. Never lower than the configured line. */
+export function alienPlayerY(configHeight,playerBottom,belowPx,pxPerUnit,marginPx=ALIEN_BOUNDS_MARGIN){
+ if(!(pxPerUnit>0)||!(belowPx>0))return configHeight-playerBottom;
+ return configHeight-Math.max(playerBottom,(belowPx+marginPx)/pxPerUnit);
+}
+/** Pure: the sideways range [min,max] of player.x (model units) in which a ship drawn `halfWidthPx` CSS px to each side stays on screen.
+ * Never wider than the model's own range (the hit circle inside the field). */
+export function alienPlayerXRange(configWidth,playerRadius,halfWidthPx,pxPerUnit,marginPx=4){
+ const inset=pxPerUnit>0&&halfWidthPx>0?Math.max(playerRadius,(halfWidthPx+marginPx)/pxPerUnit):playerRadius,capped=Math.min(inset,configWidth*.25);
+ return [capped,configWidth-capped];
+}
+/** Pure: do two screen rectangles {left,right,top,bottom} overlap? */
+export function alienBoxesOverlap(a,b){return Boolean(a&&b)&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;}

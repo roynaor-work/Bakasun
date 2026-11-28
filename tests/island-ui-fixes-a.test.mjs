@@ -131,6 +131,14 @@ test('alien bounds: on by default, ?alienBounds=old keeps the old flight line', 
   assert.ok(y < 480 - 38.4, 'a ship drawn 60px under its centre is lifted');
   assert.ok(Math.abs((480 - y) * k - (60 + ALIEN_BOUNDS_MARGIN)) < 1e-9, 'its lowest pixel ends one margin above the bottom edge');
   assert.equal(alienPlayerY(480, 38.4, 60, 0), 480 - 38.4, 'no scale yet');
+  // sideways: a 360-unit field drawn 844px wide, hit circle 18 units
+  const {alienPlayerXRange} = await import(new URL('minigames/alien-move.mjs', root));
+  const kx = 844 / 360;
+  assert.deepEqual(alienPlayerXRange(360, 18, 0, kx), [18, 342], 'nothing measured: the model range');
+  const [min, max] = alienPlayerXRange(360, 18, 50, kx);
+  assert.ok(min > 18 && Math.abs(min * kx - 54) < 1e-9, 'the ship edge stays 4px inside the screen');
+  assert.equal(max, 360 - min, 'the same on the other side');
+  assert.deepEqual(alienPlayerXRange(360, 18, 900, kx), [90, 270], 'never closes more than a quarter of the field on each side');
   const stick = {left: 78, right: 178, top: 265, bottom: 365};
   assert.equal(alienBoxesOverlap({left: 100, right: 190, top: 300, bottom: 380}, stick), true);
   assert.equal(alienBoxesOverlap({left: 300, right: 390, top: 300, bottom: 380}, stick), false);
@@ -142,6 +150,7 @@ test('alien bounds: the session lifts the line only in the 3D picture and only w
   assert.match(session, /const boundsOn=alienBoundsOn\(\)/);
   assert.match(session, /if\(boundsOn&&view\?\.mode==='three'&&view\.playerBox/);
   assert.match(session, /model\.player\.y=y/);
+  assert.match(session, /if\(boundsX&&view\?\.mode==='three'\)\{const p=model\.player;if\(p\.x<boundsX\[0\]\)/, 'the sideways range is applied after the model step, in 3D only');
   assert.match(session, /stick\.dataset\.shipUnder/);
   assert.match(read('minigames/alien-view.mjs'), /return \{ready,playerBox,resize/);
   assert.match(read('minigames/alien-v25.css'), /#joystick\[data-ship-under=true\]\{opacity:\.38/);
