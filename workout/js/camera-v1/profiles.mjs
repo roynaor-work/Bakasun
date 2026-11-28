@@ -85,6 +85,12 @@ const straightenKnees = 'נאריך את הרגליים עד המקום שנוח
 const plankStart = f => groundedPlank(f) && f.elbowAngle >= 145 && f.kneeAngle >= 137 &&
   shoulderHeight(f) > .61 && Math.abs(f.footLift) < .25;
 
+// camForearm=1: most people hold a plank on the forearms. On the one real clip measured (a grown-up, side view)
+// the elbow read 81 to 85 degrees, the elbow lay on the floor (clearance -.02 to .02) and the shoulder stood
+// .55 to .57 torso lengths above it: under the .61 a straight-arm plank asks, so nothing was credited.
+const forearmPlank = f => f.forearm && pushLine(f) && f.elbowAngle >= 55 && f.elbowAngle <= 125 &&
+  f.clearance(f.main.elbow?.y) <= .16 && f.kneeAngle >= 137 && shoulderHeight(f) > .36 && Math.abs(f.footLift) < .25;
+
 export const PROFILES = {
   jog: activity({ ...standingSide, required: both(...LEGS) }, 'נרים כל רגל בתורה ונזיז את הידיים בנוחות.',
     // An easy jog lifts the knee far less than a high-knee drill: the thigh about 40 degrees from the standing leg.
@@ -171,7 +177,7 @@ export const PROFILES = {
     f => restingHip(f) && shoulderHeight(f) < .39 && f.footLift < .39,
     [point(f => restingHip(f) && shoulderHeight(f) > .68 && chest(f) > .58 && f.footLift > .67 &&
       f.dist(f.main.wrist, f.main.ankle) < .73, 74)]),
-  plank: hold(floorSide, hipsInLine, f => plankStart(f)),
+  plank: hold(floorSide, hipsInLine, f => plankStart(f) || forearmPlank(f)),
   'side-plank': hold({ ...floorBoth, view: 'diagonal' }, 'נמקם מרפק מתחת לכתף ונרים את האגן בקו עם הגוף.', f => {
     if (!horizontal(f) || max(f.sides.map(side => side.line)) < 145) return;
     const low = f.sides.find(side => f.dy(side.elbow, f.sides[1 - side.index].elbow) > .33);

@@ -6,6 +6,7 @@ const SEEN = .4;
 const NEED = .49;
 const EDGE = .03;
 const EXIT_MS = 8000;
+const WIDE = .78;
 
 const PARTS = {
   head: { ids: [0, 7, 8], text: 'הראש לא נראה', say: 'הָרֹאשׁ לֹא נִרְאֶה' },
@@ -134,8 +135,17 @@ export function guide(sample, status, policy = {}, memory = {}) {
     top: box.top < EDGE || lost.some(p => p.y < EDGE),
     bottom: box.bottom > 1 - EDGE || lost.some(p => p.y > 1 - EDGE),
   };
+  // camPlace=1: a body that already takes most of the picture's width (lying on the floor, or arms spread)
+  // cannot be brought in by a step to the side: the other end would leave. Only more distance helps.
+  // The same for a body cut at one side while its hidden part is the far end (legs of a lying child).
+  const wide = policy.place === true && box.right - box.left > WIDE;
+  // camPlace=1: hidden parts with nothing cut at an edge. Legs or head hidden while the rest is seen well
+  // means the phone looks past them (too close, or tilted): distance brings them in. Hands alone are usually
+  // behind the body, so that stays "check that nothing hides you".
+  const far = policy.place === true && names.some(name => name === 'feet' || name === 'knees' || name === 'head');
   let move;
   if (status === 'move-back' || (cut.left && cut.right)) move = 'back';
+  else if (wide && (cut.left || cut.right)) move = 'back';
   else if (status === 'move-closer') move = 'closer';
   else if (status === 'raise-phone') move = 'raise';
   else if (cut.left || cut.right) move = cut.left ? 'left' : 'right';
@@ -144,7 +154,7 @@ export function guide(sample, status, policy = {}, memory = {}) {
   // which happens at a shorter distance the smaller the child is.
   else if (box.bottom - box.top < .25 && box.right - box.left < .25) move = 'closer';
   else if (middle < .38 || middle > .62) move = towardMiddle(middle);
-  else move = names.length ? 'clear' : 'center';
+  else move = names.length ? (far ? 'back' : 'clear') : 'center';
 
   const parts = names.length > 2 ? [WHOLE] : names.map(name => PARTS[name]);
   const steps = move === 'back' && policy.steps ? stepWords(sample, points, memory) : null;

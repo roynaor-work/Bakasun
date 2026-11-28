@@ -246,7 +246,7 @@ function onPose(sample) {
       counter.pause();
       status('slow', 'המצלמה מצלמת לאט כרגע. אפשר להמשיך בלי מצלמה.');
     } else {
-      let instruction = guide(sample, result.status, flags.steps ? { ...policy, steps: true } : policy, seenAt);
+      let instruction = guide(sample, result.status, flags.steps || flags.place ? { ...policy, steps: flags.steps, place: flags.place } : policy, seenAt);
       // "Move back" that does not help for a while means the room is too small for this picture shape,
       // which happens sooner the taller the child: say what else can be done.
       if (instruction?.move === 'back') backSince ??= sample.time;
@@ -279,7 +279,7 @@ function onPose(sample) {
     const body = flags.body ? bodyFromFrames(reference.worlds) : null;
     if (body?.torsoMeters) seenAt.torsoMeters = body.torsoMeters;
     counter.setReference(landmarks, { aspect: sample.aspect, world, scales: body ? scalesOf(body) : null,
-      depthEase: flags.depth ? depthEaseOf(body) : null });
+      depthEase: flags.depth ? depthEaseOf(body) : null, forearm: flags.forearm });
   }
   const motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect, world: result.pose.world });
   const cameraProgress = isTimed() ? motion.activeMs / 1000 : motion.count;
@@ -325,7 +325,7 @@ function startCamera() {
     view: policy.view === 'diagonal' ? 'either' : policy.view,
     setup: policy.setup,
     required: policy.required,
-    minConfidence: confidenceFor(policy, flags.conf),
+    minConfidence: confidenceFor(policy, flags.conf, exercise.id),
   });
   counter ??= new MotionCounter(exercise.id, { goal: item.target });
   visible('retry', false);

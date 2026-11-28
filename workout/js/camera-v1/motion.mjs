@@ -34,12 +34,13 @@ export class MotionCounter {
   }
 
   // scales: { leg, arm } from body.mjs when the page runs with camBody=1; absent, nothing changes.
-  setReference(points, { aspect = 1, scales = null, depthEase = null } = {}) {
+  setReference(points, { aspect = 1, scales = null, depthEase = null, forearm = false } = {}) {
     if (!seen(points, this.spec.required)) return false;
     const f = measure(points, aspect, null, this.spec.required);
     if (!f || this.spec.mode !== 'circles' && !Number.isFinite(f.floor)) return false;
     if (scales) { f.legScale = scales.leg; f.armScale = scales.arm; }
     if (depthEase) f.depthEase = depthEase;
+    if (forearm) f.forearm = true;
     this.reference = f;
     this.pause();
     if (this.spec.rest?.(f)) this.origin = f;

@@ -9,7 +9,12 @@ const minConfidence = .49;
 // camConf=1: the model is less sure of a body lying or folded on the floor, so a floor exercise asks a little
 // less of each required joint to start. Standing exercises keep the common limit. Never below the "stay" limit.
 export const CONFIDENCE_START = Object.freeze({ standing: minConfidence, floor: .42 });
-export const confidenceFor = (policy, on = false) => on ? (CONFIDENCE_START[policy?.setup] ?? minConfidence) : minConfidence;
+// Per exercise, where a real clip showed the common limit holding a well-placed person back (camera-real-v1.md).
+// A standing exercise stays on the common limit until a real clip says otherwise; nothing here goes above it.
+export const CONFIDENCE_BY_EXERCISE = Object.freeze({ 'push-ups': .42, 'knee-push-ups': .42, plank: .42, 'side-plank': .42,
+  crunches: .40, 'glute-bridge': .40, 'leg-raises': .40, 'wall-sit': .45 });
+export const confidenceFor = (policy, on = false, id = null) => !on ? minConfidence
+  : Math.min(minConfidence, CONFIDENCE_BY_EXERCISE[id] ?? CONFIDENCE_START[policy?.setup] ?? minConfidence);
 const maxFrameGap = 360;
 const maxCalibrationSamples = 24;
 // Share of the background (outside the body) that changed between two frames. A frame above sceneStir is a

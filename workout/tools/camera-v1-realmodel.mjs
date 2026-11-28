@@ -66,7 +66,7 @@ function trulyCut(frame) {
 // flags: { body, steps } as in the page's address flags (camBody, camSteps); both off by default.
 export function replay(clip, api, id = clip.cfg.id, flags = {}) {
   const policy = api.CAMERA_EXERCISES[id], ex = byId[id];
-  const tracker = new api.PoseTracker({ view: policy.view === 'diagonal' ? 'either' : policy.view, setup: policy.setup, required: policy.required, minConfidence: api.confidenceFor ? api.confidenceFor(policy, flags.conf) : undefined });
+  const tracker = new api.PoseTracker({ view: policy.view === 'diagonal' ? 'either' : policy.view, setup: policy.setup, required: policy.required, minConfidence: api.confidenceFor ? api.confidenceFor(policy, flags.conf, id) : undefined });
   const counter = new api.MotionCounter(id, { goal: 100 });
   const memory = {}, statuses = {}, moves = {}, parts = {}, events = {}, hints = {}, countedAt = [], lines = {};
   let tempo = 0, own = 0, adapted = 0, meterTop = null;
@@ -83,7 +83,7 @@ export function replay(clip, api, id = clip.cfg.id, flags = {}) {
     bump(statuses, status);
     if (slow) counter.pause();
     else if (!result.ready) {
-      const instruction = api.guide(sample, result.status, flags.steps ? { ...policy, steps: true } : policy, memory);
+      const instruction = api.guide(sample, result.status, flags.steps || flags.place ? { ...policy, steps: flags.steps, place: flags.place } : policy, memory);
       if (instruction && frame.t >= 500) {
         bump(moves, instruction.move ?? 'none');
         bump(lines, instruction.code);
@@ -97,7 +97,7 @@ export function replay(clip, api, id = clip.cfg.id, flags = {}) {
         const body = flags.body && api.bodyFromFrames ? api.bodyFromFrames(reference.worlds) : null;
         if (body?.torsoMeters) memory.torsoMeters = body.torsoMeters;
         counter.setReference(reference.reference.landmarks, { aspect: sample.aspect, scales: body ? api.scalesOf(body) : null,
-          depthEase: flags.depth && api.depthEaseOf ? api.depthEaseOf(body) : null });
+          depthEase: flags.depth && api.depthEaseOf ? api.depthEaseOf(body) : null, forearm: flags.forearm === true });
       }
       motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect });
       if (motion.event) bump(events, motion.event);

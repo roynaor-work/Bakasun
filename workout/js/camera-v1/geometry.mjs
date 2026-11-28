@@ -94,7 +94,9 @@ export function measure(points, aspect, reference, required) {
     ankleOrder: Math.sign(dx(left.ankle, right.ankle)), bodyLine: main.line, kneeLine: main.kneeLine,
     kneeAngle: main.kneeAngle, elbowAngle: main.elbowAngle,
     // camDepth=1: how much easier than the written depth a push-up counts (1 = as written); see body.mjs depthEaseOf.
-    depthEase: reference?.depthEase ?? 1 };
+    depthEase: reference?.depthEase ?? 1,
+    // camForearm=1: a plank held on the forearms is a plank too (profiles.mjs).
+    forearm: reference?.forearm === true };
   // A first measurement (no reference yet) of a standing child records the child's own thigh length.
   if (!reference) out.thigh = standingThigh(out);
   return out;
