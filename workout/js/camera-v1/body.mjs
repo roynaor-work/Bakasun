@@ -103,5 +103,7 @@ export const STEP_WORDS = Object.freeze({
 export const DEPTH_EASE = .77;
 export function depthEaseOf(body = null) {
   const arm = scalesOf(body).arm;
-  return clamp(DEPTH_EASE / arm, .6, .85);
+  // Measured lying in the push-up start, the same grown-ups read an arm of .80 to .93 torso lengths against 1.05
+  // standing (the far arm hides behind the near one), so the lower end is kept close: .66, not less.
+  return clamp(DEPTH_EASE / arm, .66, .85);
 }
