@@ -53,4 +53,4 @@ If the app changes so that it collects any information, we will update this poli
 Privacy questions: ___ (email address).
 
 ---
-Editing notes (delete before publishing): based on a code review of main at the time this folder was prepared (release island-v2-20261107-25). If the code starts using the network, camera, microphone, cloud storage or any SDK, update this text. A public page at a permanent URL is required (for example on the repository Pages site), and the URL goes into the privacy form of each store.
+Editing notes (delete before publishing): based on a code review of main at the time this folder was prepared (release island-v2-20261107-26). If the code starts using the network, camera, microphone, cloud storage or any SDK, update this text. A public page at a permanent URL is required (for example on the repository Pages site), and the URL goes into the privacy form of each store.

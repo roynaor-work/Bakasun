@@ -3,11 +3,11 @@ export const MIN_AGE = 6;
 export const MAX_AGE = 12;
 
 const files = {
-  math: new URL('../data/math.json?v=island-v2-20261107-25', import.meta.url),
-  hebrew: new URL('../data/hebrew.json?v=island-v2-20261107-25', import.meta.url),
-  logic: new URL('../data/logic.json?v=island-v2-20261107-25', import.meta.url),
-  general: new URL('../data/general.json?v=island-v2-20261107-25', import.meta.url),
-  science: new URL('../data/science.json?v=island-v2-20261107-25', import.meta.url),
+  math: new URL('../data/math.json?v=island-v2-20261107-26', import.meta.url),
+  hebrew: new URL('../data/hebrew.json?v=island-v2-20261107-26', import.meta.url),
+  logic: new URL('../data/logic.json?v=island-v2-20261107-26', import.meta.url),
+  general: new URL('../data/general.json?v=island-v2-20261107-26', import.meta.url),
+  science: new URL('../data/science.json?v=island-v2-20261107-26', import.meta.url),
 };
 
 let request;

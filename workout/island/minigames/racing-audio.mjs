@@ -1,5 +1,5 @@
-import {racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-25';
-import {REENGAGE} from './racing-v24-6.mjs?v=island-v2-20261107-25';
+import {racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-26';
+import {REENGAGE} from './racing-v24-6.mjs?v=island-v2-20261107-26';
 /** Procedural sport engine; no downloaded samples. Shared app mute is authoritative.
  * sync(speed, boosting, {drifting, offroad, steer, throttle}) keeps the two-argument API.
  * Noise and custom harmonics are optional so minimal/headless audio contexts still work.
@@ -82,7 +82,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
     createNoise();lastTime=context.currentTime;
     // racing-v11 samples (Codex racing-audio-v2): loaded after the first unlock, layered over the procedural engine; any failure leaves the procedural sound alone.
     if(layerOption)samples=layerOption;   // tests: a ready sample layer instead of the dynamic import
-    else if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-25').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled(),v4:v4On,base4:new URL('../assets/racing-audio-v4/',import.meta.url),hiss:hissMode,air:airMode,rec,baseRec:new URL('../assets/racing-rec/',import.meta.url),pit:pitOn,basePit:new URL('../assets/racing-pit-v1/audio/',import.meta.url),v5,base5:new URL('../assets/racing-audio-v5/',import.meta.url),v6,base6:new URL('../assets/racing-audio-v6/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
+    else if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-26').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled(),v4:v4On,base4:new URL('../assets/racing-audio-v4/',import.meta.url),hiss:hissMode,air:airMode,rec,baseRec:new URL('../assets/racing-rec/',import.meta.url),pit:pitOn,basePit:new URL('../assets/racing-pit-v1/audio/',import.meta.url),v5,base5:new URL('../assets/racing-audio-v5/',import.meta.url),v6,base6:new URL('../assets/racing-audio-v6/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
    }
    if(context.state==='suspended')resume();
   }catch{}

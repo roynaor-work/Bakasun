@@ -3,8 +3,8 @@
 import * as T from '../../vendor/three.module.js';
 import {GLTFLoader} from '../../vendor/GLTFLoader.js';
 import {clone} from '../../vendor/SkeletonUtils.js';
-import {loadAthleteV3, createAthleteV3Instance, V3_HAIR, V3_BODIES} from '../../minigames/athlete-body-v3.mjs?v=island-v2-20261107-25';
-import {loadAthleteV22, createAthleteV22Instance} from '../../minigames/athlete-body-v22.mjs?v=island-v2-20261107-25';
+import {loadAthleteV3, createAthleteV3Instance, V3_HAIR, V3_BODIES} from '../../minigames/athlete-body-v3.mjs?v=island-v2-20261107-26';
+import {loadAthleteV22, createAthleteV22Instance} from '../../minigames/athlete-body-v22.mjs?v=island-v2-20261107-26';
 import {loadMotionCatalog} from '../athlete-body-v2/runtime/motion.mjs';
 
 const $ = id => document.getElementById(id);

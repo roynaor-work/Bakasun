@@ -1,11 +1,11 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-25';
-import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-25';
-import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-25';
-import { TYRE, tyreWear, CARRY, shoulderOf, GEARS as LIFT } from './racing-v24-5.mjs?v=island-v2-20261107-25';
-import { BRAKE_DOWN, TIGHT } from './racing-v24-7.mjs?v=island-v2-20261107-25';
-import { DRIFT, driftGrip, driftReward } from './racing-v24-9.mjs?v=island-v2-20261107-25';
-import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-25';
-import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-25';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-26';
+import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-26';
+import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-26';
+import { TYRE, tyreWear, CARRY, shoulderOf, GEARS as LIFT } from './racing-v24-5.mjs?v=island-v2-20261107-26';
+import { BRAKE_DOWN, TIGHT } from './racing-v24-7.mjs?v=island-v2-20261107-26';
+import { DRIFT, driftGrip, driftReward } from './racing-v24-9.mjs?v=island-v2-20261107-26';
+import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-26';
+import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-26';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);

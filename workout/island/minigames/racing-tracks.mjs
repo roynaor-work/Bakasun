@@ -1,6 +1,6 @@
 // Original island circuits. Distances are metres, Y is up, heading 0 faces +Z.
-import { ROUND, racingRoundOn } from './racing-v24-5.mjs?v=island-v2-20261107-25';
-import { racingV247Flags } from './racing-v24-7.mjs?v=island-v2-20261107-25';
+import { ROUND, racingRoundOn } from './racing-v24-5.mjs?v=island-v2-20261107-26';
+import { racingV247Flags } from './racing-v24-7.mjs?v=island-v2-20261107-26';
 const TAU = Math.PI * 2;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const wrap = (v, length) => ((v % length) + length) % length;

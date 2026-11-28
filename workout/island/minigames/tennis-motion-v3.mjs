@@ -8,7 +8,7 @@
  * As in v1 the legs follow the clip and the racket arm stays with the contact IK during a stroke, so a failure here cannot miss a ball.
  * New in v3: the clip's hip height is applied too (a crouch lowers the body instead of lifting the feet off the court).
  * ?tennisMotionV3=0 (or ?tennisMotionV1=0, or any load error) keeps v24.9 exactly. */
-import {sampleClip,jointWorld} from './tennis-motion.mjs?v=island-v2-20261107-25';
+import {sampleClip,jointWorld} from './tennis-motion.mjs?v=island-v2-20261107-26';
 const unit=a=>{const n=Math.hypot(...a)||1;return a.map(v=>v/n);};
 const param=(name,search)=>{try{return new URLSearchParams(search).get(name);}catch{return null;}};
 export function tennisMotionV3Enabled(search=globalThis.location?.search||''){return param('tennisMotionV3',search)!=='0'&&param('tennisMotionV1',search)!=='0';}
@@ -61,7 +61,7 @@ export function armTargets(dirs,side,shoulder,upperLength,foreLength,flipX=1){
 }
 export async function loadMotionV3({base,fetcher=globalThis.fetch,params}={}){
  if(params?.get?.('tennisMotionV3')==='0'||params?.get?.('tennisMotionV1')==='0')return null;
- const response=await fetcher(new URL('../assets/tennis-motion-v3/core.json?v=island-v2-20261107-25',base));
+ const response=await fetcher(new URL('../assets/tennis-motion-v3/core.json?v=island-v2-20261107-26',base));
  if(!response.ok)throw new Error('motion v3 '+response.status);
  const data=await response.json();
  if(data?.bones?.length!==18||!data.clips?.point_win)throw new Error('motion v3 data');

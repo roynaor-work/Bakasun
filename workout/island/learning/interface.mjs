@@ -1,8 +1,8 @@
-import {createLearningVoice} from './voice.mjs?v=island-v2-20261107-25';
-import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-v2-20261107-25';
-import {unpoint} from './questions.mjs?v=island-v2-20261107-25';
-import {correctVoice,retryVoice,pictureRevealVoice,feedbackVoice,roundVoice} from './spoken-copy.mjs?v=island-v2-20261107-25';
-import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-25';
+import {createLearningVoice} from './voice.mjs?v=island-v2-20261107-26';
+import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-v2-20261107-26';
+import {unpoint} from './questions.mjs?v=island-v2-20261107-26';
+import {correctVoice,retryVoice,pictureRevealVoice,feedbackVoice,roundVoice} from './spoken-copy.mjs?v=island-v2-20261107-26';
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-26';
 
 kidUxStyle('027', `
   .learning-voice-status { color: #243e4b; background: #fff9ed; border-radius: 12px; padding: 8px; font-size: 14px; font-weight: 700; }

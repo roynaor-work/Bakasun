@@ -1,6 +1,6 @@
-import {nativeShellAction} from './press.mjs?v=island-v2-20261107-25';
-import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-25';
-import {uiIconOr} from './ui-icons.mjs?v=island-v2-20261107-25';
+import {nativeShellAction} from './press.mjs?v=island-v2-20261107-26';
+import { kidUx, kidUxStyle } from '../kid-ux.mjs?v=island-v2-20261107-26';
+import {uiIconOr} from './ui-icons.mjs?v=island-v2-20261107-26';
 
 kidUxStyle('007', `
   .game-screen.game-screen[data-paused] .game-header .game-pause[data-kid-ux-pause-label] {

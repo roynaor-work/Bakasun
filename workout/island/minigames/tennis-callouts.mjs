@@ -60,7 +60,7 @@ export function createTakeBag(count,random=Math.random){
 }
 /** Load the recorded takes into AudioBuffers: {out:[AudioBuffer], net:[AudioBuffer]} (empty lists when there are none or nothing decodes).
  * `base` is this module's URL (the paths are relative to the island root). One take = its first file that loads and decodes. */
-export async function loadRecordedCalls(context,{base,fetcher=globalThis.fetch,ogg=true,version='island-v2-20261107-25',dir=CALLOUT_REC_DIR}={}){
+export async function loadRecordedCalls(context,{base,fetcher=globalThis.fetch,ogg=true,version='island-v2-20261107-26',dir=CALLOUT_REC_DIR}={}){
  const out={out:[],net:[]};
  try{
   const response=await fetcher(new URL('../'+dir+'takes.json?v='+version,base));if(!response?.ok)return out;
@@ -90,7 +90,7 @@ export const CALLOUT_PACK=Object.freeze({
  textAnchor:Object.freeze([.586,.492]),labelColors:Object.freeze({out:'#411c18',net:'#102e2b'})
 });
 /** The sprite as one AudioBuffer, the playable format first and the other as a fallback; null when neither loads and decodes. */
-export async function loadCalloutPack(context,{base,fetcher=globalThis.fetch,opus=true,version='island-v2-20261107-25'}={}){
+export async function loadCalloutPack(context,{base,fetcher=globalThis.fetch,opus=true,version='island-v2-20261107-26'}={}){
  for(const path of opus?[CALLOUT_PACK.files.ogg,CALLOUT_PACK.files.mp3]:[CALLOUT_PACK.files.mp3,CALLOUT_PACK.files.ogg]){
   try{const file=await fetcher(new URL('../'+path+'?v='+version,base));if(!file?.ok)continue;return await context.decodeAudioData(await file.arrayBuffer());}catch{}
  }

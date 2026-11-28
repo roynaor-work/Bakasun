@@ -21,8 +21,8 @@ const result = await page.evaluate(async ({samples, bodies}) => {
   const T = window.v3Preview.THREE;
   const {GLTFLoader} = await import('../../vendor/GLTFLoader.js');
   const {clone} = await import('../../vendor/SkeletonUtils.js');
-  const v3 = await import('../../minigames/athlete-body-v3.mjs?v=island-v2-20261107-25');
-  const v22 = await import('../../minigames/athlete-body-v22.mjs?v=island-v2-20261107-25');
+  const v3 = await import('../../minigames/athlete-body-v3.mjs?v=island-v2-20261107-26');
+  const v22 = await import('../../minigames/athlete-body-v22.mjs?v=island-v2-20261107-26');
   const loader = new GLTFLoader(), load = url => loader.loadAsync(url);
   const src3 = window.v3Preview.source, src22 = await v22.loadAthleteV22(load, {T, bodies});
   const clips = window.v3Preview.clips;
