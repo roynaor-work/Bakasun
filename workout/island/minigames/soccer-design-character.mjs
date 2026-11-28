@@ -17,6 +17,7 @@ import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
 import {createLocomotionGate,heldClipRelease,soccerSwitchVersion,soccerGlitchVersion,capYawStep,softenCut} from './soccer-v23.mjs?v=island-v2-20261107-24'; // v23 (13/11): locomotion gate (?soccerGlitch=v22), selected player leaves held clips (?soccerSwitch=v22)
 import {applySoccerLook249} from './soccer-look249.mjs';
 import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22Triangles,v22HairFor,v22Height,V22_MAP} from './athlete-body-v22.mjs?v=island-v2-20261107-24';
+import {athleteV3Enabled,loadAthleteV3,createAthleteV3Instance} from './athlete-body-v3.mjs?v=island-v2-20261107-24';
 import {athleteLodGeometries,loadAthleteLodAssets} from './soccer-full-lod.mjs?v=island-v2-20261107-24';
 import {loadAthleteV2,decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-24';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
@@ -561,7 +562,7 @@ export function feelSlideYaw(character,p,motion){
 /** Compile actions that have a live simulation mapping. Other extension
  * states remain in the merged library without an expensive unused floor bake. */
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
-let designSources=null,lastAthleteV22Error=null,lastAthleteV2Error=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,lastV8Error=null,lastAthleteError=null;
+let designSources=null,lastAthleteV22Error=null,lastAthleteV2Error=null,lastAthleteV3Error=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,lastV8Error=null,lastAthleteError=null;
 /** Why the Codex athlete body (v22) was skipped in favour of the previous shared athlete (null when it loaded or was not asked for). */
 export function soccerAthleteV22FallbackReason(){return lastAthleteV22Error;}
 /** Why the shared athlete body was skipped in favour of v7 (null when it loaded or was not asked for). */
@@ -686,15 +687,20 @@ async function prepareAthleteV22(loader){
   // v24: the Codex body v2 (hands, keeper gloves, shirt numbers) on the same rig; a failure keeps the v22 body (`?athleteBodyV2=0` too).
   lastAthleteV2Error=null;
   const v22Body=()=>loadAthleteV22(url=>retrying(()=>loader.loadAsync(url),'athlete-body-v22/'+url.split('/').pop()),{T,bodies:['soccer']});
-  const body2=athleteBodyV2Enabled()?loadAthleteV2({T,GLTFLoader,retry:fn=>retrying(fn,'soccer-v24/body')}).catch(error=>{lastAthleteV2Error=String(error?.message||error);return v22Body();}):v22Body();
+  const previous=()=>athleteBodyV2Enabled()?loadAthleteV2({T,GLTFLoader,retry:fn=>retrying(fn,'soccer-v24/body')}).catch(error=>{lastAthleteV2Error=String(error?.message||error);return v22Body();}):v22Body();
+  // v3 (athlete-body-v3.mjs, 28/11): the new body on the same rig; `?athleteV3=0` or any failure keeps the previous body exactly
+  lastAthleteV3Error=null;
+  const body2=athleteV3Enabled()?loadAthleteV3(url=>retrying(()=>loader.loadAsync(url),'athlete-body-v3/'+url.split('/').pop()),{T,bodies:['soccer']}).catch(error=>{lastAthleteV3Error=String(error?.message||error);return previous();}):previous();
   const [source,library,packs]=await Promise.all([body2,retrying(()=>loadSoccerRestartMotion(),'motion library'),loadMotionPacks()]);
   const data={...library,states:{...library.states,...packs.states}},body=source.bodies.soccer;
   const map=athleteRetargetMap(body.rig,data.skeleton.bones,V22_MAP,{tweaks:{}});
   return finishSources({scenes:[body.scene],rig:body.rig,map,data,set:'athlete',outfield:[0],keeper:0,validate:()=>{},assign:()=>{},extraClips:packs.extraClips,
-    lodFor:mesh=>[mesh.geometry,mesh.geometry],extra:{athlete:source,v22:true,v2:source.v2===true}});
+    lodFor:mesh=>[mesh.geometry,mesh.geometry],extra:{athlete:source,v22:true,v2:source.v2===true,v3:source.v3===true}});
 }
 /** Why the v24 body v2 was skipped for the v22 body (null when it loaded or was not asked for). */
 export function soccerAthleteV2FallbackReason(){return lastAthleteV2Error;}
+/** Why the v3 body was skipped for the previous one (null when it loaded or was not asked for). */
+export function soccerAthleteV3FallbackReason(){return lastAthleteV3Error;}
 /** Why the full match's bodies use the runtime clustering instead of Codex athlete-lod-v1 (null when the pack loaded or the match is small). */
 let lastFullLodError=null;export function soccerFullLodFallbackReason(){return lastFullLodError;}
 /** GPT v7: player-01 (team A), player-04 (team B), goalkeeper. LOD0 and LOD1 come from the files; LOD1
@@ -758,13 +764,13 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
     for(const r of resources)r.dispose?.();resources.clear();
   };
   try {
-    const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips,set,outfield,keeper:keeperSource,athlete:athleteSource,v22:athleteV22,v2:athleteV2}=await prepareSoccerDesignSources();
+    const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips,set,outfield,keeper:keeperSource,athlete:athleteSource,v22:athleteV22,v2:athleteV2,v3:athleteV3}=await prepareSoccerDesignSources();
     globalThis.performance?.mark?.('soccer:characters-instance-start');
     const height=config.view.animation.characterHeight||1.8,yawCapped=soccerGlitchVersion()==='v23';
     // Soccer full (soccer-full.mjs, config.full.lod): the 1.4K and 0.4K copies of the shared body for players away from the camera (v22 / v2 body
     // only): Codex athlete-lod-v1 first, the load-time clustering of soccer-full-lod.mjs if it cannot be loaded; hair caps are clustered (110).
     let codexLods=null;lastFullLodError=null;
-    if(config.full?.lod&&set==='athlete'&&athleteV22){try{codexLods=await loadAthleteLodAssets({T,GLTFLoader,retry:fn=>retrying(fn,'athlete-lod-v1')});}catch(error){lastFullLodError=String(error?.message||error);}}
+    if(config.full?.lod&&set==='athlete'&&athleteV22&&!athleteV3){try{codexLods=await loadAthleteLodAssets({T,GLTFLoader,retry:fn=>retrying(fn,'athlete-lod-v1')});}catch(error){lastFullLodError=String(error?.message||error);}}
     const fullLods=config.full?.lod?{body:g=>codexLods||athleteLodGeometries(T,g,'body'),hair:g=>athleteLodGeometries(T,g,'hair'),farShadows:Boolean(config.full.lod.lowShadows),source:codexLods?'codex-athlete-lod-v1':'runtime-cluster'}:null;
     let triangles=0,lowTriangles=0,mobileTriangles=0;
     const a=config.view.athlete||{};
@@ -774,11 +780,12 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
         // the Codex body: the team's colours painted into this player's vertex colours, skin tone and hairstyle per slot, no per-player material
         const team=slot.team===0?config.team:config.opponent,profile=(a.profiles||[{skin:'#c08a68',hair:'#1f1712'}])[id%(a.profiles?.length||1)];
         const kit=athleteKitFor('soccer',team.colors,{keeper:isKeeper,keeperColor:a.keeperColors?.[slot.team]||'#cf9d2e',selected:slot.team===0&&!isKeeper?selectedKit:null});
-        const inst=createAthleteV22Instance(T,athleteSource,{bodyId:'soccer',cloneRig:cloneSoccerRig,appearance:{skin:profile.skin,hair:profile.hair,hairStyle:v22HairFor(profile,id)},kit,style:'soccer',track:own,height:v22Height('soccer','field',isKeeper?(a.keeperHeight||height*1.033):height),lods:fullLods});
+        const instanceOptions={bodyId:'soccer',cloneRig:cloneSoccerRig,appearance:{skin:profile.skin,hair:profile.hair,hairStyle:v22HairFor(profile,id)},kit,style:'soccer',track:own,height:v22Height('soccer','field',isKeeper?(a.keeperHeight||height*1.033):height),lods:fullLods};
+        const inst=athleteV3?createAthleteV3Instance(T,athleteSource,{...instanceOptions,number:slot.matchNumber??null,gloves:isKeeper}):createAthleteV22Instance(T,athleteSource,instanceOptions);
         // v24 body v2: gloves on the keepers, the card's number on every back (set each frame from the player, see update)
-        const decoration=athleteV2?decorateAthleteV2(T,inst,{number:slot.matchNumber??null,gloves:isKeeper,kit,appearance:{skin:profile.skin,hair:profile.hair}}):null;
+        const decoration=athleteV3?inst.v3:athleteV2?decorateAthleteV2(T,inst,{number:slot.matchNumber??null,gloves:isKeeper,kit,appearance:{skin:profile.skin,hair:profile.hair}}):null;
         // v24.9 look (soccer-look249.mjs, `?soccerLook=0`): wider shoulders, longer and thicker arms, a smaller head and boots, as rest scales of the joints
-        if(config.v249Look)applySoccerLook249(inst.bones);
+        if(config.v249Look&&!athleteV3)applySoccerLook249(inst.bones);   // v3 has its own proportions
         const pivot=new T.Group();pivot.add(inst.root);scene.add(pivot);
         triangles+=v22Triangles(inst);lowTriangles+=v22Triangles(inst,fullLods?1:0);mobileTriangles+=v22Triangles(inst,fullLods?2:0);
         const mixer=new T.AnimationMixer(inst.root),motion=createSoccerDesignMotion(mixer,clipSets[0],data,config);
@@ -794,7 +801,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
             pivot.position.set(stand?stand.x:p.x,motion.ownsHeight?0:Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
             this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
           },
-          metrics:()=>({kind:decoration?'athlete-body-v2':'athlete-body-v22',set:'athlete-v22',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod:inst.lod,heightMetres:inst.height,armSwing:motion.armSwing.weight,slide:motion.slide,header:motion.header,number:decoration?.number??null,gloves:decoration?.gloves??false}),
+          metrics:()=>({kind:athleteV3?'athlete-body-v3':decoration?'athlete-body-v2':'athlete-body-v22',set:'athlete-v22',state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod:inst.lod,heightMetres:inst.height,armSwing:motion.armSwing.weight,slide:motion.slide,header:motion.header,number:decoration?.number??null,gloves:decoration?.gloves??false}),
           dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(inst.root);decoration?.dispose();inst.dispose();pivot.removeFromParent();},
         };
         mixer.update(0);characters.push(character);continue;

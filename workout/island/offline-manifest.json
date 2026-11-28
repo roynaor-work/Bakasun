@@ -355,6 +355,7 @@
   "minigames/art.mjs",
   "minigames/athlete-body-v2.mjs",
   "minigames/athlete-body-v22.mjs",
+  "minigames/athlete-body-v3.mjs",
   "minigames/athlete-body.mjs",
   "minigames/athletes-core.mjs",
   "minigames/athletes-gait.mjs",
@@ -956,7 +957,16 @@
    "assets/soccer-v241/referee/referee.glb",
    "design/athlete-lod-v1/models/soccer-lod1.glb",
    "design/athlete-lod-v1/models/soccer-lod2.glb",
-   "design/athlete-lod-v1/textures/number-23-mask.png"
+   "design/athlete-lod-v1/textures/number-23-mask.png",
+   "assets/athlete-body-v3/models/soccer.glb",
+   "assets/athlete-body-v3/hair/buzz.glb",
+   "assets/athlete-body-v3/hair/crop.glb",
+   "assets/athlete-body-v3/hair/side-part.glb",
+   "assets/athlete-body-v3/hair/quiff.glb",
+   "assets/athlete-body-v3/hair/curls.glb",
+   "assets/athlete-body-v3/hair/afro.glb",
+   "assets/athlete-body-v3/hair/swept-back.glb",
+   "assets/athlete-body-v3/hair/bun.glb"
   ],
   "hoops": [
    "assets/athlete/athlete.glb",
@@ -1133,7 +1143,16 @@
    "assets/hoops-polish-v1/audio/rim-hit-02.mp3",
    "assets/hoops-polish-v1/audio/rim-hit-02.ogg",
    "assets/hoops-polish-v1/audio/rim-hit-03.mp3",
-   "assets/hoops-polish-v1/audio/rim-hit-03.ogg"
+   "assets/hoops-polish-v1/audio/rim-hit-03.ogg",
+   "assets/athlete-body-v3/models/hoops.glb",
+   "assets/athlete-body-v3/hair/buzz.glb",
+   "assets/athlete-body-v3/hair/crop.glb",
+   "assets/athlete-body-v3/hair/side-part.glb",
+   "assets/athlete-body-v3/hair/quiff.glb",
+   "assets/athlete-body-v3/hair/curls.glb",
+   "assets/athlete-body-v3/hair/afro.glb",
+   "assets/athlete-body-v3/hair/swept-back.glb",
+   "assets/athlete-body-v3/hair/bun.glb"
   ],
   "alpine": [
    "assets/alpine-rush/granite-v5.webp",
@@ -3244,6 +3263,46 @@
   "assets/athlete-body-v22/textures/athlete-atlas.png": [
    "7024031216a0af3b",
    474663
+  ],
+  "assets/athlete-body-v3/hair/afro.glb": [
+   "e135ba9825f67819",
+   14552
+  ],
+  "assets/athlete-body-v3/hair/bun.glb": [
+   "fe86c9deb09a3278",
+   18552
+  ],
+  "assets/athlete-body-v3/hair/buzz.glb": [
+   "15404af0c0a3580b",
+   14552
+  ],
+  "assets/athlete-body-v3/hair/crop.glb": [
+   "6d1310585e49ddda",
+   14556
+  ],
+  "assets/athlete-body-v3/hair/curls.glb": [
+   "589d1fca50c29059",
+   17160
+  ],
+  "assets/athlete-body-v3/hair/quiff.glb": [
+   "8b924b771f476556",
+   14556
+  ],
+  "assets/athlete-body-v3/hair/side-part.glb": [
+   "52e3bed8a05147c0",
+   14564
+  ],
+  "assets/athlete-body-v3/hair/swept-back.glb": [
+   "41313ba0ea3aba64",
+   14568
+  ],
+  "assets/athlete-body-v3/models/hoops.glb": [
+   "da6b260ef1db0306",
+   237248
+  ],
+  "assets/athlete-body-v3/models/soccer.glb": [
+   "1fb3dbbde3a3bc72",
+   204864
   ],
   "assets/athlete/athlete.glb": [
    "ca4bed47cba1b8ce",
@@ -8693,6 +8752,10 @@
    "fdd728613aded651",
    16929
   ],
+  "minigames/athlete-body-v3.mjs": [
+   "ff3d520c1507b1df",
+   9369
+  ],
   "minigames/athlete-body.mjs": [
    "ea2ba93972b19d5e",
    22913
@@ -9106,8 +9169,8 @@
    17019
   ],
   "minigames/hoops-athlete.mjs": [
-   "2af6c4c85b5bd0af",
-   18359
+   "7826a88add13d33b",
+   19216
   ],
   "minigames/hoops-audio.mjs": [
    "c766c8d5435640a2",
@@ -9766,8 +9829,8 @@
    16760
   ],
   "minigames/soccer-design-character.mjs": [
-   "764934456ef3a154",
-   86374
+   "87020132ab1335f9",
+   87403
   ],
   "minigames/soccer-design-contracts.mjs": [
    "be71e6a4d29b41b2",
