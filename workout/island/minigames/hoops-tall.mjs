@@ -146,12 +146,13 @@ export function chooseTallMotion(pack,p,ctx,st){
  }
  if(st.celebrate>0&&!act)return {kind:'full',clip:st.celebrateClip,t:Math.min(pack.clips[st.celebrateClip].duration-.01,2.2-st.celebrate),ownsJump:true};
  const SC=ctx.stopClips;
- if(SC&&st.stopClip&&p.stop&&!p.hasBall)return {kind:'full',clip:st.stopClip.id,t:Math.min(st.stopClip.duration-.001,p.stop.t),ownsJump:false};
- if(SC&&!p.hasBall&&speed>.8&&Math.abs(lat)>Math.abs(fwd)*(st.slideFast?.8:1.1)){
+ if(SC&&SC.mode!=='3'&&st.stopClip&&p.stop&&!p.hasBall)return {kind:'full',clip:st.stopClip.id,t:Math.min(st.stopClip.duration-.001,p.stop.t),ownsJump:false};
+ if(SC&&SC.mode!=='2'&&!p.hasBall&&speed>.8&&Math.abs(lat)>Math.abs(fwd)*(st.slideFast?.8:1.1)){
   const sf=slideFastPlan(SC.meta,speed,lat,SC.scale,st.slideFast||null);
-  if(sf){st.slideFast=sf.clip;return {kind:'loop',clip:sf.clip,rate:sf.rate,group:'def',sideways:true};}
+  if(sf){const r0=st.slideFastRate,same=st.slideFast===sf.clip&&Number.isFinite(r0);/* the rate follows the speed slowly: a rate that jumps every tick drags the planted foot */
+   st.slideFast=sf.clip;st.slideFastRate=same?r0+(sf.rate-r0)*.12:sf.rate;return {kind:'loop',clip:sf.clip,rate:st.slideFastRate,group:'def',sideways:true,fastSlide:true};}
  }
- st.slideFast=null;
+ st.slideFast=null;st.slideFastRate=NaN;
  if(ctx.defending&&!p.hasBall){
   if(speed<.4)return {kind:'loop',clip:'defensive_stance',rate:1,group:'def'};
   if(Math.abs(lat)>Math.abs(fwd)*.8&&speed<(F?F.slideMax:4.2))return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,F?F.slideRate:1.7),group:'def'};
@@ -324,19 +325,19 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   lastAct=p.act;
   const catching=ctx.catching||performance.now()<(st.catchUntil||0);
   const feet250=assets.feet250&&assets.unified?{...assets.feet250,yaw:heading.yaw,following:heading.following}:null;
-  const SCa=assets.stopClips&&assets.stopClips.scale?{meta:assets.stopClips.meta,scale:assets.stopClips.scale[profile]}:null;
+  const SCa=assets.stopClips&&assets.stopClips.scale?{meta:assets.stopClips.meta,mode:assets.stopClips.mode,scale:assets.stopClips.scale[profile]}:null;
   if(SCa&&p.stop&&!p.hasBall){if(!st.stopClip){const v=pickStopVariant(SCa.meta,p.stop.v0,SCa.scale,p.stop.Ts);st.stopClip={id:v.id,duration:dur(v.id)};}}else st.stopClip=null;
   let plan=chooseTallMotion(pack,p,{...ctx,stopClips:SCa,catching,feet250,v8pack:assets.v8,v8s,dt,gaits13:assets.gaits13?.[profile]||null,fakeV13:assets.fakeV13!==false},st);
   // v25.0 feet: a moving loop is kept for `dwell` seconds before another moving loop may replace it (measured: a clip change every 0.46 s per
   // player, most of them dragging the planted foot); a stop, an act or a change of ball possession switches at once
   if(feet250&&plan.kind==='loop'){const sp=Math.hypot(p.vx||0,p.vz||0);
-   if(hold&&plan.clip!==hold.plan.clip&&hold.t<feet250.dwell&&sp>.4&&!!plan.dribble===!!hold.plan.dribble&&plan.group!=='idle'){plan=hold.plan;hold.t+=dt;hold.held++;}
+   if(hold&&plan.clip!==hold.plan.clip&&hold.t<feet250.dwell&&sp>.4&&!plan.fastSlide&&!hold.plan.fastSlide&&!!plan.dribble===!!hold.plan.dribble&&plan.group!=='idle'){plan=hold.plan;hold.t+=dt;hold.held++;}
    else if(!hold||plan.clip!==hold.plan.clip)hold={plan,t:0,held:0};else{hold.plan=plan;hold.t+=dt;}
   }else hold=null;
   // weights and times: a layered plan is the upper and lower halves of two clips; everything else is one clip (full-body)
   const layered=plan.kind==='layer';
   cur.mix+=((layered?0:1)-cur.mix)*(1-Math.exp(-dt/(plan.kind==='loop'?.12:.07)));
-  const fullName=layered?null:plan.clip,upName=layered?'U:'+plan.upper:null,loName=layered?'L:'+plan.lower:null,tau=plan.kind==='loop'?.12:.07;
+  const fullName=layered?null:plan.clip,upName=layered?'U:'+plan.upper:null,loName=layered?'L:'+plan.lower:null,tau=plan.kind==='loop'?(plan.fastSlide?.06:.12):.07;
   const sF=easeWeights(cur.full,fullName,tau,dt),sU=easeWeights(cur.upper,upName,tau,dt),sL=easeWeights(cur.lower,loName,tau,dt);
   for(const n in actions)actions[n].setEffectiveWeight(0);
   const apply=(map,sum,k)=>{for(const [n,w] of Object.entries(map)){const a=action(n);if(a)a.setEffectiveWeight(w/sum*k);}};

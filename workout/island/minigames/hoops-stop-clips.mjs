@@ -12,7 +12,9 @@ const hyp=Math.hypot;
 
 export const STOP_FLAG='hoopsStopClips';
 /** Off by default (the 28/11 measurement showed no gain, see design/hoops-stop-clips-v1/REPORT.md); `?hoopsStopClips=1` turns it on. */
-export function stopClipsEnabled(params){const q=params&&typeof params.get==='function'?params.get(STOP_FLAG):null;return q==='1';}
+export function stopClipsEnabled(params){return stopClipsMode(params)!=='0';}
+/** '0' off (default), '1' stop mode and fast shuffle, '2' stop mode only, '3' fast shuffle only (for measuring each part on its own). */
+export function stopClipsMode(params){const q=params&&typeof params.get==='function'?params.get(STOP_FLAG):null;return q==='1'||q==='2'||q==='3'?q:'0';}
 
 /** Engine side. Speeds are world m/s. `bands`: the entry speed from which a stop lasts `Ts` seconds (the clips' own braking time). */
 export const STOP=Object.freeze({
@@ -25,7 +27,7 @@ export const STOP=Object.freeze({
  slide:Object.freeze({from:2.2,to:5.3,hysteresis:0.2}),
 });
 /** The engine's option: STOP, or null when off. */
-export const engineStopClips=params=>stopClipsEnabled(params)?STOP:null;
+export const engineStopClips=params=>{const m=stopClipsMode(params);return m==='1'||m==='2'?STOP:null;};
 export function stopBand(v0,cfg=STOP){return cfg.bands.find(b=>v0>=b.from)||cfg.bands[cfg.bands.length-1];}
 
 /** One engine step of the stop mode for player `p` ({vx,vz,face,act,stumble,stop}). Returns true when it set p.vx / p.vz this step
