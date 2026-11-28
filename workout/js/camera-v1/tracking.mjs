@@ -13,6 +13,11 @@ export const CONFIDENCE_START = Object.freeze({ standing: minConfidence, floor: 
 // A standing exercise stays on the common limit until a real clip says otherwise; nothing here goes above it.
 export const CONFIDENCE_BY_EXERCISE = Object.freeze({ 'push-ups': .42, 'knee-push-ups': .42, plank: .42, 'side-plank': .42,
   crunches: .40, 'glute-bridge': .40, 'leg-raises': .40, 'wall-sit': .45 });
+// camStart=1: how long the child must hold still before counting starts. On real clips of a grown-up who went
+// straight into squats (no pause at the start) the common 650 ms was first met after 10 seconds and the first
+// two to six squats were lost; the top of a squat lasts about half a second. Floor poses keep the common time.
+export const CALIBRATION_MS = Object.freeze({ common: 650, standingQuick: 400 });
+export const calibrationFor = (policy, on = false) => on && policy?.setup === 'standing' ? CALIBRATION_MS.standingQuick : CALIBRATION_MS.common;
 export const confidenceFor = (policy, on = false, id = null) => !on ? minConfidence
   : Math.min(minConfidence, CONFIDENCE_BY_EXERCISE[id] ?? CONFIDENCE_START[policy?.setup] ?? minConfidence);
 const maxFrameGap = 360;

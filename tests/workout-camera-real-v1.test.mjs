@@ -8,7 +8,7 @@ import { measure } from '../workout/js/camera-v1/geometry.mjs';
 import { guide } from '../workout/js/camera-v1/guide.mjs';
 import { cameraFlags } from '../workout/js/camera-v1/flag.mjs';
 import { MotionCounter } from '../workout/js/camera-v1/motion.mjs';
-import { PoseTracker } from '../workout/js/camera-v1/tracking.mjs';
+import { PoseTracker, calibrationFor, CALIBRATION_MS } from '../workout/js/camera-v1/tracking.mjs';
 
 // A standing body in world coordinates (metres, y down, hip-centred). size scales every length, thigh/shin/arm
 // are the lengths against the torso, turn rotates the body about the vertical axis (a diagonal stance).
@@ -154,10 +154,29 @@ test('camSteps: the guidance names the number of steps only when the flag is on 
 });
 
 test('flags: all off unless the address asks, and malformed addresses are harmless', () => {
-  const off = { body: false, steps: false, conf: false, depth: false, place: false, forearm: false };
+  const off = { body: false, steps: false, conf: false, depth: false, place: false, forearm: false, start: false };
   assert.deepEqual({ ...cameraFlags('') }, off);
   assert.deepEqual({ ...cameraFlags('?camBody=1&camSteps=1') }, { ...off, body: true, steps: true });
   assert.deepEqual({ ...cameraFlags('?camBody=0&camConf=1') }, { ...off, conf: true });
   assert.deepEqual({ ...cameraFlags('?camPlace=1&camForearm=1') }, { ...off, place: true, forearm: true });
   assert.doesNotThrow(() => cameraFlags('%E0%A4%A'));
+});
+
+test('camStart: a standing exercise is ready after a shorter still moment; floor exercises and the default keep 650 ms', () => {
+  assert.equal(calibrationFor({ setup: 'standing' }, false), 650);
+  assert.equal(calibrationFor({ setup: 'floor' }, true), 650);
+  assert.equal(calibrationFor({ setup: 'standing' }, true), CALIBRATION_MS.standingQuick);
+  assert.equal(cameraFlags('?camStart=1').start, true);
+  // Three sizes in the picture: a small child, an eleven-year-old as tall as a grown-up, a grown-up.
+  for (const torso of [.11, .15, .19]) {
+    const firstReady = calibrationMs => {
+      const tracker = new PoseTracker({ view: 'front', setup: 'standing', required: [[11, 23, 25, 27], [12, 24, 26, 28]], calibrationMs });
+      const pose = { landmarks: picture({ torso }), world: world() };
+      for (let time = 0; time <= 2000; time += 66) if (tracker.update({ poses: [pose], time, aspect: .75 }).status === 'ready') return time;
+      return null;
+    };
+    const quick = firstReady(calibrationFor({ setup: 'standing' }, true)), common = firstReady(calibrationFor({ setup: 'standing' }, false));
+    assert.ok(quick != null && common != null, 'both become ready: ' + torso);
+    assert.ok(common - quick >= 190, `the quick start is ready about a quarter of a second sooner (${quick} against ${common}): ` + torso);
+  }
 });

@@ -15,7 +15,8 @@ export const cameraV1Href = (exerciseId = '') => 'camera-v1/' + (safe(exerciseId
 //   camDepth=1  push-up depth eased by the child's arm scale
 //   camPlace=1  guidance: a body that fills the width, or hidden legs or head with nothing cut, is told to move back
 //   camForearm=1 a plank held on the forearms is credited
+//   camStart=1  standing exercises start counting after a shorter still moment (400 ms instead of 650)
 export const cameraFlags = (search = globalThis.location?.search || '') => {
   const on = name => { try { return new URLSearchParams(search).get(name) === '1'; } catch { return false; } };
-  return Object.freeze({ body: on('camBody'), steps: on('camSteps'), conf: on('camConf'), depth: on('camDepth'), place: on('camPlace'), forearm: on('camForearm') });
+  return Object.freeze({ body: on('camBody'), steps: on('camSteps'), conf: on('camConf'), depth: on('camDepth'), place: on('camPlace'), forearm: on('camForearm'), start: on('camStart') });
 };
