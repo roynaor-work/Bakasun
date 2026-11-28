@@ -6,10 +6,10 @@
  *  - the clear-sky wait at the end of a stage: a banner over the battle ("a helicopter is up, shoot it down with the Vulcan") and an edge
  *    arrow toward the aircraft when it is off the picture.
  * Nothing is drawn for a part whose switch is off (the model reports `radarOn`, `airFinale`). */
-import {navalLockBox,NAVAL_LOCK_COLORS} from './naval-lockon-hud.mjs?v=island-v2-20261107-24';
-import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-24';
-import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-24';
-import {NAVAL_V241_COLORS,NAVAL_V241_WORDS,NAVAL_V241_DEFAULTS,navalRadarRange} from './naval-v241.mjs?v=island-v2-20261107-24';
+import {navalLockBox,NAVAL_LOCK_COLORS} from './naval-lockon-hud.mjs?v=island-v2-20261107-25';
+import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-25';
+import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-25';
+import {NAVAL_V241_COLORS,NAVAL_V241_WORDS,NAVAL_V241_DEFAULTS,navalRadarRange} from './naval-v241.mjs?v=island-v2-20261107-25';
 const TAU=Math.PI*2,OUTLINE=NAVAL_LOCK_COLORS.outline;
 function brackets(p,b,color,arm,alpha=1){
  p.save();p.globalAlpha=alpha;p.lineCap='round';p.lineJoin='round';

@@ -3,7 +3,7 @@
 // (source and listening evidence in notes/g4f-qa.md).
 // v24.4: call(kind) = the synthesised line call "OUT!" / "NET!" (tennis-callouts.mjs), through the same master and sound switch.
 // v24.5: recorded takes (assets/tennis-callouts-rec, listed in its takes.json) replace the synthesised call when present; ?tennisCalloutRec=0 keeps the synth.
-import {playCall,tennisCalloutRecEnabled,loadRecordedCalls,createTakeBag,tennisCalloutPackEnabled,loadCalloutPack,playPackCall,CALLOUT_PACK,calloutVoiceOrder,pickCallVoice,CALLOUT_VOICE_DIRS} from './tennis-callouts.mjs?v=island-v2-20261107-24';
+import {playCall,tennisCalloutRecEnabled,loadRecordedCalls,createTakeBag,tennisCalloutPackEnabled,loadCalloutPack,playPackCall,CALLOUT_PACK,calloutVoiceOrder,pickCallVoice,CALLOUT_VOICE_DIRS} from './tennis-callouts.mjs?v=island-v2-20261107-25';
 // v24.6 (Roy on the phone after v24.5, 20/11/2026: "in tennis there is no sound of what I recorded for NET and OUT, the old ones are there; there is
 // also the racing engine sound in the background; the crowd is not the new recording"). ?tennisAudioV246=0 keeps v24.5 exactly. Found:
 //  - the "engine in the background" is the crowd bed (stadium-bed.ogg, a synthesised 24 s murmur loop played all match at .1-.3): measured, all
@@ -29,7 +29,7 @@ export const CALL_DUCK=.25;
 export function createTennisAudio({config,storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
  let context,master,paused=false,disposed=false,muted=false;const buffers=new Map(),active=new Set(),last=new Map(),played={};const recOn=tennisCalloutRecEnabled(),v246=tennisAudioV246Enabled(),packOn=tennisCalloutPackEnabled();let pack=null,packAsked=false;const packBags={out:createTakeBag(CALLOUT_PACK.takes.out.length),net:createTakeBag(CALLOUT_PACK.takes.net.length)};let crowdBus=null,callUntil=-1;const voiceAw=new Set();const order=calloutVoiceOrder(),sets={words:{out:[],net:[]},rec:{out:[],net:[]}},setLoaded={words:false,rec:false},bags={words:{},rec:{}};const covered=()=>['out','net'].every(k=>sets.words[k].length||sets.rec[k].length);
  function sync(){try{muted=storage?.getItem('island.sound')==='off';}catch{}if(master)master.gain.value=muted||paused?0:config.volume;}
- const files=Promise.all(Object.entries(tennisSamples(config)).map(async([name,path])=>{try{const response=await fetcher(new URL('../'+path+'?v=island-v2-20261107-24',import.meta.url));if(!response.ok)return;return [name,await response.arrayBuffer()];}catch{return;}}));
+ const files=Promise.all(Object.entries(tennisSamples(config)).map(async([name,path])=>{try{const response=await fetcher(new URL('../'+path+'?v=island-v2-20261107-25',import.meta.url));if(!response.ok)return;return [name,await response.arrayBuffer()];}catch{return;}}));
  /* v24.7: the Codex sprite is fetched only when a call has no recorded take (so not at all with Roy's four takes in place). */
  function needPack(){if(!packOn||packAsked||disposed||!context||covered())return;packAsked=true;let opus=true;try{opus=Boolean(globalThis.Audio&&new Audio().canPlayType('audio/ogg; codecs="opus"'));}catch{}void loadCalloutPack(context,{base:import.meta.url,fetcher,opus}).then(b=>{if(!disposed)pack=b;});}
  async function loadVoices(ctx){let ogg=true;try{ogg=Boolean(globalThis.Audio&&new Audio().canPlayType('audio/ogg; codecs="vorbis"'));}catch{}

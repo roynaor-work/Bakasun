@@ -156,7 +156,7 @@ test('look: the joints\' rest scales widen the shoulders, lengthen the arms and 
   const p=soccerLook249Proportions();assert.ok(p.after.shoulderJoints>p.before.shoulderJoints&&p.after.arm>p.before.arm&&p.after.headsTall>p.before.headsTall);
   assert.ok(p.after.arm>=.56&&p.after.arm<=.6,'the arm reaches an adult length for this height: '+p.after.arm);
   const character=readFileSync(new URL('../workout/island/minigames/soccer-design-character.mjs',import.meta.url),'utf8'),light=readFileSync(new URL('../workout/island/minigames/soccer-lighting.mjs',import.meta.url),'utf8');
-  assert.match(character,/if\(config\.v249Look\)applySoccerLook249\(inst\.bones\)/);assert.match(light,/config\.v249Look\?new T\.DirectionalLight\(SOCCER_LOOK249\.fillColor,SOCCER_LOOK249\.fill\)/);
+  assert.match(character,/if\(config\.v249Look&&!athleteV3\)applySoccerLook249\(inst\.bones\)/);assert.match(light,/config\.v249Look\?new T\.DirectionalLight\(SOCCER_LOOK249\.fillColor,SOCCER_LOOK249\.fill\)/);
   const cfg=full();assert.equal(applySoccerV249View(cfg,{enabled:false,look:true}).v249Look,true);assert.equal(applySoccerV249View(cfg,{enabled:true,look:false}).v249Look,undefined);
   // the shared athlete body files (also basketball's) are not edited by this round
   const shared=readFileSync(new URL('../workout/island/minigames/athlete-body-v22.mjs',import.meta.url),'utf8');assert.doesNotMatch(shared,/249/);

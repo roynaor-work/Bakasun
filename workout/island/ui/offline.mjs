@@ -11,7 +11,7 @@
 // old cache dropped when the new worker takes over, persistent storage, and a worker that
 // answers the app shell from the device first.
 import {DATA_VERSION} from '../release.mjs';
-import {alpineRunnerEnabled} from '../minigames/alpine-runner-rules.mjs?v=island-v2-20261107-24';
+import {alpineRunnerEnabled} from '../minigames/alpine-runner-rules.mjs?v=island-v2-20261107-25';
 
 export const OFFLINE_GAMES=Object.freeze({soccer:'כדורגל',hoops:'כדורסל',alpine:'סקי',alpineLeague:'ליגת הסקי',alpineRunner:'גלישת סקי אינסופית',tennis:'טניס',racing:'מרוצים',naval:'ספינות',boar:'אי החזירים',fire:'כיבוי אש',alien:'הגנה מחייזרים',city:'העיר',catch:'תפוס את הפושע'});
 export const STATUS_KEY='island.offline.status';

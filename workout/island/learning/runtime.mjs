@@ -1,6 +1,6 @@
-import {STATIONS,levelForAge,questionsForAge,syncLearningDay,dailyStatus,recordAnswer,roundReward,completeDailyRound} from './state.mjs?v=island-v2-20261107-24';
-import {createQuestion} from './questions.mjs?v=island-v2-20261107-24';
-import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-24';
+import {STATIONS,levelForAge,questionsForAge,syncLearningDay,dailyStatus,recordAnswer,roundReward,completeDailyRound} from './state.mjs?v=island-v2-20261107-25';
+import {createQuestion} from './questions.mjs?v=island-v2-20261107-25';
+import {kidUx} from '../kid-ux.mjs?v=island-v2-20261107-25';
 
 /** One in-memory round owns answers and pays once, only after all eight questions. */
 export function installLearning(engine,changed) {

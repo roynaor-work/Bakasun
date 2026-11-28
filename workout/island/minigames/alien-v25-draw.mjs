@@ -3,15 +3,15 @@
  * spinning muzzle flash on both barrels while the Vulcan fires, an impact burst where a Vulcan bullet strikes (0.18 s), and steam from the
  * barrels for half a second when the gauge locks. While a picture is still loading (or in a test) a drawn fallback keeps the same size.
  * Only with v25 on (?alienVulcan=v24 draws nothing here and the v24 tracers stay). */
-import {pelletOffsets,V25_DEFAULTS,VULCAN_V25_ASSETS} from './alien-v25.mjs?v=island-v2-20261107-24';
-import {boltPoints,ARSENAL_DEFAULTS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-24';
+import {pelletOffsets,V25_DEFAULTS,VULCAN_V25_ASSETS} from './alien-v25.mjs?v=island-v2-20261107-25';
+import {boltPoints,ARSENAL_DEFAULTS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-25';
 const TAU=Math.PI*2;
 const images=new Map();
 /** Lazy picture next to this module (assets/alien-v25); null outside a browser, false until decoded. */
 export function alienV25Image(name){
  if(typeof Image==='undefined')return null;
  let entry=images.get(name);
- if(!entry){const img=new Image();entry={img,ok:false};img.onload=()=>{entry.ok=true;};img.onerror=()=>{entry.failed=true;};img.src=new URL(`../assets/alien-v25/${name}?v=island-v2-20261107-24`,import.meta.url).href;images.set(name,entry);}
+ if(!entry){const img=new Image();entry={img,ok:false};img.onload=()=>{entry.ok=true;};img.onerror=()=>{entry.failed=true;};img.src=new URL(`../assets/alien-v25/${name}?v=island-v2-20261107-25`,import.meta.url).href;images.set(name,entry);}
  return entry.ok?entry.img:false;
 }
 /** Start loading the four atlases (the session calls it once, so the first Vulcan burst already has its plasma). */

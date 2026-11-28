@@ -1,36 +1,37 @@
-import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-24';
+import {kidUx,kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-25';
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-24';
-import {createSoccer} from './soccer.mjs?v=island-v2-20261107-24';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-24';
-import {aerialMeet,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-24';
+import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-25';
+import {createSoccer} from './soccer.mjs?v=island-v2-20261107-25';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-25';
+import {aerialMeet,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-25';
 /** Air v23 prompt: a high ball the controlled player can meet within the header window. */
 const airPromptMeet=s=>{const p=s.players[s.controlled];return Boolean(p&&aerialMeet(p,s.ball,{aerial:{minHeight:.8,maxHeight:2.4,reach:1.9},physics:{ballRadius:.11},ball:{gravity:12}},{horizon:SOCCER_LOB.promptSeconds,speed:5.6}));};
-import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-24';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-24';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-24';
-import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-24';
-import {createControls} from './controls.mjs?v=island-v2-20261107-24';
+import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-25';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-25';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-25';
+import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-25';
+import {createControls} from './controls.mjs?v=island-v2-20261107-25';
 import {withSoccerV7Kits} from './soccer-v7.mjs';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-24';
-import {gameContext} from './context.mjs?v=island-v2-20261107-24';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-25';
+import {gameContext} from './context.mjs?v=island-v2-20261107-25';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {soccerMotionLoadReport} from './soccer-design-character.mjs';
 import {applySoccerTeams,resolveSoccerTeams,SOCCER_PRODUCT_TEAMS} from './soccer-teams.mjs';
 import {createSoccerTelemetry} from './soccer-telemetry.mjs';
-import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-24';
+import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-25';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout,soccerPadRect} from './soccer-design-controls.mjs';
 import {soccerShowEnabled} from './soccer-show.mjs';
-import {applySoccerPitchV23,applySoccerControlV23,soccerAirVersion} from './soccer-v23.mjs?v=island-v2-20261107-24';
+import {applySoccerPitchV23,applySoccerControlV23,soccerAirVersion} from './soccer-v23.mjs?v=island-v2-20261107-25';
 // Soccer full (14/11): 11 against 11 on the 105 x 68 m pitch, the radar in the corner, the advantage call. `?soccerFull=0` = the v24 small match.
-import {soccerFullEnabled,applySoccerFull,soccerRadarLayout,drawSoccerRadar} from './soccer-full.mjs?v=island-v2-20261107-24';
+import {soccerFullEnabled,applySoccerFull,soccerRadarLayout,drawSoccerRadar} from './soccer-full.mjs?v=island-v2-20261107-25';
 // v24.1 (14/11): no radar (Roy: "לא צריך אחד כזה", `?soccerRadar=1` brings it back); volley / header / scissor on the kick and fourth buttons.
-import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soccer-r241.mjs?v=island-v2-20261107-24';
+import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soccer-r241.mjs?v=island-v2-20261107-25';
 // v24.9 (soccer-r249.mjs, `?soccerV249=0` = v24.8): closer camera and brighter markers, no text pill for ordinary touches, the stage card steps aside.
 import {applySoccerV249View,soccerHud249Enabled,soccerCueShown,SOCCER_V249} from './soccer-r249.mjs';
 // v25.0 (soccer-r250.mjs, `?soccerV250=0` = v24.9): closer camera, taps on the pitch (pass to a team-mate, into space, select in defence), aimed set pieces.
 import {applySoccerV250View,soccerTap250Enabled,soccerTapMate,soccerIsTap} from './soccer-r250.mjs';
+import {applyReadablePlayersSoccer} from './readable-players.mjs';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -72,7 +73,7 @@ export function soccerActionLabels(state,config){
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
   const {balance:sourceBalance,canvas,controls,status,t}=ctx,fullOn=!ctx.drill&&soccerFullEnabled(),teamsKey=fullOn?'11':resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS);
-  const balance=applySoccerV250View(applySoccerV249View(applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey)))),ctx.drill?{enabled:false,look:false}:{}),ctx.drill?{enabled:false,saveReplay:false}:{}),hud249=!ctx.drill&&soccerHud249Enabled();
+  const balance=applyReadablePlayersSoccer(applySoccerV250View(applySoccerV249View(applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey)))),ctx.drill?{enabled:false,look:false}:{}),ctx.drill?{enabled:false,saveReplay:false}:{}),ctx.drill?{enabled:false}:{}),hud249=!ctx.drill&&soccerHud249Enabled();
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
@@ -113,11 +114,11 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-24',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-25',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-24',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-25',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   if(!document.querySelector('link[data-soccer-controls-assets]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-controls-assets.css',import.meta.url).href;link.dataset.soccerControlsAssets='';document.head.append(link);}
-  if(fullOn&&!document.querySelector('link[data-soccer-full]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-full.css?v=island-v2-20261107-24',import.meta.url).href;link.dataset.soccerFull='';document.head.append(link);}
+  if(fullOn&&!document.querySelector('link[data-soccer-full]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-full.css?v=island-v2-20261107-25',import.meta.url).href;link.dataset.soccerFull='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
     document.addEventListener('pointerdown',()=>void audio.unlock(),options);
