@@ -1,0 +1,5943 @@
+{
+  "version": "hoops-stop-clips-v1",
+  "license": "CC0-1.0",
+  "nativeRate": 30,
+  "rootMotion": false,
+  "skeleton": [
+    {
+      "name": "Root",
+      "parent": null,
+      "rest": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "rest": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "rest": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "rest": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "rest": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "rest": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "rest": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "rest": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "rest": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "rest": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "clips": [
+    {
+      "id": "hoops_stop_sprint_4p5",
+      "family": "hoops-stop-sprint",
+      "label": "עצירת קפיצה מספרינט",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 4.5
+      },
+      "duration": 0.65,
+      "durationSeconds": 0.65,
+      "nativeRate": 30,
+      "frameCount": 21,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-sprint",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.135758,
+          "frame": 4
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.305455,
+          "frame": 9
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.42,
+          "frame": 13
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.55,
+          "frame": 17
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.55,
+        "duration": 0.55
+      },
+      "notes": "Last cruise stride, short hop, both feet land ahead of the pelvis and absorb with a deep knee bend; the pelvis stops over the feet.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            0.22891
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.97
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.92
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.144048
+          ],
+          [
+            0,
+            0.27619
+          ],
+          [
+            0,
+            0.396429
+          ],
+          [
+            0,
+            0.504762
+          ],
+          [
+            0,
+            0.60119
+          ],
+          [
+            0,
+            0.685714
+          ],
+          [
+            0,
+            0.758333
+          ],
+          [
+            0,
+            0.819048
+          ],
+          [
+            0,
+            0.867857
+          ],
+          [
+            0,
+            0.904762
+          ],
+          [
+            0,
+            0.929762
+          ],
+          [
+            0,
+            0.942857
+          ],
+          [
+            0,
+            0.945
+          ],
+          [
+            0,
+            0.945
+          ],
+          [
+            0,
+            0.945
+          ],
+          [
+            0,
+            0.945
+          ],
+          [
+            0,
+            0.945
+          ],
+          [
+            0,
+            0.945
+          ],
+          [
+            0,
+            0.945
+          ],
+          [
+            0,
+            0.945
+          ]
+        ],
+        "speeds": [
+          4.3214,
+          4.1429,
+          3.7857,
+          3.4286,
+          3.0714,
+          2.7143,
+          2.3571,
+          2,
+          1.6429,
+          1.2857,
+          0.9286,
+          0.5714,
+          0.2286,
+          0.0321,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.42,
+        "D": 0.945
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_sprint_5p5",
+      "family": "hoops-stop-sprint",
+      "label": "עצירת קפיצה מספרינט",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 5.5
+      },
+      "duration": 0.65,
+      "durationSeconds": 0.65,
+      "nativeRate": 30,
+      "frameCount": 21,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-sprint",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.135758,
+          "frame": 4
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.305455,
+          "frame": 9
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.42,
+          "frame": 13
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.55,
+          "frame": 17
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.55,
+        "duration": 0.55
+      },
+      "notes": "Last cruise stride, short hop, both feet land ahead of the pelvis and absorb with a deep knee bend; the pelvis stops over the feet.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            0.25756
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            1.18
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            1.13
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.176058
+          ],
+          [
+            0,
+            0.337566
+          ],
+          [
+            0,
+            0.484524
+          ],
+          [
+            0,
+            0.616931
+          ],
+          [
+            0,
+            0.734788
+          ],
+          [
+            0,
+            0.838095
+          ],
+          [
+            0,
+            0.926852
+          ],
+          [
+            0,
+            1.001058
+          ],
+          [
+            0,
+            1.060714
+          ],
+          [
+            0,
+            1.10582
+          ],
+          [
+            0,
+            1.136376
+          ],
+          [
+            0,
+            1.152381
+          ],
+          [
+            0,
+            1.155
+          ],
+          [
+            0,
+            1.155
+          ],
+          [
+            0,
+            1.155
+          ],
+          [
+            0,
+            1.155
+          ],
+          [
+            0,
+            1.155
+          ],
+          [
+            0,
+            1.155
+          ],
+          [
+            0,
+            1.155
+          ],
+          [
+            0,
+            1.155
+          ]
+        ],
+        "speeds": [
+          5.2817,
+          5.0635,
+          4.627,
+          4.1905,
+          3.754,
+          3.3175,
+          2.881,
+          2.4444,
+          2.0079,
+          1.5714,
+          1.1349,
+          0.6984,
+          0.2794,
+          0.0393,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.42,
+        "D": 1.155
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_sprint_6p5",
+      "family": "hoops-stop-sprint",
+      "label": "עצירת קפיצה מספרינט",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 6.5
+      },
+      "duration": 0.65,
+      "durationSeconds": 0.65,
+      "nativeRate": 30,
+      "frameCount": 21,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-sprint",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.135758,
+          "frame": 4
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.305455,
+          "frame": 9
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.42,
+          "frame": 13
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.55,
+          "frame": 17
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.55,
+        "duration": 0.55
+      },
+      "notes": "Last cruise stride, short hop, both feet land ahead of the pelvis and absorb with a deep knee bend; the pelvis stops over the feet.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            0.28621
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            1.39
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            1.34
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.208069
+          ],
+          [
+            0,
+            0.398942
+          ],
+          [
+            0,
+            0.572619
+          ],
+          [
+            0,
+            0.729101
+          ],
+          [
+            0,
+            0.868386
+          ],
+          [
+            0,
+            0.990476
+          ],
+          [
+            0,
+            1.09537
+          ],
+          [
+            0,
+            1.183069
+          ],
+          [
+            0,
+            1.253571
+          ],
+          [
+            0,
+            1.306878
+          ],
+          [
+            0,
+            1.342989
+          ],
+          [
+            0,
+            1.361905
+          ],
+          [
+            0,
+            1.365
+          ],
+          [
+            0,
+            1.365
+          ],
+          [
+            0,
+            1.365
+          ],
+          [
+            0,
+            1.365
+          ],
+          [
+            0,
+            1.365
+          ],
+          [
+            0,
+            1.365
+          ],
+          [
+            0,
+            1.365
+          ],
+          [
+            0,
+            1.365
+          ]
+        ],
+        "speeds": [
+          6.2421,
+          5.9841,
+          5.4683,
+          4.9524,
+          4.4365,
+          3.9206,
+          3.4048,
+          2.8889,
+          2.373,
+          1.8571,
+          1.3413,
+          0.8254,
+          0.3302,
+          0.0464,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.42,
+        "D": 1.365
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_sprint_7p5",
+      "family": "hoops-stop-sprint",
+      "label": "עצירת קפיצה מספרינט",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 7.5
+      },
+      "duration": 0.65,
+      "durationSeconds": 0.65,
+      "nativeRate": 30,
+      "frameCount": 21,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-sprint",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.135758,
+          "frame": 4
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.305455,
+          "frame": 9
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.42,
+          "frame": 13
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.55,
+          "frame": 17
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.55,
+        "duration": 0.55
+      },
+      "notes": "Last cruise stride, short hop, both feet land ahead of the pelvis and absorb with a deep knee bend; the pelvis stops over the feet.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            0.31485
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            1.6
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            1.55
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.240079
+          ],
+          [
+            0,
+            0.460317
+          ],
+          [
+            0,
+            0.660714
+          ],
+          [
+            0,
+            0.84127
+          ],
+          [
+            0,
+            1.001984
+          ],
+          [
+            0,
+            1.142857
+          ],
+          [
+            0,
+            1.263889
+          ],
+          [
+            0,
+            1.365079
+          ],
+          [
+            0,
+            1.446429
+          ],
+          [
+            0,
+            1.507937
+          ],
+          [
+            0,
+            1.549603
+          ],
+          [
+            0,
+            1.571429
+          ],
+          [
+            0,
+            1.575
+          ],
+          [
+            0,
+            1.575
+          ],
+          [
+            0,
+            1.575
+          ],
+          [
+            0,
+            1.575
+          ],
+          [
+            0,
+            1.575
+          ],
+          [
+            0,
+            1.575
+          ],
+          [
+            0,
+            1.575
+          ],
+          [
+            0,
+            1.575
+          ]
+        ],
+        "speeds": [
+          7.2024,
+          6.9048,
+          6.3095,
+          5.7143,
+          5.119,
+          4.5238,
+          3.9286,
+          3.3333,
+          2.7381,
+          2.1429,
+          1.5476,
+          0.9524,
+          0.381,
+          0.0536,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 1,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.42,
+        "D": 1.575
+      },
+      "asset": "clips/hoops_stop_sprint_7p5.glb",
+      "bytes": 776080,
+      "sha256": "c48d39f37e80f1863ec8c0559335a9b7bcd5d2fdf058adbf547ae71b8662b726",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_stop_sprint_9",
+      "family": "hoops-stop-sprint",
+      "label": "עצירת קפיצה מספרינט",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 9
+      },
+      "duration": 0.65,
+      "durationSeconds": 0.65,
+      "nativeRate": 30,
+      "frameCount": 21,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-sprint",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.135758,
+          "frame": 4
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.305455,
+          "frame": 9
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.42,
+          "frame": 13
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.55,
+          "frame": 17
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.55,
+        "duration": 0.55
+      },
+      "notes": "Last cruise stride, short hop, both feet land ahead of the pelvis and absorb with a deep knee bend; the pelvis stops over the feet.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            0.35782
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            1.915
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.633333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            1.865
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.288095
+          ],
+          [
+            0,
+            0.552381
+          ],
+          [
+            0,
+            0.792857
+          ],
+          [
+            0,
+            1.009524
+          ],
+          [
+            0,
+            1.202381
+          ],
+          [
+            0,
+            1.371429
+          ],
+          [
+            0,
+            1.516667
+          ],
+          [
+            0,
+            1.638095
+          ],
+          [
+            0,
+            1.735714
+          ],
+          [
+            0,
+            1.809524
+          ],
+          [
+            0,
+            1.859524
+          ],
+          [
+            0,
+            1.885714
+          ],
+          [
+            0,
+            1.89
+          ],
+          [
+            0,
+            1.89
+          ],
+          [
+            0,
+            1.89
+          ],
+          [
+            0,
+            1.89
+          ],
+          [
+            0,
+            1.89
+          ],
+          [
+            0,
+            1.89
+          ],
+          [
+            0,
+            1.89
+          ],
+          [
+            0,
+            1.89
+          ]
+        ],
+        "speeds": [
+          8.6428,
+          8.2857,
+          7.5714,
+          6.8571,
+          6.1429,
+          5.4286,
+          4.7143,
+          4,
+          3.2857,
+          2.5714,
+          1.8571,
+          1.1428,
+          0.4571,
+          0.0643,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 1,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.42,
+        "D": 1.89
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_run_3",
+      "family": "hoops-stop-run",
+      "label": "עצירה מריצה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 3
+      },
+      "duration": 0.55,
+      "durationSeconds": 0.55,
+      "nativeRate": 30,
+      "frameCount": 18,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-run",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.102,
+          "frame": 3
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.2635,
+          "frame": 8
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.34,
+          "frame": 10
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.46,
+          "frame": 14
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.46,
+        "duration": 0.46
+      },
+      "notes": "A braking stride with the foot planted ahead, a second planting step, pelvis dropped and leaning forward while it stops, then rising to the ready stance.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1,
+            0,
+            0.13753
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.266667,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.535
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.133333,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.52266
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.485
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.095098
+          ],
+          [
+            0,
+            0.180392
+          ],
+          [
+            0,
+            0.255882
+          ],
+          [
+            0,
+            0.321569
+          ],
+          [
+            0,
+            0.377451
+          ],
+          [
+            0,
+            0.423529
+          ],
+          [
+            0,
+            0.459804
+          ],
+          [
+            0,
+            0.486275
+          ],
+          [
+            0,
+            0.502941
+          ],
+          [
+            0,
+            0.509804
+          ],
+          [
+            0,
+            0.51
+          ],
+          [
+            0,
+            0.51
+          ],
+          [
+            0,
+            0.51
+          ],
+          [
+            0,
+            0.51
+          ],
+          [
+            0,
+            0.51
+          ],
+          [
+            0,
+            0.51
+          ],
+          [
+            0,
+            0.51
+          ]
+        ],
+        "speeds": [
+          2.8529,
+          2.7059,
+          2.4118,
+          2.1177,
+          1.8235,
+          1.5294,
+          1.2353,
+          0.9412,
+          0.6471,
+          0.3529,
+          0.1059,
+          0.0029,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.34,
+        "D": 0.51
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_run_4",
+      "family": "hoops-stop-run",
+      "label": "עצירה מריצה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 4
+      },
+      "duration": 0.55,
+      "durationSeconds": 0.55,
+      "nativeRate": 30,
+      "frameCount": 18,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-run",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.102,
+          "frame": 3
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.2635,
+          "frame": 8
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.34,
+          "frame": 10
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.46,
+          "frame": 14
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.46,
+        "duration": 0.46
+      },
+      "notes": "A braking stride with the foot planted ahead, a second planting step, pelvis dropped and leaning forward while it stops, then rising to the ready stance.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1,
+            0,
+            0.15004
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.266667,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.705
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.133333,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.64354
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.655
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.126797
+          ],
+          [
+            0,
+            0.240523
+          ],
+          [
+            0,
+            0.341176
+          ],
+          [
+            0,
+            0.428758
+          ],
+          [
+            0,
+            0.503268
+          ],
+          [
+            0,
+            0.564706
+          ],
+          [
+            0,
+            0.613072
+          ],
+          [
+            0,
+            0.648366
+          ],
+          [
+            0,
+            0.670588
+          ],
+          [
+            0,
+            0.679739
+          ],
+          [
+            0,
+            0.68
+          ],
+          [
+            0,
+            0.68
+          ],
+          [
+            0,
+            0.68
+          ],
+          [
+            0,
+            0.68
+          ],
+          [
+            0,
+            0.68
+          ],
+          [
+            0,
+            0.68
+          ],
+          [
+            0,
+            0.68
+          ]
+        ],
+        "speeds": [
+          3.8039,
+          3.6078,
+          3.2157,
+          2.8235,
+          2.4314,
+          2.0392,
+          1.6471,
+          1.2549,
+          0.8627,
+          0.4706,
+          0.1412,
+          0.0039,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.34,
+        "D": 0.68
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_run_5",
+      "family": "hoops-stop-run",
+      "label": "עצירה מריצה",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 5
+      },
+      "duration": 0.55,
+      "durationSeconds": 0.55,
+      "nativeRate": 30,
+      "frameCount": 18,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-run",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.102,
+          "frame": 3
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.2635,
+          "frame": 8
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.34,
+          "frame": 10
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.46,
+          "frame": 14
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.46,
+        "duration": 0.46
+      },
+      "notes": "A braking stride with the foot planted ahead, a second planting step, pelvis dropped and leaning forward while it stops, then rising to the ready stance.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1,
+            0,
+            0.16255
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.266667,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.875
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.133333,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.76443
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.825
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.158497
+          ],
+          [
+            0,
+            0.300654
+          ],
+          [
+            0,
+            0.426471
+          ],
+          [
+            0,
+            0.535948
+          ],
+          [
+            0,
+            0.629085
+          ],
+          [
+            0,
+            0.705882
+          ],
+          [
+            0,
+            0.76634
+          ],
+          [
+            0,
+            0.810458
+          ],
+          [
+            0,
+            0.838235
+          ],
+          [
+            0,
+            0.849673
+          ],
+          [
+            0,
+            0.85
+          ],
+          [
+            0,
+            0.85
+          ],
+          [
+            0,
+            0.85
+          ],
+          [
+            0,
+            0.85
+          ],
+          [
+            0,
+            0.85
+          ],
+          [
+            0,
+            0.85
+          ],
+          [
+            0,
+            0.85
+          ]
+        ],
+        "speeds": [
+          4.7549,
+          4.5098,
+          4.0196,
+          3.5294,
+          3.0392,
+          2.549,
+          2.0588,
+          1.5686,
+          1.0784,
+          0.5882,
+          0.1765,
+          0.0049,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.34,
+        "D": 0.8500000000000001
+      },
+      "asset": "clips/hoops_stop_run_5.glb",
+      "bytes": 775104,
+      "sha256": "3b2fec226f97eef6f1e9d1e55e6ad7430f6dcac324a375cf66a9fccb99b54b56",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_stop_run_6",
+      "family": "hoops-stop-run",
+      "label": "עצירה מריצה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 6
+      },
+      "duration": 0.55,
+      "durationSeconds": 0.55,
+      "nativeRate": 30,
+      "frameCount": 18,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-run",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.102,
+          "frame": 3
+        },
+        {
+          "type": "land",
+          "event": "land",
+          "time": 0.2635,
+          "frame": 8
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.34,
+          "frame": 10
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.46,
+          "frame": 14
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.46,
+        "duration": 0.46
+      },
+      "notes": "A braking stride with the foot planted ahead, a second planting step, pelvis dropped and leaning forward while it stops, then rising to the ready stance.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1,
+            0,
+            0.17507
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.266667,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            1.045
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.133333,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.88532
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.333333,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.995
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.190196
+          ],
+          [
+            0,
+            0.360784
+          ],
+          [
+            0,
+            0.511765
+          ],
+          [
+            0,
+            0.643137
+          ],
+          [
+            0,
+            0.754902
+          ],
+          [
+            0,
+            0.847059
+          ],
+          [
+            0,
+            0.919608
+          ],
+          [
+            0,
+            0.972549
+          ],
+          [
+            0,
+            1.005882
+          ],
+          [
+            0,
+            1.019608
+          ],
+          [
+            0,
+            1.02
+          ],
+          [
+            0,
+            1.02
+          ],
+          [
+            0,
+            1.02
+          ],
+          [
+            0,
+            1.02
+          ],
+          [
+            0,
+            1.02
+          ],
+          [
+            0,
+            1.02
+          ],
+          [
+            0,
+            1.02
+          ]
+        ],
+        "speeds": [
+          5.7059,
+          5.4118,
+          4.8235,
+          4.2353,
+          3.6471,
+          3.0588,
+          2.4706,
+          1.8823,
+          1.2941,
+          0.7059,
+          0.2118,
+          0.0059,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.34,
+        "D": 1.02
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_jog_1p5",
+      "family": "hoops-stop-jog",
+      "label": "האטה מג׳וג לעמידה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 1.5
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-jog",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.153659,
+          "frame": 5
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.42,
+          "frame": 13
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.42,
+        "duration": 0.42
+      },
+      "notes": "Two shortening steps, the second lands on the final stance foot, the other closes in; arm swing fades out.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.08,
+            0,
+            0.10142
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.3,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.25
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.166667,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.2
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.047222
+          ],
+          [
+            0,
+            0.088889
+          ],
+          [
+            0,
+            0.125
+          ],
+          [
+            0,
+            0.155556
+          ],
+          [
+            0,
+            0.180556
+          ],
+          [
+            0,
+            0.2
+          ],
+          [
+            0,
+            0.213889
+          ],
+          [
+            0,
+            0.222222
+          ],
+          [
+            0,
+            0.225
+          ],
+          [
+            0,
+            0.225
+          ],
+          [
+            0,
+            0.225
+          ],
+          [
+            0,
+            0.225
+          ],
+          [
+            0,
+            0.225
+          ],
+          [
+            0,
+            0.225
+          ],
+          [
+            0,
+            0.225
+          ]
+        ],
+        "speeds": [
+          1.4167,
+          1.3333,
+          1.1667,
+          1,
+          0.8333,
+          0.6667,
+          0.5,
+          0.3333,
+          0.1667,
+          0.0417,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.3,
+        "D": 0.22499999999999998
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_jog_2",
+      "family": "hoops-stop-jog",
+      "label": "האטה מג׳וג לעמידה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 2
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-jog",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.153659,
+          "frame": 5
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.42,
+          "frame": 13
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.42,
+        "duration": 0.42
+      },
+      "notes": "Two shortening steps, the second lands on the final stance foot, the other closes in; arm swing fades out.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.08,
+            0,
+            0.10855
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.3,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.325
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.166667,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.275
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.062963
+          ],
+          [
+            0,
+            0.118519
+          ],
+          [
+            0,
+            0.166667
+          ],
+          [
+            0,
+            0.207407
+          ],
+          [
+            0,
+            0.240741
+          ],
+          [
+            0,
+            0.266667
+          ],
+          [
+            0,
+            0.285185
+          ],
+          [
+            0,
+            0.296296
+          ],
+          [
+            0,
+            0.3
+          ],
+          [
+            0,
+            0.3
+          ],
+          [
+            0,
+            0.3
+          ],
+          [
+            0,
+            0.3
+          ],
+          [
+            0,
+            0.3
+          ],
+          [
+            0,
+            0.3
+          ],
+          [
+            0,
+            0.3
+          ]
+        ],
+        "speeds": [
+          1.8889,
+          1.7778,
+          1.5556,
+          1.3333,
+          1.1111,
+          0.8889,
+          0.6667,
+          0.4444,
+          0.2222,
+          0.0556,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.3,
+        "D": 0.3
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_stop_jog_2p75",
+      "family": "hoops-stop-jog",
+      "label": "האטה מג׳וג לעמידה",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 2.75
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-jog",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.153659,
+          "frame": 5
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.42,
+          "frame": 13
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.42,
+        "duration": 0.42
+      },
+      "notes": "Two shortening steps, the second lands on the final stance foot, the other closes in; arm swing fades out.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.08,
+            0,
+            0.11926
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.3,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.4375
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.166667,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.3875
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.086574
+          ],
+          [
+            0,
+            0.162963
+          ],
+          [
+            0,
+            0.229167
+          ],
+          [
+            0,
+            0.285185
+          ],
+          [
+            0,
+            0.331019
+          ],
+          [
+            0,
+            0.366667
+          ],
+          [
+            0,
+            0.39213
+          ],
+          [
+            0,
+            0.407407
+          ],
+          [
+            0,
+            0.4125
+          ],
+          [
+            0,
+            0.4125
+          ],
+          [
+            0,
+            0.4125
+          ],
+          [
+            0,
+            0.4125
+          ],
+          [
+            0,
+            0.4125
+          ],
+          [
+            0,
+            0.4125
+          ],
+          [
+            0,
+            0.4125
+          ]
+        ],
+        "speeds": [
+          2.5972,
+          2.4444,
+          2.1389,
+          1.8333,
+          1.5278,
+          1.2222,
+          0.9167,
+          0.6111,
+          0.3055,
+          0.0764,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.3,
+        "D": 0.4125
+      },
+      "asset": "clips/hoops_stop_jog_2p75.glb",
+      "bytes": 774368,
+      "sha256": "a1f2b8b587235331153214ef3145da85fb392ab6f733bdc1a9e0a611cd59ad64",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_stop_jog_3p5",
+      "family": "hoops-stop-jog",
+      "label": "האטה מג׳וג לעמידה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": null,
+      "variant": {
+        "entrySpeedMps": 3.5
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-stop-jog",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.153659,
+          "frame": 5
+        },
+        {
+          "type": "stop",
+          "event": "stop",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.42,
+          "frame": 13
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.42,
+        "duration": 0.42
+      },
+      "notes": "Two shortening steps, the second lands on the final stance foot, the other closes in; arm swing fades out.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.08,
+            0,
+            0.12997
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.3,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.55
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.166667,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.5
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.110185
+          ],
+          [
+            0,
+            0.207407
+          ],
+          [
+            0,
+            0.291667
+          ],
+          [
+            0,
+            0.362963
+          ],
+          [
+            0,
+            0.421296
+          ],
+          [
+            0,
+            0.466667
+          ],
+          [
+            0,
+            0.499074
+          ],
+          [
+            0,
+            0.518519
+          ],
+          [
+            0,
+            0.525
+          ],
+          [
+            0,
+            0.525
+          ],
+          [
+            0,
+            0.525
+          ],
+          [
+            0,
+            0.525
+          ],
+          [
+            0,
+            0.525
+          ],
+          [
+            0,
+            0.525
+          ],
+          [
+            0,
+            0.525
+          ]
+        ],
+        "speeds": [
+          3.3056,
+          3.1111,
+          2.7222,
+          2.3333,
+          1.9444,
+          1.5556,
+          1.1667,
+          0.7778,
+          0.3889,
+          0.0972,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "Ts": 0.3,
+        "D": 0.525
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_defensive_slide_fast_left",
+      "family": "hoops-defensive-slide-fast",
+      "label": "החלקה הגנתית מהירה שמאלה",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "direction": "left",
+        "referenceSpeedMps": 3.4,
+        "rateRange": [
+          0.6,
+          1.4
+        ],
+        "speedRangeMps": [
+          2.2,
+          5
+        ]
+      },
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "nativeRate": 30,
+      "frameCount": 25,
+      "loop": true,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-defensive-slide-fast",
+      "events": [
+        {
+          "type": "step_left",
+          "event": "step_left",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "type": "step_right",
+          "event": "step_right",
+          "time": 0.2,
+          "frame": 6
+        },
+        {
+          "type": "step_left",
+          "event": "step_left",
+          "time": 0.4,
+          "frame": 12
+        },
+        {
+          "type": "step_right",
+          "event": "step_right",
+          "time": 0.6,
+          "frame": 18
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.8,
+        "duration": 0.8
+      },
+      "notes": "Low stance, lead foot reaches and trail foot closes; no foot crossing, loop seamless at 0.8 s, travels toward +X (the athlete left).",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.133333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.622,
+            0,
+            0.04
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.4,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            1.982,
+            0,
+            0.04
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.2,
+          "end": 0.333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.602,
+            0,
+            -0.04
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.6,
+          "end": 0.733333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            1.962,
+            0,
+            -0.04
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0.113333,
+            0
+          ],
+          [
+            0.226667,
+            0
+          ],
+          [
+            0.34,
+            0
+          ],
+          [
+            0.453333,
+            0
+          ],
+          [
+            0.566667,
+            0
+          ],
+          [
+            0.68,
+            0
+          ],
+          [
+            0.793333,
+            0
+          ],
+          [
+            0.906667,
+            0
+          ],
+          [
+            1.02,
+            0
+          ],
+          [
+            1.133333,
+            0
+          ],
+          [
+            1.246667,
+            0
+          ],
+          [
+            1.36,
+            0
+          ],
+          [
+            1.473333,
+            0
+          ],
+          [
+            1.586667,
+            0
+          ],
+          [
+            1.7,
+            0
+          ],
+          [
+            1.813333,
+            0
+          ],
+          [
+            1.926667,
+            0
+          ],
+          [
+            2.04,
+            0
+          ],
+          [
+            2.153333,
+            0
+          ],
+          [
+            2.266667,
+            0
+          ],
+          [
+            2.38,
+            0
+          ],
+          [
+            2.493333,
+            0
+          ],
+          [
+            2.606667,
+            0
+          ],
+          [
+            2.72,
+            0
+          ]
+        ],
+        "speeds": [
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1",
+        "note": "the game defensive_stance is not part of this package; idle_relaxed is the measured stand-in"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "speed": 3.4,
+        "loopSeconds": 0.8
+      },
+      "asset": "clips/hoops_defensive_slide_fast_left.glb",
+      "bytes": 777392,
+      "sha256": "634575fcbdfe4f5d7ce3df473900092bf50cb6c3b7d5aac1191801bed9ab9f2c",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_defensive_slide_fast_right",
+      "family": "hoops-defensive-slide-fast",
+      "label": "החלקה הגנתית מהירה ימינה",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": "hoops_defensive_slide_fast_left",
+      "variant": {
+        "direction": "right",
+        "referenceSpeedMps": 3.4,
+        "rateRange": [
+          0.6,
+          1.4
+        ],
+        "speedRangeMps": [
+          2.2,
+          5
+        ]
+      },
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "nativeRate": 30,
+      "frameCount": 25,
+      "loop": true,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-defensive-slide-fast",
+      "events": [
+        {
+          "type": "step_right",
+          "event": "step_right",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "type": "step_left",
+          "event": "step_left",
+          "time": 0.2,
+          "frame": 6
+        },
+        {
+          "type": "step_right",
+          "event": "step_right",
+          "time": 0.4,
+          "frame": 12
+        },
+        {
+          "type": "step_left",
+          "event": "step_left",
+          "time": 0.6,
+          "frame": 18
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.8,
+        "duration": 0.8
+      },
+      "notes": "Low stance, lead foot reaches and trail foot closes; no foot crossing, loop seamless at 0.8 s, travels toward +X (the athlete left).",
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.133333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.622,
+            0,
+            0.04
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.4,
+          "end": 0.533333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -1.982,
+            0,
+            0.04
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.2,
+          "end": 0.333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.602,
+            0,
+            -0.04
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.6,
+          "end": 0.733333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -1.962,
+            0,
+            -0.04
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.113333,
+            0
+          ],
+          [
+            -0.226667,
+            0
+          ],
+          [
+            -0.34,
+            0
+          ],
+          [
+            -0.453333,
+            0
+          ],
+          [
+            -0.566667,
+            0
+          ],
+          [
+            -0.68,
+            0
+          ],
+          [
+            -0.793333,
+            0
+          ],
+          [
+            -0.906667,
+            0
+          ],
+          [
+            -1.02,
+            0
+          ],
+          [
+            -1.133333,
+            0
+          ],
+          [
+            -1.246667,
+            0
+          ],
+          [
+            -1.36,
+            0
+          ],
+          [
+            -1.473333,
+            0
+          ],
+          [
+            -1.586667,
+            0
+          ],
+          [
+            -1.7,
+            0
+          ],
+          [
+            -1.813333,
+            0
+          ],
+          [
+            -1.926667,
+            0
+          ],
+          [
+            -2.04,
+            0
+          ],
+          [
+            -2.153333,
+            0
+          ],
+          [
+            -2.266667,
+            0
+          ],
+          [
+            -2.38,
+            0
+          ],
+          [
+            -2.493333,
+            0
+          ],
+          [
+            -2.606667,
+            0
+          ],
+          [
+            -2.72,
+            0
+          ]
+        ],
+        "speeds": [
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4,
+          3.4
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1",
+        "note": "the game defensive_stance is not part of this package; idle_relaxed is the measured stand-in"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "speed": 3.4,
+        "loopSeconds": 0.8
+      },
+      "asset": "clips/hoops_defensive_slide_fast_right.glb",
+      "bytes": 777416,
+      "sha256": "ab392cf672696d358b085131db62a413e02fa3d67fe62cc0bc9aeaf58b506091",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_defensive_slide_recover_forward_left",
+      "family": "hoops-defensive-slide-recover",
+      "label": "מהחלקה לריצה קדימה",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "direction": "left",
+        "exitGait": "run-forward",
+        "entrySpeedMps": 3.4,
+        "exitSpeedMps": 4.5
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-defensive-slide-recover",
+      "events": [
+        {
+          "type": "turn",
+          "event": "turn",
+          "time": 0.2,
+          "frame": 6
+        },
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.36,
+          "frame": 11
+        },
+        {
+          "type": "push",
+          "event": "push",
+          "time": 0.54,
+          "frame": 16
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.5,
+        "duration": 0.5
+      },
+      "notes": "Slide with the body turning 90 degrees toward the travel direction (+X) and running on; the pelvis yaw is part of the pose, hence exit.bodyYawDegrees.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.133333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.62572,
+            0,
+            0.0211
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.366667,
+          "end": 0.466667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            1.71497,
+            0,
+            -0.14
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.2,
+          "end": 0.333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.89113,
+            0,
+            0.22334
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0.113491,
+            0
+          ],
+          [
+            0.227883,
+            0
+          ],
+          [
+            0.34396,
+            0
+          ],
+          [
+            0.462372,
+            0
+          ],
+          [
+            0.583642,
+            0
+          ],
+          [
+            0.70816,
+            0
+          ],
+          [
+            0.836187,
+            0
+          ],
+          [
+            0.967853,
+            0
+          ],
+          [
+            1.10316,
+            0
+          ],
+          [
+            1.241975,
+            0
+          ],
+          [
+            1.384039,
+            0
+          ],
+          [
+            1.52896,
+            0
+          ],
+          [
+            1.676217,
+            0
+          ],
+          [
+            1.825157,
+            0
+          ],
+          [
+            1.975,
+            0
+          ]
+        ],
+        "speeds": [
+          3.4047,
+          3.4182,
+          3.457,
+          3.5173,
+          3.5952,
+          3.6868,
+          3.7882,
+          3.8954,
+          4.0046,
+          4.1118,
+          4.2132,
+          4.3048,
+          4.3827,
+          4.443,
+          4.4817,
+          4.4953
+        ],
+        "endYawDegrees": 90
+      },
+      "entry": {
+        "reference": "hoops_defensive_slide_fast_left",
+        "phase": 0,
+        "blendSeconds": 0.15,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1",
+        "bodyYawDegrees": 90
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 3,
+        "maxYShift": 0
+      },
+      "meta": {
+        "speedStart": 3.4,
+        "speedEnd": 4.5,
+        "bodyYawChangeDegrees": 90
+      },
+      "asset": "clips/hoops_defensive_slide_recover_forward_left.glb",
+      "bytes": 774408,
+      "sha256": "0542d06f05d5b0d4515c1a9526c64211f51fa19bc44a77f14b2ac67d60ff919c",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_defensive_slide_recover_forward_right",
+      "family": "hoops-defensive-slide-recover",
+      "label": "מהחלקה לריצה קדימה (ימין)",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": "hoops_defensive_slide_recover_forward_left",
+      "variant": {
+        "direction": "right",
+        "exitGait": "run-forward",
+        "entrySpeedMps": 3.4,
+        "exitSpeedMps": 4.5
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-defensive-slide-recover",
+      "events": [
+        {
+          "type": "turn",
+          "event": "turn",
+          "time": 0.2,
+          "frame": 6
+        },
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.36,
+          "frame": 11
+        },
+        {
+          "type": "push",
+          "event": "push",
+          "time": 0.54,
+          "frame": 16
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.5,
+        "duration": 0.5
+      },
+      "notes": "Slide with the body turning 90 degrees toward the travel direction (+X) and running on; the pelvis yaw is part of the pose, hence exit.bodyYawDegrees.",
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.133333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.62572,
+            0,
+            0.0211
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.366667,
+          "end": 0.466667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -1.71497,
+            0,
+            -0.14
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.2,
+          "end": 0.333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.89113,
+            0,
+            0.22334
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.113491,
+            0
+          ],
+          [
+            -0.227883,
+            0
+          ],
+          [
+            -0.34396,
+            0
+          ],
+          [
+            -0.462372,
+            0
+          ],
+          [
+            -0.583642,
+            0
+          ],
+          [
+            -0.70816,
+            0
+          ],
+          [
+            -0.836187,
+            0
+          ],
+          [
+            -0.967853,
+            0
+          ],
+          [
+            -1.10316,
+            0
+          ],
+          [
+            -1.241975,
+            0
+          ],
+          [
+            -1.384039,
+            0
+          ],
+          [
+            -1.52896,
+            0
+          ],
+          [
+            -1.676217,
+            0
+          ],
+          [
+            -1.825157,
+            0
+          ],
+          [
+            -1.975,
+            0
+          ]
+        ],
+        "speeds": [
+          3.4047,
+          3.4182,
+          3.457,
+          3.5173,
+          3.5952,
+          3.6868,
+          3.7882,
+          3.8954,
+          4.0046,
+          4.1118,
+          4.2132,
+          4.3048,
+          4.3827,
+          4.443,
+          4.4817,
+          4.4953
+        ],
+        "endYawDegrees": -90
+      },
+      "entry": {
+        "reference": "hoops_defensive_slide_fast_left",
+        "phase": 0,
+        "blendSeconds": 0.15,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1",
+        "bodyYawDegrees": -90
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 3,
+        "maxYShift": 0
+      },
+      "meta": {
+        "speedStart": 3.4,
+        "speedEnd": 4.5,
+        "bodyYawChangeDegrees": 90
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_defensive_slide_recover_back_left",
+      "family": "hoops-defensive-slide-recover",
+      "label": "מהחלקה לריצה לאחור",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "direction": "left",
+        "exitGait": "run-backward",
+        "entrySpeedMps": 3.4,
+        "exitSpeedMps": 3.4
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-defensive-slide-recover",
+      "events": [
+        {
+          "type": "turn",
+          "event": "turn",
+          "time": 0.15,
+          "frame": 5
+        },
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.36,
+          "frame": 11
+        },
+        {
+          "type": "push",
+          "event": "push",
+          "time": 0.54,
+          "frame": 16
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.5,
+        "duration": 0.5
+      },
+      "notes": "Slide while the travel direction swings from +X to -Z; the body keeps facing +Z and ends in a backpedal.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.133333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.62061,
+            0,
+            0.03889
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.366667,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            1.003,
+            0,
+            -0.88789
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.2,
+          "end": 0.333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.59028,
+            0,
+            -0.395
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0.113223,
+            0
+          ],
+          [
+            0.225844,
+            -0.000195
+          ],
+          [
+            0.337309,
+            -0.004972
+          ],
+          [
+            0.446293,
+            -0.021591
+          ],
+          [
+            0.54988,
+            -0.055088
+          ],
+          [
+            0.643784,
+            -0.107722
+          ],
+          [
+            0.723404,
+            -0.17889
+          ],
+          [
+            0.785166,
+            -0.26563
+          ],
+          [
+            0.827588,
+            -0.363683
+          ],
+          [
+            0.851778,
+            -0.468663
+          ],
+          [
+            0.861511,
+            -0.577192
+          ],
+          [
+            0.863002,
+            -0.687505
+          ],
+          [
+            0.863002,
+            -0.7991
+          ],
+          [
+            0.863002,
+            -0.911723
+          ],
+          [
+            0.863002,
+            -1.024945
+          ]
+        ],
+        "speeds": [
+          3.3967,
+          3.3877,
+          3.3621,
+          3.3223,
+          3.276,
+          3.2318,
+          3.1974,
+          3.1793,
+          3.1821,
+          3.2052,
+          3.2428,
+          3.2869,
+          3.3287,
+          3.3633,
+          3.3877,
+          3.3967
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "hoops_defensive_slide_fast_left",
+        "phase": 0,
+        "blendSeconds": 0.15,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1",
+        "note": "backward run; no reference backpedal exists, bridge to defensive_stance or the game backward gait"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 3,
+        "maxYShift": 0
+      },
+      "meta": {
+        "speedStart": 3.4,
+        "speedEnd": 3.4,
+        "travelHeadingChangeDegrees": 90
+      },
+      "asset": "clips/hoops_defensive_slide_recover_back_left.glb",
+      "bytes": 774516,
+      "sha256": "331c5b7d71472953c472575539da2d8460eef7f8831437a01ad5b3faaaa7ff2b",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_defensive_slide_recover_back_right",
+      "family": "hoops-defensive-slide-recover",
+      "label": "מהחלקה לריצה לאחור (ימין)",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": "hoops_defensive_slide_recover_back_left",
+      "variant": {
+        "direction": "right",
+        "exitGait": "run-backward",
+        "entrySpeedMps": 3.4,
+        "exitSpeedMps": 3.4
+      },
+      "duration": 0.5,
+      "durationSeconds": 0.5,
+      "nativeRate": 30,
+      "frameCount": 16,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-defensive-slide-recover",
+      "events": [
+        {
+          "type": "turn",
+          "event": "turn",
+          "time": 0.15,
+          "frame": 5
+        },
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.36,
+          "frame": 11
+        },
+        {
+          "type": "push",
+          "event": "push",
+          "time": 0.54,
+          "frame": 16
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.5,
+        "duration": 0.5
+      },
+      "notes": "Slide while the travel direction swings from +X to -Z; the body keeps facing +Z and ends in a backpedal.",
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.133333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.62061,
+            0,
+            0.03889
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.366667,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -1.003,
+            0,
+            -0.88789
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.2,
+          "end": 0.333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.59028,
+            0,
+            -0.395
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.113223,
+            0
+          ],
+          [
+            -0.225844,
+            -0.000195
+          ],
+          [
+            -0.337309,
+            -0.004972
+          ],
+          [
+            -0.446293,
+            -0.021591
+          ],
+          [
+            -0.54988,
+            -0.055088
+          ],
+          [
+            -0.643784,
+            -0.107722
+          ],
+          [
+            -0.723404,
+            -0.17889
+          ],
+          [
+            -0.785166,
+            -0.26563
+          ],
+          [
+            -0.827588,
+            -0.363683
+          ],
+          [
+            -0.851778,
+            -0.468663
+          ],
+          [
+            -0.861511,
+            -0.577192
+          ],
+          [
+            -0.863002,
+            -0.687505
+          ],
+          [
+            -0.863002,
+            -0.7991
+          ],
+          [
+            -0.863002,
+            -0.911723
+          ],
+          [
+            -0.863002,
+            -1.024945
+          ]
+        ],
+        "speeds": [
+          3.3967,
+          3.3877,
+          3.3621,
+          3.3223,
+          3.276,
+          3.2318,
+          3.1974,
+          3.1793,
+          3.1821,
+          3.2052,
+          3.2428,
+          3.2869,
+          3.3287,
+          3.3633,
+          3.3877,
+          3.3967
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "hoops_defensive_slide_fast_left",
+        "phase": 0,
+        "blendSeconds": 0.15,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1",
+        "note": "backward run; no reference backpedal exists, bridge to defensive_stance or the game backward gait"
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 3,
+        "maxYShift": 0
+      },
+      "meta": {
+        "speedStart": 3.4,
+        "speedEnd": 3.4,
+        "travelHeadingChangeDegrees": 90
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_cut_plant_left",
+      "family": "hoops-cut-plant",
+      "label": "חיתוך 70 מעלות שמאלה",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "direction": "left",
+        "cutDegrees": 70,
+        "entrySpeedMps": 4.5,
+        "exitSpeedMps": 4.4
+      },
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "nativeRate": 30,
+      "frameCount": 19,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-cut-plant",
+      "events": [
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.17,
+          "frame": 5
+        },
+        {
+          "type": "push",
+          "event": "push",
+          "time": 0.39,
+          "frame": 12
+        },
+        {
+          "type": "step",
+          "event": "step",
+          "time": 0.47,
+          "frame": 14
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.6,
+        "duration": 0.6
+      },
+      "notes": "Run in, plant the outside foot wide, the body leads the turn, drive off the plant foot onto a new heading of 70 degrees; exit.bodyYawDegrees says how far the pelvis is yawed in the clip frame.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1,
+            0,
+            0.14499
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.5,
+          "end": 0.566667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.87677,
+            0,
+            1.41127
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.2,
+          "end": 0.366667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.08787,
+            0,
+            1.51834
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.149689
+          ],
+          [
+            0,
+            0.297765
+          ],
+          [
+            0,
+            0.443313
+          ],
+          [
+            0,
+            0.586181
+          ],
+          [
+            0,
+            0.726979
+          ],
+          [
+            0,
+            0.866186
+          ],
+          [
+            0.003825,
+            0.993789
+          ],
+          [
+            0.024113,
+            1.098512
+          ],
+          [
+            0.063869,
+            1.179123
+          ],
+          [
+            0.124387,
+            1.242562
+          ],
+          [
+            0.20493,
+            1.291126
+          ],
+          [
+            0.299685,
+            1.328932
+          ],
+          [
+            0.399712,
+            1.365338
+          ],
+          [
+            0.502944,
+            1.402912
+          ],
+          [
+            0.613959,
+            1.443318
+          ],
+          [
+            0.735047,
+            1.48739
+          ],
+          [
+            0.865636,
+            1.534921
+          ],
+          [
+            1.002289,
+            1.584658
+          ]
+        ],
+        "speeds": [
+          4.4907,
+          4.4665,
+          4.4044,
+          4.3262,
+          4.255,
+          4.2001,
+          4.0026,
+          3.5036,
+          2.9223,
+          2.6327,
+          2.7018,
+          2.9313,
+          3.1266,
+          3.2446,
+          3.42,
+          3.705,
+          4.0174,
+          4.2659,
+          4.3627
+        ],
+        "endYawDegrees": 70
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1",
+        "bodyYawDegrees": 70,
+        "headingChangeDegrees": 70
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 1,
+        "clamped": 7,
+        "maxYShift": 0.17383845787293362
+      },
+      "meta": {
+        "entrySpeedMps": 4.5,
+        "exitHeadingDegrees": 70,
+        "minSpeedMps": 2.6
+      },
+      "asset": "clips/hoops_cut_plant_left.glb",
+      "bytes": 775404,
+      "sha256": "8109997d546d2ce2c4654ffc83d7757ce65009b7591672d39a284ad060904083",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_cut_plant_right",
+      "family": "hoops-cut-plant",
+      "label": "חיתוך 70 מעלות ימינה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": "hoops_cut_plant_left",
+      "variant": {
+        "direction": "right",
+        "cutDegrees": 70,
+        "entrySpeedMps": 4.5,
+        "exitSpeedMps": 4.4
+      },
+      "duration": 0.6,
+      "durationSeconds": 0.6,
+      "nativeRate": 30,
+      "frameCount": 19,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-cut-plant",
+      "events": [
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.17,
+          "frame": 5
+        },
+        {
+          "type": "push",
+          "event": "push",
+          "time": 0.39,
+          "frame": 12
+        },
+        {
+          "type": "step",
+          "event": "step",
+          "time": 0.47,
+          "frame": 14
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.6,
+        "duration": 0.6
+      },
+      "notes": "Run in, plant the outside foot wide, the body leads the turn, drive off the plant foot onto a new heading of 70 degrees; exit.bodyYawDegrees says how far the pelvis is yawed in the clip frame.",
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.066667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1,
+            0,
+            0.14499
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.5,
+          "end": 0.566667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.87677,
+            0,
+            1.41127
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.2,
+          "end": 0.366667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.08787,
+            0,
+            1.51834
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.149689
+          ],
+          [
+            0,
+            0.297765
+          ],
+          [
+            0,
+            0.443313
+          ],
+          [
+            0,
+            0.586181
+          ],
+          [
+            0,
+            0.726979
+          ],
+          [
+            0,
+            0.866186
+          ],
+          [
+            -0.003825,
+            0.993789
+          ],
+          [
+            -0.024113,
+            1.098512
+          ],
+          [
+            -0.063869,
+            1.179123
+          ],
+          [
+            -0.124387,
+            1.242562
+          ],
+          [
+            -0.20493,
+            1.291126
+          ],
+          [
+            -0.299685,
+            1.328932
+          ],
+          [
+            -0.399712,
+            1.365338
+          ],
+          [
+            -0.502944,
+            1.402912
+          ],
+          [
+            -0.613959,
+            1.443318
+          ],
+          [
+            -0.735047,
+            1.48739
+          ],
+          [
+            -0.865636,
+            1.534921
+          ],
+          [
+            -1.002289,
+            1.584658
+          ]
+        ],
+        "speeds": [
+          4.4907,
+          4.4665,
+          4.4044,
+          4.3262,
+          4.255,
+          4.2001,
+          4.0026,
+          3.5036,
+          2.9223,
+          2.6327,
+          2.7018,
+          2.9313,
+          3.1266,
+          3.2446,
+          3.42,
+          3.705,
+          4.0174,
+          4.2659,
+          4.3627
+        ],
+        "endYawDegrees": -70
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1",
+        "bodyYawDegrees": -70,
+        "headingChangeDegrees": 70
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 1,
+        "clamped": 7,
+        "maxYShift": 0.17383845787293362
+      },
+      "meta": {
+        "entrySpeedMps": 4.5,
+        "exitHeadingDegrees": 70,
+        "minSpeedMps": 2.6
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_pivot_stop_left",
+      "family": "hoops-pivot-stop",
+      "label": "עצירה ופיבוט שמאלה",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "direction": "left",
+        "entrySpeedMps": 3,
+        "pivotFoot": "Left",
+        "pivotDegrees": 90
+      },
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "nativeRate": 30,
+      "frameCount": 25,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-pivot-stop",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.12,
+          "frame": 4
+        },
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "type": "pivot",
+          "event": "pivot",
+          "time": 0.42,
+          "frame": 13
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.74,
+          "frame": 22
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.72,
+        "duration": 0.72
+      },
+      "notes": "Stride stop onto the left foot, the left sole stays planted while the pelvis turns 90 degrees around it and the right foot steps around; ends in the ready stance yawed 90 degrees (exit.bodyYawDegrees).",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.08,
+            0,
+            0.10963
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.3,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.625
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.133333,
+          "end": 0.233333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12,
+            0,
+            0.5585
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.733333,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.08,
+            0,
+            0.885
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.095833
+          ],
+          [
+            0,
+            0.183333
+          ],
+          [
+            0,
+            0.2625
+          ],
+          [
+            0,
+            0.333333
+          ],
+          [
+            0,
+            0.395833
+          ],
+          [
+            0,
+            0.45
+          ],
+          [
+            0,
+            0.495833
+          ],
+          [
+            0,
+            0.533333
+          ],
+          [
+            0,
+            0.5625
+          ],
+          [
+            0,
+            0.583333
+          ],
+          [
+            0,
+            0.595833
+          ],
+          [
+            0,
+            0.6
+          ],
+          [
+            -0.000195,
+            0.601035
+          ],
+          [
+            -0.001727,
+            0.611848
+          ],
+          [
+            -0.002179,
+            0.632337
+          ],
+          [
+            0.00212,
+            0.65923
+          ],
+          [
+            0.013663,
+            0.688172
+          ],
+          [
+            0.03241,
+            0.71445
+          ],
+          [
+            0.055554,
+            0.734466
+          ],
+          [
+            0.078489,
+            0.746949
+          ],
+          [
+            0.096289,
+            0.753018
+          ],
+          [
+            0.104738,
+            0.754949
+          ],
+          [
+            0.105,
+            0.755
+          ],
+          [
+            0.105,
+            0.755
+          ]
+        ],
+        "speeds": [
+          2.875,
+          2.75,
+          2.5,
+          2.25,
+          2,
+          1.75,
+          1.5,
+          1.25,
+          1,
+          0.75,
+          0.5,
+          0.25,
+          0.0781,
+          0.1796,
+          0.4705,
+          0.7131,
+          0.8706,
+          0.9447,
+          0.9365,
+          0.8458,
+          0.6714,
+          0.4116,
+          0.134,
+          0.004,
+          0
+        ],
+        "endYawDegrees": 90
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1",
+        "bodyYawDegrees": 90
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "entrySpeedMps": 3,
+        "Ts": 0.4,
+        "pivotFoot": "Left",
+        "pivotDegrees": 90
+      },
+      "asset": "clips/hoops_pivot_stop_left.glb",
+      "bytes": 777404,
+      "sha256": "e4fc958677997383f7fae5e15254ec98e0b721f213521798caab2804b18cd9e0",
+      "compression": "none"
+    },
+    {
+      "id": "hoops_pivot_stop_right",
+      "family": "hoops-pivot-stop",
+      "label": "עצירה ופיבוט ימינה",
+      "role": "basketball",
+      "nominal": false,
+      "glb": false,
+      "mirrorOf": "hoops_pivot_stop_left",
+      "variant": {
+        "direction": "right",
+        "entrySpeedMps": 3,
+        "pivotFoot": "Left",
+        "pivotDegrees": 90
+      },
+      "duration": 0.8,
+      "durationSeconds": 0.8,
+      "nativeRate": 30,
+      "frameCount": 25,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-pivot-stop",
+      "events": [
+        {
+          "type": "brake",
+          "event": "brake",
+          "time": 0.12,
+          "frame": 4
+        },
+        {
+          "type": "plant",
+          "event": "plant",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "type": "pivot",
+          "event": "pivot",
+          "time": 0.42,
+          "frame": 13
+        },
+        {
+          "type": "stand",
+          "event": "stand",
+          "time": 0.74,
+          "frame": 22
+        }
+      ],
+      "coreRange": {
+        "start": 0,
+        "end": 0.72,
+        "duration": 0.72
+      },
+      "notes": "Stride stop onto the left foot, the left sole stays planted while the pelvis turns 90 degrees around it and the right foot steps around; ends in the ready stance yawed 90 degrees (exit.bodyYawDegrees).",
+      "supports": [
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.08,
+            0,
+            0.10963
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.3,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            0.625
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.133333,
+          "end": 0.233333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            0.5585
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.733333,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.08,
+            0,
+            0.885
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.095833
+          ],
+          [
+            0,
+            0.183333
+          ],
+          [
+            0,
+            0.2625
+          ],
+          [
+            0,
+            0.333333
+          ],
+          [
+            0,
+            0.395833
+          ],
+          [
+            0,
+            0.45
+          ],
+          [
+            0,
+            0.495833
+          ],
+          [
+            0,
+            0.533333
+          ],
+          [
+            0,
+            0.5625
+          ],
+          [
+            0,
+            0.583333
+          ],
+          [
+            0,
+            0.595833
+          ],
+          [
+            0,
+            0.6
+          ],
+          [
+            0.000195,
+            0.601035
+          ],
+          [
+            0.001727,
+            0.611848
+          ],
+          [
+            0.002179,
+            0.632337
+          ],
+          [
+            -0.00212,
+            0.65923
+          ],
+          [
+            -0.013663,
+            0.688172
+          ],
+          [
+            -0.03241,
+            0.71445
+          ],
+          [
+            -0.055554,
+            0.734466
+          ],
+          [
+            -0.078489,
+            0.746949
+          ],
+          [
+            -0.096289,
+            0.753018
+          ],
+          [
+            -0.104738,
+            0.754949
+          ],
+          [
+            -0.105,
+            0.755
+          ],
+          [
+            -0.105,
+            0.755
+          ]
+        ],
+        "speeds": [
+          2.875,
+          2.75,
+          2.5,
+          2.25,
+          2,
+          1.75,
+          1.5,
+          1.25,
+          1,
+          0.75,
+          0.5,
+          0.25,
+          0.0781,
+          0.1796,
+          0.4705,
+          0.7131,
+          0.8706,
+          0.9447,
+          0.9365,
+          0.8458,
+          0.6714,
+          0.4116,
+          0.134,
+          0.004,
+          0
+        ],
+        "endYawDegrees": -90
+      },
+      "entry": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1",
+        "bodyYawDegrees": -90
+      },
+      "synthNotes": {
+        "reach": 0,
+        "ceiling": 0,
+        "clamped": 0,
+        "maxYShift": 0
+      },
+      "meta": {
+        "entrySpeedMps": 3,
+        "Ts": 0.4,
+        "pivotFoot": "Left",
+        "pivotDegrees": 90
+      },
+      "asset": null,
+      "bytes": 0,
+      "sha256": null,
+      "data": "motions.json"
+    },
+    {
+      "id": "hoops_start_from_stand",
+      "family": "hoops-start-from-stand",
+      "label": "יציאה מעמידה, שלושה צעדים",
+      "role": "basketball",
+      "nominal": true,
+      "glb": true,
+      "mirrorOf": null,
+      "variant": {
+        "exitSpeedMps": 4.3,
+        "steps": 3
+      },
+      "duration": 0.9,
+      "durationSeconds": 0.9,
+      "nativeRate": 30,
+      "frameCount": 28,
+      "loop": false,
+      "rootMotion": false,
+      "license": "CC0-1.0",
+      "category": "hoops-start-from-stand",
+      "events": [
+        {
+          "type": "push",
+          "event": "push",
+          "time": 0.1,
+          "frame": 3
+        },
+        {
+          "type": "step",
+          "event": "step",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "type": "step",
+          "event": "step",
+          "time": 0.48,
+          "frame": 14
+        },
+        {
+          "type": "step",
+          "event": "step",
+          "time": 0.62,
+          "frame": 19
+        }
+      ],
+      "coreRange": {
+        "start": 0.1,
+        "end": 0.9,
+        "duration": 0.8
+      },
+      "notes": "Drive lean, push from the left foot, three accelerating steps (right, left, right) into a run of about 4.3 m/s.",
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.025
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.4,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            0.58294
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.7,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12,
+            0,
+            1.7525
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.13,
+            0,
+            -0.025
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.233333,
+          "end": 0.333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12,
+            0,
+            0.19126
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.566667,
+          "end": 0.666667,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12,
+            0,
+            1.1536
+          ]
+        }
+      ],
+      "path": {
+        "frame": "clip",
+        "unit": "meters",
+        "rate": 30,
+        "samples": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0.000094
+          ],
+          [
+            0,
+            0.001731
+          ],
+          [
+            0,
+            0.007213
+          ],
+          [
+            0,
+            0.018575
+          ],
+          [
+            0,
+            0.037557
+          ],
+          [
+            0,
+            0.065604
+          ],
+          [
+            0,
+            0.103866
+          ],
+          [
+            0,
+            0.153199
+          ],
+          [
+            0,
+            0.214162
+          ],
+          [
+            0,
+            0.287022
+          ],
+          [
+            0,
+            0.371749
+          ],
+          [
+            0,
+            0.468018
+          ],
+          [
+            0,
+            0.57521
+          ],
+          [
+            0,
+            0.692411
+          ],
+          [
+            0,
+            0.818411
+          ],
+          [
+            0,
+            0.951707
+          ],
+          [
+            0,
+            1.0905
+          ],
+          [
+            0,
+            1.232695
+          ],
+          [
+            0,
+            1.376
+          ],
+          [
+            0,
+            1.519333
+          ],
+          [
+            0,
+            1.662667
+          ],
+          [
+            0,
+            1.806
+          ],
+          [
+            0,
+            1.949333
+          ],
+          [
+            0,
+            2.092667
+          ],
+          [
+            0,
+            2.236
+          ]
+        ],
+        "speeds": [
+          0,
+          0,
+          0.0014,
+          0.026,
+          0.1068,
+          0.2527,
+          0.4552,
+          0.7054,
+          0.9946,
+          1.3139,
+          1.6544,
+          2.0073,
+          2.3638,
+          2.7149,
+          3.0519,
+          3.3659,
+          3.648,
+          3.8894,
+          4.0813,
+          4.2148,
+          4.2825,
+          4.2996,
+          4.3,
+          4.3,
+          4.3,
+          4.3,
+          4.3,
+          4.3
+        ],
+        "endYawDegrees": 0
+      },
+      "entry": {
+        "reference": "idle_relaxed",
+        "phase": 0,
+        "blendSeconds": 0.2,
+        "curve": "cubic-hermite-C1"
+      },
+      "exit": {
+        "reference": "run",
+        "phase": 0,
+        "blendSeconds": 0.3,
+        "curve": "cubic-hermite-C1"
+      },
+      "synthNotes": {
+        "reach": 1.5306601246975207,
+        "ceiling": 3,
+        "clamped": 4,
+        "maxYShift": 0.09623490693813808
+      },
+      "meta": {
+        "exitSpeedMps": 4.3,
+        "steps": 3
+      },
+      "asset": "clips/hoops_start_from_stand.glb",
+      "bytes": 778256,
+      "sha256": "268a901b1038cefad4b467d81e2250908efaf931d454c46b2b9e533d3c77e137",
+      "compression": "none"
+    }
+  ],
+  "sourceMotionSha256": "8dcf001b8eb0f6a94dd7b4c18f933267c56a4c32f41616d6e60c2f66148f31d8"
+}

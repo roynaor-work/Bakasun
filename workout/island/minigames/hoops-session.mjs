@@ -18,6 +18,7 @@ import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-24';
 import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-24';
 import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-24';
 import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
+import {engineStopClips} from './hoops-stop-clips.mjs';
 import {hoopsV250Flags,engineV250,basketReplayTrigger} from './hoops-v250.mjs';
 import {createHoopsV250Hud} from './hoops-v250-hud.mjs';
 
@@ -49,7 +50,7 @@ export function startHoops(ctx){
  // v25.0 (24/11): shot meter, quiet HUD, tap pass, rebound timing, auto-stick, basket replay, special meter; `?hoopsV250=0` restores v24.9
  const v250=hoopsV250Flags(params),basketReplay={lastWall:null,green:new Set()};let v250Hud=null;
  const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:(params.get('hoopsV249')==='0'||params.get('hoopsMotion249')==='0')&&balance.play?{...balance.play,motion:null}:undefined,
-  rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio,timeoutFeedback,v250:engineV250(v250)});
+  rimPhysics:polish.physics,impactDetails:polish.rim||polish.net||polish.audio,timeoutFeedback,v250:engineV250(v250),stopClips:engineStopClips(params)});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});

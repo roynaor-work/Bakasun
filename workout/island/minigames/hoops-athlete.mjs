@@ -19,6 +19,7 @@ import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor
 import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-24';
 import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-24';
 import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-24';
+import {stopClipsEnabled,loadStopClips} from './hoops-stop-clips.mjs';
 import {hoopsLookEnabled,cullBodyGeometry,applyHoopsLook,hoopsLookKit} from './hoops-look-v249.mjs?v=island-v2-20261107-24';
 import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-24';
 
@@ -119,6 +120,9 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
   try{const r=await fetch(v13Url());if(!r.ok)throw Error('Basketball v13 motion pack '+r.status);v13=prepareV13(await r.json(),decodeTallPack);motionV13={clips:[...v13.byGame.keys()],aligned:v13.aligned,shared:alignSharedV12(pack,V22_LEG_RATIO.wing)};}
   catch(error){v13=null;motionV13=null;onFallback?.('motion v13',error);}
  }
+ // hoops-stop-clips-v1: stopping and fast-shuffle clips (canonical hips offsets like v13); only with the v13 gait tables, which give each body's scale. `?hoopsStopClips=0` skips it.
+ let stopClips=null;
+ if(v13&&v22&&stopClipsEnabled(params)){try{stopClips=await loadStopClips(base,cfg.stopClips?.url||'assets/hoops-stop-clips-v1/stop-clips.json',decodeTallPack);}catch(error){stopClips=null;onFallback?.('stop clips',error);}}
  let v8=null;
  if(v8MotionEnabled(cfg,params)){try{v8=await loadV8Motion(cfg,base);}catch(error){v8=null;onFallback?.('v8 motion',error);}}
  const map=v22?null:athleteRetargetMap(source.rig,CANON_REST),clipSets={};
@@ -136,6 +140,7 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
    for(const [game,id] of Object.entries(V13_USE)){const c=built.get(id).clone();c.name=game;renamed.set(game,c);}
    for(const [n,c] of retargetClipMap(renamed,v13.pack.profiles.canonical.hips,body.rig,{...pmap,motionScale:1}))clipSets[p].set(n,c);
   }
+  if(stopClips)for(const [n,c] of retargetClipMap(buildTallClips(stopClips.pack,'canonical'),stopClips.pack.profiles.canonical.hips,body.rig,{...pmap,motionScale:1}))clipSets[p].set(n,c);
   dunks[p]=calibrateAthleteDunks(body,clipSets[p],{height:(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100,bulk:v22?1:ATHLETE_BULK[p]||1});
  }
  // the plan reads clip data by game name (durations, events, ball tracks): the v13 data replaces v12's for the connected names; each body's
@@ -146,9 +151,10 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
   for(const [game,data] of v13.byGame)pack.clips[game]=data;
   motionV13.refScale=Object.fromEntries(Object.entries(gaits13).map(([p,g])=>[p,g.refScale]));
  }
+ if(stopClips&&gaits13)stopClips.scale=Object.fromEntries(TALL_PROFILES.map(p=>[p,gaits13[p].refScale]));else stopClips=null;
  const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
  const sleeves=v22?null:athleteKitGeometry(THREE,source,'basketball');
- return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',lookV249,lookCull,pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,fakeV13:params?.get?.('hoopsFakeV13')!=='0',
+ return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',lookV249,lookCull,pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,stopClips,fakeV13:params?.get?.('hoopsFakeV13')!=='0',
   /** createAvatarTall calls this instead of cloning a tall body. `look` is the team look ({primary, trim/secondary, shortsBase}). */
   bodyFactory(profile,card,look,{numbers=null,cell=0,track=x=>x}={}){
    const lookOn=lookV249;
