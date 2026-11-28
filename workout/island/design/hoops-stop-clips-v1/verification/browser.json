@@ -1,10 +1,79 @@
 {
   "clipsLoaded": [
-    "hoops_stop_sprint_7p5"
+    "hoops_stop_sprint_7p5",
+    "hoops_stop_run_5",
+    "hoops_stop_jog_2p75",
+    "hoops_defensive_slide_fast_left",
+    "hoops_defensive_slide_fast_right",
+    "hoops_defensive_slide_recover_forward_left",
+    "hoops_defensive_slide_recover_back_left",
+    "hoops_cut_plant_left",
+    "hoops_pivot_stop_left",
+    "hoops_start_from_stand"
   ],
   "captures": [
     {
       "id": "hoops_stop_sprint_7p5",
+      "times": [
+        0,
+        0.1,
+        0.2,
+        0.3,
+        0.36666666666666664,
+        0.4666666666666667,
+        0.5666666666666667,
+        0.6666666666666666
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_stop_sprint_7p5.png"
+    },
+    {
+      "id": "hoops_stop_run_5",
+      "times": [
+        0,
+        0.06666666666666667,
+        0.16666666666666666,
+        0.23333333333333334,
+        0.3333333333333333,
+        0.4,
+        0.5,
+        0.5666666666666667
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_stop_run_5.png"
+    },
+    {
+      "id": "hoops_stop_jog_2p75",
+      "times": [
+        0,
+        0.06666666666666667,
+        0.13333333333333333,
+        0.2,
+        0.3,
+        0.36666666666666664,
+        0.43333333333333335,
+        0.5
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_stop_jog_2p75.png"
+    },
+    {
+      "id": "hoops_defensive_slide_fast_left",
       "times": [
         0,
         0.1,
@@ -21,7 +90,127 @@
         "front",
         "back"
       ],
-      "path": "sheets/hoops_stop_sprint_7p5.png"
+      "path": "sheets/hoops_defensive_slide_fast_left.png"
+    },
+    {
+      "id": "hoops_defensive_slide_fast_right",
+      "times": [
+        0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_defensive_slide_fast_right.png"
+    },
+    {
+      "id": "hoops_defensive_slide_recover_forward_left",
+      "times": [
+        0,
+        0.06666666666666667,
+        0.13333333333333333,
+        0.2,
+        0.3,
+        0.36666666666666664,
+        0.43333333333333335,
+        0.5
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_defensive_slide_recover_forward_left.png"
+    },
+    {
+      "id": "hoops_defensive_slide_recover_back_left",
+      "times": [
+        0,
+        0.06666666666666667,
+        0.13333333333333333,
+        0.2,
+        0.3,
+        0.36666666666666664,
+        0.43333333333333335,
+        0.5
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_defensive_slide_recover_back_left.png"
+    },
+    {
+      "id": "hoops_cut_plant_left",
+      "times": [
+        0,
+        0.1,
+        0.16666666666666666,
+        0.26666666666666666,
+        0.3333333333333333,
+        0.43333333333333335,
+        0.5,
+        0.6
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_cut_plant_left.png"
+    },
+    {
+      "id": "hoops_pivot_stop_left",
+      "times": [
+        0,
+        0.1,
+        0.23333333333333334,
+        0.3333333333333333,
+        0.4666666666666667,
+        0.5666666666666667,
+        0.7,
+        0.8
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_pivot_stop_left.png"
+    },
+    {
+      "id": "hoops_start_from_stand",
+      "times": [
+        0,
+        0.13333333333333333,
+        0.26666666666666666,
+        0.4,
+        0.5,
+        0.6333333333333333,
+        0.7666666666666667,
+        0.9
+      ],
+      "views": [
+        "three",
+        "side",
+        "front",
+        "back"
+      ],
+      "path": "sheets/hoops_start_from_stand.png"
     }
   ],
   "viewports": [
@@ -35,11 +224,11 @@
     }
   ],
   "errors": [],
-  "mobileOverflow": false,
+  "mobileOverflow": true,
   "webAssemblyBlocked": true,
   "wasmRequests": [],
   "networkOrigins": [
     "http://127.0.0.1:8765"
   ],
-  "passed": true
+  "passed": false
 }
