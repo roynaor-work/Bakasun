@@ -51,7 +51,7 @@ for(const variant of variants){
  await page.evaluate(install);
  const R=report[variant.name]={moments:{}};let n=0;
  for(const [name,x,z,def] of moments){
-  if(name.startsWith('free'))await page.evaluate(n=>{for(let i=0;i<n;i++)window.__t.step(1);},x);else await page.evaluate(([x,z,def])=>{window.__t.setBall(x,z,def);window.__session.debug.view.snapCamera();for(let i=0;i<40;i++)window.__t.step(1);window.__session.debug.view.snapCamera();window.__t.step(1);},[x,z,def]);
+  if(name.startsWith('free'))await page.evaluate(n=>{window.__t.step(n);},x);else await page.evaluate(([x,z,def])=>{window.__t.setBall(x,z,def);window.__session.debug.view.snapCamera();for(let i=0;i<40;i++)window.__t.step(1);window.__session.debug.view.snapCamera();window.__t.step(1);},[x,z,def]);
   R.moments[name]=await page.evaluate(([w,h])=>window.__t.measure(w,h),[width,height]);
   const M=R.moments[name];console.log(variant.name,name,'player px',M.me.px,'rim on',M.rim.on,'near on',M.nearOn+'/'+M.nearCount);
   await page.evaluate(async()=>{window.__session.debug.render();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));});
