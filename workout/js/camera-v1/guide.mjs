@@ -1,10 +1,12 @@
 // Where to go when the camera does not see the child well. Pure: takes the pose sample of one frame,
 // the tracker's status and the exercise's needs, and returns one short instruction, as display text
 // and as a vowel-marked reading for the device voice. Nothing is kept beyond the last seen position.
+import { proportionsOf, stepsBack, STEP_WORDS } from './body.mjs?v=20261010-camera-1';
 const SEEN = .4;
 const NEED = .49;
 const EDGE = .03;
 const EXIT_MS = 8000;
+const WIDE = .78;
 
 const PARTS = {
   head: { ids: [0, 7, 8], text: 'הראש לא נראה', say: 'הָרֹאשׁ לֹא נִרְאֶה' },
@@ -66,6 +68,20 @@ function mainPerson(poses) {
   return most >= 3 ? best : null;
 }
 
+// camSteps=1: "move back" says how many steps, from the child's own torso in metres (world landmarks, or the
+// one measured while calibrating) against the torso in the picture. Without both it stays "move back a bit".
+function stepWords(sample, points, memory) {
+  const pose = (Array.isArray(sample?.poses) ? sample.poses : []).find(candidate => candidate?.landmarks === points);
+  const meters = proportionsOf(pose?.world)?.torsoMeters ?? memory.torsoMeters;
+  const aspect = Number.isFinite(sample?.aspect) && sample.aspect > 0 ? sample.aspect : .75;
+  const at = ids => ids.map(id => points[id]).filter(p => p && Number.isFinite(p.x) && Number.isFinite(p.y) && confidence(p) >= SEEN);
+  const mean = list => list.length ? { x: list.reduce((a, p) => a + p.x, 0) / list.length, y: list.reduce((a, p) => a + p.y, 0) / list.length } : null;
+  const shoulder = mean(at([11, 12])), hip = mean(at([23, 24]));
+  if (!shoulder || !hip) return null;
+  const steps = stepsBack({ torsoMeters: meters, torsoInPicture: Math.hypot((shoulder.x - hip.x) * aspect, shoulder.y - hip.y) });
+  return steps ? STEP_WORDS[steps] : null;
+}
+
 function missingParts(points, required) {
   const groups = Array.isArray(required?.[0]) ? required : [required || []];
   let fewest = null;
@@ -119,8 +135,17 @@ export function guide(sample, status, policy = {}, memory = {}) {
     top: box.top < EDGE || lost.some(p => p.y < EDGE),
     bottom: box.bottom > 1 - EDGE || lost.some(p => p.y > 1 - EDGE),
   };
+  // camPlace=1: a body that already takes most of the picture's width (lying on the floor, or arms spread)
+  // cannot be brought in by a step to the side: the other end would leave. Only more distance helps.
+  // The same for a body cut at one side while its hidden part is the far end (legs of a lying child).
+  const wide = policy.place === true && box.right - box.left > WIDE;
+  // camPlace=1: hidden parts with nothing cut at an edge. Legs or head hidden while the rest is seen well
+  // means the phone looks past them (too close, or tilted): distance brings them in. Hands alone are usually
+  // behind the body, so that stays "check that nothing hides you".
+  const far = policy.place === true && names.some(name => name === 'feet' || name === 'knees' || name === 'head');
   let move;
   if (status === 'move-back' || (cut.left && cut.right)) move = 'back';
+  else if (wide && (cut.left || cut.right)) move = 'back';
   else if (status === 'move-closer') move = 'closer';
   else if (status === 'raise-phone') move = 'raise';
   else if (cut.left || cut.right) move = cut.left ? 'left' : 'right';
@@ -129,11 +154,12 @@ export function guide(sample, status, policy = {}, memory = {}) {
   // which happens at a shorter distance the smaller the child is.
   else if (box.bottom - box.top < .25 && box.right - box.left < .25) move = 'closer';
   else if (middle < .38 || middle > .62) move = towardMiddle(middle);
-  else move = names.length ? 'clear' : 'center';
+  else move = names.length ? (far ? 'back' : 'clear') : 'center';
 
   const parts = names.length > 2 ? [WHOLE] : names.map(name => PARTS[name]);
-  const code = [status, names.join('+'), move].join(':');
-  return { ...line(code, ...parts, MOVES[move]), move, parts: names };
+  const steps = move === 'back' && policy.steps ? stepWords(sample, points, memory) : null;
+  const code = [status, names.join('+'), move, steps ? steps.text : ''].join(':');
+  return { ...line(code, ...parts, steps || MOVES[move]), move, parts: names };
 }
 
 // Decides when an instruction is read aloud: only after it has held for a moment, never the same one

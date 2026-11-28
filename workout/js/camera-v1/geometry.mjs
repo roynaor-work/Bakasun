@@ -59,7 +59,10 @@ export function measure(points, aspect, reference, required) {
   if (!main || !hip || !shoulder) return null;
   const s = reference?.scale ?? distance(main.shoulder || shoulder, main.hip || hip);
   if (!(s >= .035)) return null;
-  const thighScale = reference?.thigh ? Math.max(.8, Math.min(1.7, NOMINAL_THIGH / reference.thigh)) : 1;
+  // camBody=1: the legs and arms are restated on the grown-up scale from the child's measured proportions
+  // (body.mjs, world landmarks), which do not depend on the angle the thigh happened to be seen at.
+  const thighScale = reference?.legScale ?? (reference?.thigh ? Math.max(.8, Math.min(1.7, NOMINAL_THIGH / reference.thigh)) : 1);
+  const armScale = reference?.armScale ?? 1;
   const dx = (a, b) => a && b ? (a.x - b.x) / s : NaN;
   const dy = (a, b) => a && b ? (a.y - b.y) / s : NaN;
   const dist = (a, b) => distance(a, b) / s;
@@ -72,7 +75,7 @@ export function measure(points, aspect, reference, required) {
     side.legAngle = angle(shoulder, hip, knee);
     side.torsoLength = dist(shoulder, hip);
     side.sole = max([toe?.y, heel?.y, ankle ? ankle.y + .08 * s : NaN]);
-    side.armUp = dy(shoulder, wrist);
+    side.armUp = dy(shoulder, wrist) * armScale;
     side.heelRise = dy(toe, heel);
     side.kneeRise = dy(hip, knee) * thighScale;
   }
@@ -89,7 +92,11 @@ export function measure(points, aspect, reference, required) {
     torsoUp: dy(hip, shoulder), torsoWide: Math.abs(dx(hip, shoulder)),
     kneeWidth: Math.abs(dx(left.knee, right.knee)), wristSpread: Math.abs(dx(left.wrist, right.wrist)),
     ankleOrder: Math.sign(dx(left.ankle, right.ankle)), bodyLine: main.line, kneeLine: main.kneeLine,
-    kneeAngle: main.kneeAngle, elbowAngle: main.elbowAngle };
+    kneeAngle: main.kneeAngle, elbowAngle: main.elbowAngle,
+    // camDepth=1: how much easier than the written depth a push-up counts (1 = as written); see body.mjs depthEaseOf.
+    depthEase: reference?.depthEase ?? 1,
+    // camForearm=1: a plank held on the forearms is a plank too (profiles.mjs).
+    forearm: reference?.forearm === true };
   // A first measurement (no reference yet) of a standing child records the child's own thigh length.
   if (!reference) out.thigh = standingThigh(out);
   return out;
