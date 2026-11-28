@@ -86,3 +86,5 @@
 
 /* v5: archery view. The power meter becomes a bow-string you pull with the other hand. */
 .catch-hud[data-arch] .catch-power{left:max(16px,calc(env(safe-area-inset-left) + 16px));bottom:max(86px,calc(env(safe-area-inset-bottom) + 86px));width:38px;height:128px;border-radius:12px;border:2px solid #ffffff66;pointer-events:auto;touch-action:none;cursor:ns-resize}
+/* v25.2: the start overlay (two dots, until the street is loaded) covered the loading words. While the game starts the words sit under the dots, above the overlay. */
+.game-screen[data-starting=true] .catch-loading:not([hidden]){inset:calc(50% + 34px) 0 auto 0;z-index:12;padding:0 16px;background:none;font-size:16px}

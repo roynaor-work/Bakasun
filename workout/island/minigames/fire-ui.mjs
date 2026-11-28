@@ -21,6 +21,20 @@ export function fireCoachState(m){
   const progress=Number.isFinite(guide.progress)?Math.max(0,Math.min(1,guide.progress)):m.refilling?m.water/m.maxWater:null;
   return {key,title:mission.titleKey||'fire.mission.'+(mission.kind||'suppression'),brief:mission.briefKey,kind:guide.kind||'drive',active,progress,distance:Number.isFinite(guide.distance)&&(active||key.includes('approach'))?Math.ceil(guide.distance):null};
 }
+/** v25.2 (QA of v25.1; Roy: text must not cover the game): the coach strip ("נוגעים באש, בחלון או בברז כדי לנסוע") stayed for the whole
+ * mission, about 500px wide over the buildings. Now every instruction shows for a few seconds and the strip goes away; the opening
+ * instruction also goes at the child's first action. While a drive is planned or a bar is filling, only the small part with the distance,
+ * the bar and the cancel button stays. ?fireHint=old keeps the permanent strip. */
+export function fireHintBrief(search=globalThis.location?.search||''){try{return new URLSearchParams(search).get('fireHint')!=='old';}catch{return true;}}
+export const FIRE_HINT_SECONDS=6;
+/** Pure. `memory` = {key,age,acted} kept between frames; returns 'full' | 'compact' | 'hidden'. */
+export function fireCoachQuiet(memory,coach,action,dt,seconds=FIRE_HINT_SECONDS){
+  if(memory.key!==coach.key){memory.key=coach.key;memory.age=0;}else memory.age+=Math.max(0,dt||0);
+  if(action&&action!=='ready')memory.acted=true;
+  const opening=coach.key==='fire.guide.select'||(coach.brief&&coach.key===coach.brief);
+  if(memory.age<seconds&&!(opening&&memory.acted))return 'full';
+  return coach.active||coach.distance!==null||(coach.progress>0&&coach.progress<1)?'compact':'hidden';
+}
 export function fireIcon(name){const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');const p=document.createElementNS(NS,'path');p.setAttribute('d',paths[name]||paths.star);svg.append(p);return svg;}
 function ring(node,color,radius){const svg=document.createElementNS(NS,'svg');svg.classList.add('fire-ring');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('aria-hidden','true');const track=document.createElementNS(NS,'circle'),circle=document.createElementNS(NS,'circle');for(const [key,value]of Object.entries({cx:50,cy:50,r:radius,pathLength:100,fill:'none','stroke-width':3.5}))for(const item of [track,circle])item.setAttribute(key,String(value));track.classList.add('fire-ring-track');circle.setAttribute('stroke',color);circle.setAttribute('stroke-dasharray','100');circle.setAttribute('stroke-linecap','round');svg.append(track,circle);node.append(svg);return circle;}
 export function installFireUI(ctx){
@@ -43,7 +57,7 @@ export function installFireUI(ctx){
   let gauge=null;if(hudV21){gauge=document.createElement('div');gauge.className='fire-water-gauge';gauge.setAttribute('role','meter');gauge.setAttribute('aria-label',t('fire.waterGauge'));gauge.setAttribute('aria-valuemin','0');gauge.setAttribute('aria-valuemax','100');gauge.append(fireIcon('drop'));const track=document.createElement('span');track.className='fire-gauge-track';const fill=document.createElement('i');fill.className='fire-gauge-fill';track.append(fill);const text=document.createElement('bdi');text.className='fire-gauge-text';gauge.append(track,text);dialog.append(gauge);gauge.fill=fill;gauge.text=text;} // its own panel under the counters: the coach box starts 244px from the left and would cover a wider HUD
   dialog.append(hud);
   const coach=document.createElement('div');coach.className='fire-coach';const coachText=document.createElement('div');coachText.className='fire-coach-text';const missionTitle=document.createElement('span');missionTitle.className='fire-mission-title';const instruction=document.createElement('span');instruction.className='fire-instruction';instruction.setAttribute('role','status');instruction.setAttribute('aria-live','polite');const distance=document.createElement('bdi');distance.className='fire-coach-distance';coachText.append(missionTitle,instruction);const cancelNavigation=document.createElement('button');cancelNavigation.type='button';cancelNavigation.className='fire-navigation-cancel';cancelNavigation.setAttribute('aria-label',t('fire.navCancel'));cancelNavigation.title=t('fire.navCancel');cancelNavigation.textContent='×';cancelNavigation.hidden=true;const progress=document.createElement('i');progress.className='fire-coach-progress';progress.hidden=true;coach.append(coachText,distance,cancelNavigation,progress);dialog.append(coach);
-  return {gauge,stabilizer,marker,spray,water,pressure,refill,ladder,finish,counters,timeRing,dialog,coach,missionTitle,instruction,distance,cancelNavigation,progress,t,dispose(){hud.remove();gauge?.remove();coach.remove();stabilizer.remove();link.remove();g2n.remove();g2o.remove();dialog.classList.remove('fire-play');delete dialog.dataset.fireAction;}};
+  return {hintMemory:fireHintBrief()?{key:null,age:0,acted:false,at:performance.now()}:null,gauge,stabilizer,marker,spray,water,pressure,refill,ladder,finish,counters,timeRing,dialog,coach,missionTitle,instruction,distance,cancelNavigation,progress,t,dispose(){hud.remove();gauge?.remove();coach.remove();stabilizer.remove();link.remove();g2n.remove();g2o.remove();dialog.classList.remove('fire-play');delete dialog.dataset.fireAction;}};
 }
 const v9Controls=fireControlsV9();
 export function updateFireUI(ui,m,b){
@@ -58,4 +72,5 @@ export function updateFireUI(ui,m,b){
   ui.spray.classList.toggle('effective',m.spraying&&m.coolingTarget!==null&&m.coolingTarget!==undefined&&m.coolingPower>0);
   const coach=fireCoachState(m);ui.coach.dataset.kind=coach.kind;ui.cancelNavigation.hidden=!coach.active;ui.missionTitle.textContent=ui.t(coach.title);ui.missionTitle.title=coach.brief?ui.t(coach.brief):'';
   const instruction=ui.t(coach.key);if(ui.instruction.textContent!==instruction)ui.instruction.textContent=instruction;ui.distance.hidden=coach.distance===null;ui.distance.textContent=coach.distance===null?'':ui.t('fire.distance',{distance:coach.distance});ui.progress.hidden=coach.progress===null;ui.progress.style.transform='scaleX('+(coach.progress??0)+')';
+  if(ui.hintMemory){const now=performance.now(),dt=Math.min(.25,(now-ui.hintMemory.at)/1000);ui.hintMemory.at=now;const quiet=fireCoachQuiet(ui.hintMemory,coach,ui.dialog.dataset.fireAction,dt);if(ui.coach.dataset.quiet!==quiet)ui.coach.dataset.quiet=quiet;}
 }

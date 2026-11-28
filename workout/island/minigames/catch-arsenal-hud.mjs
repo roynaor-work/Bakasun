@@ -115,6 +115,25 @@ const CSS8 = `
 .catch-behind8{position:absolute;left:50%;bottom:calc(max(18px,env(safe-area-inset-bottom)) + 40px);transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:16px;background:#3a0f0fd8;border:2px solid #ffb0a0;color:#fff;font-size:14px;font-weight:800;white-space:nowrap;direction:rtl}
 .catch-behind8[hidden]{display:none!important}
 `;
+/** v25.2 (QA of v25.1; Roy: text must not cover the game): the target's name ("תא המטען", "גג") and the reason under the ring ("רחוק מדי")
+ * floated over the fleeing car for the whole chase, and the bend notice ("פנייה שמאלה") sat on the damage bar. Now the name and the reason show
+ * only for a moment after the child picks a tool or presses fire in vain (the ring and the hit chance stay, smaller), the bend notice is a
+ * small chip at the side under the top row, and the tool's name wraps inside its button instead of being cut. ?catchLabels=old keeps the
+ * previous labels. */
+export function catchLabelsCompact(search = globalThis.location?.search || '') { try { return new URLSearchParams(search).get('catchLabels') !== 'old'; } catch { return true; } }
+export const CATCH_LABEL_SECONDS = 2.5;
+/** Pure: are the ring's words on screen `now` ms, when the child last picked a tool or fired in vain at `raisedAt` ms (null = never)? */
+export function catchLabelsShown(now, raisedAt, seconds = CATCH_LABEL_SECONDS) { return raisedAt !== null && raisedAt !== undefined && now - raisedAt >= 0 && now - raisedAt < seconds * 1000; }
+const CSS_COMPACT = `
+[data-catch-labels=compact] .catch-reticle[data-v8] em{font-size:10px;font-weight:700;padding:0 6px;transform:translate(-50%,-3px);background:#0c1830a8}
+[data-catch-labels=compact] .catch-reticle[data-v8] b{font-size:10px;transform:translate(-50%,3px)}
+[data-catch-labels=compact] .catch-reticle[data-v8][data-labels=false] em{display:none}
+[data-catch-labels=compact] .catch-reticle[data-v8][data-labels=false][data-q=off] b{display:none}
+[data-catch-labels=compact] .catch-reticle[data-v8][data-labels=false][data-q=off]{opacity:.6}
+[data-catch-labels=compact] .catch-bend{left:max(14px,env(safe-area-inset-left));top:calc(max(8px,env(safe-area-inset-top)) + 48px);transform:none;gap:5px;padding:3px 10px;border-width:1px;border-radius:14px;font-size:13px;background:#0c1830a8}
+[data-catch-labels=compact] .catch-bend svg{width:18px;height:18px}
+[data-catch-labels=compact] .catch-weapon strong{max-width:62px;font-size:11px;line-height:1.05;white-space:normal;text-align:center;text-wrap:balance}
+`;
 function node(doc, tag, cls, text) { const n = doc.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }
 function icon(doc, name, size) {
   const s = doc.createElementNS(SVG, 'svg'); s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('width', size); s.setAttribute('height', size); s.setAttribute('aria-hidden', 'true');
@@ -151,6 +170,9 @@ export function installArsenalHud({hud, stageEl, t, chase, project, onFire, onCy
   if (fix8) { const arrow = doc.createElementNS(SVG, 'svg'); arrow.setAttribute('viewBox', '0 0 24 24'); arrow.setAttribute('width', 20); arrow.setAttribute('height', 20); arrow.setAttribute('aria-hidden', 'true'); arrow.innerHTML = '<path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'; behind.append(arrow, node(doc, 'span', '', tt('catch.range.behind'))); }
   hud.append(reticle, dot, button, weapon, ammo, close, hint, ...(fix8 ? [behind] : []));
   let disposed = false, shown = true, lastTool = null, hintShown = false, hintTimer = 0, lastQ = null;
+  const compact = fix8 && catchLabelsCompact(); let labelsAt = null, compactStyle = null;
+  if (compact) { hud.dataset.catchLabels = 'compact'; compactStyle = doc.createElement('style'); compactStyle.textContent = CSS_COMPACT; hud.append(compactStyle); reticle.dataset.labels = 'false'; }
+  const raiseLabels = () => { labelsAt = performance.now(); };
   const tmpA = {}, tmpB = {}, tmpC = {};
   const fire = e => { if (e) e.preventDefault(); if (disposed) return; replay(button, 'kick'); setTimeout(() => button.classList.remove('kick'), 90); onFire?.(); };
   const cycle = e => { if (e) e.preventDefault(); if (disposed) return; onCycle?.(); replay(weapon, 'flip'); };
@@ -169,7 +191,7 @@ export function installArsenalHud({hud, stageEl, t, chase, project, onFire, onCy
     for (const el of [button, weapon, ammo]) el.hidden = !on;
     if (!on) { reticle.hidden = true; dot.hidden = true; close.hidden = true; behind.hidden = true; veil.dataset.on = 'false'; return; }
     const B = gun.balance || {};
-    if (st.weapon !== lastTool) { lastTool = st.weapon; wIcon.replaceChildren(icon(doc, st.weapon, 22)); fireIcon.replaceChildren(icon(doc, st.weapon, 28)); reticleIcon.replaceChildren(icon(doc, st.weapon, 22)); weapon.setAttribute('aria-label', tt('catch.weapon.next', {name: tt('catch.weapon.' + st.weapon)})); }
+    if (st.weapon !== lastTool) { raiseLabels(); lastTool = st.weapon; wIcon.replaceChildren(icon(doc, st.weapon, 22)); fireIcon.replaceChildren(icon(doc, st.weapon, 28)); reticleIcon.replaceChildren(icon(doc, st.weapon, 22)); weapon.setAttribute('aria-label', tt('catch.weapon.next', {name: tt('catch.weapon.' + st.weapon)})); }
     const lab = toolLabel(st, tt); wName.textContent = lab.name; wLeft.textContent = lab.left; weapon.dataset.empty = String(st.ammo <= 0);
     wBar.style.width = Math.round(st.reload > 0 ? (1 - st.reload / (B.reloadSeconds || 1)) * 100 : st.ammo / Math.max(1, st.ammoMax) * 100) + '%';
     button.dataset.locked = String(Boolean(st.locked)); button.dataset.reload = String(st.reload > 0); button.dataset.empty = String(st.ammo <= 0); button.dataset.q = st.locked ? st.quality : 'grey';
@@ -180,6 +202,7 @@ export function installArsenalHud({hud, stageEl, t, chase, project, onFire, onCy
     ammo.setAttribute('aria-label', tt('catch.ammo7', {count: st.ammo}));
     close.hidden = !(st.closeT > 0); veil.dataset.on = String(st.closeT > 0);
     const aim = gun.aimInfo?.();
+    if (compact) { const on = String(catchLabelsShown(performance.now(), labelsAt)); if (reticle.dataset.labels !== on) reticle.dataset.labels = on; }
     if (fix8) { refresh8(ch, st, aim); return; }
     if (st.locked && aim && ch.track) {
       const z = project(...xyz(zoneWorld(ch.track, ch, aim, tmpA))), d = project(...xyz(dotWorld(ch.track, ch, aim, tmpB)));
@@ -218,13 +241,13 @@ export function installArsenalHud({hud, stageEl, t, chase, project, onFire, onCy
       if (e.type === 'shot' || (e.type === 'wshot' && !e.late)) replay(reticle, e.hit ? 'hit' : 'miss');
       else if (e.type === 'noAmmo') replay(weapon, 'flip');
       else if (e.type === 'stopped') { reticle.hidden = true; dot.hidden = true; behind.hidden = true; }
-      else if (e.type === 'dry') replay(reticle, 'miss');
+      else if (e.type === 'dry') { raiseLabels(); replay(reticle, 'miss'); }
     }
   }
   return {
     refresh, handle,
     show(v) { shown = Boolean(v); refresh(); if (!shown) { reticle.hidden = true; dot.hidden = true; hint.hidden = true; behind.hidden = true; } },
     get button() { return button; }, get weaponButton() { return weapon; },
-    dispose() { disposed = true; clearTimeout(hintTimer); for (const el of [button, weapon, ammo, reticle, dot, close, hint, veil, behind]) el.remove(); },
+    dispose() { disposed = true; clearTimeout(hintTimer); for (const el of [button, weapon, ammo, reticle, dot, close, hint, veil, behind]) el.remove(); if (compact) { delete hud.dataset.catchLabels; compactStyle.remove(); } },
   };
 }
