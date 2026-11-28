@@ -1,43 +1,43 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261107-24';
-import {kitIntro,kitIcon,kitStageLabel,kitResultPanel,kitPrimary,kitRating} from './ui-kit.mjs?v=island-v2-20261107-24';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261107-24';
-import {fireCertificateBalanceEnabled} from '../activity/fire-certificates.mjs?v=island-v2-20261107-24';
-import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261107-24';
-import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261107-24';
-import {createSound} from '../minigames/sound.mjs?v=island-v2-20261107-24';
-import {soccerQuietButton} from '../minigames/soccer-v23.mjs?v=island-v2-20261107-24';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261107-24';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-24';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261107-24';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-24';
-import {racingStageFeature} from '../minigames/racing-v24-7.mjs?v=island-v2-20261107-24';
-import {gameContext} from '../minigames/context.mjs?v=island-v2-20261107-24';
-import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-24';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261107-24';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261107-24';
-import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261107-24';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-24';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-24';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261107-24';
-import {hoopsClubPanel,hoopsStartCard,prepareHoopsClubLayout} from './hoops-club.mjs?v=island-v2-20261107-24';
-import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261107-24';
-import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-24';
-import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-24';
-import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-24';
-import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-24';
-import { kidUx } from '../kid-ux.mjs?v=island-v2-20261107-24';
-import { gameGuide, helpReplay } from './kid-ux-help.mjs?v=island-v2-20261107-24';
-import './kid-ux-library.mjs?v=island-v2-20261107-24';
-import { pinResultActions, wrapResultOffer } from './kid-ux-result.mjs?v=island-v2-20261107-24';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261107-25';
+import {kitIntro,kitIcon,kitStageLabel,kitResultPanel,kitPrimary,kitRating} from './ui-kit.mjs?v=island-v2-20261107-25';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261107-25';
+import {fireCertificateBalanceEnabled} from '../activity/fire-certificates.mjs?v=island-v2-20261107-25';
+import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261107-25';
+import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261107-25';
+import {createSound} from '../minigames/sound.mjs?v=island-v2-20261107-25';
+import {soccerQuietButton} from '../minigames/soccer-v23.mjs?v=island-v2-20261107-25';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261107-25';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-25';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261107-25';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-25';
+import {racingStageFeature} from '../minigames/racing-v24-7.mjs?v=island-v2-20261107-25';
+import {gameContext} from '../minigames/context.mjs?v=island-v2-20261107-25';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-25';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261107-25';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261107-25';
+import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261107-25';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-25';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-25';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261107-25';
+import {hoopsClubPanel,hoopsStartCard,prepareHoopsClubLayout} from './hoops-club.mjs?v=island-v2-20261107-25';
+import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261107-25';
+import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-25';
+import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-25';
+import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-25';
+import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-25';
+import { kidUx } from '../kid-ux.mjs?v=island-v2-20261107-25';
+import { gameGuide, helpReplay } from './kid-ux-help.mjs?v=island-v2-20261107-25';
+import './kid-ux-library.mjs?v=island-v2-20261107-25';
+import { pinResultActions, wrapResultOffer } from './kid-ux-result.mjs?v=island-v2-20261107-25';
 
-import {pitAutoEnabled,racingV24Flags} from '../minigames/racing-v24.mjs?v=island-v2-20261107-24';
-import {navalRadarV241,navalAirEndV241} from '../minigames/naval-v241.mjs?v=island-v2-20261107-24';
-import {navalAimV24} from '../minigames/naval-v24.mjs?v=island-v2-20261107-24';
-import {navalLockOn} from '../minigames/naval-lockon.mjs?v=island-v2-20261107-24';
-import {navalAirEnabled} from '../minigames/naval-air.mjs?v=island-v2-20261107-24';
-import {polishValue} from '../minigames/polish-flag.mjs?v=island-v2-20261107-24';
+import {pitAutoEnabled,racingV24Flags} from '../minigames/racing-v24.mjs?v=island-v2-20261107-25';
+import {navalRadarV241,navalAirEndV241} from '../minigames/naval-v241.mjs?v=island-v2-20261107-25';
+import {navalAimV24} from '../minigames/naval-v24.mjs?v=island-v2-20261107-25';
+import {navalLockOn} from '../minigames/naval-lockon.mjs?v=island-v2-20261107-25';
+import {navalAirEnabled} from '../minigames/naval-air.mjs?v=island-v2-20261107-25';
+import {polishValue} from '../minigames/polish-flag.mjs?v=island-v2-20261107-25';
 
-import {alpineRunnerEnabled,alpineRunnerGoals} from '../minigames/alpine-runner-rules.mjs?v=island-v2-20261107-24';
+import {alpineRunnerEnabled,alpineRunnerGoals} from '../minigames/alpine-runner-rules.mjs?v=island-v2-20261107-25';
 /** Phone fixes B/D (v24.3) changed the naval lock and the racing pit; `.v241` keys keep the v24.1 text for ?phoneFixB=0 / ?phoneFixD=0 (or ?phoneFixes=0). */
 const phoneFixOn=letter=>polishValue('phoneFixes')!=='0'&&polishValue('phoneFix'+letter)!=='0';
 /** One key selection for written and spoken instructions; ?reviewHelp=0 restores the v24.1 help. */
@@ -506,12 +506,12 @@ export class ActivityInterface {
   }
   /** Upgrade offer after a stage (ui/upgrade-offer.mjs, loaded on first use). Silent on any failure; ?upgradeOffer=0 turns it off. */
   offerUpgrade(id,result,place){
-    import('./upgrade-offer.mjs?v=island-v2-20261107-24').then(m=>m.offerUpgrade({engine:this.engine,activity:this.activity,data:this.data,t:this.t,gameId:id,result,place:host=>place(wrapResultOffer(host)),sound:e=>this.sound.play(e)})).catch(()=>{});
+    import('./upgrade-offer.mjs?v=island-v2-20261107-25').then(m=>m.offerUpgrade({engine:this.engine,activity:this.activity,data:this.data,t:this.t,gameId:id,result,place:host=>place(wrapResultOffer(host)),sound:e=>this.sound.play(e)})).catch(()=>{});
   }
   /** Racing league (ui/racing-league.mjs, loaded on first use). ?racingLeague=0 removes every entry point. */
   racingLeagueOnly(){return this.leagueOn()&&new URLSearchParams(globalThis.location?.search||'').get('racingLevels')!=='1';}
     leagueOn(){return Boolean(this.engine.racingLeague?.enabled())&&this.data.featureFlags.minigames;}
-  leagueModule(){return this.leagueLoad??=import('./racing-league.mjs?v=island-v2-20261107-24').catch(error=>{this.leagueLoad=null;throw error;});}
+  leagueModule(){return this.leagueLoad??=import('./racing-league.mjs?v=island-v2-20261107-25').catch(error=>{this.leagueLoad=null;throw error;});}
   leagueActions(){return {go:()=>this.racingLeagueGo(),season:()=>this.racingLeagueScreen('season'),shop:()=>this.racingLeagueScreen('shop'),refresh:()=>this.stages('islandRacing')};}
   racingLeagueGo(){
     if(this.requireBuilding('islandRacing'))return;
@@ -547,7 +547,7 @@ export class ActivityInterface {
   }
   /** Ski league (ui/alpine-league.mjs, loaded on first use). ?alpineLeague=0 removes every entry point: the ski game is then v22.1. */
   alpineLeagueOn(){return Boolean(this.engine.alpineLeague?.enabled())&&this.data.featureFlags.minigames;}
-  alpineLeagueModule(){return this.alpineLeagueLoad??=import('./alpine-league.mjs?v=island-v2-20261107-24').catch(error=>{this.alpineLeagueLoad=null;throw error;});}
+  alpineLeagueModule(){return this.alpineLeagueLoad??=import('./alpine-league.mjs?v=island-v2-20261107-25').catch(error=>{this.alpineLeagueLoad=null;throw error;});}
   alpineLeagueActions(){return {go:n=>this.alpineLeagueGo(n),season:()=>this.alpineLeagueScreen('season'),shop:()=>this.alpineLeagueScreen('shop'),refresh:()=>this.stages('alpineRush')};}
   alpineLeagueGo(n){
     if(this.requireBuilding('alpineRush'))return;
@@ -585,7 +585,7 @@ export class ActivityInterface {
     }
     // Design result card: rank medal, time, peak speed, trick score, coins and the course record.
     const time=ms=>{const c=Math.round(ms/10);return `${String(Math.floor(c/6000)).padStart(2,'0')}:${String(Math.floor(c/100)%60).padStart(2,'0')}.${String(c%100).padStart(2,'0')}`;};
-    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261107-24',import.meta.url).href;dialog.append(css);
+    const css=el('link');css.rel='stylesheet';css.href=new URL('../minigames/alpine.css?v=island-v2-20261107-25',import.meta.url).href;dialog.append(css);
     dialog.classList.add('alpine-result');const medal=el('div','alpine-medal',String(a.rank).padStart(2,'0'));medal.setAttribute('aria-label',this.t('alpine.result.rank')+' '+a.rank);dialog.append(medal);
     const rows=[['rank',`${a.rank} / ${a.totalRiders}`],['time',time(a.elapsedMs)],['peak',String(a.peakKmh)],['trickScore',(a.trickScore||0).toLocaleString('en-US')],['coins',`${a.coins||0} / ${a.coinTotal??'-'}`]];
     if(a.bestMs)rows.push([a.newBest?'newBest':'best',time(a.bestMs)]);

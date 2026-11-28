@@ -1,6 +1,6 @@
 import {passLaneClearance} from './soccer-teamplay.mjs';
 import {passInterceptPoint,spaceAhead} from './soccer-feel.mjs';
-import {soccerFullAnchor,soccerFullMarkable} from './soccer-full.mjs?v=island-v2-20261107-24';
+import {soccerFullAnchor,soccerFullMarkable} from './soccer-full.mjs?v=island-v2-20261107-25';
 
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 const finite=(value,fallback=0)=>Number.isFinite(value)?value:fallback;

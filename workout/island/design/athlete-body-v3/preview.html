@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <title>גוף האתלט v3 · פנים, ידיים, נעליים ומדים</title>
+  <style>
+    :root{color-scheme:dark;--ink:#e9efe9;--mut:#9fb0a6;--bg:#0f1716;--panel:#16211f;--line:#2a3a37;--acc:#f0c35a}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,"Segoe UI",Arial,sans-serif}
+    header{padding:18px 20px 6px}h1{margin:0;font-size:22px}p.intro{margin:4px 0 0;color:var(--mut);max-width:70ch}
+    .controls{display:flex;flex-wrap:wrap;gap:10px 16px;padding:10px 20px;border-block:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:3}
+    .controls label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:2px}
+    .controls input,.controls select,.controls button{font:inherit;color:var(--ink);background:#0d1413;border:1px solid var(--line);border-radius:6px;padding:4px 6px;min-height:32px}
+    .controls input[type=color]{padding:0;width:44px;height:32px}.controls input[type=number]{width:70px}.check{flex-direction:row!important;align-items:center;gap:6px!important}
+    .controls button{cursor:pointer}
+    #grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 20px 4px}
+    .view{position:relative;height:360px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    .view.tall{height:440px}.view span{position:absolute;inset-block-start:6px;inset-inline-start:8px;font-size:12px;color:var(--mut);z-index:2}
+    #stage{position:fixed;inset:0;pointer-events:none;z-index:1;width:100vw;height:100vh}
+    #status{padding:6px 20px 24px;color:var(--mut)}
+    @media(max-width:900px){#grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <header>
+    <h1>גוף האתלט v3 · פנים, ידיים, נעליים ומדים</h1>
+    <p class="intro">אותו שלד של 18 עצמות, גוף חדש: פנים מצוירות, ידיים עם אצבעות, נעלי כדורגל מול נעלי כדורסל, תלבושת לפי קבוצה ומספר על החולצה. הגוף נבנה בקוד (tools/build.py) ואין בו טקסטורה.</p>
+  </header>
+  <section class="controls" aria-label="בקרת תצוגה">
+    <label>גוף<select id="body"><option value="soccer">כדורגל · 1.80 מ׳</option><option value="guard">רכז · 1.78 מ׳</option><option value="wing">קיצוני · 1.94 מ׳</option><option value="center">סנטר · 2.08 מ׳</option></select></label>
+    <label>תנועה<select id="clip"><option>טוען קליפים…</option></select></label>
+    <label>פריים<input id="time" type="range" min="0" max="1" step=".001" value="0"></label>
+    <label>מספר<input id="number" type="number" min="0" max="99" value="23"></label>
+    <label>צבע ראשי<input id="primary" type="color" value="#1f5fbf"></label>
+    <label>צבע שני<input id="trim" type="color" value="#ffd35c"></label>
+    <label>מכנסיים<input id="shorts" type="color" value="#14305f"></label>
+    <label>עור<select id="skin"><option value="0">1</option><option value="1">2</option><option value="2" selected>3</option><option value="3">4</option><option value="4">5</option><option value="5">6</option></select></label>
+    <label>שיער<select id="hair"></select></label>
+    <label>צבע שיער<input id="hairColor" type="color" value="#2b1d14"></label>
+    <label class="check"><input type="checkbox" id="keeper">כפפות שוער</label>
+    <button id="play" type="button">עצירה</button>
+  </section>
+  <div id="grid"></div>
+  <p id="status">טוען…</p>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

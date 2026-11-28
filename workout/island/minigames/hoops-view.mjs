@@ -4,22 +4,23 @@
 import * as THREE from '../vendor/three.module.js';
 import {readHoopsPolish} from './hoops-polish-flags.mjs';
 import {createHoopsBasketMotion,createHoopsBallHandoff,updateHoopsBallShadow} from './hoops-polish-view.mjs';
-import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-24';
-import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-24';
+import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-25';
+import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-25';
 import {hoopsNumbersTexture} from './hoops-athlete.mjs';
 import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
-import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-24';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-25';
 import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
+import {stopClipsEnabled,STOP} from './hoops-stop-clips.mjs';
 import {broadcastReplayCamera,hoopsV250Flags,FEET} from './hoops-v250.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
-import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-24';
-import {hoopsLookEnabled,HOOPS_LOOK_CROWD_TINT} from './hoops-look-v249.mjs?v=island-v2-20261107-24';
+import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-25';
+import {hoopsLookEnabled,HOOPS_LOOK_CROWD_TINT} from './hoops-look-v249.mjs?v=island-v2-20261107-25';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -89,7 +90,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const search=globalThis.location?.search||'',crowdMode=hoopsCrowd3dMode(search),crowd3dState={mode:crowdMode,status:crowdMode==='off'?'off':models.arenaV8?'loading':'no-v8-hall',error:null};
  let crowd3d=null,crowd3dApi=null,crowdCards=null,viewDisposed=false;
  if(crowdMode!=='off'&&models.arenaV8){
-  Promise.all([import('./hoops-crowd3d.mjs?v=island-v2-20261107-24'),import('./hoops-v8-venue.mjs'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([C,V,G,H])=>{
+  Promise.all([import('./hoops-crowd3d.mjs?v=island-v2-20261107-25'),import('./hoops-v8-venue.mjs'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([C,V,G,H])=>{
    const seats=C.hoopsCrowdSeats(V.seatingLayout(0)),loader=new G.GLTFLoader();
    const loaded=await C.createHoopsCrowd3d({T:THREE,GLTFLoader:G.GLTFLoader,load:url=>H.loadHoopsGLTF(loader,url),seats,mode:crowdMode,teamColors:[looks[0].primary,looks[1].primary],...(hoopsLookEnabled(search)?{tint:HOOPS_LOOK_CROWD_TINT}:{})});
    if(viewDisposed){loaded.dispose();return;}
@@ -100,14 +101,14 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  let referee=null;const refereeState={status:'off',error:null};
  if(quality>=1&&hoopsRefereeEnabled(search)){
   refereeState.status='loading';
-  Promise.all([import('./hoops-referee.mjs?v=island-v2-20261107-24'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([R,G,H])=>{
+  Promise.all([import('./hoops-referee.mjs?v=island-v2-20261107-25'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([R,G,H])=>{
    const loader=new G.GLTFLoader(),loaded=await R.createHoopsReferee({T:THREE,load:url=>H.loadHoopsGLTF(loader,url),court});
    if(viewDisposed){loaded.dispose();return;}
    loaded.group.traverse(o=>{if(o.isSkinnedMesh&&reflection)o.layers.enable(REFLECTION_LAYER);});
    referee=loaded;scene.add(loaded.group);refereeState.status='ready';
   }).catch(error=>{refereeState.status='fallback';refereeState.error=String(error?.message||error);});
  }
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;if(hoopsV250Flags(new URLSearchParams(globalThis.location?.search||'')).feet)assets.feet250=FEET;loadingAssets=assets;mark('playerAssets');
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;if(hoopsV250Flags(new URLSearchParams(globalThis.location?.search||'')).feet)assets.feet250=stopClipsEnabled(new URLSearchParams(globalThis.location?.search||''))?{...FEET,heading:{...FEET.heading,slideMax:STOP.slide.to}}:FEET;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();

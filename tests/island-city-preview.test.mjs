@@ -67,7 +67,8 @@ test('browser: the save is untouched by the preview', {skip:process.env.ISLAND_C
     const context=await browser.newContext({viewport:{width:844,height:390}}),page=await context.newPage(),probe=await context.newPage(),errors=[];
     page.on('pageerror',e=>errors.push(e.message));
     await probe.goto(server.url+'release.json');
-    const snap=async()=>{await page.goto('about:blank');return probe.evaluate(()=>Object.fromEntries(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)])));};
+    // Leaving the WebGL city on SwiftShader takes 4-66 s (context teardown; pagehide/unload end within 35 ms), so the default 30 s is too short.
+    const snap=async()=>{await page.goto('about:blank',{timeout:180000});return probe.evaluate(()=>Object.fromEntries(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)])));};
     await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
     await page.evaluate(()=>window.__island.engine.save());
     const before=await snap();

@@ -1,5 +1,5 @@
-import {BADGES} from '../data/badges.mjs?v=island-v2-20261107-24';
-import {complimentsByReason} from '../data/compliments.mjs?v=island-v2-20261107-24';
+import {BADGES} from '../data/badges.mjs?v=island-v2-20261107-25';
+import {complimentsByReason} from '../data/compliments.mjs?v=island-v2-20261107-25';
 
 export const DAY_MS = 86_400_000;
 export const COOLDOWN_MS = 15 * 60_000;

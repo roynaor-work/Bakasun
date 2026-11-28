@@ -36,6 +36,7 @@ UNWIRED_DESIGN = set("""
     alpine-themes-v1 athlete-body-v2 catch-audio-v2 refill-enemyfire-v1 soccer-clips-v13 soccer-crowd-3d-v1
     soccer-fx-v1 soccer-pitch-v1 torpedo-sub-v1 tennis-callouts-v1 racing-audio-v6 racing-tracks-v3
     workout-camera-exercises-v1 alpine-runner-themes-v2 ui-icons-v2 tennis-motion-v2 tennis-motion-v3
+    hoops-stop-clips-v1
 """.split())
 REVIEW_DESIGN = ("-audit-v1", "-patches-v1")
 # Licence and attribution notes travel with the files they cover.

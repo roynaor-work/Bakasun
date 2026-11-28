@@ -1,30 +1,30 @@
-import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-v2-20261107-24';
-import {navalAimLegacy,navalFollowYaw,navalAimSpin,navalSpinFollow} from './naval-aim-flag.mjs?v=island-v2-20261107-24';
-import {createNavalAir,navalAirConfig,navalAirEnabled,navalAirManual} from './naval-air.mjs?v=island-v2-20261107-24';
-import {navalAmmoLimit,navalMagazines,navalSupplyNeeded,navalBuoySpot,navalCollect,navalBuoyReached,navalAmmoState,navalSupplyConfig,navalLoad,navalBuoyDrift} from './naval-supply.mjs?v=island-v2-20261107-24';
-import {createNavalAirAudio} from './naval-air-audio.mjs?v=island-v2-20261107-24';
-import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-20261107-24';
-import {navalLockOn,navalLockConfig,navalLockSolve,navalLockSlew,navalLockAligned,navalLockStatus} from './naval-lockon.mjs?v=island-v2-20261107-24';
-import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261107-24';
-import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-24';
-import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-v2-20261107-24';
-import {navalBattleCampaign,navalBattleEnabled,navalBattlePriority} from './naval-battle.mjs?v=island-v2-20261107-24';
-import {navalHarderEnabled,navalHarderCampaign,navalHarderRadar,navalHarderNeed,navalTrackRate,navalTrackStep,navalEvadeSpeed} from './naval-harder.mjs?v=island-v2-20261107-24';
-import {navalCampaignStage,navalMissionState,navalStagePressure,NAVAL_BASE_DEFAULTS,navalBaseRows,navalBaseEnabled} from './naval-campaign.mjs?v=island-v2-20261107-24';
-import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-24';
-import {createNavalAudio} from './g6d-audio.mjs?v=island-v2-20261107-24';
-import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-v2-20261107-24';
-import {createNavalView} from './naval-view.mjs?v=island-v2-20261107-24';
-import {drawNavalAimMarks,drawNavalShellTracers,drawNavalHitFeedback,navalMarkKind} from './naval-marks.mjs?v=island-v2-20261107-24';
-import {createNavalPatrol,stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles} from './naval-patrol.mjs?v=island-v2-20261107-24';
-import {navalForecast,navalForecastConfig} from './naval-forecast.mjs?v=island-v2-20261107-24';
-import {navalLaunch,navalPredict,navalAdvanceShot,navalBallisticPoint,navalSolveLaunch,navalBallisticConfig,navalLanding,navalMuzzle} from './naval-ballistics.mjs?v=island-v2-20261107-24';
-import {navalAimV24,navalEnemyFireV24,navalSubV24,navalV24Config,navalFireSeconds,navalTelegraph,navalEnemyAim,navalSubDepth,navalSubDiveLeft,navalSubShield,navalTorpedoStock,navalLockOrder,navalLockNext,navalHitChance} from './naval-v24.mjs?v=island-v2-20261107-24';
-import {navalSkyAngles,navalSkyError} from './naval-air.mjs?v=island-v2-20261107-24';
-import {drawNavalV24} from './naval-v24-hud.mjs?v=island-v2-20261107-24';
-import {createNavalV24Audio} from './naval-v24-audio.mjs?v=island-v2-20261107-24';
-import {navalPhoneFixB,navalRadarV241,navalAirEndV241,navalHintV241,navalSubDeepV241,navalV241Config,navalRadarSeconds,navalRadarBeep,navalRadarInRange,navalDeepTorpedoes,navalSkyBusy} from './naval-v241.mjs?v=island-v2-20261107-24';
-import {drawNavalV241} from './naval-v241-hud.mjs?v=island-v2-20261107-24';
+import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-v2-20261107-25';
+import {navalAimLegacy,navalFollowYaw,navalAimSpin,navalSpinFollow} from './naval-aim-flag.mjs?v=island-v2-20261107-25';
+import {createNavalAir,navalAirConfig,navalAirEnabled,navalAirManual} from './naval-air.mjs?v=island-v2-20261107-25';
+import {navalAmmoLimit,navalMagazines,navalSupplyNeeded,navalBuoySpot,navalCollect,navalBuoyReached,navalAmmoState,navalSupplyConfig,navalLoad,navalBuoyDrift} from './naval-supply.mjs?v=island-v2-20261107-25';
+import {createNavalAirAudio} from './naval-air-audio.mjs?v=island-v2-20261107-25';
+import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-20261107-25';
+import {navalLockOn,navalLockConfig,navalLockSolve,navalLockSlew,navalLockAligned,navalLockStatus} from './naval-lockon.mjs?v=island-v2-20261107-25';
+import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261107-25';
+import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-25';
+import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-v2-20261107-25';
+import {navalBattleCampaign,navalBattleEnabled,navalBattlePriority} from './naval-battle.mjs?v=island-v2-20261107-25';
+import {navalHarderEnabled,navalHarderCampaign,navalHarderRadar,navalHarderNeed,navalTrackRate,navalTrackStep,navalEvadeSpeed} from './naval-harder.mjs?v=island-v2-20261107-25';
+import {navalCampaignStage,navalMissionState,navalStagePressure,NAVAL_BASE_DEFAULTS,navalBaseRows,navalBaseEnabled} from './naval-campaign.mjs?v=island-v2-20261107-25';
+import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-25';
+import {createNavalAudio} from './g6d-audio.mjs?v=island-v2-20261107-25';
+import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-v2-20261107-25';
+import {createNavalView} from './naval-view.mjs?v=island-v2-20261107-25';
+import {drawNavalAimMarks,drawNavalShellTracers,drawNavalHitFeedback,navalMarkKind} from './naval-marks.mjs?v=island-v2-20261107-25';
+import {createNavalPatrol,stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles} from './naval-patrol.mjs?v=island-v2-20261107-25';
+import {navalForecast,navalForecastConfig} from './naval-forecast.mjs?v=island-v2-20261107-25';
+import {navalLaunch,navalPredict,navalAdvanceShot,navalBallisticPoint,navalSolveLaunch,navalBallisticConfig,navalLanding,navalMuzzle} from './naval-ballistics.mjs?v=island-v2-20261107-25';
+import {navalAimV24,navalEnemyFireV24,navalSubV24,navalV24Config,navalFireSeconds,navalTelegraph,navalEnemyAim,navalSubDepth,navalSubDiveLeft,navalSubShield,navalTorpedoStock,navalLockOrder,navalLockNext,navalHitChance} from './naval-v24.mjs?v=island-v2-20261107-25';
+import {navalSkyAngles,navalSkyError} from './naval-air.mjs?v=island-v2-20261107-25';
+import {drawNavalV24} from './naval-v24-hud.mjs?v=island-v2-20261107-25';
+import {createNavalV24Audio} from './naval-v24-audio.mjs?v=island-v2-20261107-25';
+import {navalPhoneFixB,navalRadarV241,navalAirEndV241,navalHintV241,navalSubDeepV241,navalV241Config,navalRadarSeconds,navalRadarBeep,navalRadarInRange,navalDeepTorpedoes,navalSkyBusy} from './naval-v241.mjs?v=island-v2-20261107-25';
+import {drawNavalV241} from './naval-v241-hud.mjs?v=island-v2-20261107-25';
 export function healthPercent(hp,maxHp){return Math.round(Math.max(0,Math.min(1,hp/maxHp))*100);}
 export function navalSway(seed,time,balance){const a=balance.aim.sway,phase=(seed>>>0)%997;return {yaw:Math.sin(time*a.frequency+phase)*a.yaw,elevation:Math.cos(time*a.frequency*.73+phase)*a.elevation};}
 export function navalTrajectory(ship,yaw,elevation,balance){const range=balance.aim.minRange+(elevation-balance.aim.minElevation)*balance.aim.rangePerDegree;return {x:ship.x+Math.cos(yaw)*range,z:(ship.z||0)+Math.sin(yaw)*range};}
@@ -586,11 +586,11 @@ export function drawNaval(p,m,{config,balance,art,quality,view,t}){
 /** Optional 30 ms buzz on a weak-centre hit, on devices that support it, unless turned off. */
 export function navalBuzz(storage,nav=globalThis.navigator){try{if(storage?.getItem('island.naval.vibration')==='off')return false;if(typeof nav?.vibrate!=='function')return false;return nav.vibrate(30)!==false;}catch{return false;}}
 export function startNaval(ctx){
- if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-v2-20261107-24',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
- if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-v2-20261107-24',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
- if(!document.querySelector('[data-naval-aim-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-aim.css?v=island-v2-20261107-24',import.meta.url).href;link.dataset.navalAimStyle='';document.head.append(link);}
- if(!document.querySelector('[data-naval-v24-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v24.css?v=island-v2-20261107-24',import.meta.url).href;link.dataset.navalV24Style='';document.head.append(link);}
- if(!document.querySelector('[data-naval-v241-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v241.css?v=island-v2-20261107-24',import.meta.url).href;link.dataset.navalV241Style='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-v2-20261107-25',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-v2-20261107-25',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-aim-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-aim.css?v=island-v2-20261107-25',import.meta.url).href;link.dataset.navalAimStyle='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-v24-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v24.css?v=island-v2-20261107-25',import.meta.url).href;link.dataset.navalV24Style='';document.head.append(link);}
+ if(!document.querySelector('[data-naval-v241-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-v241.css?v=island-v2-20261107-25',import.meta.url).href;link.dataset.navalV241Style='';document.head.append(link);}
  let model,view,storage,rawUpdate=null,airAudio=null;const picker=mountNavalWeaponPicker(ctx,()=>model);try{storage=globalThis.localStorage;}catch{}const audio=createNavalAudio({storage}),v24Audio=navalEnemyFireV24()||navalSubV24()?createNavalV24Audio({storage}):null;let soundLog=null;const audioEvents=new AbortController();for(const type of ['pointerdown','keydown'])document.addEventListener(type,()=>{audio.unlock();airAudio?.unlock();v24Audio?.unlock();},{signal:audioEvents.signal});const input=createNavalInput(ctx,()=>model,()=>view);
  try{
   const session=runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},args=>{model=createNavalModel({...args,navalBattle:navalBattleEnabled(),navalHarder:navalHarderEnabled(),sound:name=>{if(soundLog&&soundLog.length<2000)soundLog.push({name,t:model?model.time:0});audio.play(name);airAudio?.play(name);v24Audio?.play(name);}});if(model.vulcan&&!airAudio)airAudio=createNavalAirAudio({storage});const update=model.update;rawUpdate=update;let buzzed=-1;model.update=(dt,raw)=>{update(dt,input.sample(raw));const f=model.lastFeedback;if(f?.kind==='critical'&&f.time!==buzzed){buzzed=f.time;navalBuzz(storage);}audio.update(model.playerShip.speed||0,model.time);picker.update();};return model;},drawNaval,(args,m)=>view=createNavalView(args,m));

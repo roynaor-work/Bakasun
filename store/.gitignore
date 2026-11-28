@@ -1,0 +1,23 @@
+node_modules/
+www/
+build-tmp/
+# signing and account files never enter the repository
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+google-services.json
+GoogleService-Info.plist
+local.properties
+keystore.properties
+android/.gradle/
+android/build/
+android/app/build/
+android/capacitor-cordova-android-plugins/
+ios/App/Pods/
+ios/App/build/
+ios/DerivedData/
+ios/App/App/public/
+android/app/src/main/assets/public/
+android/app/src/main/assets/capacitor.config.json
+android/app/src/main/assets/capacitor.plugins.json

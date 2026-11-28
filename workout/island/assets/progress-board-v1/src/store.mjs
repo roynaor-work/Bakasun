@@ -1,4 +1,4 @@
-import {applyEvent, createState, normalizeEvent, snapshot, updatePreferences} from './progress.mjs?v=island-v2-20261107-24';
+import {applyEvent, createState, normalizeEvent, snapshot, updatePreferences} from './progress.mjs?v=island-v2-20261107-25';
 
 export const DB_NAME = 'bakasun-progress-board-v1';
 

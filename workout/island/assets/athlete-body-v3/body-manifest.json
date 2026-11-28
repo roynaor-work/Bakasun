@@ -1,0 +1,118 @@
+{
+ "schemaVersion": 1,
+ "version": "athlete-body-v3",
+ "license": "CC0-1.0",
+ "models": [
+  {
+   "canonicalHeightMeters": 1.7304999944753945,
+   "canonicalFloorY": 0.005100000184029341,
+   "scale": 1.0401618062678322,
+   "vertices": 3734,
+   "triangles": 5937,
+   "bytes": 204864,
+   "sha256": "e28dac5c23d2a49b5997c63d147a34a3d33cc5a214951f6ee22ceea7d25fde51",
+   "id": "soccer",
+   "path": "models/soccer.glb",
+   "heightMeters": 1.8,
+   "morphs": []
+  },
+  {
+   "canonicalHeightMeters": 1.7304999944753945,
+   "canonicalFloorY": 0.005100000184029341,
+   "scale": 1.1210632800886635,
+   "vertices": 3568,
+   "triangles": 5722,
+   "bytes": 239428,
+   "sha256": "671bda85977d6596c7e29c7f4d8901ac946127598f025d0338681b89eb1d9972",
+   "id": "hoops",
+   "path": "models/hoops.glb",
+   "heightMeters": 1.94,
+   "morphs": [
+    "broad"
+   ]
+  }
+ ],
+ "hair": [
+  {
+   "id": "buzz",
+   "path": "hair/buzz.glb",
+   "triangles": 570,
+   "vertices": 301,
+   "bytes": 14552,
+   "sha256": "38876d1194a5d876755c1564f3072740d43750581282741b4bb93ec6698e2138"
+  },
+  {
+   "id": "crop",
+   "path": "hair/crop.glb",
+   "triangles": 570,
+   "vertices": 301,
+   "bytes": 14556,
+   "sha256": "3a7210cac3c9b4d66f7b9c91b3e27a65fba2ec99bfcc57e52b84189086158853"
+  },
+  {
+   "id": "side-part",
+   "path": "hair/side-part.glb",
+   "triangles": 570,
+   "vertices": 301,
+   "bytes": 14564,
+   "sha256": "932e07fabfe773d228ced3e12d9e7f48358ab221344acd266ca072bbf75d944e"
+  },
+  {
+   "id": "quiff",
+   "path": "hair/quiff.glb",
+   "triangles": 570,
+   "vertices": 301,
+   "bytes": 14556,
+   "sha256": "6a38be6309117830054eee6d15a89587cd002a9a9e86161311089aba341efb5f"
+  },
+  {
+   "id": "curls",
+   "path": "hair/curls.glb",
+   "triangles": 684,
+   "vertices": 361,
+   "bytes": 17160,
+   "sha256": "c4856e84cea3f8b458273020f746d2031c726f3dfbe91790e288f026765de0d6"
+  },
+  {
+   "id": "afro",
+   "path": "hair/afro.glb",
+   "triangles": 570,
+   "vertices": 301,
+   "bytes": 14552,
+   "sha256": "b2d444c16ff73d77a517f84ee33215c6ea15bd7b6317d1378b3a6b3376d4364e"
+  },
+  {
+   "id": "swept-back",
+   "path": "hair/swept-back.glb",
+   "triangles": 570,
+   "vertices": 301,
+   "bytes": 14564,
+   "sha256": "2f3b914f4b47ca48f1f222d5df47f446dc30446db729d4bb3907e768543f1237"
+  },
+  {
+   "id": "bun",
+   "path": "hair/bun.glb",
+   "triangles": 714,
+   "vertices": 399,
+   "bytes": 18552,
+   "sha256": "4ccc053203125128fb764a79e38ea495018bb33e5fff60b9be7676dfa780679d"
+  }
+ ],
+ "regions": {
+  "skin": 0,
+  "shirt": 1,
+  "shorts": 2,
+  "trim": 3,
+  "shoe_upper": 4,
+  "shoe_sole": 5,
+  "eyes": 6,
+  "hair": 7,
+  "sock": 8,
+  "iris": 9,
+  "mouth": 10,
+  "pupil": 11,
+  "highlight": 12,
+  "laces": 13
+ },
+ "segEncoding": "_SEG uint8: 0 none; 1..42 = placement(0 front, 1 back)*21 + slot(0 single, 1 tens, 2 ones)*7 + segment(a..g) + 1; 100 = hand (keeper gloves)"
+}

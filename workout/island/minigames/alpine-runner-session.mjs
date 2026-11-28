@@ -1,8 +1,8 @@
-import {createAlpineRunner} from './alpine-runner-engine.mjs?v=island-v2-20261107-24';
-import {alpineRunnerGoals, alpineRunnerProgress, alpineRunnerScore, alpineThemesEnabled} from './alpine-runner-rules.mjs?v=island-v2-20261107-24';
-import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-24';
+import {createAlpineRunner} from './alpine-runner-engine.mjs?v=island-v2-20261107-25';
+import {alpineRunnerGoals, alpineRunnerProgress, alpineRunnerScore, alpineThemesEnabled} from './alpine-runner-rules.mjs?v=island-v2-20261107-25';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-25';
 import {createQualityGovernor} from './alpine-quality.mjs';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-24';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-25';
 
 const BEST_KEY = 'island.alpine.runner.best.v1';
 const THEME_KEY = 'island.alpine.runner.theme.v1';
@@ -301,7 +301,7 @@ export function runAlpineRunnerSession(ctx) {
 
   const loadStart = performance.now();
   loadingTimer = setTimeout(() => fail('timeout'), 25000);
-  import('./alpine-runner-view.mjs?v=island-v2-20261107-24').then(({createAlpineRunnerView}) =>
+  import('./alpine-runner-view.mjs?v=island-v2-20261107-25').then(({createAlpineRunnerView}) =>
     createAlpineRunnerView(stage, {canvas, quality, theme: THEMES[theme][0], themes: packs, goal: goals[0], isDisposed: () => disposed || Boolean(error)})
   ).then(loaded => {
     clearTimeout(loadingTimer);
