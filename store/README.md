@@ -31,7 +31,17 @@ cd android && ./gradlew assembleDebug
 
 פלט: `android/app/build/outputs/apk/debug/app-debug.apk`. נדרשים Node 22, JDK 21 ו-Android SDK (`ANDROID_HOME`, פלטפורמה 36).
 
-## משימות לרועי (שדות שנשארו ריקים בכוונה)
+## מצב אימות (28/11/2026)
+
+| נבדק | תוצאה |
+|---|---|
+| `npm run build:web -- --slim` | עובר: 111.3MB, 263 קריאות `location.search` קובעו ב-128 קבצים, אין קריאה שנשארה |
+| `npx cap sync android` ו-`./gradlew assembleDebug` | עובר (JDK 21, SDK 36): APK דיבאג 65MB, בלי הרשאות (גם לא INTERNET: כל ה-`fetch` יחסיים, אין כתובת חיצונית בקוד הריצה) |
+| סריקת רישוי | 59 תקין, 2 קרדיט, 5 לבדיקה, 29 חסום (ראו `LICENSES-REPORT.md`) |
+| צילומי מסך | טלפון 2556×1179 (7), טאבלט 16:9 1920×1080 (6), מ-Chromium על `www/` |
+| לא נבדק | הרצה על מכשיר או אמולטור, בנייה של iOS (דורש Mac), AAB חתום |
+
+ (שדות שנשארו ריקים בכוונה)
 
 ### 1. החלטת שם חבילה
 
