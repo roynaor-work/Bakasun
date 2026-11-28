@@ -204,10 +204,10 @@ try {
   const inDesign = countDesignPages(island);
   fs.rmSync(WWW, { recursive: true, force: true });
   fs.cpSync(island, WWW, { recursive: true });
+  const slimmed = process.argv.includes('--slim') ? slim(WWW) : null;
   const reads = rewrite(WWW);
   const done = transforms(WWW);
   const links = plainExternalLinks(WWW);
-  const slimmed = process.argv.includes('--slim') ? slim(WWW) : null;
   const problems = verify(WWW, flags).concat(syntaxCheck([...reads.changed, ...done.map((t) => path.join(WWW, t.file))]));
   const rows = table(flags);
   writeFlags(rows, reads, done, inDesign);
