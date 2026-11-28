@@ -7,11 +7,11 @@ import {decodeTallPack} from '../workout/island/minigames/hoops-tall.mjs';
 const json=JSON.parse(await readFile(new URL('../workout/island/assets/hoops-stop-clips-v1/stop-clips.json',import.meta.url),'utf8'));
 const design=JSON.parse(await readFile(new URL('../workout/island/design/hoops-stop-clips-v1/runtime/catalog.json',import.meta.url),'utf8'));
 
-test('flag: on by default, ?hoopsStopClips=0 switches engine and view off',()=>{
-  assert.equal(stopClipsEnabled(new URLSearchParams('')),true);
+test('flag: off by default (no measured gain), ?hoopsStopClips=1 switches engine and view on',()=>{
+  assert.equal(stopClipsEnabled(new URLSearchParams('')),false);
   assert.equal(stopClipsEnabled(new URLSearchParams('hoopsStopClips=0')),false);
-  assert.equal(engineStopClips(new URLSearchParams('hoopsStopClips=0')),null);
-  assert.equal(engineStopClips(new URLSearchParams('')),STOP);
+  assert.equal(engineStopClips(new URLSearchParams('')),null);
+  assert.equal(engineStopClips(new URLSearchParams('hoopsStopClips=1')),STOP);
 });
 
 test('stop bands follow the clips braking time',()=>{

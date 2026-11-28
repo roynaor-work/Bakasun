@@ -11,8 +11,8 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const hyp=Math.hypot;
 
 export const STOP_FLAG='hoopsStopClips';
-/** On unless `?hoopsStopClips=0`. */
-export function stopClipsEnabled(params){const q=params&&typeof params.get==='function'?params.get(STOP_FLAG):null;return q!=='0';}
+/** Off by default (the 28/11 measurement showed no gain, see design/hoops-stop-clips-v1/REPORT.md); `?hoopsStopClips=1` turns it on. */
+export function stopClipsEnabled(params){const q=params&&typeof params.get==='function'?params.get(STOP_FLAG):null;return q==='1';}
 
 /** Engine side. Speeds are world m/s. `bands`: the entry speed from which a stop lasts `Ts` seconds (the clips' own braking time). */
 export const STOP=Object.freeze({
