@@ -313,7 +313,8 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       const athlete=await fixture(t,'hoops-athlete-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
       try{
         const requests=[];athlete.page.on('request',r=>requests.push(r.url()));
-        await athlete.page.goto(server.url+tallBase+'&hoopsV241=0',{waitUntil:'load'});
+        // v25.1: the athlete-body-v3 default is pinned off here (this check covers the v22 body)
+        await athlete.page.goto(server.url+tallBase+'&hoopsV241=0&athleteV3=0',{waitUntil:'load'});
         const live=await hoopsReady(athlete.page);
         assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.athleteBody,true);assert.equal(live.m.characterVersion,10);assert.equal(live.m.motionSource,'v12');assert.deepEqual(live.m.v4Fallbacks,[]);
         assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/models/')),'the shared body (v22, Codex)');assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/textures/')),'its textures');
@@ -329,7 +330,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       const v241=await fixture(t,'hoops-v241-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
       try{
         const requests=[];v241.page.on('request',r=>requests.push(r.url()));
-        await v241.page.goto(server.url+tallBase,{waitUntil:'load'});
+        await v241.page.goto(server.url+tallBase+'&athleteV3=0',{waitUntil:'load'});
         const live=await hoopsReady(v241.page);
         assert.equal(live.error,null);assert.equal(live.m.athleteBody,true);assert.equal(live.m.v241.bodyV2,true);assert.deepEqual(live.m.v4Fallbacks,[]);
         assert.ok(live.m.v241.motionV13?.clips?.includes('run'),'v13 clips: '+JSON.stringify(live.m.v241.motionV13));
