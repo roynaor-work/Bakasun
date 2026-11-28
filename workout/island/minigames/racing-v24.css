@@ -72,3 +72,21 @@
  .game-screen[data-game=islandRacing] .racing-drift-tip{right:calc(max(var(--race-edge),env(safe-area-inset-right)) + 93px);bottom:calc(var(--race-bottom) + 182px);font-size:10px;max-width:96px}
  .game-screen[data-game=islandRacing] .racing-drift-tip[data-auto=true]{bottom:calc(var(--race-bottom) + 126px)}
 }
+/* racing-v25.2 (QA of v25.1): the speedometer, the gear and the ERS tag sat in the bottom centre beside the car and over the road. They are a small cluster on the
+   right edge under the track map now (screen[data-racing-gauge=side]); ?racingGauge=old brings the bottom centre back. The doubled attribute outranks the child HUD rules. */
+.game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-readout{--race-dial:84px;--race-gauge-top:118px;left:auto;right:max(var(--race-edge),env(safe-area-inset-right));bottom:auto;top:var(--race-gauge-top)}
+.game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-readout .racing-speed-unit{font-size:10px;background:none;padding:0}
+.game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-energy{left:auto;right:max(var(--race-edge),env(safe-area-inset-right));bottom:auto;top:208px;width:84px}
+.game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-energy .racing-energy-tag{top:50%;left:auto;right:calc(100% + 6px);transform:translateY(-50%);white-space:nowrap;font-size:11px;line-height:1.2;padding:1px 4px;border-radius:5px;letter-spacing:0}
+@media(max-height:400px) and (orientation:landscape){
+ .game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-readout{--race-dial:72px;--race-gauge-top:92px}
+ .game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-energy{top:169px;width:72px}
+}
+@media(min-width:1000px) and (min-height:600px){
+ .game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-readout{--race-dial:104px;--race-gauge-top:150px}
+ .game-screen[data-game=islandRacing][data-racing-gauge=side][data-racing-gauge] .racing-energy{top:262px;width:104px}
+}
+/* racing-v25.2 drift tip: two short lines beside the drift button for three seconds at the first hard turn (the v25.1 tip stood three lines tall for ten seconds) */
+.game-screen[data-game=islandRacing] .racing-drift-tip[data-tip=corner]{max-width:136px}
+/* racing-v25.2 credit: plain text on the intro card and the podium, no link inside the race */
+.game-screen[data-game=islandRacing] .rb-intro-credit,.game-screen[data-game=islandRacing] .racing-podium-credit{display:block;max-width:300px;font-size:9px;line-height:1.3;font-weight:600;color:#a8b8c7;direction:rtl;unicode-bidi:plaintext}

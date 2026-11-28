@@ -63,7 +63,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   // racing-v24 (racing-v24.mjs; each one off unless the config asks, the session asks unless the address says v23 or 0): recover = one roll where the car left,
   // then a vanish and a soft drop on the centre line; offSlow = a slow car can always drive back (and is set back softly when lost); shiftInput=false = the shift
   // points no longer move with the steering and the brake; cornerSlow=false = no speed bled by the turn itself; bump = a knock that bounces the cars apart; pit = tyres and stops
-  const recoverV24=config.recover==='v24'&&offTrackOn,offSlowOn=!!config.offSlow&&!walls,shiftInputOn=config.shiftInput!==false,cornerSlowOn=config.cornerSlow!==false,bumpV24=config.bump==='v24';
+  const recoverV24=config.recover==='v24'&&offTrackOn,offSlowOn=!!config.offSlow&&!walls,shiftInputOn=config.shiftInput!==false,cornerSlowOn=config.cornerSlow!==false,bumpV24=config.bump==='v24',noseTail=config.noseTail===true,NOSE_TAIL={length:4.2,width:1.8};   // racing-v25.2 noseTail: see the contact loop
   // racing-v24.5 (racing-v24-5.mjs; each one off unless the config asks, the session asks unless the address says v244): tyreFeel = the player's control fades with the
   // tyre wear; carry = the inertia slide in a long corner; shoulder = the run-off beside the asphalt keeps the speed (off-road starts SHOULDER m out); gears = the lift and
   // downshifts before a tight corner (the player's car on the gas)
@@ -572,6 +572,22 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
           const push=(2.55-d)*.48;
           first.x-=nx*push;first.z-=nz*push;second.x+=nx*push;second.z+=nz*push;
           if(first.collisionCooldown<=0&&second.collisionCooldown<=0){first.speed*=.92;second.speed*=.92;first.collisionCooldown=.6;second.collisionCooldown=.6;event('bump',first);}
+        }
+      } else if(noseTail&&aiOn&&(first.isPlayer||second.isPlayer)&&d>=2.55&&d<NOSE_TAIL.length&&!first.finished&&!second.finished&&!first.pit&&!second.pit&&!first.offFlight?.v24&&!second.offFlight?.v24&&!(first.ghostT>0)&&!(second.ghostT>0)) {
+        // racing-v25.2 (QA of v25.1: at the start a rival's nose stood inside the player's car): the contact circle is 2.55 m and a car is 4.2 m long, so a car
+        // right behind another one overlapped it by almost two metres. For the player's car only (the computer drivers' own races stay as they were): two cars in the
+        // same lane keep a car's length nose to tail; the one behind is set back, and a real closing speed is the same knock as any rear-end hit.
+        const tan=track.sample(first.s),along=dx*tan.tangent.x+dz*tan.tangent.z,lat=dx*tan.normal.x+dz*tan.normal.z;
+        if(Math.abs(lat)<NOSE_TAIL.width&&Math.abs(along)<NOSE_TAIL.length){
+          const dir=Math.sign(along)||1,rear=dir>0?first:second,front=rear===first?second:first,overlap=NOSE_TAIL.length-Math.abs(along);
+          rear.x-=tan.tangent.x*overlap*.7;rear.z-=tan.tangent.z*overlap*.7;front.x+=tan.tangent.x*overlap*.3;front.z+=tan.tangent.z*overlap*.3;
+          if(rear.speed>front.speed+.5&&first.collisionCooldown<=0&&second.collisionCooldown<=0){
+            if(bumpV24)knock(first,second,tan.tangent.x*dir,tan.tangent.z*dir,1,rear,front);
+            else{rear.speed*=.88;front.speed=Math.min(front.speed+1.2,front.maxSpeed||front.speed+1.2);first.collisionCooldown=.5;second.collisionCooldown=.5;event('bump',first,{with:second.id,along:1});}
+          }
+          if(rear.speed>front.speed+3)rear.speed=Math.max(front.speed+3,rear.speed-30*FIXED_STEP);
+          // a computer driver behind a slow or parked player slides out of the lane (2.7 m/s) and goes round: nobody waits behind a child who has not started yet
+          if(!rear.isPlayer&&front.speed<6){const rl=rear===second?lat:-lat,side=Math.sign(rl)||(rear.id<front.id?1:-1);rear.x+=tan.normal.x*side*.045;rear.z+=tan.normal.z*side*.045;}
         }
       }
     }
