@@ -146,8 +146,8 @@ export function chooseTallMotion(pack,p,ctx,st){
  }
  if(st.celebrate>0&&!act)return {kind:'full',clip:st.celebrateClip,t:Math.min(pack.clips[st.celebrateClip].duration-.01,2.2-st.celebrate),ownsJump:true};
  const SC=ctx.stopClips;
- if(SC&&st.stopClip&&p.stop&&!p.hasBall)return {kind:'full',clip:st.stopClip.id,t:Math.min(st.stopClip.duration-.001,p.stop.t),ownsJump:false};
- if(SC&&!p.hasBall&&speed>.8&&Math.abs(lat)>Math.abs(fwd)*(st.slideFast?.8:1.1)){
+ if(SC&&SC.mode!=='3'&&st.stopClip&&p.stop&&!p.hasBall)return {kind:'full',clip:st.stopClip.id,t:Math.min(st.stopClip.duration-.001,p.stop.t),ownsJump:false};
+ if(SC&&SC.mode!=='2'&&!p.hasBall&&speed>.8&&Math.abs(lat)>Math.abs(fwd)*(st.slideFast?.8:1.1)){
   const sf=slideFastPlan(SC.meta,speed,lat,SC.scale,st.slideFast||null);
   if(sf){st.slideFast=sf.clip;return {kind:'loop',clip:sf.clip,rate:sf.rate,group:'def',sideways:true};}
  }
@@ -324,7 +324,7 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   lastAct=p.act;
   const catching=ctx.catching||performance.now()<(st.catchUntil||0);
   const feet250=assets.feet250&&assets.unified?{...assets.feet250,yaw:heading.yaw,following:heading.following}:null;
-  const SCa=assets.stopClips&&assets.stopClips.scale?{meta:assets.stopClips.meta,scale:assets.stopClips.scale[profile]}:null;
+  const SCa=assets.stopClips&&assets.stopClips.scale?{meta:assets.stopClips.meta,mode:assets.stopClips.mode,scale:assets.stopClips.scale[profile]}:null;
   if(SCa&&p.stop&&!p.hasBall){if(!st.stopClip){const v=pickStopVariant(SCa.meta,p.stop.v0,SCa.scale,p.stop.Ts);st.stopClip={id:v.id,duration:dur(v.id)};}}else st.stopClip=null;
   let plan=chooseTallMotion(pack,p,{...ctx,stopClips:SCa,catching,feet250,v8pack:assets.v8,v8s,dt,gaits13:assets.gaits13?.[profile]||null,fakeV13:assets.fakeV13!==false},st);
   // v25.0 feet: a moving loop is kept for `dwell` seconds before another moving loop may replace it (measured: a clip change every 0.46 s per

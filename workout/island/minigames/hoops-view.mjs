@@ -16,7 +16,7 @@ import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
-import {stopClipsEnabled,STOP} from './hoops-stop-clips.mjs';
+import {stopClipsEnabled,stopClipsMode,STOP} from './hoops-stop-clips.mjs';
 import {broadcastReplayCamera,hoopsV250Flags,FEET} from './hoops-v250.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
 import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-24';
@@ -108,7 +108,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    referee=loaded;scene.add(loaded.group);refereeState.status='ready';
   }).catch(error=>{refereeState.status='fallback';refereeState.error=String(error?.message||error);});
  }
- const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;if(hoopsV250Flags(new URLSearchParams(globalThis.location?.search||'')).feet)assets.feet250=stopClipsEnabled(new URLSearchParams(globalThis.location?.search||''))?{...FEET,heading:{...FEET.heading,slideMax:STOP.slide.to}}:FEET;loadingAssets=assets;mark('playerAssets');
+ const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;if(hoopsV250Flags(new URLSearchParams(globalThis.location?.search||'')).feet)assets.feet250=(['1','3'].includes(stopClipsMode(new URLSearchParams(globalThis.location?.search||''))))?{...FEET,heading:{...FEET.heading,slideMax:STOP.slide.to}}:FEET;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();

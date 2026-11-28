@@ -19,7 +19,7 @@ import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor
 import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-24';
 import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-24';
 import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-24';
-import {stopClipsEnabled,loadStopClips} from './hoops-stop-clips.mjs';
+import {stopClipsEnabled,stopClipsMode,loadStopClips} from './hoops-stop-clips.mjs';
 import {hoopsLookEnabled,cullBodyGeometry,applyHoopsLook,hoopsLookKit} from './hoops-look-v249.mjs?v=island-v2-20261107-24';
 import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-24';
 
@@ -151,6 +151,7 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
   for(const [game,data] of v13.byGame)pack.clips[game]=data;
   motionV13.refScale=Object.fromEntries(Object.entries(gaits13).map(([p,g])=>[p,g.refScale]));
  }
+ if(stopClips)stopClips.mode=stopClipsMode(params);
  if(stopClips&&gaits13)stopClips.scale=Object.fromEntries(TALL_PROFILES.map(p=>[p,gaits13[p].refScale]));else stopClips=null;
  const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
  const sleeves=v22?null:athleteKitGeometry(THREE,source,'basketball');
