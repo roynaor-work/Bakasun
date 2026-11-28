@@ -155,3 +155,22 @@ test('alien bounds: the session lifts the line only in the 3D picture and only w
   assert.match(read('minigames/alien-view.mjs'), /return \{ready,playerBox,resize/);
   assert.match(read('minigames/alien-v25.css'), /#joystick\[data-ship-under=true\]\{opacity:\.38/);
 });
+
+// ---- 5. Tennis score board: the player's row has a name like the rival's (?tennisNames=old) ----
+test('tennis board: the player row carries the child name, or a default when there is none', async () => {
+  const {tennisBoardNames, tennisPlayerLabel} = await import(new URL('minigames/tennis-ui.mjs', root));
+  assert.equal(tennisBoardNames(''), true);
+  assert.equal(tennisBoardNames('?tennisNames=old'), false);
+  assert.equal(tennisPlayerLabel('נועם'), 'נועם');
+  assert.equal(tennisPlayerLabel('  נועם '), 'נועם');
+  for (const empty of ['', '   ', undefined, null, 7]) assert.equal(tennisPlayerLabel(empty), 'אני', 'a default name: ' + JSON.stringify(empty));
+  assert.match(read('minigames/tennis-session.mjs'), /if\(!i&&tennisBoardNames\(\)\)dot\.dataset\.name=tennisPlayerLabel\(ctx\.state\.avatar\?\.name\)/);
+  const css = read('minigames/tennis.css');
+  const off = css.indexOf('.tennis-player-dot::after{content:none}'), on = css.indexOf('.tennis-player-dot[data-name]::after{content:attr(data-name)');
+  assert.ok(off > 0 && on > off, 'the named row wins over the v11 rule that removed the captions');
+});
+
+test('no foreign-script letters in the new interface strings', () => {
+  const added = [read('minigames/tennis-ui.mjs').split('v25.2')[1], read('minigames/catch-arsenal-hud.mjs').match(/const CSS_COMPACT = `[^`]*`/)[0]].join('\n');
+  assert.doesNotMatch(added, /[\u0600-\u06FF]/);
+});

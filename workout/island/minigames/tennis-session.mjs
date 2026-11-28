@@ -6,7 +6,7 @@ import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-
 import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-25';
 // v15: with the sweeping return meter the stroke is judged the moment the finger lands (like the serve); the model still receives the real dt.
 const applyTennisSample=(model,sample,dt)=>applySampleBase(model,sample,dt,{pressFires:Boolean(model.getState().hitMeter?.sweep)});
-import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-25';
+import {tennisIcon,tennisScoreCells,ratingIcon,tennisBoardNames,tennisPlayerLabel} from './tennis-ui.mjs?v=island-v2-20261107-25';
 import {tennisCalloutsEnabled,calloutFor,CALL_WORD,CALL_SECONDS,tennisCalloutPackEnabled,CALLOUT_PACK} from './tennis-callouts.mjs?v=island-v2-20261107-25';
 import {tennisUi2Enabled,applyTennisUi2,ui2MeterBox} from './tennis-ui2.mjs?v=island-v2-20261107-25';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
@@ -69,7 +69,7 @@ export function startTennis(ctx){
   }
  }
  const board=node('div','soccer-scoreboard tennis-board'),cells=[];
- for(let i=0;i<2;i++){const dot=node('span','tennis-player-dot'),games=node('bdi','tennis-games'),points=node('bdi','tennis-points');dot.style.setProperty('--shirt',i?opponent.shirtColor:viewConfig.render.shirtColor);board.append(dot,games,points);cells.push({dot,games,points});}
+ for(let i=0;i<2;i++){const dot=node('span','tennis-player-dot'),games=node('bdi','tennis-games'),points=node('bdi','tennis-points');dot.style.setProperty('--shirt',i?opponent.shirtColor:viewConfig.render.shirtColor);if(!i&&tennisBoardNames())dot.dataset.name=tennisPlayerLabel(ctx.state.avatar?.name);board.append(dot,games,points);cells.push({dot,games,points});}
  status.after(board);
  const meter=node('div','tennis-serve-meter'),needle=node('span','tennis-serve-needle'),perfectBand=node('span','tennis-perfect-band');meter.setAttribute('aria-label',t('tennis.accuracy'));meter.append(perfectBand,needle);canvas.after(meter);
  perfectBand.style.height=`${balance.serve.perfectWidth*100}%`;perfectBand.style.bottom=`${(1-balance.serve.perfectWidth)*50}%`;
