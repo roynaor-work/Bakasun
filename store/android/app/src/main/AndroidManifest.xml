@@ -36,7 +36,5 @@
         </provider>
     </application>
 
-    <!-- Permissions -->
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- No permissions on purpose: the app is offline, with no camera, microphone, location or network access. -->
 </manifest>
