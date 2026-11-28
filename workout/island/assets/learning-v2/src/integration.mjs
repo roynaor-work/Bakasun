@@ -1,15 +1,15 @@
-import { LearningInterface } from '../../../learning/interface.mjs?v=island-v2-20261107-24';
-import { questionsForAge } from '../../../learning/state.mjs?v=island-v2-20261107-24';
-import { CITY_BUILD_REWARD, V2_STATIONS } from './integration-runtime.mjs?v=island-v2-20261107-24';
+import { LearningInterface } from '../../../learning/interface.mjs?v=island-v2-20261107-25';
+import { questionsForAge } from '../../../learning/state.mjs?v=island-v2-20261107-25';
+import { CITY_BUILD_REWARD, V2_STATIONS } from './integration-runtime.mjs?v=island-v2-20261107-25';
 
-export { installLearningV2 } from './integration-runtime.mjs?v=island-v2-20261107-24';
+export { installLearningV2 } from './integration-runtime.mjs?v=island-v2-20261107-25';
 
 // The screen styles load with this module, so `?learningV2=0` leaves the page untouched.
 if (globalThis.document?.head && !document.head.querySelector('link[data-learning-v2]')) {
   const css = document.createElement('link');
   css.rel = 'stylesheet';
   css.dataset.learningV2 = '';
-  css.href = new URL('./integration.css?v=island-v2-20261107-24', import.meta.url).href;
+  css.href = new URL('./integration.css?v=island-v2-20261107-25', import.meta.url).href;
   document.head.append(css);
 }
 

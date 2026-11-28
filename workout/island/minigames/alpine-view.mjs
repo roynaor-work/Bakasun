@@ -1,7 +1,7 @@
 import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-24';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-24';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-25';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-25';
 import {createAlpineVfx,inertAlpineVfx} from './alpine-vfx.mjs';
 import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs';
@@ -11,8 +11,8 @@ import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
 import {bodyTarget,followBody,carvePose,travelYaw,curveBank} from './alpine-steer.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-24';
-import {ghostAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-24';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-25';
+import {ghostAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-25';
 
 /** Track heading is positive toward +X; with downhill -Z the root's Y rotation
  * must have the opposite sign. Keep travelYaw's track-space contract for callers.
@@ -63,7 +63,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   // Ski league v23: a league stage names its theme (visual.theme); its look module grades the scene and adds the theme layers.
   // Regular stages never load it. Any failure keeps the regular look.
   let leagueLook = null, theme = null, themeLayers = null, disposeBackplate = null;
-  if (visual.theme) { try { leagueLook = await import('./alpine-league-look.mjs?v=island-v2-20261107-24'); theme = leagueLook.themeOf(visual.theme); if (theme) leagueLook.gradeLights(theme, {scene, renderer, hemi, sun, look}); } catch { leagueLook = theme = null; } }
+  if (visual.theme) { try { leagueLook = await import('./alpine-league-look.mjs?v=island-v2-20261107-25'); theme = leagueLook.themeOf(visual.theme); if (theme) leagueLook.gradeLights(theme, {scene, renderer, hemi, sun, look}); } catch { leagueLook = theme = null; } }
   const mat = (c, roughness = .8) => new THREE.MeshStandardMaterial({color: c, roughness,envMapIntensity:.2});
   const trackMats=[],snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
   function mesh(geo, material, parent, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, material); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; }

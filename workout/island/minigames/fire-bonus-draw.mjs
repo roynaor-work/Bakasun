@@ -2,9 +2,9 @@
  * the Codex street buildings, the three rooms, the rescue friends (girl/cat/dog), the knock-down cans, and the fire/smoke/water
  * sheets (fire-fx-v1). Nothing here draws a person or a flame "by hand" when an asset exists; a tiny fallback keeps the game
  * playable if a sheet has not loaded yet. Every draw call takes scene px of the current background. */
-import {jetArc} from './fire-targets.mjs?v=island-v2-20261107-24';
-import {smokeLine} from './fire-interior.mjs?v=island-v2-20261107-24';
-import {FIRE_V23_ANCHOR_DATA as A,FIRE_V23_FX,spriteBox,spriteFrame,streetOverlay,roomOverlay,targetSprite} from './fire-v23-assets.mjs?v=island-v2-20261107-24';
+import {jetArc} from './fire-targets.mjs?v=island-v2-20261107-25';
+import {smokeLine} from './fire-interior.mjs?v=island-v2-20261107-25';
+import {FIRE_V23_ANCHOR_DATA as A,FIRE_V23_FX,spriteBox,spriteFrame,streetOverlay,roomOverlay,targetSprite} from './fire-v23-assets.mjs?v=island-v2-20261107-25';
 
 const MAX_PARTICLES=150;
 const ease=t=>1-Math.pow(1-Math.max(0,Math.min(1,t)),3);

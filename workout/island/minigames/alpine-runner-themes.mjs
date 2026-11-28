@@ -3,7 +3,7 @@
 // weather, and the start and goal arches. Only the chosen theme is fetched (24 files, about 0.65 MB).
 // ?alpineThemes=0 turns the packs off: the runner then draws the base tiles and sky it shipped with.
 // A pack that fails to load leaves the base look in place; nothing here can stop a run from starting.
-import {makeWeather, paintForeground, paintGlow} from './alpine-runner-weather.mjs?v=island-v2-20261107-24';
+import {makeWeather, paintForeground, paintGlow} from './alpine-runner-weather.mjs?v=island-v2-20261107-25';
 
 const PACK = new URL('../assets/alpine-runner-themes-v2/', import.meta.url);
 /** Runner theme id -> pack theme id. */
@@ -14,7 +14,7 @@ const REFERENCE_WIDTH = 844;
 /** The start arch stands a little ahead of the skier, so the first frame of a run shows it whole. */
 export const START_SIGN_M = 12;
 
-export {alpineThemesEnabled} from './alpine-runner-rules.mjs?v=island-v2-20261107-24';
+export {alpineThemesEnabled} from './alpine-runner-rules.mjs?v=island-v2-20261107-25';
 
 /** Backdrop scroll of one layer in texture space: the picture is stretched to the full height and repeats sideways. */
 export function layerWindow(layer, width, height, distance, cameraX) {

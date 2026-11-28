@@ -1,7 +1,7 @@
-import {alpineResult} from './alpine-result.mjs?v=island-v2-20261107-24';
-import {RIDER_IDS} from './alpine-engine.mjs?v=island-v2-20261107-24';
-import {stageInfo,engineStageOf,starsFor} from './alpine-league-core.mjs?v=island-v2-20261107-24';
-import {leagueBalance,stageGoals,judgeGoals,courseFacts} from './alpine-league-stages.mjs?v=island-v2-20261107-24';
+import {alpineResult} from './alpine-result.mjs?v=island-v2-20261107-25';
+import {RIDER_IDS} from './alpine-engine.mjs?v=island-v2-20261107-25';
+import {stageInfo,engineStageOf,starsFor} from './alpine-league-core.mjs?v=island-v2-20261107-25';
+import {leagueBalance,stageGoals,judgeGoals,courseFacts} from './alpine-league-stages.mjs?v=island-v2-20261107-25';
 
 /** Ski league v23 result path. A league run reports the same strict race summary as a regular run (raw.alpine, checked by
  * alpine-result.mjs against the league stage: track, seed, run id, coins on the course, time, speed, reward fields), plus raw.league:

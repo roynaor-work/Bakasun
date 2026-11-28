@@ -8,7 +8,7 @@
  *    four fingers and a thumb, original eight hair caps on the Head joint, the player's number on the back (and the chest in basketball) as seven-segment
  *    geometry painted per player. No texture and no shader: one material, per-player vertex colours by region, like v22.
  * `?athleteV3=0` returns the previous bodies exactly (v2 / v22). Pure parts run in node tests; three.js only through `T`. */
-import {athleteBodyV22Enabled, createAthleteV22Instance, V22_HAIR} from './athlete-body-v22.mjs?v=island-v2-20261107-24';
+import {athleteBodyV22Enabled, createAthleteV22Instance, V22_HAIR} from './athlete-body-v22.mjs?v=island-v2-20261107-25';
 import {athleteRig} from './athlete-body.mjs';
 
 export const V3_BASE = '../assets/athlete-body-v3/';

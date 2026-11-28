@@ -1,14 +1,14 @@
-import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-24';
-import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-v2-20261107-24';
-import {nearestPlacement} from '../engine/placement-help.mjs?v=island-v2-20261107-24';
-import {CityDepthInterface} from './city-depth.mjs?v=island-v2-20261107-24';
-import {CityManagementInterface} from './city-management.mjs?v=island-v2-20261107-24';
-import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-20261107-24';
-import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-24';
-import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-24';
-import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-24';
-import { kidUx, kidUxStyle, kidSpeak, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-24';
-import {uiIconsEnabled,uiIconOr} from './ui-icons.mjs?v=island-v2-20261107-24';
+import { levelFactor, levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-25';
+import { placementAvailability, upgradeAvailability } from '../engine/rules.mjs?v=island-v2-20261107-25';
+import {nearestPlacement} from '../engine/placement-help.mjs?v=island-v2-20261107-25';
+import {CityDepthInterface} from './city-depth.mjs?v=island-v2-20261107-25';
+import {CityManagementInterface} from './city-management.mjs?v=island-v2-20261107-25';
+import {nearestCityZone} from '../engine/city-management.mjs?v=island-v2-20261107-25';
+import {citySites,citySitesSignature} from '../engine/city-sites.mjs?v=island-v2-20261107-25';
+import {ReadyPlotsInterface} from './ready-plots.mjs?v=island-v2-20261107-25';
+import {airportSpaceReason} from '../engine/ready-plots.mjs?v=island-v2-20261107-25';
+import { kidUx, kidUxStyle, kidSpeak, localHebrewVoices } from '../kid-ux.mjs?v=island-v2-20261107-25';
+import {uiIconsEnabled,uiIconOr} from './ui-icons.mjs?v=island-v2-20261107-25';
 
 kidUxStyle('012', `
   .kid-city-hall-instruction{display:flex;align-items:stretch;gap:8px;margin-block:8px;color:#183c33}
@@ -69,7 +69,7 @@ kidUxStyle('013', `
   .kid-city-stats-more .metrics{gap:6px}
 `);
 
-import {appendLoadReports} from './load-report.mjs?v=island-v2-20261107-24';
+import {appendLoadReports} from './load-report.mjs?v=island-v2-20261107-25';
 
 const el = (tag, className = '', text = '') => {
   const node = document.createElement(tag);

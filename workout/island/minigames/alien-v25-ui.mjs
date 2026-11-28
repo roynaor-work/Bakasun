@@ -3,9 +3,9 @@
  *  - A small round switch beside it (#special-switch, 46 px, the C key) shows the NEXT weapon and its charges; a tap selects it.
  *  - alien-v25.css: the same three rings from the bottom corner up (reachable), the switch on the inner side of the special button, and no
  *    text block next to the stick (the short notices move to the top centre). Only with the v24 HUD rings and without ?alienHud=v24. */
-import {SPECIALS,nextSpecial,alienArsenalEnabled} from './alien-v25-arsenal.mjs?v=island-v2-20261107-24';
+import {SPECIALS,nextSpecial,alienArsenalEnabled} from './alien-v25-arsenal.mjs?v=island-v2-20261107-25';
 let styled=false;
-export function ensureAlienV25Style(doc=globalThis.document){if(styled||!doc?.head)return;styled=true;const link=doc.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v25.css?v=island-v2-20261107-24',import.meta.url).href;doc.head.append(link);}
+export function ensureAlienV25Style(doc=globalThis.document){if(styled||!doc?.head)return;styled=true;const link=doc.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v25.css?v=island-v2-20261107-25',import.meta.url).href;doc.head.append(link);}
 const PATHS={
  lightning:'M13.5 2.5 5.5 13.2h5.6l-1.8 8.3 9.2-12.1h-5.8z',
  shockwave:'M3 15.5a9 9 0 0 1 18 0M6.4 15.5a5.6 5.6 0 0 1 11.2 0M9.8 15.5a2.2 2.2 0 0 1 4.4 0',
