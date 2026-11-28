@@ -55,3 +55,17 @@
 @keyframes hv250-pop{from{transform:scale(.4)}to{transform:scale(1)}}
 @keyframes hv250-pulse{50%{transform:scale(1.12)}}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=streetSlam] .hv250-special[data-ready=true],.game-screen[data-game=streetSlam] .hv250-badge{animation:none}}
+/* v25.2 (QA of v25.1; hoops-v252.mjs). ?hoopsMeterPos=old: the meter is 70% of its size (it stood over the players next to the shooter; the script now puts it on
+   the free side) and the rebound cue has no large white ring over the players after the release: its small spot with the arrow stays and turns green for the jump. */
+.game-screen[data-game=streetSlam][data-hoops-meter-pos=side] .hv250-meter{width:18px;height:92px}
+.game-screen[data-game=streetSlam][data-hoops-meter-pos=side] .hv250-track{border-radius:9px;border-width:1.5px}
+.game-screen[data-game=streetSlam][data-hoops-meter-pos=side] .hv250-marker{height:5px;margin-bottom:-2.5px}
+.game-screen[data-game=streetSlam][data-hoops-meter-pos=side] .hv250-badge{top:-32px;width:28px;height:28px;margin-left:-14px}
+.game-screen[data-game=streetSlam][data-hoops-meter-pos=side] .hv250-badge svg{width:17px;height:17px}
+.game-screen[data-game=streetSlam][data-hoops-meter-pos=side] .hv250-reb-ring{display:none}
+.game-screen[data-game=streetSlam][data-hoops-meter-pos=side] .hv250-reb-core{box-shadow:0 0 0 2px #0a0f1a99}
+/* ?hoopsBtnPos=old: the "?" and kit buttons go up to the top row beside the score (landscape): 72 px down they covered the far basket in the sideline camera */
+@media(orientation:landscape){
+ .game-screen[data-game=streetSlam][data-hoops-btn-pos=top] .hoops-kit-trigger{top:calc(12px + var(--ih-safe-top,env(safe-area-inset-top,0px)))}
+ .game-screen[data-game=streetSlam][data-hoops-btn-pos=top][data-hoops-v250~=hud] .kid-hoops-pass-launch{top:max(12px,calc(4px + env(safe-area-inset-top)))}
+}

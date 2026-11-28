@@ -11,6 +11,7 @@ import {racingV24Flags,v24PhysicsConfig} from '../workout/island/minigames/racin
 import {racingV245Flags,v245PhysicsConfig} from '../workout/island/minigames/racing-v24-5.mjs';
 import {racingV247Flags,v247PhysicsConfig} from '../workout/island/minigames/racing-v24-7.mjs';
 import {racingV249Flags,v249PhysicsConfig} from '../workout/island/minigames/racing-v24-9.mjs';
+import {hoopsV252Flags,meterAnchor,METER} from '../workout/island/minigames/hoops-v252.mjs';
 
 const island=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../workout/island');
 const read=p=>readFile(path.join(island,p),'utf8');
@@ -111,3 +112,44 @@ test('start line: the model alone (no config) keeps the v25.1 contact, so the co
  assert.match(physics,/else if\(noseTail&&aiOn&&\(first\.isPlayer\|\|second\.isPlayer\)/,'the player\'s car only');
 });
 
+test('hoops flags: both groups default to the new layout and each has its own way back', () => {
+ assert.deepEqual({...hoopsV252Flags('')},{meterPos:'side',btnPos:'top'});
+ assert.deepEqual({...hoopsV252Flags('?hoopsMeterPos=old')},{meterPos:'old',btnPos:'top'});
+ assert.deepEqual({...hoopsV252Flags('?hoopsBtnPos=old')},{meterPos:'side',btnPos:'old'});
+});
+
+test('hoops shot meter: smaller, beside the shooter on the side with no player next to him, inside the screen', () => {
+ const W=844,H=390,shooter={x:600,y:210};
+ const free=meterAnchor({shooter,others:[{x:570,y:200},{x:520,y:230}],width:W,height:H});
+ assert.equal(free.side,1,'players on the left: the meter goes right');
+ assert.ok(free.x>shooter.x+METER.gap-1);
+ const other=meterAnchor({shooter,others:[{x:640,y:205}],width:W,height:H});
+ assert.equal(other.side,-1,'a player on the right: the meter goes left');
+ const edge=meterAnchor({shooter:{x:830,y:200},others:[],width:W,height:H});
+ assert.ok(edge.x<=W-METER.margin&&edge.x>=METER.margin,'never off the screen');
+ const top=meterAnchor({shooter:{x:400,y:20},others:[],width:W,height:H});
+ assert.ok(top.y-METER.height/2>=METER.margin-1,'never off the top');
+ assert.ok(METER.scale<=.72,'smaller than the v25.1 meter');
+ const none=meterAnchor({shooter,others:[],width:W,height:H});assert.equal(none.side,1,'alone: the default side');
+});
+
+test('hoops shot meter: a button block is never covered, even when a player stands on the other side', () => {
+ const W=844,H=390,avoid=[{x0:W-250,y0:H-175,x1:W,y1:H}];
+ const a=meterAnchor({shooter:{x:590,y:300},others:[{x:557,y:300}],width:W,height:H,avoid});
+ assert.equal(a.side,-1,'the buttons are on the right: the meter goes left even over a player');
+ const b=meterAnchor({shooter:{x:300,y:200},others:[],width:W,height:H,body:120,avoid});
+ assert.ok(b.x-300>=METER.gap+METER.width/2,'a near (large) shooter pushes the meter further out');
+});
+
+test('hoops session and styles: the meter anchors to the shooter, no large ring after the release, the two round buttons leave the basket', async () => {
+ const hud=await read('minigames/hoops-v250-hud.mjs'),session=await read('minigames/hoops-session.mjs'),css=await read('minigames/hoops-v250.css');
+ assert.match(hud,/const sideMeter=v252\?\.meterPos==='side';if\(sideMeter\)screenEl\.dataset\.hoopsMeterPos='side'/);
+ assert.match(hud,/meterAnchor\(\{shooter:\{x:px,y:py\},others,/);
+ assert.match(session,/const v252=hoopsV252Flags\(params\)/);assert.match(session,/if\(v252\.btnPos==='top'\)screenEl\.dataset\.hoopsBtnPos='top'/);
+ assert.match(css,/\[data-hoops-meter-pos=side\] \.hv250-meter\{width:18px;height:92px\}/);
+ assert.match(css,/\[data-hoops-meter-pos=side\] \.hv250-reb-ring\{display:none\}/,'the large ring is gone, the small jump spot stays');
+ assert.ok(!/\[data-hoops-meter-pos=side\] \.hv250-reb(-core)?\{[^}]*display:none/.test(css));
+ const top=css.match(/\[data-hoops-btn-pos=top\] \.hoops-kit-trigger\{top:calc\((\d+)px/)?.[1];assert.equal(top,'12','the top row, not 72 px down');
+ assert.match(css,/\[data-hoops-btn-pos=top\]\[data-hoops-v250~=hud\] \.kid-hoops-pass-launch\{top:max\(12px/);
+ assert.equal(METER.width,18);assert.equal(METER.height,92);
+});
