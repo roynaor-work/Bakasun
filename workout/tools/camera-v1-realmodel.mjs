@@ -66,7 +66,7 @@ function trulyCut(frame) {
 // flags: { body, steps } as in the page's address flags (camBody, camSteps); both off by default.
 export function replay(clip, api, id = clip.cfg.id, flags = {}) {
   const policy = api.CAMERA_EXERCISES[id], ex = byId[id];
-  const tracker = new api.PoseTracker({ view: policy.view === 'diagonal' ? 'either' : policy.view, setup: policy.setup, required: policy.required });
+  const tracker = new api.PoseTracker({ view: policy.view === 'diagonal' ? 'either' : policy.view, setup: policy.setup, required: policy.required, minConfidence: api.confidenceFor ? api.confidenceFor(policy, flags.conf) : undefined });
   const counter = new api.MotionCounter(id, { goal: 100 });
   const memory = {}, statuses = {}, moves = {}, parts = {}, events = {}, hints = {}, countedAt = [], lines = {};
   let tempo = 0, own = 0, adapted = 0, meterTop = null;

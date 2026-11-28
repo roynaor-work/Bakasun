@@ -4,7 +4,7 @@ import { buildItems, workoutReward } from '../logic.js?v=20261014-w2g-1';
 import { PROGRAMS } from '../programs.js?v=20261010-camera-1';
 import { LocalCapture } from './capture.mjs?v=20261010-camera-1';
 import { CAMERA_EXERCISES, MotionCounter, MOTION_MAX_GAP_MS, RANGE_COPY } from './motion.mjs?v=20261010-camera-1';
-import { PoseTracker } from './tracking.mjs?v=20261010-camera-1';
+import { PoseTracker, confidenceFor } from './tracking.mjs?v=20261010-camera-1';
 import { guide, GuideVoice, GUIDE_COPY, CueLimiter } from './guide.mjs?v=20261010-camera-1';
 
 const { landscape: LANDSCAPE, goal: GOAL, tight: TIGHT } = GUIDE_COPY.LINES;
@@ -324,6 +324,7 @@ function startCamera() {
     view: policy.view === 'diagonal' ? 'either' : policy.view,
     setup: policy.setup,
     required: policy.required,
+    minConfidence: confidenceFor(policy, flags.conf),
   });
   counter ??= new MotionCounter(exercise.id, { goal: item.target });
   visible('retry', false);

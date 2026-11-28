@@ -6,6 +6,10 @@ const FEET = [27, 28, 29, 30, 31, 32];
 const BODY = [...HEAD, ...CORE, 25, 26, ...FEET];
 const LINKS = [[11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28]];
 const minConfidence = .49;
+// camConf=1: the model is less sure of a body lying or folded on the floor, so a floor exercise asks a little
+// less of each required joint to start. Standing exercises keep the common limit. Never below the "stay" limit.
+export const CONFIDENCE_START = Object.freeze({ standing: minConfidence, floor: .42 });
+export const confidenceFor = (policy, on = false) => on ? (CONFIDENCE_START[policy?.setup] ?? minConfidence) : minConfidence;
 const maxFrameGap = 360;
 const maxCalibrationSamples = 24;
 // Share of the background (outside the body) that changed between two frames. A frame above sceneStir is a
@@ -247,7 +251,8 @@ function smoothPose(pose, previous, dt, shape, aspect) {
 }
 
 export class PoseTracker {
-  constructor({ aspect = 1, view = 'either', setup = 'standing', calibrationMs = 650, required = [] } = {}) {
+  constructor({ aspect = 1, view = 'either', setup = 'standing', calibrationMs = 650, required = [], minConfidence: start = minConfidence } = {}) {
+    this.startConfidence = Number.isFinite(start) ? clamp(start, stayConfidence + .02, .7) : minConfidence;
     this.aspect = Number.isFinite(aspect) && aspect > 0 ? aspect : 1;
     this.view = view;
     this.setup = setup;
@@ -358,7 +363,7 @@ export class PoseTracker {
 
     const person = this.view === 'side' ? pairSides(people[0], this.setup === 'floor') : people[0];
     const shape = describe(person.landmarks, this.aspect);
-    const looking = framing(person.landmarks, shape, this.required, this.setup, this.calibration ? stayConfidence : minConfidence);
+    const looking = framing(person.landmarks, shape, this.required, this.setup, this.calibration ? stayConfidence : this.startConfidence);
     if (looking === 'upper-edge') {
       this.upperEdgeSince ??= time;
       return this._blocked(time - this.upperEdgeSince >= 280 ? 'raise-phone' : 'center');
