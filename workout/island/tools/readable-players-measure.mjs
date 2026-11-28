@@ -1,7 +1,7 @@
 // Player size on a phone screen (evidence only): Chromium + SwiftShader, hasTouch + isMobile, 844x390. Measures the height in CSS pixels of
 // the player the child controls (floor to the top of the head, projected through the game's own camera) in staged moments of the real
 // basketball match, and keeps one frame per moment. Run before (`readablePlayers=0`) and after.
-// Football: tools/soccer-v250-touch.mjs --scenarios=camera reads the same number (and tools/readable-players-soccer.mjs keeps four frames).
+// Football: tools/soccer-v250-touch.mjs <out> --scenarios=camera,tapPass,freeKick,corner [--query=readablePlayers=0] reads the same number and keeps the frames.
 // Usage: PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.mjs node workout/island/tools/readable-players-measure.mjs out=/tmp/rp [variants=before:readablePlayers=0,after:] [viewport=844x390] [seed=4242]
 import {createRequire} from 'node:module';
 import {createServer} from 'node:http';

@@ -12,7 +12,7 @@ export const READABLE = Object.freeze({
   hoops: Object.freeze({minPixels: 60, viewportHeight: 390, playerHeight: 1.9}),
   // football, full match: v25.0 was base 19.2 / near 15.4 / speedZoom 6 / portraitBase 33
   soccer: Object.freeze({camera: Object.freeze({base: 16.2, near: 13.2, speedZoom: 5, portraitBase: 29}), targetPixels: 48}),
-  outline: Object.freeze({pixels: 1.5, selected: 0xffffff, holder: 0xffc24a}),
+  outline: Object.freeze({pixels: 1.25, selected: 0xffffff, holder: 0xffc24a}),
 });
 
 const params = search => new URLSearchParams(search ?? globalThis.location?.search ?? '');
