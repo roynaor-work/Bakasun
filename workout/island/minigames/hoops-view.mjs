@@ -18,6 +18,7 @@ import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
 import {stopClipsEnabled,STOP} from './hoops-stop-clips.mjs';
 import {broadcastReplayCamera,hoopsV250Flags,FEET} from './hoops-v250.mjs';
+import {readablePlayersEnabled,readableOutlinePlan,createPlayerOutlines} from './readable-players.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
 import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-25';
 import {hoopsLookEnabled,HOOPS_LOOK_CROWD_TINT} from './hoops-look-v249.mjs?v=island-v2-20261107-25';
@@ -133,6 +134,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const ballShadow=new THREE.Mesh(new THREE.CircleGeometry(court.ballR*1.6,24),new THREE.MeshBasicMaterial({map:blobTex,color:0x000000,transparent:true,opacity:0.5,depthWrite:false}));ballShadow.rotation.x=-Math.PI/2;ballShadow.renderOrder=-1;scene.add(ballShadow);
  const blobs=new THREE.InstancedMesh(new THREE.PlaneGeometry(1.15,1.15).rotateX(-Math.PI/2),new THREE.MeshBasicMaterial({map:blobTex,color:0x000000,transparent:true,opacity:0.36,depthWrite:false}),32);blobs.renderOrder=-1;blobs.frustumCulled=false;blobs.count=0;scene.add(blobs);
  const blobM=new THREE.Matrix4();
+ // readable players (28/11): a thin outline around the child's player and around another ball holder; `?readablePlayers=0` = none
+ const outlines=readablePlayersEnabled()?createPlayerOutlines(THREE):null,outlinePlan=[];
  // controlled-player ring and pass target marker
  const ringMat=new THREE.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0.9,depthWrite:false});
  const ring=new THREE.Mesh(new THREE.RingGeometry(0.5,0.68,48),ringMat);ring.rotation.x=-Math.PI/2;ring.position.y=0.018;scene.add(ring);
@@ -153,7 +156,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   for(const name of ['hanging_scoreboard','live-hanging-scoreboard']){const board=arena.getObjectByName(name);if(board)board.visible=state.landscape;}
   models.arenaV8?.setHangingBoard(state.landscape);
   const cap=mobile?V.mobileDprCap:V.dprCap;
-  renderer.setPixelRatio(Math.min(dpr||1,cap));renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(dpr||1,cap));renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();outlines?.resize(w,h);
   reflection?.resize(canvas.width,canvas.height);
  }
 
@@ -323,6 +326,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   if(polish.shadow)updateHoopsBallShadow(ballShadow,ball,court,dyn.key,FLOOR_Y);
   else {ballShadow.position.set(bx,FLOOR_Y,bz);ballShadow.material.opacity=clamp(0.55-by*0.1,0.1,0.55);const bs=1+by*0.25;ballShadow.scale.set(bs,bs,1);ballShadow.visible=ball.visible;}
   // controlled player marker
+  if(outlines){outlinePlan.length=0;for(const o of readableOutlinePlan({controlled:me?.id,holder:handler?.id,replay:!!state.replay})){const av=avatars.get(o.id);if(av?.root.visible){o.root=av.root;outlinePlan.push(o);}}outlines.update(outlinePlan);}
   if(me&&!state.replay){const mi=interp.get(me,alpha);ring.visible=true;ring.position.x=mi.x;ring.position.z=mi.z;glow.visible=true;glow.position.x=mi.x;glow.position.z=mi.z;const pulse=1+Math.sin(performance.now()*0.008)*0.06;ring.scale.setScalar(pulse);arrow.visible=true;arrow.position.set(mi.x,me.hasBall?2.75:2.6,mi.z);arrow.rotation.y+=dt*2;}
   else {ring.visible=false;glow.visible=false;arrow.visible=false;}
   // nets, LED, displays
@@ -474,7 +478,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  }
  function skipReplay(){const r=state.replay;if(!r?.show||r.seg?.cam==='back')return false;r.skip=true;showCounts.skipped++;return true;}
  function dispose(){
-  viewDisposed=true;crowd3d?.dispose();crowd3d=null;referee?.dispose();referee=null;
+  viewDisposed=true;outlines?.dispose();crowd3d?.dispose();crowd3d=null;referee?.dispose();referee=null;
   for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();feel.dispose();reflection?.dispose();
   releaseScene(scene);envTarget.dispose();renderer.dispose();pm.dispose();
  }
