@@ -2,7 +2,7 @@
 // the player the child controls (floor to the top of the head, projected through the game's own camera) in staged moments of the real
 // basketball match, and keeps one frame per moment. Run before (`readablePlayers=0`) and after.
 // Football: tools/soccer-v250-touch.mjs <out> --scenarios=camera,tapPass,freeKick,corner [--query=readablePlayers=0] reads the same number and keeps the frames.
-// Usage: PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.mjs node workout/island/tools/readable-players-measure.mjs out=/tmp/rp [variants=before:readablePlayers=0,after:] [viewport=844x390] [seed=4242]
+// Usage: PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.mjs node workout/island/tools/readable-players-measure.mjs out=/tmp/rp [variants=before:readablePlayers=0,after:] [moments=wing,paint] [viewport=844x390] [seed=4242]
 import {createRequire} from 'node:module';
 import {createServer} from 'node:http';
 import {mkdir,readFile,stat,writeFile} from 'node:fs/promises';
@@ -35,9 +35,13 @@ function install(){
    const ph=p=>{const a=P(p.x,0,p.z),b=P(p.x,1.9,p.z);return {id:p.id,team:p.team,px:+(a.y-b.y).toFixed(1),x:+a.x.toFixed(0),y:+b.y.toFixed(0),on:a.visible&&a.x>12&&a.x<w-12&&b.y>8&&a.y<h-6};};
    const dirA=s.dir[0],rim=P(dirA*court.rimX,3.05,0);
    const near=s.players.filter(p=>p.id!==m.id&&Math.hypot(p.x-m.x,p.z-m.z)<7).map(ph);
-   return {me:ph(m),rim:{x:+rim.x.toFixed(0),y:+rim.y.toFixed(0),on:rim.visible&&rim.x>12&&rim.x<w-12&&rim.y>8&&rim.y<h-6},nearCount:near.length,nearOn:near.filter(q=>q.on).length,near,all:s.players.map(ph).filter(q=>q.on).length};}};
+   // the bodies as drawn: body, LOD and the height of hips, knees and feet above the floor (a body sunk into the floor shows here)
+   const wy=o=>{if(!o)return null;o.updateWorldMatrix(true,false);return +o.matrixWorld.elements[13].toFixed(2);};
+   const bodies=s.players.map(p=>{const av=view.avatars?.get(p.id),b={};av?.root.traverse(o=>{if(o.isBone&&!b[o.name])b[o.name]=o;});return {id:p.id,team:p.team,act:p.act||'',speed:+Math.hypot(p.vx||0,p.vz||0).toFixed(1),body:av?.root.userData.bodyId||av?.instance?.bodyId||null,version:av?.root.userData.characterVersion??null,lod:av?.lod??null,scale:av?+av.root.scale.y.toFixed(3):null,hips:wy(b.Hips),knee:wy(b.LeftLeg),footL:wy(b.LeftFoot),footR:wy(b.RightFoot)};});
+   return {bodies,me:ph(m),rim:{x:+rim.x.toFixed(0),y:+rim.y.toFixed(0),on:rim.visible&&rim.x>12&&rim.x<w-12&&rim.y>8&&rim.y<h-6},nearCount:near.length,nearOn:near.filter(q=>q.on).length,near,all:s.players.map(ph).filter(q=>q.on).length};}};
 }
-const moments=[['backcourt',-3,0,3.2],['half',2,-3,3.2],['wing',6,5,2.4],['top',8,0,2],['paint',10.4,2,1.6]];
+// the last two are not staged: the match as the engine plays it, 150 and 240 more steps on
+const moments=[['backcourt',-3,0,3.2],['half',2,-3,3.2],['wing',6,5,2.4],['top',8,0,2],['paint',10.4,2,1.6],['free1',150,0,0],['free2',240,0,0]].filter(m=>!args.moments||args.moments.split(',').includes(m[0]));
 for(const variant of variants){
  const ctx=await browser.newContext({viewport:{width,height},hasTouch:true,isMobile:true,deviceScaleFactor:dpr}),page=await ctx.newPage(),errors=[];
  ctx.setDefaultTimeout(300000);page.on('pageerror',e=>errors.push(e.message));
@@ -47,7 +51,7 @@ for(const variant of variants){
  await page.evaluate(install);
  const R=report[variant.name]={moments:{}};let n=0;
  for(const [name,x,z,def] of moments){
-  await page.evaluate(([x,z,def])=>{window.__t.setBall(x,z,def);window.__session.debug.view.snapCamera();for(let i=0;i<40;i++)window.__t.step(1);window.__session.debug.view.snapCamera();window.__t.step(1);},[x,z,def]);
+  if(name.startsWith('free'))await page.evaluate(n=>{for(let i=0;i<n;i++)window.__t.step(1);},x);else await page.evaluate(([x,z,def])=>{window.__t.setBall(x,z,def);window.__session.debug.view.snapCamera();for(let i=0;i<40;i++)window.__t.step(1);window.__session.debug.view.snapCamera();window.__t.step(1);},[x,z,def]);
   R.moments[name]=await page.evaluate(([w,h])=>window.__t.measure(w,h),[width,height]);
   const M=R.moments[name];console.log(variant.name,name,'player px',M.me.px,'rim on',M.rim.on,'near on',M.nearOn+'/'+M.nearCount);
   await page.evaluate(async()=>{window.__session.debug.render();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));});
