@@ -40,7 +40,7 @@ export function anatomy(clip) {
   const r = x => +x.toFixed(2);
   return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, r(v)]));
 }
-export const limits = {kneeFlex: [-2, 150], elbowFlex: [-2, 150], hipFlex: [-35, 125], legGapMin: .08, handTorsoMin: .1, soleBelowFloorCm: .5};
+export const limits = {kneeFlex: [-2, 150], elbowFlex: [-2, 150], hipFlex: [-35, 125], legGapMin: .08, handTorsoMin: .1, soleBelowFloorCm: 1.5};
 export function anatomyVerdict(a) {
   const f = [];
   if (a.kneeFlexMin < limits.kneeFlex[0] || a.kneeFlexMax > limits.kneeFlex[1]) f.push('knee');

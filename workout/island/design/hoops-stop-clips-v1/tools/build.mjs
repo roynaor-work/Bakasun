@@ -45,7 +45,7 @@ function finalize(def, spec, res) {
   // sub-frame refinement: the native LINEAR/slerp interpolation between two keyframes cuts the arc of a fast leg;
   // nudge the keyframe targets of every long planted run until the 240 Hz sole stays on its anchor (3-D, so height too)
   const refineIters = def.refine ?? 3;
-  const exactFirst = !!def.startIdle, exactLast = def.endIdle !== false;
+  const exactFirst = !!def.startIdle || !!def.loop, exactLast = def.endIdle !== false || !!def.loop;
   if (refineIters) {
     const tmpOf = () => ({frames: frames.map(f => ({time: f.time, hips: f.pose.hips, rotations: Object.fromEntries(bones.map(b => { const q = f.pose.rotations[b.name], n = Math.hypot(...q); return [b.name, q.map(v => v / n)]; }))})), path: {samples: frames.map(f => f.root)}});
     const runs = [];
@@ -94,6 +94,31 @@ function finalize(def, spec, res) {
     }
     for (let ri = 0; ri < runs.length; ri++) offs[ri] = bestOffs[ri];
     apply();
+  }
+  // floor guard: the LINEAR/slerp interpolation between two keyframes cuts the arc of a fast lifting or landing foot, so the 240 Hz sole
+  // can dip below the floor between frames; raise the swing keyframes next to the dip until the interpolated sole stays on or above it
+  {
+    const edgeK = def.endBlend ?? 5, startK = def.startBlend ?? 5;
+    const free = i => !(def.startIdle && i <= startK + 1) && !(def.endIdle !== false && i >= N - edgeK - 2) && !(def.loop && (i === 0 || i === N - 1));
+    const tmp = () => ({frames: frames.map(f => ({time: f.time, hips: f.pose.hips, rotations: Object.fromEntries(bones.map(b => { const q = f.pose.rotations[b.name], n = Math.hypot(...q); return [b.name, q.map(v => v / n)]; }))})), path: {samples: frames.map(f => f.root)}});
+    const lift = {Left: new Array(N).fill(0), Right: new Array(N).fill(0)};
+    // stance frames take part only when their stance run is too short for the refinement above (fewer than 3 frames)
+    const shortStance = (side, i) => { let a = i, b = i; while (a > 0 && frames[a - 1].feet[side].stance) a--; while (b < N - 1 && frames[b + 1].feet[side].stance) b++; return b - a < 2; };
+    for (let pass = 0; pass < 8; pass++) {
+      const t = tmp(); let changed = false;
+      for (const side of ['Left', 'Right']) for (let k = 0; k < N - 1; k++) {
+        let low = 0;
+        for (let s = 1; s < 8; s++) low = Math.min(low, soleWorld(t, side + 'Foot', (k + s / 8) / 30)[1]);
+        if (low > -.0015) continue;
+        for (const i of [k, k + 1]) {
+          if ((frames[i].feet[side].stance && !shortStance(side, i)) || !free(i)) continue;
+          lift[side][i] += -low * 1.4 + .001; changed = true;
+          const ls = frames[i].legSolve[side];
+          solve(frames[i].pose, side + 'UpLeg', side + 'Leg', side + 'Foot', [ls.target[0], ls.target[1] + lift[side][i], ls.target[2]], ls.pole, ls.q);
+        }
+      }
+      if (!changed) break;
+    }
   }
   // supports: whole frames inside each contact
   const supports = [];

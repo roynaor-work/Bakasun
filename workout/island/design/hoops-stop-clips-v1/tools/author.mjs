@@ -92,7 +92,7 @@ function slideRecoverForward() {
   const root = t => { let x = 0; const n = Math.max(1, Math.round(Math.abs(t) * 600)), h = t / n; for (let i = 0; i < n; i++) x += speed(i * h + h / 2) * h; return [x, 0]; };
   const yaw = t => 90 * smooth((t - .04) / .36);
   const L = [{td: -.4, to: -.24, auto: [.35, .04]}, {td: 0, to: .16, auto: [.35, .04]}, {td: .36, to: .47, auto: [.14, .12]}];
-  const R = [{td: -.2, to: -.04, auto: [-.35, -.04]}, {td: .20, to: .34, auto: [-.24, .02]}, {td: .54, to: 9, auto: [-.14, .12]}];
+  const R = [{td: -.2, to: -.04, auto: [-.35, -.04]}, {td: .20, to: .34, auto: [-.24, .02]}, {td: .54, to: .74, auto: [-.14, .12]}];
   const ramp = t => smooth((t - .1) / .35);
   return {T, root, endYaw: 90, contacts: {Left: L, Right: R}, lift: (t, d) => Math.min(.2, .05 + .08 * d),
     body: t => { const s = slideBody(t), r = ramp(t); return {...s, y: s.y + (.78 - s.y) * r, lean: 14 + 4 * r, hipPitch: s.hipPitch * (1 - r) + 9 * r, yaw: yaw(t), roll: s.roll * (1 - r), kneeOut: s.kneeOut * (1 - r)}; },
@@ -106,7 +106,7 @@ function slideRecoverBack() {
   const T = .5, speed = C2([[0, SLIDE_V], [.25, 3.2], [.5, 3.4]]), head = t => 90 + 90 * smooth((t - .05) / .35); // heading from +X to -Z (degrees from +Z, clockwise toward +X)
   const root = t => { let x = 0, z = 0; const n = Math.max(1, Math.round(Math.abs(t) * 600)), h = t / n; for (let i = 0; i < n; i++) { const tm = i * h + h / 2, s = speed(tm), a = head(tm) * D2R; x += s * Math.sin(a) * h; z += s * Math.cos(a) * h; } return [x, z]; };
   const L = [{td: -.4, to: -.24, auto: [.35, .04]}, {td: 0, to: .16, auto: [.35, .04]}, {td: .36, to: .5, auto: [.14, -.1]}];
-  const R = [{td: -.2, to: -.04, auto: [-.35, -.04]}, {td: .20, to: .34, auto: [-.2, -.12]}, {td: .54, to: 9, auto: [-.14, -.1]}];
+  const R = [{td: -.2, to: -.04, auto: [-.35, -.04]}, {td: .20, to: .34, auto: [-.2, -.12]}, {td: .54, to: .74, auto: [-.14, -.1]}];
   const ramp = t => smooth((t - .12) / .3);
   return {T, root, endYaw: 0, contacts: {Left: L, Right: R}, lift: (t, d) => Math.min(.16, .04 + .07 * d),
     body: t => { const s = slideBody(t), r = ramp(t); return {...s, y: s.y + (.7 - s.y) * r, lean: 14 - 6 * r, hipPitch: s.hipPitch * (1 - r) + 4 * r, roll: s.roll * (1 - r), kneeOut: s.kneeOut * (1 - r) + .1 * r}; },
@@ -117,8 +117,8 @@ function slideRecoverBack() {
 function cutPlant() {
   const T = .6, A = 70, speed = C2([[0, 4.5], [.18, 4.2], [.3, 2.6], [.42, 3.2], [.6, 4.4]]), head = t => A * smooth((t - .2) / .2);
   const root = t => { let x = 0, z = 0; const n = Math.max(1, Math.round(Math.abs(t) * 600)), h = t / n; for (let i = 0; i < n; i++) { const tm = i * h + h / 2, s = speed(tm), a = head(tm) * D2R; x += s * Math.sin(a) * h; z += s * Math.cos(a) * h; } return [x, z]; };
-  const L = [{td: -.3, to: -.17}, {td: -.05, to: .07, auto: [.1, .1]}, {td: .47, to: .57, auto: [.12, .16]}, {td: .72, to: 9, auto: [.1, .1]}];
-  const R = [{td: -.22, to: -.1}, {td: .17, to: .39, auto: [-.34, .22]}, {td: .62, to: 9, auto: [-.1, .1]}];
+  const L = [{td: -.3, to: -.17}, {td: -.05, to: .07, auto: [.1, .1]}, {td: .47, to: .57, auto: [.12, .16]}, {td: .72, to: .9, auto: [.1, .1]}];
+  const R = [{td: -.22, to: -.1}, {td: .17, to: .39, auto: [-.34, .22]}, {td: .62, to: .8, auto: [-.1, .1]}];
   L[0].a = [.12, -1.1]; R[0].a = [-.12, -.55];
   const yaw = t => A * smooth((t - .14) / .26), lean = C2([[0, 12], [.16, 10], [.3, 20], [.5, 16], [.6, 14]]);
   const y = C2([[0, .77], [.1, .77], [.18, .7], [.3, .63], [.4, .66], [.5, .75], [.6, .77]]);
@@ -147,7 +147,7 @@ function startFromStand() {
   const T = .9, speed = t => 4.3 * smooth((t - .08) / .6) ;
   const root = t => { if (t <= .08) return [0, 0]; let z = 0; const n = Math.max(1, Math.round(t * 600)), h = t / n; for (let i = 0; i < n; i++) z += speed(i * h + h / 2) * h; return [0, z]; };
   const L = [{td: -.6, to: .2, a: [.13, .025]}, {td: .40, to: .53, auto: [.12, .12]}, {td: .70, to: .81, auto: [.12, .14]}];
-  const R = [{td: -.6, to: .1, a: [-.13, -.025]}, {td: .22, to: .36, auto: [-.12, .1]}, {td: .56, to: .67, auto: [-.12, .14]}, {td: .84, to: 9, auto: [-.12, .14]}];
+  const R = [{td: -.6, to: .1, a: [-.13, -.025]}, {td: .22, to: .36, auto: [-.12, .1]}, {td: .56, to: .67, auto: [-.12, .14]}, {td: .84, to: 1.0, auto: [-.12, .14]}];
   const lean = C2([[0, 0], [.1, 14], [.4, 22], [.7, 15], [.9, 12]]);
   const y = C2([[0, .785], [.1, .74], [.3, .72], [.5, .75], [.9, .78]]);
   return {T, root, endYaw: 0, contacts: {Left: L, Right: R}, lift: (t, d) => Math.min(.22, .05 + .09 * d),

@@ -20,7 +20,7 @@
    ],
    "legGapMin": 0.08,
    "handTorsoMin": 0.1,
-   "soleBelowFloorCm": 0.5
+   "soleBelowFloorCm": 1.5
   }
  },
  "clips": [
@@ -122,7 +122,7 @@
     }
    ],
    "anatomy": {
-    "kneeFlexMin": 28.57,
+    "kneeFlexMin": 30.87,
     "kneeFlexMax": 110.95,
     "elbowFlexMin": 40,
     "elbowFlexMax": 107.14,
@@ -179,7 +179,7 @@
     }
    ],
    "anatomy": {
-    "kneeFlexMin": 18.43,
+    "kneeFlexMin": 24.74,
     "kneeFlexMax": 110.95,
     "elbowFlexMin": 40,
     "elbowFlexMax": 107.66,
@@ -189,13 +189,11 @@
     "handTorsoMin": 0.21,
     "trunkLeanMin": 1.37,
     "trunkLeanMax": 21.6,
-    "soleBelowFloorCm": 0.59,
+    "soleBelowFloorCm": 0.49,
     "floatCm": 0,
     "handFloorMin": 0.67
    },
-   "anatomyFail": [
-    "floor"
-   ]
+   "anatomyFail": []
   },
   {
    "id": "hoops_stop_sprint_7p5",
@@ -252,9 +250,7 @@
     "floatCm": 0,
     "handFloorMin": 0.67
    },
-   "anatomyFail": [
-    "floor"
-   ]
+   "anatomyFail": []
   },
   {
    "id": "hoops_stop_sprint_9",
@@ -311,9 +307,7 @@
     "floatCm": 0,
     "handFloorMin": 0.67
    },
-   "anatomyFail": [
-    "floor"
-   ]
+   "anatomyFail": []
   },
   {
    "id": "hoops_stop_run_3",
@@ -497,7 +491,7 @@
     }
    ],
    "anatomy": {
-    "kneeFlexMin": 27.36,
+    "kneeFlexMin": 30.22,
     "kneeFlexMax": 100.58,
     "elbowFlexMin": 40,
     "elbowFlexMax": 107.12,
@@ -507,7 +501,7 @@
     "handTorsoMin": 0.21,
     "trunkLeanMin": 1.34,
     "trunkLeanMax": 12.6,
-    "soleBelowFloorCm": 0.31,
+    "soleBelowFloorCm": 0.22,
     "floatCm": 0,
     "handFloorMin": 0.78
    },
@@ -563,7 +557,7 @@
     }
    ],
    "anatomy": {
-    "kneeFlexMin": 15.54,
+    "kneeFlexMin": 24.05,
     "kneeFlexMax": 104.76,
     "elbowFlexMin": 40,
     "elbowFlexMax": 107.49,
@@ -573,13 +567,11 @@
     "handTorsoMin": 0.21,
     "trunkLeanMin": 1.34,
     "trunkLeanMax": 12.6,
-    "soleBelowFloorCm": 0.73,
+    "soleBelowFloorCm": 0.31,
     "floatCm": 0,
     "handFloorMin": 0.78
    },
-   "anatomyFail": [
-    "floor"
-   ]
+   "anatomyFail": []
   },
   {
    "id": "hoops_stop_jog_1p5",
@@ -817,18 +809,18 @@
    "frames": 25,
    "entrySpeedMps": 3.4,
    "windows": 4,
-   "slideCmMax": 0.505,
-   "anchorDevCmMax": 0.28,
-   "floorDevCmMax": 0.518,
+   "slideCmMax": 0.722,
+   "anchorDevCmMax": 0.444,
+   "floorDevCmMax": 0.657,
    "supports": [
     {
      "bone": "LeftFoot",
      "start": 0,
      "end": 0.133333,
      "samples": 32,
-     "slideCm": 0.505,
-     "anchorDevCm": 0.28,
-     "floorCm": 0.518
+     "slideCm": 0.722,
+     "anchorDevCm": 0.444,
+     "floorCm": 0.657
     },
     {
      "bone": "LeftFoot",
@@ -869,7 +861,7 @@
     "handTorsoMin": 0.51,
     "trunkLeanMin": 20.01,
     "trunkLeanMax": 20.01,
-    "soleBelowFloorCm": 0.44,
+    "soleBelowFloorCm": 0.66,
     "floatCm": 0,
     "handFloorMin": 0.74
    },
@@ -883,18 +875,18 @@
    "frames": 25,
    "entrySpeedMps": 3.4,
    "windows": 4,
-   "slideCmMax": 0.505,
-   "anchorDevCmMax": 0.28,
-   "floorDevCmMax": 0.518,
+   "slideCmMax": 0.722,
+   "anchorDevCmMax": 0.444,
+   "floorDevCmMax": 0.657,
    "supports": [
     {
      "bone": "RightFoot",
      "start": 0,
      "end": 0.133333,
      "samples": 32,
-     "slideCm": 0.505,
-     "anchorDevCm": 0.28,
-     "floorCm": 0.518
+     "slideCm": 0.722,
+     "anchorDevCm": 0.444,
+     "floorCm": 0.657
     },
     {
      "bone": "RightFoot",
@@ -935,7 +927,7 @@
     "handTorsoMin": 0.51,
     "trunkLeanMin": 20.01,
     "trunkLeanMax": 20.01,
-    "soleBelowFloorCm": 0.44,
+    "soleBelowFloorCm": 0.66,
     "floatCm": 0,
     "handFloorMin": 0.74
    },
@@ -987,7 +979,7 @@
     "elbowFlexMin": 50.98,
     "elbowFlexMax": 107.79,
     "hipFlexMin": 1.86,
-    "hipFlexMax": 92.4,
+    "hipFlexMax": 88.98,
     "legGapMin": 0.09,
     "handTorsoMin": 0.21,
     "trunkLeanMin": 13,
@@ -1044,7 +1036,7 @@
     "elbowFlexMin": 50.98,
     "elbowFlexMax": 107.79,
     "hipFlexMin": 1.86,
-    "hipFlexMax": 92.4,
+    "hipFlexMax": 88.98,
     "legGapMin": 0.09,
     "handTorsoMin": 0.21,
     "trunkLeanMin": 13,
@@ -1096,11 +1088,11 @@
     }
    ],
    "anatomy": {
-    "kneeFlexMin": 19.9,
+    "kneeFlexMin": 23.29,
     "kneeFlexMax": 104.03,
     "elbowFlexMin": 50.98,
-    "elbowFlexMax": 105.78,
-    "hipFlexMin": -58.85,
+    "elbowFlexMax": 106.61,
+    "hipFlexMin": -15.05,
     "hipFlexMax": 67.59,
     "legGapMin": 0.16,
     "handTorsoMin": 0.32,
@@ -1110,9 +1102,7 @@
     "floatCm": 0,
     "handFloorMin": 0.76
    },
-   "anatomyFail": [
-    "hip"
-   ]
+   "anatomyFail": []
   },
   {
    "id": "hoops_defensive_slide_recover_back_right",
@@ -1155,11 +1145,11 @@
     }
    ],
    "anatomy": {
-    "kneeFlexMin": 19.9,
+    "kneeFlexMin": 23.29,
     "kneeFlexMax": 104.03,
     "elbowFlexMin": 50.98,
-    "elbowFlexMax": 105.78,
-    "hipFlexMin": -58.85,
+    "elbowFlexMax": 106.61,
+    "hipFlexMin": -15.05,
     "hipFlexMax": 67.59,
     "legGapMin": 0.16,
     "handTorsoMin": 0.32,
@@ -1169,9 +1159,7 @@
     "floatCm": 0,
     "handFloorMin": 0.76
    },
-   "anatomyFail": [
-    "hip"
-   ]
+   "anatomyFail": []
   },
   {
    "id": "hoops_cut_plant_left",
@@ -1219,7 +1207,7 @@
     "elbowFlexMin": 53.61,
     "elbowFlexMax": 107.06,
     "hipFlexMin": 4.24,
-    "hipFlexMax": 91.86,
+    "hipFlexMax": 86.2,
     "legGapMin": 0.2,
     "handTorsoMin": 0.21,
     "trunkLeanMin": 8.76,
@@ -1276,7 +1264,7 @@
     "elbowFlexMin": 53.61,
     "elbowFlexMax": 107.06,
     "hipFlexMin": 4.24,
-    "hipFlexMax": 91.86,
+    "hipFlexMax": 86.2,
     "legGapMin": 0.2,
     "handTorsoMin": 0.21,
     "trunkLeanMin": 8.76,
@@ -1487,12 +1475,12 @@
     }
    ],
    "anatomy": {
-    "kneeFlexMin": 0.58,
+    "kneeFlexMin": 16.88,
     "kneeFlexMax": 95.35,
     "elbowFlexMin": 40,
     "elbowFlexMax": 105.8,
-    "hipFlexMin": -24.92,
-    "hipFlexMax": 91.16,
+    "hipFlexMin": -24.75,
+    "hipFlexMax": 73.96,
     "legGapMin": 0.2,
     "handTorsoMin": 0.21,
     "trunkLeanMin": 1.5,
@@ -1694,9 +1682,9 @@
    "durationSeconds": 0.2,
    "referenceYawDegrees": 0,
    "endpointStartDeg": 0.000002,
-   "endpointEndDeg": 0.000002,
+   "endpointEndDeg": 0.000003,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 4.085,
+   "maxStep240Deg": 4.423,
    "maxHipsStep240Meters": 0.0045,
    "pass": true
   },
@@ -1709,9 +1697,9 @@
    "durationSeconds": 0.2,
    "referenceYawDegrees": 0,
    "endpointStartDeg": 0.000003,
-   "endpointEndDeg": 0.000002,
+   "endpointEndDeg": 0.000003,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 4.086,
+   "maxStep240Deg": 4.424,
    "maxHipsStep240Meters": 0.0045,
    "pass": true
   },
@@ -1726,7 +1714,7 @@
    "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.65,
+   "maxStep240Deg": 2.475,
    "maxHipsStep240Meters": 0.0044,
    "pass": true
   },
@@ -1741,7 +1729,7 @@
    "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000003,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.649,
+   "maxStep240Deg": 2.474,
    "maxHipsStep240Meters": 0.0045,
    "pass": true
   },
@@ -1754,9 +1742,9 @@
    "durationSeconds": 0.2,
    "referenceYawDegrees": 0,
    "endpointStartDeg": 0.000002,
-   "endpointEndDeg": 0.000002,
+   "endpointEndDeg": 0.000003,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 4.085,
+   "maxStep240Deg": 4.423,
    "maxHipsStep240Meters": 0.0045,
    "pass": true
   },
@@ -1769,9 +1757,9 @@
    "durationSeconds": 0.2,
    "referenceYawDegrees": 0,
    "endpointStartDeg": 0.000003,
-   "endpointEndDeg": 0.000002,
+   "endpointEndDeg": 0.000003,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 4.086,
+   "maxStep240Deg": 4.424,
    "maxHipsStep240Meters": 0.0045,
    "pass": true
   },
@@ -1786,7 +1774,7 @@
    "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.645,
+   "maxStep240Deg": 2.47,
    "maxHipsStep240Meters": 0.0044,
    "pass": true
   },
@@ -1801,7 +1789,7 @@
    "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000003,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.644,
+   "maxStep240Deg": 2.469,
    "maxHipsStep240Meters": 0.0045,
    "pass": true
   },
@@ -1813,10 +1801,10 @@
    "phaseKind": "catalog-zero",
    "durationSeconds": 0.15,
    "referenceYawDegrees": 0,
-   "endpointStartDeg": 0.000002,
+   "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 167.015,
+   "maxStep240Deg": 4.19,
    "maxHipsStep240Meters": 0.0007,
    "pass": true
   },
@@ -1846,7 +1834,7 @@
    "endpointStartDeg": 0.000002,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.55,
+   "maxStep240Deg": 6.19,
    "maxHipsStep240Meters": 0.001,
    "pass": true
   },
@@ -1861,7 +1849,7 @@
    "endpointStartDeg": 0.000002,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.323,
+   "maxStep240Deg": 6.171,
    "maxHipsStep240Meters": 0.0005,
    "pass": true
   },
@@ -1873,10 +1861,10 @@
    "phaseKind": "catalog-zero",
    "durationSeconds": 0.15,
    "referenceYawDegrees": 0,
-   "endpointStartDeg": 0.000002,
+   "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 167.015,
+   "maxStep240Deg": 4.029,
    "maxHipsStep240Meters": 0.0007,
    "pass": true
   },
@@ -1903,10 +1891,10 @@
    "phaseKind": "catalog-zero",
    "durationSeconds": 0.3,
    "referenceYawDegrees": 0,
-   "endpointStartDeg": 0,
+   "endpointStartDeg": 0.000002,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.582,
+   "maxStep240Deg": 3.952,
    "maxHipsStep240Meters": 0.0013,
    "pass": true
   },
@@ -1918,10 +1906,10 @@
    "phaseKind": "interior",
    "durationSeconds": 0.3,
    "referenceYawDegrees": 0,
-   "endpointStartDeg": 0,
+   "endpointStartDeg": 0.000002,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 3.019,
+   "maxStep240Deg": 3.932,
    "maxHipsStep240Meters": 0.0012,
    "pass": true
   },
@@ -1963,10 +1951,10 @@
    "phaseKind": "catalog-zero",
    "durationSeconds": 0.3,
    "referenceYawDegrees": 70,
-   "endpointStartDeg": 0.000002,
+   "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000003,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 4.555,
+   "maxStep240Deg": 3.321,
    "maxHipsStep240Meters": 0.001,
    "pass": true
   },
@@ -1978,10 +1966,10 @@
    "phaseKind": "interior",
    "durationSeconds": 0.3,
    "referenceYawDegrees": 70,
-   "endpointStartDeg": 0.000002,
+   "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 4.569,
+   "maxStep240Deg": 3.336,
    "maxHipsStep240Meters": 0.0006,
    "pass": true
   },
@@ -2086,8 +2074,8 @@
    "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 2.962,
-   "maxHipsStep240Meters": 0.011,
+   "maxStep240Deg": 5.086,
+   "maxHipsStep240Meters": 0.0092,
    "pass": true
   },
   {
@@ -2101,8 +2089,8 @@
    "endpointStartDeg": 0.000003,
    "endpointEndDeg": 0.000002,
    "endpointHipsMeters": 0,
-   "maxStep240Deg": 1.99,
-   "maxHipsStep240Meters": 0.011,
+   "maxStep240Deg": 5.107,
+   "maxHipsStep240Meters": 0.0092,
    "pass": true
   }
  ],
@@ -2111,8 +2099,8 @@
    "id": "hoops_stop_sprint_7p5",
    "asset": "clips/hoops_stop_sprint_7p5.glb",
    "bytes": 776080,
-   "sha256": "c48d39f37e80f1863ec8c0559335a9b7bcd5d2fdf058adbf547ae71b8662b726",
-   "sha256Catalog": "c48d39f37e80f1863ec8c0559335a9b7bcd5d2fdf058adbf547ae71b8662b726",
+   "sha256": "aea1e4ee74e3a8e699646fd83afd8262e61ab06e807cf1e8d19ce78596c8b673",
+   "sha256Catalog": "aea1e4ee74e3a8e699646fd83afd8262e61ab06e807cf1e8d19ce78596c8b673",
    "shaMatches": true,
    "maxRotationDegVsMotions": 0.000004,
    "maxHipsMetersVsMotions": 0,
@@ -2125,8 +2113,8 @@
    "id": "hoops_stop_run_5",
    "asset": "clips/hoops_stop_run_5.glb",
    "bytes": 775104,
-   "sha256": "3b2fec226f97eef6f1e9d1e55e6ad7430f6dcac324a375cf66a9fccb99b54b56",
-   "sha256Catalog": "3b2fec226f97eef6f1e9d1e55e6ad7430f6dcac324a375cf66a9fccb99b54b56",
+   "sha256": "b8e869b2c0dab0127a247a3b95bc214f2a5a2b12702509264b043fc6f17d0f1b",
+   "sha256Catalog": "b8e869b2c0dab0127a247a3b95bc214f2a5a2b12702509264b043fc6f17d0f1b",
    "shaMatches": true,
    "maxRotationDegVsMotions": 0.000003,
    "maxHipsMetersVsMotions": 0,
@@ -2153,13 +2141,13 @@
    "id": "hoops_defensive_slide_fast_left",
    "asset": "clips/hoops_defensive_slide_fast_left.glb",
    "bytes": 777392,
-   "sha256": "634575fcbdfe4f5d7ce3df473900092bf50cb6c3b7d5aac1191801bed9ab9f2c",
-   "sha256Catalog": "634575fcbdfe4f5d7ce3df473900092bf50cb6c3b7d5aac1191801bed9ab9f2c",
+   "sha256": "ec6c9c320282bd4b8f5801bb87f62cba2319f38f1f644cfce09b57d45c586f04",
+   "sha256Catalog": "ec6c9c320282bd4b8f5801bb87f62cba2319f38f1f644cfce09b57d45c586f04",
    "shaMatches": true,
    "maxRotationDegVsMotions": 0.000004,
    "maxHipsMetersVsMotions": 0,
-   "glbSlideCmMax": 0.505,
-   "glbFloorCmMax": 0.518,
+   "glbSlideCmMax": 0.722,
+   "glbFloorCmMax": 0.657,
    "draco": false,
    "rootIdentity": true
   },
@@ -2167,13 +2155,13 @@
    "id": "hoops_defensive_slide_fast_right",
    "asset": "clips/hoops_defensive_slide_fast_right.glb",
    "bytes": 777416,
-   "sha256": "ab392cf672696d358b085131db62a413e02fa3d67fe62cc0bc9aeaf58b506091",
-   "sha256Catalog": "ab392cf672696d358b085131db62a413e02fa3d67fe62cc0bc9aeaf58b506091",
+   "sha256": "9cf8b2d163d7da2b19ab99de602d1603cec3dc9e6850b70092e2292d92d64cb3",
+   "sha256Catalog": "9cf8b2d163d7da2b19ab99de602d1603cec3dc9e6850b70092e2292d92d64cb3",
    "shaMatches": true,
    "maxRotationDegVsMotions": 0.000004,
    "maxHipsMetersVsMotions": 0,
-   "glbSlideCmMax": 0.505,
-   "glbFloorCmMax": 0.518,
+   "glbSlideCmMax": 0.722,
+   "glbFloorCmMax": 0.657,
    "draco": false,
    "rootIdentity": true
   },
@@ -2181,8 +2169,8 @@
    "id": "hoops_defensive_slide_recover_forward_left",
    "asset": "clips/hoops_defensive_slide_recover_forward_left.glb",
    "bytes": 774408,
-   "sha256": "0542d06f05d5b0d4515c1a9526c64211f51fa19bc44a77f14b2ac67d60ff919c",
-   "sha256Catalog": "0542d06f05d5b0d4515c1a9526c64211f51fa19bc44a77f14b2ac67d60ff919c",
+   "sha256": "7a2869adcd36f254e4a320231700a1e7a14776c12f63cc89c6758123533de87e",
+   "sha256Catalog": "7a2869adcd36f254e4a320231700a1e7a14776c12f63cc89c6758123533de87e",
    "shaMatches": true,
    "maxRotationDegVsMotions": 0.000003,
    "maxHipsMetersVsMotions": 0,
@@ -2195,8 +2183,8 @@
    "id": "hoops_defensive_slide_recover_back_left",
    "asset": "clips/hoops_defensive_slide_recover_back_left.glb",
    "bytes": 774516,
-   "sha256": "331c5b7d71472953c472575539da2d8460eef7f8831437a01ad5b3faaaa7ff2b",
-   "sha256Catalog": "331c5b7d71472953c472575539da2d8460eef7f8831437a01ad5b3faaaa7ff2b",
+   "sha256": "d6004cc24923a4b84dcc3aba821906e19a5b7532428ca14e89b621449bc76760",
+   "sha256Catalog": "d6004cc24923a4b84dcc3aba821906e19a5b7532428ca14e89b621449bc76760",
    "shaMatches": true,
    "maxRotationDegVsMotions": 0.000004,
    "maxHipsMetersVsMotions": 0,
@@ -2209,8 +2197,8 @@
    "id": "hoops_cut_plant_left",
    "asset": "clips/hoops_cut_plant_left.glb",
    "bytes": 775404,
-   "sha256": "8109997d546d2ce2c4654ffc83d7757ce65009b7591672d39a284ad060904083",
-   "sha256Catalog": "8109997d546d2ce2c4654ffc83d7757ce65009b7591672d39a284ad060904083",
+   "sha256": "e05e6d6e9b2a26d860fce957aae9d62592b7bdd68e965142578dd5caab56d464",
+   "sha256Catalog": "e05e6d6e9b2a26d860fce957aae9d62592b7bdd68e965142578dd5caab56d464",
    "shaMatches": true,
    "maxRotationDegVsMotions": 0.000005,
    "maxHipsMetersVsMotions": 0,
@@ -2237,10 +2225,10 @@
    "id": "hoops_start_from_stand",
    "asset": "clips/hoops_start_from_stand.glb",
    "bytes": 778256,
-   "sha256": "268a901b1038cefad4b467d81e2250908efaf931d454c46b2b9e533d3c77e137",
-   "sha256Catalog": "268a901b1038cefad4b467d81e2250908efaf931d454c46b2b9e533d3c77e137",
+   "sha256": "6a8cc484d1eae896eb29ddfc5169c1a9a08ea92dfd69900898e76a33b44e818b",
+   "sha256Catalog": "6a8cc484d1eae896eb29ddfc5169c1a9a08ea92dfd69900898e76a33b44e818b",
    "shaMatches": true,
-   "maxRotationDegVsMotions": 0.000004,
+   "maxRotationDegVsMotions": 0.000003,
    "maxHipsMetersVsMotions": 0,
    "glbSlideCmMax": 0.132,
    "glbFloorCmMax": 0.528,
@@ -2256,44 +2244,7 @@
   "bridges": 40,
   "bridgesPassed": 40,
   "maxBridgeEndpointDeg": 0.000003,
-  "maxBridgeStep240Deg": 167.015,
-  "anatomyFailures": [
-   [
-    "hoops_stop_sprint_6p5",
-    [
-     "floor"
-    ]
-   ],
-   [
-    "hoops_stop_sprint_7p5",
-    [
-     "floor"
-    ]
-   ],
-   [
-    "hoops_stop_sprint_9",
-    [
-     "floor"
-    ]
-   ],
-   [
-    "hoops_stop_run_6",
-    [
-     "floor"
-    ]
-   ],
-   [
-    "hoops_defensive_slide_recover_back_left",
-    [
-     "hip"
-    ]
-   ],
-   [
-    "hoops_defensive_slide_recover_back_right",
-    [
-     "hip"
-    ]
-   ]
-  ]
+  "maxBridgeStep240Deg": 6.19,
+  "anatomyFailures": []
  }
 }
