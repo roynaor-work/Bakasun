@@ -147,7 +147,8 @@ for (const pkg of packages.values()) {
       reason = `אין קובץ רישיון בתיקייה; מתועד ב-ASSETS.md (${ids.join(', ')}). ${note}`.trim();
     } else {
       status = 'block';
-      reason = prov.length ? `אין קובץ רישיון ואין רישיון ב-ASSETS.md (${note})` : 'אין קובץ רישיון ואין תיעוד מקור';
+      const mentions = doc ? doc.split('\n').length : 0;
+      reason = prov.length ? `אין קובץ רישיון ואין רישיון ב-ASSETS.md (${note})` : mentions ? `אין קובץ רישיון; מוזכר ב-ASSETS.md (${mentions} שורות) בלי מזהה רישיון: נגזרת של נכס בריפו או יצירה פנימית, רועי מאשר מקור` : 'אין קובץ רישיון ואין תיעוד מקור';
     }
   } else {
     const found = identify(readNotice(pkg));

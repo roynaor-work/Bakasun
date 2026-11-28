@@ -4,15 +4,6 @@
 
 ## נכסים עם חובת ייחוס
 
-### assets/racing
-
-רישיון: CC-BY-4.0
-
-- The files sport-coupe.glb and sport-coupe-low.glb are modified versions of **Car Concept**, created by **Eric Chadwick** for **Darmstadt Graphics Group GmbH**, 2024. Model and textures are licensed under **Creative Commons Attribution 4.0 International (CC-BY-4.0)**.
-- Source: https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept
-- License: https://creativecommons.org/licenses/by/4.0/
-- The source distribution excludes logos and associated trademarks from its CC license. **Khronos and 3D Commerce logos, including sidewall color and normal maps, are not included in these derivatives.** No endorsement by the original creator, DGG, or Khronos is implied.
-
 ### assets/racing-v7
 
 רישיון: CC-BY-4.0
@@ -21,17 +12,6 @@
 - Source: https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CarConcept
 - License: https://creativecommons.org/licenses/by/4.0/
 - The source distribution excludes logos and trademarks from its CC licence; none are included here. No endorsement by the original creator or DGG is implied.
-
-### minigames/boar-island/fonts
-
-רישיון: MIT, OFL-1.1
-
-- Copyright 2014 The Heebo Project Authors (https://github.com/OdedEzer/heebo)
-- "Font Software" refers to the set of files released by the Copyright
-- copyright statement(s).
-- distributed by the Copyright Holder(s).
-- "Author" refers to any designer, engineer, programmer, technical
-- contains the above copyright notice and this license. These can be
 
 ### assets/soccer-v6
 
