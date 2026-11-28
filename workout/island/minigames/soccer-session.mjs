@@ -31,6 +31,7 @@ import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soc
 import {applySoccerV249View,soccerHud249Enabled,soccerCueShown,SOCCER_V249} from './soccer-r249.mjs';
 // v25.0 (soccer-r250.mjs, `?soccerV250=0` = v24.9): closer camera, taps on the pitch (pass to a team-mate, into space, select in defence), aimed set pieces.
 import {applySoccerV250View,soccerTap250Enabled,soccerTapMate,soccerIsTap} from './soccer-r250.mjs';
+import {applyReadablePlayersSoccer} from './readable-players.mjs';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -72,7 +73,7 @@ export function soccerActionLabels(state,config){
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
   const {balance:sourceBalance,canvas,controls,status,t}=ctx,fullOn=!ctx.drill&&soccerFullEnabled(),teamsKey=fullOn?'11':resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS);
-  const balance=applySoccerV250View(applySoccerV249View(applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey)))),ctx.drill?{enabled:false,look:false}:{}),ctx.drill?{enabled:false,saveReplay:false}:{}),hud249=!ctx.drill&&soccerHud249Enabled();
+  const balance=applyReadablePlayersSoccer(applySoccerV250View(applySoccerV249View(applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(fullOn?applySoccerFull(sourceBalance):applySoccerTeams(sourceBalance,teamsKey)))),ctx.drill?{enabled:false,look:false}:{}),ctx.drill?{enabled:false,saveReplay:false}:{}),ctx.drill?{enabled:false}:{}),hud249=!ctx.drill&&soccerHud249Enabled();
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});

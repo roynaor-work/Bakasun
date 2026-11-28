@@ -26,7 +26,8 @@ export const V3_MAP = Object.freeze(Object.fromEntries(CANON18.map(n => [n, n]))
 
 /** On unless `?athleteV3=0`; `?athleteBody=0` / `?athleteBodyV22=0` (the older switches: previous bodies) switch it off too. */
 export function athleteV3Enabled(search = globalThis.location?.search || '') {
-  return athleteBodyV22Enabled(search) && new URLSearchParams(search).get('athleteV3') !== '0';
+  // v25.1: opt-in (`?athleteV3=1`). In the first review the basketball legs of the new body looked like pipes (calf 18x21 cm), so it is not the default yet.
+  return athleteBodyV22Enabled(search) && new URLSearchParams(search).get('athleteV3') === '1';
 }
 
 // ---- numbers ----------------------------------------------------------------------------------------------------------------------------

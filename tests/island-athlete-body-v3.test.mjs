@@ -131,12 +131,13 @@ test('v3NumberSegments: 0..99, single digits centred, two digits side by side, n
   assert.equal(v3NumberSegments(1).length, 4);
 });
 
-test('flag: on by default, ?athleteV3=0 and the older switches return the previous bodies', () => {
-  assert.equal(athleteV3Enabled(''), true);
+test('flag: off by default (first review: the basketball legs look like pipes), ?athleteV3=1 turns it on and the older switches still win', () => {
+  assert.equal(athleteV3Enabled(''), false);
   assert.equal(athleteV3Enabled('?athleteV3=0'), false);
   assert.equal(athleteV3Enabled('?athleteBodyV22=0'), false);
   assert.equal(athleteV3Enabled('?athleteBody=0'), false);
   assert.equal(athleteV3Enabled('?athleteV3=1'), true);
+  assert.equal(athleteV3Enabled('?athleteV3=1&athleteBodyV22=0'), false);
   assert.deepEqual(Object.keys(V3_BODIES), ['soccer', 'guard', 'wing', 'center']);
   assert.deepEqual([...V3_HAIR], ['buzz', 'crop', 'side-part', 'quiff', 'curls', 'afro', 'swept-back', 'bun']);
 });
