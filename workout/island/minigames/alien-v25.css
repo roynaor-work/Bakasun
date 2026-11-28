@@ -22,3 +22,6 @@
 /* The switch with the older layouts (the arsenal can run with ?alienHud=v24 or v23): next to the v24 column, above the v23 missile button. */
 .game-screen[data-game=alienDefense] .alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24]:not([data-alien-low=on]) .alien-special-switch{bottom:calc(16.4% + 173px)}
 .game-screen[data-game=alienDefense] .alien-controls.alien-controls[data-alien-fire=v23]:not([data-alien-hud]) .alien-special-switch{right:261px;bottom:calc(max(96px,19vh,env(safe-area-inset-bottom)) + 100px)}
+/* v25.2: the stick turns see-through while the 3D ship flies behind it (?alienBounds=old never sets the attribute). */
+.game-screen[data-game=alienDefense] #joystick[data-ship-under=true]{opacity:.38;transition:opacity .15s}
+.game-screen[data-game=alienDefense] #joystick[data-ship-under=false]{transition:opacity .15s}

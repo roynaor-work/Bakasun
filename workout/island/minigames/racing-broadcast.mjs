@@ -5,8 +5,8 @@
 // tower lists every car with position, team colour, number, the gap to the car ahead in seconds, a green/red arrow on a position change and a
 // purple mark for the fastest lap; lower-third cards announce the lap, an overtake and a new fastest lap; the results page lists all finishers
 // with their gap to the winner. A good phone racing game keeps the tower short on the left, never over the wheel or the buttons.
-import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-25';
-import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-25';
+import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-26';
+import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-26';
 
 export const broadcastEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingBroadcast')!=='0';
 export const COUNTDOWN=3,LIGHTS=5,LIGHT_STEP=.5,GO_SHOW=1.2,INTRO_SECONDS=4,PODIUM_SECONDS=8,START_QUIET=2,CARD_SECONDS=1.7;
@@ -118,7 +118,7 @@ function chip(row,withName=true,art=false){const c=node('span','rb-chip');c.styl
  * (the session does not step the model then); podium(state, done) replaces the plain podium. */
 // racing-v24.9: showCards=false (the session's default unless ?racingText=old) never shows the card in the middle of the screen; card() gives the current one to the
 // session, which shows it as a small chip in the corner.
-export function createBroadcast({stage,model,league=false,signal=null,art=broadcastArtEnabled(),showCards=true}){
+export function createBroadcast({stage,model,league=false,signal=null,art=broadcastArtEnabled(),showCards=true,creditLine=''}){
  const track=model.track,trackLength=track.length,tracker=createGapTracker(),watch=createRankWatch(),cards=createCards();
  let introT=0,introDone=false,fastest=null,lapsSeen=0,disposed=false,prevLights=-1,shown=null;
  const lights=node('div','racing-lights');lights.setAttribute('role','img');lights.setAttribute('aria-label','רמזורי זינוק');
@@ -131,7 +131,7 @@ export function createBroadcast({stage,model,league=false,signal=null,art=broadc
   if(league)head.append(node('span','rb-intro-league','מרוץ ליגה'));
   const grid=node('ol','rb-grid');for(const row of info.grid){const li=node('li','rb-grid-slot');li.dataset.rank=String(row.rank);if(row.isPlayer)li.classList.add('you');li.append(node('b','rb-grid-pos',String(row.rank)),chip(row,true,art));grid.append(li);}
   const you=node('p','rb-intro-you',`המקום שלכם בזינוק: ${info.playerGrid}`),go=node('button','rb-intro-go','למרוץ');go.type='button';go.dataset.action='racing-intro-go';
-  const side=node('div','rb-intro-side');side.append(head,you,go);intro.append(side,grid);}
+  const side=node('div','rb-intro-side');side.append(head,you,go);if(creditLine)side.append(node('small','rb-intro-credit',creditLine));intro.append(side,grid);}   // racing-v25.2: the model credit as plain text here, not a link inside the race
  if(art)applyPanelArt(intro);
  stage.append(lights,card,intro);
  const closeIntro=()=>{if(introDone)return;introDone=true;intro.remove();};

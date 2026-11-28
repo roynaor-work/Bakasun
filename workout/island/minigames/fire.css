@@ -49,3 +49,9 @@
 @media(max-height:380px){.fire-play .fire-coach{top:10px;left:calc(max(12px,env(safe-area-inset-left)) + 244px);right:calc(max(12px,env(safe-area-inset-right)) + 64px);min-height:48px;padding:5px 9px;gap:7px}.fire-play .fire-instruction{font-size:12px}}
 @media(max-width:620px){.fire-play .fire-coach{top:74px;left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));max-width:none}}
 @media(prefers-reduced-motion:reduce){.game-screen.fire-play [data-game-control]{transition:none}}
+/* v25.2: the coach strip shows each instruction for a few seconds and then leaves the buildings free (?fireHint=old keeps it). */
+.fire-play .fire-coach[data-quiet]{transition:opacity .35s}
+.fire-play .fire-coach[data-quiet=hidden]{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s,visibility 0s .35s}
+.fire-play .fire-coach[data-quiet=compact]{left:auto;min-height:36px;padding:4px 9px}
+.fire-play .fire-coach[data-quiet=compact] .fire-coach-text{display:none}
+@media(prefers-reduced-motion:reduce){.fire-play .fire-coach[data-quiet]{transition:none}}

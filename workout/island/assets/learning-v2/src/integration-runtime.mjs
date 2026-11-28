@@ -1,6 +1,6 @@
-import { completeDailyRound, dailyStatus, questionsForAge, roundReward, STATIONS, syncLearningDay } from '../../../learning/state.mjs?v=island-v2-20261107-25';
-import { createAdaptiveSelector } from './adaptive.mjs?v=island-v2-20261107-25';
-import { loadBank } from './data.mjs?v=island-v2-20261107-25';
+import { completeDailyRound, dailyStatus, questionsForAge, roundReward, STATIONS, syncLearningDay } from '../../../learning/state.mjs?v=island-v2-20261107-26';
+import { createAdaptiveSelector } from './adaptive.mjs?v=island-v2-20261107-26';
+import { loadBank } from './data.mjs?v=island-v2-20261107-26';
 
 export const V2_STATIONS = Object.freeze({
   language: { ...STATIONS.language, domain: 'hebrew', title: 'עברית' },

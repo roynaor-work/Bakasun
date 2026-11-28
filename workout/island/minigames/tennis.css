@@ -112,6 +112,8 @@
 
 /* v11: one bar, no top text. The needle takes the colour of the contact grade; the score board has no title or player captions. */
 .game-screen[data-game=tennis] .tennis-board .tennis-player-dot::after{content:none}
+/* v25.2: the player's row is named like the rival's (?tennisNames=old leaves it empty). */
+.game-screen[data-game=tennis] .tennis-board .tennis-player-dot[data-name]::after{content:attr(data-name);overflow:hidden;text-overflow:ellipsis}
 .game-screen[data-game=tennis] .tennis-feedback{display:none}
 .game-screen[data-game=tennis] .tennis-serve-meter[data-mode=hit][data-grade=medium] .tennis-serve-needle{background:#efc355}
 .game-screen[data-game=tennis] .tennis-serve-meter[data-mode=hit][data-grade=weak] .tennis-serve-needle{background:#f06960}

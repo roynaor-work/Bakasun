@@ -1,25 +1,26 @@
-import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-25';
-import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-25';
-import {createControls} from './controls.mjs?v=island-v2-20261107-25';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-25';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-25';
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-26';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-26';
+import {createControls} from './controls.mjs?v=island-v2-20261107-26';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-26';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-26';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-25';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-26';
 import {alienV9Enabled} from './alien-v9.mjs';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-25';
-import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-25';
-import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-25';
-import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-25';
-import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-25';
-import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-25';
-import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-25';
-import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-25';
-import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-25';
-import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-25';
-import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-25';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-26';
+import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-26';
+import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-26';
+import {v23Config} from './alien-v23.mjs?v=island-v2-20261107-26';
+import {createAlienVulcan} from './alien-v23-ui.mjs?v=island-v2-20261107-26';
+import {alienHudV24Enabled,alienRefillEnabled,v24Config} from './alien-v24.mjs?v=island-v2-20261107-26';
+import {createAlienV24Audio} from './alien-v24-audio.mjs?v=island-v2-20261107-26';
+import {createAlienV25Audio} from './alien-v25-audio.mjs?v=island-v2-20261107-26';
+import {preloadAlienV25} from './alien-v25-draw.mjs?v=island-v2-20261107-26';
+import {alienHudV25Enabled,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-26';
+import {createAlienSpecialSwitch,ensureAlienV25Style} from './alien-v25-ui.mjs?v=island-v2-20261107-26';
 import {alienTextCompact,alienLaserSeenEnabled} from './alien-v249.mjs';
 import {createAlienLaserChip} from './alien-v249-ui.mjs';
+import {alienBoundsOn,alienPlayerY,alienPlayerXRange,alienBoxesOverlap} from './alien-move.mjs?v=island-v2-20261107-26';
 const alienKidStyle = `
 .game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] :is(#shoot,#vulcan,#pass,.alien-special-switch){opacity:1!important}
 .game-screen[data-game=alienDefense] .alien-controls[data-kid-weapons] #pass:disabled{opacity:1;border-color:#a4b0c0;color:#a4b0c0}
@@ -49,7 +50,7 @@ const alienKidDemo={
 };
 let v24Styled=false;
 /** v24 HUD stylesheet, once per page. */
-function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-25',import.meta.url).href;document.head.append(link);}
+function ensureV24Style(){if(v24Styled||!globalThis.document?.head)return;v24Styled=true;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v24.css?v=island-v2-20261107-26',import.meta.url).href;document.head.append(link);}
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */
@@ -86,6 +87,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
  art.hudFont=config.visuals.hudFont;art.clockText=art.comboText='';
  let shared,flight,vulcan,specialSwitch,resetting=false;
  let disposed=false,paused=false,frame,last,cssWidth=1,cssHeight=1,dpr=1,samples=0,frameMs=0;
+ const boundsOn=alienBoundsOn();let boundsTick=0,boundsBelow=0,boundsHalf=0,boundsX=null,boundsSize='',stickBox=null;
  const view=createView?.({...ctx,art},model),renderContext={...ctx,art,quality,view};
  // v24.4 hull contact (alien-hull.mjs, ?alienHull=0 keeps v24.3): rounds stop where the 3D ship is drawn; the canvas fallback draws the hit circle (0).
  model.hull={get pxPerUnit(){return view&&view.mode==='three'?cssHeight/config.height:0;}};
@@ -174,12 +176,20 @@ export function runAlienSession(ctx,createModel,draw,createView){
   try{
    audio.sync();
    if(dt>0){
-    const input=alienFrameInput(shared,dt,flight,b.controls.deadzone,vulcan,specialSwitch);model.update(dt,input);
+    const input=alienFrameInput(shared,dt,flight,b.controls.deadzone,vulcan,specialSwitch);model.update(dt,input);if(boundsX&&view?.mode==='three'){const p=model.player;if(p.x<boundsX[0]){p.x=boundsX[0];if(p.vx<0)p.vx=0;}else if(p.x>boundsX[1]){p.x=boundsX[1];if(p.vx>0)p.vx=0;}}
     samples++;frameMs+=elapsed;
     if(samples>=b.render.fallbackSampleFrames){const slow=frameMs/samples>b.render.fallbackFrameMs;if(slow){if(quality.low)view?.degrade(true);else{quality.low=true;view?.degrade();resize();}}samples=frameMs=0;}
    }
    if(model.result){const result=ctx.finish(model.result);if(!result.ok){ctx.cancel();ctx.onError?.(result.reason);}return;}
    paint.setTransform(dpr,0,0,dpr,0,0);paint.save();paint.scale(cssWidth/config.width,cssHeight/config.height);renderContext.pixelAspect=(cssWidth/cssHeight)/(config.width/config.height);draw(paint,model,renderContext);paint.restore();hud();flightHud.update(model,flight.sample(),paused||document.hidden);vulcan?.update(model);v25Audio?.update(model);laserChip?.update(model,paused||document.hidden);if(hudV24||textCompact){const captions=model.time<captionSeconds||(textCompact&&model.time<captionAt)?'on':'off';if(controls.dataset.alienCaptions!==captions)controls.dataset.alienCaptions=captions;}
+   // v25.2 (?alienBounds=old): in 3D the whole drawn ship stays above the bottom edge, and the stick is see-through while the ship is behind it.
+   if(boundsOn&&view?.mode==='three'&&view.playerBox&&++boundsTick%6===0){const box=view.playerBox();if(box){
+    if(boundsSize!==cssWidth+'x'+cssHeight){boundsSize=cssWidth+'x'+cssHeight;boundsBelow=0;boundsHalf=0;boundsX=null;const r=stick.getBoundingClientRect(),c=canvas.getBoundingClientRect();stickBox=r.width?{left:r.left-c.left,right:r.right-c.left,top:r.top-c.top,bottom:r.bottom-c.top}:null;}
+    boundsBelow=Math.max(boundsBelow,Math.min(cssHeight*.3,box.bottom-box.cy));const y=alienPlayerY(config.height,b.playerBottom,boundsBelow,cssHeight/config.height);if(Math.abs(y-model.player.y)>.25)model.player.y=y;
+    // Sideways: start from the level ship's half width; near an edge the camera sees the ship from its side and it is drawn wider, so when the ship still crosses the edge the range closes by what is missing.
+    const k=cssWidth/config.width;if(!boundsX){boundsHalf=Math.max(box.cx-box.left,box.right-box.cx);boundsX=alienPlayerXRange(config.width,b.playerRadius,boundsHalf,k);}
+    {const cap=config.width*.25;if(box.left<4)boundsX[0]=Math.min(cap,Math.max(boundsX[0],model.player.x+(4-box.left)/k));if(box.right>cssWidth-4)boundsX[1]=Math.max(config.width-cap,Math.min(boundsX[1],model.player.x-(box.right-cssWidth+4)/k));}
+    const under=String(alienBoxesOverlap(box,stickBox));if(stick.dataset.shipUnder!==under)stick.dataset.shipUnder=under;}}
    // v25 arsenal: the count, the disabled state and the arc follow the selected special weapon (the missile as before).
    const sel=model.arsenalOn?model.special:0,ammoNow=model.arsenalOn?model.specialAmmo[sel]:model.novaCharges;specialSwitch?.update(model);updateKidWeapons(sel);
    count.textContent=String(ammoNow);
@@ -192,7 +202,7 @@ export function runAlienSession(ctx,createModel,draw,createView){
   }catch(error){dispose();ctx.cancel();ctx.onError?.('reason.gameStart');}
  }
  function dispose(){
-  if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();kidWeaponEvents.abort();demo?.remove();laserChip?.dispose();delete controls.dataset.alienText;delete controls.dataset.kidWeapons;observer.disconnect();resetInput();flight.dispose();flightHud.dispose();vulcan?.dispose();specialSwitch?.dispose();if(hudV25)delete controls.dataset.alienLow;if(hudV24){delete controls.dataset.alienHud;}delete controls.dataset.alienCaptions;shared.dispose();audio.dispose({finishTail:model.result?.outcome==='win'});shotAudio?.dispose();v24Audio?.dispose();v25Audio?.dispose();view?.dispose();
+  if(disposed)return;disposed=true;cancelAnimationFrame(frame);events.abort();kidWeaponEvents.abort();demo?.remove();laserChip?.dispose();delete controls.dataset.alienText;delete stick.dataset.shipUnder;delete controls.dataset.kidWeapons;observer.disconnect();resetInput();flight.dispose();flightHud.dispose();vulcan?.dispose();specialSwitch?.dispose();if(hudV25)delete controls.dataset.alienLow;if(hudV24){delete controls.dataset.alienHud;}delete controls.dataset.alienCaptions;shared.dispose();audio.dispose({finishTail:model.result?.outcome==='win'});shotAudio?.dispose();v24Audio?.dispose();v25Audio?.dispose();view?.dispose();
   for(const value of Object.values(art)){if(value?.getContext)value.width=value.height=0;else if(Array.isArray(value))for(const sprite of value)if(sprite?.getContext)sprite.width=sprite.height=0;}
   canvas.width=canvas.height=0;
  }

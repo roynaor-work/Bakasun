@@ -1,5 +1,5 @@
 import { API_VERSION, SEGMENT_LENGTH_M, MAX_SEGMENTS, MAX_BATCH_SEGMENTS, LANES, DIFFICULTIES,
-  THEMES, PATTERNS, configuration, freeze } from './profiles.mjs?v=island-v2-20261107-25';
+  THEMES, PATTERNS, configuration, freeze } from './profiles.mjs?v=island-v2-20261107-26';
 
 const EPS = 1e-6;
 const finite = n => typeof n === 'number' && Number.isFinite(n);

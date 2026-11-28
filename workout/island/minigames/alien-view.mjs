@@ -1,7 +1,7 @@
 import {wingVisible} from './alien-v10-draw.mjs';
 import {alienV13Enabled,V13_SHIP_URL,fitScale} from './alien-v13.mjs';
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-25';
+import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-26';
 import {alienModelSpecs,alienAppearance} from './alien-assets.mjs';
 import {alienEnvironment} from './ultra-alien-environment.mjs';
 import {modelTriangles,fleetModel,liveFleetIds,bakeFleet} from './ultra-alien-fleet.mjs';
@@ -85,7 +85,16 @@ export function createAlienView(ctx,model,adapters={}){
   if(!root)return null;scene.add(root);
   e={root,representation,appearance:alienAppearance(balance,a.kind)};entities.set(a.id,e);return e;
  }
- return {ready,resize,dispose,get mode(){return failed?'canvas':'three';},
+ // v25.2: the drawn ship's rectangle on screen (CSS px), for the flight line and the see-through stick. null until the model is in.
+ const boxTmp=new T.Box3(),boxCorner=new T.Vector3();
+ function playerBox(){
+  if(disposed||failed||!playerLoaded)return null;player.updateMatrixWorld(true);boxTmp.makeEmpty();
+  player.traverse(o=>{if(!o.isMesh||!o.visible||!o.geometry)return;if(!o.geometry.boundingBox)o.geometry.computeBoundingBox();const g=o.geometry.boundingBox;
+   for(let i=0;i<8;i++){boxCorner.set(i&1?g.max.x:g.min.x,i&2?g.max.y:g.min.y,i&4?g.max.z:g.min.z).applyMatrix4(o.matrixWorld).project(camera);boxTmp.expandByPoint(boxCorner);}});
+  if(boxTmp.isEmpty())return null;boxCorner.copy(player.position).project(camera);const sx=v=>(v+1)/2*currentWidth,sy=v=>(1-v)/2*currentHeight;
+  return {left:sx(boxTmp.min.x),right:sx(boxTmp.max.x),top:sy(boxTmp.max.y),bottom:sy(boxTmp.min.y),cx:sx(boxCorner.x),cy:sy(boxCorner.y)};
+ }
+ return {ready,playerBox,resize,dispose,get mode(){return failed?'canvas':'three';},
   metrics(){return {shipV13:Boolean(ship13),defenseV7:v7Active,triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,memory:{...renderer.info.memory},models:models.metrics(),playerLoaded,liveModels:liveCount,impostors:lodCount,sourceTexturesUnmodified:true,lodTextureSize:512,low,disposed,appearances:[...entities.values()].map(e=>({...e.appearance,representation:e.representation})),elevationDegrees:Math.atan2(camera.position.y,camera.position.z)*180/Math.PI};},
   degrade(fallback=false){if(fallback){failed=true;dispose();}else{low=true;resize();}},targetAt(x,y){return {x,y};},
   draw(p){if(disposed||failed)return false;try{

@@ -1,20 +1,21 @@
-import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-25';
-import {createRacing} from './racing-physics.mjs?v=island-v2-20261107-25';
-import {createRacingView} from './racing-view.mjs?v=island-v2-20261107-25';
-import {createRacingControls} from './racing-controls.mjs?v=island-v2-20261107-25';
-import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-25';
-import {bindAudioUnlock} from './racing-unlock.mjs?v=island-v2-20261107-25';
-import {racingV24Flags,v24PhysicsConfig,playerInput,pitAutoEnabled} from './racing-v24.mjs?v=island-v2-20261107-25';
-import {createPitUi} from './racing-pit-ui.mjs?v=island-v2-20261107-25';
-import {racingV244Flags,surfaceAt} from './racing-v24-4.mjs?v=island-v2-20261107-25';
-import {racingV245Flags,v245PhysicsConfig} from './racing-v24-5.mjs?v=island-v2-20261107-25';
-import {racingV246Flags} from './racing-v24-6.mjs?v=island-v2-20261107-25';
-import {racingV247Flags,v247PhysicsConfig} from './racing-v24-7.mjs?v=island-v2-20261107-25';
-import {racingV249Flags,v249PhysicsConfig,driftOn,driftInput,chipFor,chipForCard,chipForPit,CHIP} from './racing-v24-9.mjs?v=island-v2-20261107-25';
+import {kidUx, kidUxStyle} from '../kid-ux.mjs?v=island-v2-20261107-26';
+import {createRacing} from './racing-physics.mjs?v=island-v2-20261107-26';
+import {createRacingView} from './racing-view.mjs?v=island-v2-20261107-26';
+import {createRacingControls} from './racing-controls.mjs?v=island-v2-20261107-26';
+import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-26';
+import {bindAudioUnlock} from './racing-unlock.mjs?v=island-v2-20261107-26';
+import {racingV24Flags,v24PhysicsConfig,playerInput,pitAutoEnabled} from './racing-v24.mjs?v=island-v2-20261107-26';
+import {createPitUi} from './racing-pit-ui.mjs?v=island-v2-20261107-26';
+import {racingV244Flags,surfaceAt} from './racing-v24-4.mjs?v=island-v2-20261107-26';
+import {racingV245Flags,v245PhysicsConfig} from './racing-v24-5.mjs?v=island-v2-20261107-26';
+import {racingV246Flags} from './racing-v24-6.mjs?v=island-v2-20261107-26';
+import {racingV247Flags,v247PhysicsConfig} from './racing-v24-7.mjs?v=island-v2-20261107-26';
+import {racingV249Flags,v249PhysicsConfig,driftOn,driftInput,chipFor,chipForCard,chipForPit,CHIP} from './racing-v24-9.mjs?v=island-v2-20261107-26';
+import {racingV252Flags,v252PhysicsConfig,driftTipStep,DRAFT_CHIP,draftChipOn,CREDIT_LINE} from './racing-v25-2.mjs?v=island-v2-20261107-26';
 import {createRacingTower, towerEnabled} from './racing-tower.mjs';
-import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-25';
-import {createBroadcast, broadcastEnabled} from './racing-broadcast.mjs?v=island-v2-20261107-25';
-import {racingWallsOn, racingOffTrackOn, offTrackConfig} from './racing-offtrack.mjs?v=island-v2-20261107-25';
+import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-26';
+import {createBroadcast, broadcastEnabled} from './racing-broadcast.mjs?v=island-v2-20261107-26';
+import {racingWallsOn, racingOffTrackOn, offTrackConfig} from './racing-offtrack.mjs?v=island-v2-20261107-26';
 
 /** Finishing order of the whole grid and the car with the fastest lap, for the league result path only. */
 export function leagueOrder(cars){
@@ -31,14 +32,14 @@ export function runRacingSession(ctx){
  const engineOn=new URLSearchParams(globalThis.location?.search||'').get('racingEngine')!=='0',topSoundOn=new URLSearchParams(globalThis.location?.search||'').get('racingTopSound')!=='0',samplesOn=new URLSearchParams(globalThis.location?.search||'').get('racingSamples')!=='0',soundStartOn=new URLSearchParams(globalThis.location?.search||'').get('racingSoundStart')!=='0';
  let lastRank=0;
  // racing-v24 (Roy after v23): the flags of this round (racing-v24.mjs); every one has an address value that brings v23 back
- const v24=racingV24Flags(),v244=racingV244Flags(),v245=racingV245Flags(),v246=racingV246Flags(),v247=racingV247Flags(),v249=racingV249Flags(),slideOn=driftOn(v249,v24.turbo),cornerText=v249.text!=='old';   // racing-v24.9 (racing-v24-9.mjs): no tyre caption outside the pits, messages as a corner chip, the drift button   // racing-v24.7 (racing-v24-7.mjs): no automatic lift, tight corners, the v6 sounds   // racing-v24.4 (racing-v24-4.mjs): the pit sequence, the v5 edge/pit sounds, the idle engine, the overtake
- const model=createRacing({stage:ctx.level||1,seed:ctx.seed,difficulty:typeof ctx.difficulty==='string'?ctx.difficulty:'easy',config:{equipment:ctx.equipment,...(ctx.league?{drivers:ctx.league.drivers,stage:ctx.league.stageOverride}:{}),walls:racingWallsOn(),offTrack:racingOffTrackOn()?offTrackConfig():false,feel:new URLSearchParams(globalThis.location?.search||'').get('racingFeel')!=='0',engine:engineOn,extraRivals:ctx.league?.extraRivals??fieldSize(Boolean(ctx.lite)),crash:new URLSearchParams(globalThis.location?.search||'').get('racingCrash')!=='0',shiftMap:new URLSearchParams(globalThis.location?.search||'').get('racingShiftMap')!=='0',ers:new URLSearchParams(globalThis.location?.search||'').get('racingErs')!=='0',ai:new URLSearchParams(globalThis.location?.search||'').get('racingAi')!=='0',grid:new URLSearchParams(globalThis.location?.search||'').get('racingGrid')!=='0',grind:new URLSearchParams(globalThis.location?.search||'').get('racingGrind')!=='0',topCap:new URLSearchParams(globalThis.location?.search||'').get('racingTopCap')!=='0',revShift:new URLSearchParams(globalThis.location?.search||'').get('racingRevShift')!=='0',crashFx:new URLSearchParams(globalThis.location?.search||'').get('racingCrashFx')!=='0',...v24PhysicsConfig(v24),pitAuto:pitAutoEnabled(),pitSeq:v244.pitSeq,...v245PhysicsConfig(v245),...v247PhysicsConfig(v247,v245.gears),...v249PhysicsConfig(v249,v24.turbo)}});   // racing-v24.5 (racing-v24-5.mjs): tyre feel, carry, shoulder, gears
+ const v24=racingV24Flags(),v244=racingV244Flags(),v245=racingV245Flags(),v246=racingV246Flags(),v247=racingV247Flags(),v249=racingV249Flags(),v252=racingV252Flags(),slideOn=driftOn(v249,v24.turbo),cornerText=v249.text!=='old';   // racing-v24.9 (racing-v24-9.mjs): no tyre caption outside the pits, messages as a corner chip, the drift button   // racing-v24.7 (racing-v24-7.mjs): no automatic lift, tight corners, the v6 sounds   // racing-v24.4 (racing-v24-4.mjs): the pit sequence, the v5 edge/pit sounds, the idle engine, the overtake
+ const model=createRacing({stage:ctx.level||1,seed:ctx.seed,difficulty:typeof ctx.difficulty==='string'?ctx.difficulty:'easy',config:{equipment:ctx.equipment,...(ctx.league?{drivers:ctx.league.drivers,stage:ctx.league.stageOverride}:{}),walls:racingWallsOn(),offTrack:racingOffTrackOn()?offTrackConfig():false,feel:new URLSearchParams(globalThis.location?.search||'').get('racingFeel')!=='0',engine:engineOn,extraRivals:ctx.league?.extraRivals??fieldSize(Boolean(ctx.lite)),crash:new URLSearchParams(globalThis.location?.search||'').get('racingCrash')!=='0',shiftMap:new URLSearchParams(globalThis.location?.search||'').get('racingShiftMap')!=='0',ers:new URLSearchParams(globalThis.location?.search||'').get('racingErs')!=='0',ai:new URLSearchParams(globalThis.location?.search||'').get('racingAi')!=='0',grid:new URLSearchParams(globalThis.location?.search||'').get('racingGrid')!=='0',grind:new URLSearchParams(globalThis.location?.search||'').get('racingGrind')!=='0',topCap:new URLSearchParams(globalThis.location?.search||'').get('racingTopCap')!=='0',revShift:new URLSearchParams(globalThis.location?.search||'').get('racingRevShift')!=='0',crashFx:new URLSearchParams(globalThis.location?.search||'').get('racingCrashFx')!=='0',...v24PhysicsConfig(v24),pitAuto:pitAutoEnabled(),pitSeq:v244.pitSeq,...v245PhysicsConfig(v245),...v247PhysicsConfig(v247,v245.gears),...v249PhysicsConfig(v249,v24.turbo),...v252PhysicsConfig(v252)}});   // racing-v24.5 (racing-v24-5.mjs): tyre feel, carry, shoulder, gears
  const {canvas,controls,status,t}=ctx;let lastInput={},frame,view,input,last=0,paused=false,disposed=false,finished=false,messageUntil=0,toastText='',renderError=null;
  const abort=new AbortController();let audio;try{audio=createRacingAudio({samples:engineOn&&samplesOn,blowoff:v24.turbo==='v23',hiss:v24.hiss,v4:v24.audioV4,pit:!!model.pit?.on,v5:v244.audioV5,idle:v244.idle&&engineOn,pass:v244.pass,air:v245.air,rec:v245.rec,v246:v246.audio,v6:v247.audioV6});}catch{audio=createRacingAudio({storage:null});}
  const session={get ready(){return Boolean(view)&&renderError!=='webgl-context-lost';},get loadFailed(){return renderError&&renderError!=='webgl-context-lost'?String(renderError):null;},setPaused(value){paused=!!value;last=0;input?.setEnabled(!paused);audio.setPaused(paused);if(paused)model.pause();else model.resume();},dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();model.dispose();},get snapshot(){return {stage:model.state.stage,phase:model.state.phase,time:model.state.time,paused,disposed,player:{...model.state.player},cars:model.state.cars.map(c=>({...c})),result:model.state.result,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),error:renderError};}};
  if(!canvas)return session;
- const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-v2-20261107-25',import.meta.url).href;screen.append(css);
- const css24=document.createElement('link');css24.rel='stylesheet';css24.href=new URL('./racing-v24.css?v=island-v2-20261107-25',import.meta.url).href;screen.append(css24);
+ const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-v2-20261107-26',import.meta.url).href;screen.append(css);
+ const css24=document.createElement('link');css24.rel='stylesheet';css24.href=new URL('./racing-v24.css?v=island-v2-20261107-26',import.meta.url).href;screen.append(css24);
  const node=(tag,cls,text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
  const hud=node('div','racing-hud'),rank=node('bdi','racing-rank','3'),of=node('small','racing-of','/ '+model.state.cars.length),lap=node('span','racing-lap'),clock=node('bdi','racing-clock','0:00'),trackName=node('strong','racing-track',model.track.name);rank.append(of);const position=node('div','racing-position');position.append(rank,node('span','racing-position-label','מקום'));const info=node('div','racing-race-info');info.append(trackName,lap,clock);const lapInfo=node('span','racing-lapinfo');lapInfo.style.direction='rtl';info.append(lapInfo);hud.append(position,info);stage.append(hud);
  const draftBadge=node('div','racing-draft','סלפה');draftBadge.hidden=true;stage.append(draftBadge);
@@ -51,15 +52,17 @@ export function runRacingSession(ctx){
  const drift=node('div','racing-drift-meter'),driftFill=node('span','racing-drift-fill');drift.append(driftFill);stage.append(drift);
  const countdown=node('div','racing-countdown'),toast=node('div','racing-toast'),hint=node('p','racing-hint','גררו אגודל בצד שמאל להיגוי · לחצו על הגז (או הפעילו האצה אוטומטית) · החזיקו דריפט בפנייה ושחררו לבוסט · ניטרו מימין');stage.append(countdown,toast,hint);
  const loading=node('div','racing-loading','מכינים את מסלול המרוץ…');stage.append(loading);
- const credit=node('a','racing-credit','קרדיט לדגם');credit.href=new URL('../assets/racing/credits.html',import.meta.url).href;credit.target='_blank';credit.rel='noopener';credit.setAttribute('aria-label','קרדיט ורישיון דגם המכונית');controls.append(credit);
+ // racing-v25.2: no link out of the race screen (it opened a browser tab in the middle of a race); the credit is plain text on the intro card or the podium. ?racingCredit=old
+ if(v252.credit==='old'){const credit=node('a','racing-credit','קרדיט לדגם');credit.href=new URL('../assets/racing/credits.html',import.meta.url).href;credit.target='_blank';credit.rel='noopener';credit.setAttribute('aria-label','קרדיט ורישיון דגם המכונית');controls.append(credit);}
  input=createRacingControls({root:controls,canvas,t,slide:slideOn});input.setEnabled(!paused);
  // racing-v24.9: messages are one small chip in the corner (screen[data-racing-text=corner]; racing-v24.css), never in the middle over the road
+ if(v252.gauge==='side')screen.dataset.racingGauge='side';   // racing-v25.2: the speedometer, the gear and the ERS tag on the right edge, off the road
  if(cornerText){screen.dataset.racingText='corner';toast.setAttribute('role','status');hud.append(toast);}
  let chipKey='',lastCard=null,guide=null;const say=(kind,detail,seconds,oldText,now)=>{if(cornerText){const c=chipFor(kind,detail);if(!c)return;toastText=c.icon+' '+c.text;chipKey=c.kind;messageUntil=now+Math.min(seconds,CHIP.seconds);}else{toastText=oldText;messageUntil=now+seconds;}};
  // racing-v24.9 drift: the button and a one-time tip beside it (the first race on this device, until the first drift or DRIFT_TIP seconds of racing)
- const DRIFT_TIP=12,tipKey='island.racing.driftTip';let driftTip=null;
+ const tipKey='island.racing.driftTip',tipState={shownAt:null,done:false};let driftTip=null;
  if(slideOn){screen.dataset.racingDrift='true';let seen=false;try{seen=globalThis.localStorage?.getItem(tipKey)==='1';}catch{}
-  if(!seen){driftTip=node('span','racing-drift-tip','בסיבוב חד: החזיקו דריפט וסובבו');driftTip.setAttribute('role','note');driftTip.hidden=true;stage.append(driftTip);}}
+  if(!seen){driftTip=node('span','racing-drift-tip','בסיבוב חד: החזיקו דריפט וסובבו');driftTip.setAttribute('role','note');driftTip.hidden=true;driftTip.dataset.tip=v252.driftTip;stage.append(driftTip);}}
  // racing-v24: the one button only brakes now (racing-v24 playerInput drops the drift, so no drift boost after a corner): its label and the hint say so
  if(v24.turbo!=='v23'){const brakeButton=controls.querySelector?.('.racing-drift');if(brakeButton){brakeButton.setAttribute('aria-label',t('racing.brake'));const copy=brakeButton.querySelector('.racing-action-copy');if(copy)copy.textContent=t('racing.brake');}hint.textContent=slideOn?'גררו אגודל בצד שמאל להיגוי · לחצו על הגז · בלמו או החזיקו דריפט בפניות החדות · ניטרו מימין':'גררו אגודל בצד שמאל להיגוי · לחצו על הגז · בלמו לפני הפניות · ניטרו מימין';}
  // racing-v24 pits: the tyre meter, the pit button and the tyre-change tap (only in a race with stops: 3 laps and more, unless ?racingPit=0)
@@ -93,12 +96,12 @@ export function runRacingSession(ctx){
   const row=node('div','racing-podium-row');
   for(const car of layout){const place=car.rank,step=node('div','racing-podium-step place-'+place),swatch=node('i','racing-podium-car');swatch.style.background=PODIUM_COLORS[Math.max(0,s.cars.indexOf(car))%PODIUM_COLORS.length];
    const name=node('span','racing-podium-name',car.isPlayer?'אתם':car.name);if(car.isPlayer)step.classList.add('you');step.append(swatch,name,node('b','racing-podium-place',String(place)));row.append(step);}
-  card.append(row,node('small','racing-podium-note',s.player.rank>3?`סיימתם במקום ${s.player.rank} מתוך ${s.cars.length}`:'לחצו להמשך'));stage.append(card);
+  card.append(row,node('small','racing-podium-note',s.player.rank>3?`סיימתם במקום ${s.player.rank} מתוך ${s.cars.length}`:'לחצו להמשך'));if(v252.credit!=='old')card.append(node('small','racing-podium-credit',CREDIT_LINE));stage.append(card);
   let closed=false;const close=()=>{if(closed||disposed)return;closed=true;clearTimeout(timer);card.remove();done();};
   const timer=setTimeout(close,4000);card.addEventListener('pointerdown',close,{signal:abort.signal});abort.signal.addEventListener('abort',()=>clearTimeout(timer),{once:true});
  }
  // racing-deep-m4 broadcast: start lights, race intro (holds the model until it closes), lower-third cards, full-field tower and podium. ?racingBroadcast=0 keeps the old HUD.
- const bc=broadcastEnabled()?createBroadcast({stage,model,league:Boolean(ctx.league),signal:abort.signal,showCards:!cornerText}):null;abort.signal.addEventListener('abort',()=>bc?.dispose(),{once:true});
+ const bc=broadcastEnabled()?createBroadcast({stage,model,league:Boolean(ctx.league),signal:abort.signal,showCards:!cornerText,creditLine:v252.credit!=='old'?CREDIT_LINE:''}):null;abort.signal.addEventListener('abort',()=>bc?.dispose(),{once:true});
  const tower=towerEnabled()?createRacingTower(stage,{broadcast:bc}):null;abort.signal.addEventListener('abort',()=>tower?.dispose(),{once:true});
  function tick(at){if(disposed)return;const dt=last?Math.min(.1,(at-last)/1000):0,ms=last?at-last:0;last=at;tower?.update(model.state,dt);pitUi?.markTower(model.state);
   if(!paused&&!document.hidden&&!bc?.holding()){const sample=input.sample();lastInput=driftInput(playerInput(sample,v24),sample,slideOn);model.step(dt,lastInput);view.observeFrame(ms);}const s=model.state,p=s.player;bc?.update(s,paused?0:dt,lastInput);view.setStartLamps?.(bc?.lamps(s)??0);
@@ -114,18 +117,18 @@ export function runRacingSession(ctx){
     hint.dataset.kidRacingStep=String(step);
     guideArt.textContent=art;guideCopy.textContent=copy;
    }
-   hint.hidden=s.time>=9||(cornerText&&s.phase==='racing');guide={kind:'guide',icon:art.split(' ')[0],text:copy};
-  }else hint.hidden=s.time>4.5||(cornerText&&s.phase==='racing');   // racing-v24.9: once the race runs the hint is not over the road (the child's driving steps move to the corner chip)
+   hint.hidden=s.time>=9||(cornerText&&(s.phase==='racing'||v252.labels!=='old'));guide={kind:'guide',icon:art.split(' ')[0],text:copy};
+  }else hint.hidden=s.time>4.5||(cornerText&&(s.phase==='racing'||v252.labels!=='old'));   // racing-v24.9: once the race runs the hint is not over the road (the child's driving steps move to the corner chip)
   screen.dataset.boosting=String(p.boosting);screen.dataset.offroad=String(p.offroad);
   for(const e of s.events){if(e.car!=='player')continue;if(e.type==='crash'){audio.event?.('crash',e);view.kick?.(1);try{navigator.vibrate?.(60);}catch{}}else if(e.type==='wall'){audio.event?.('wall',e);view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='post'){audio.event?.('wall',e);view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='bump'){audio.event?.('bump',e);if(v24.bump==='v24'){view.kick?.(.15+.45*(e.intensity||0));try{navigator.vibrate?.(Math.round(12+28*(e.intensity||0)));}catch{}}}else if(/^pit/.test(e.type)){if(cornerText){const c=chipForPit(e);if(c&&pitUi)say(c.kind,'',1.8,'',s.time);}else{const line=pitUi?.toast(e);if(line){toastText=line;messageUntil=s.time+(e.type==='pitRequest'&&e.auto&&model.pit?.auto?3:1.8);}}if(['pitStop','pitChange','pitDone'].includes(e.type))audio.event?.('pit',{...e,seconds:p.pit?.dur||2,seq:!!model.pit?.seq});}else if(e.type==='crashRecover'){audio.event?.('crashRecover',e);if(e.reason==='offtrack')say('recover','',1.6,t('racing.recover'),s.time);}else if(e.type==='ersFull'){say('ers','',1.2,kidHud?'⚡ המטען מלא':'ERS מלא',s.time);try{navigator.vibrate?.(14);}catch{}}else if(e.type==='pickup'){ctx.sound?.('bonus');say('pickup','',1.4,'אנרגיית ניטרו +31',s.time);}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');say(e.type==='driftBoost'?'drift':'boostPad',e.type==='driftBoost'?'בוסט':'',1.1,e.type==='driftBoost'?'דריפט מעולה · בוסט':'מסלול בוסט',s.time);}else if(e.type==='driftEnd'){if(e.gain>0)say('drift','+'+Math.round(e.gain),1.2,'דריפט נקי · מטען +'+Math.round(e.gain),s.time);}else if(e.type==='recovery'){say('recover','',2,t('racing.recover'),s.time);}else if(e.type==='lap'){if(e.lapTime>0&&(!bestLap||e.lapTime<bestLap)){bestLap=e.lapTime;try{globalThis.localStorage?.setItem(bestKey,String(bestLap));}catch{}say('fastest',fmt(e.lapTime),2,'הקפה מהירה ביותר '+fmt(e.lapTime),s.time);}ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
   if(cornerText){
    // the broadcast's card (position, lap, fastest lap of the race) as a chip; then what holds while it lasts: off the track, the slipstream, the first driving steps
    const card=bc?.card?.()||null;if(card&&card!==lastCard){const c=chipForCard(card);if(c){toastText=c.icon+' '+c.text;chipKey=c.kind;messageUntil=s.time+Math.min(card.duration||CHIP.seconds,CHIP.seconds);}}lastCard=card;
-   const now=s.phase==='racing'&&s.time<messageUntil,held=p.offroad?chipFor('offroad'):now?null:p.draft>.15?chipFor('draft'):guide&&s.phase==='racing'&&s.time<9?guide:null;
+   const now=s.phase==='racing'&&s.time<messageUntil,held=p.offroad?chipFor('offroad'):now?null:draftChipOn({draft:p.draft,racing:s.phase==='racing',speed:p.speed},v252.labels)?(v252.labels==='old'?chipFor('draft'):DRAFT_CHIP):guide&&s.phase==='racing'&&s.time<9?guide:null;
    const text=held?held.icon+' '+held.text:now?toastText:'',kind=held?held.kind:now?chipKey:'';
    toast.hidden=!text;if(toast.textContent!==text)toast.textContent=text;if(toast.dataset.kind!==kind)toast.dataset.kind=kind;draftBadge.hidden=true;
   }else{toast.hidden=!(p.offroad||s.time<messageUntil);toast.textContent=p.offroad?t('racing.offroad'):toastText;}
-  if(driftTip){const show=s.phase==='racing'&&s.time>1.5&&s.time<DRIFT_TIP&&!p.pit;if(p.drifting||(s.phase==='racing'&&s.time>=DRIFT_TIP)){try{globalThis.localStorage?.setItem(tipKey,'1');}catch{}driftTip.remove();driftTip=null;}else{if(driftTip.hidden===show)driftTip.hidden=!show;const a=controls.dataset.racingAutomatic||'false';if(driftTip.dataset.auto!==a)driftTip.dataset.auto=a;}}
+  if(driftTip){const {show,done}=driftTipStep(tipState,{racing:s.phase==='racing',time:s.time,steer:p.steer,speed:p.speed,drifting:p.drifting,pit:!!p.pit},v252.driftTip);if(done){try{globalThis.localStorage?.setItem(tipKey,'1');}catch{}driftTip.remove();driftTip=null;}else{if(driftTip.hidden===show)driftTip.hidden=!show;const a=controls.dataset.racingAutomatic||'false';if(driftTip.dataset.auto!==a)driftTip.dataset.auto=a;}}
   if(s.result&&!finished){finished=true;ctx.onRacingSummary?.(s.result);
    // racing-deep-fable (Roy, v21 phone: "finished track 2, it froze with engine noise after showing first place"): the engine falls silent at the finish,
    // and a result the engine refuses (ok:false) no longer leaves a frozen screen: a message and a way back to the city.

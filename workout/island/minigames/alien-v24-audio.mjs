@@ -8,7 +8,7 @@ export function createAlienV24Audio({storage=globalThis.localStorage,AudioContex
  const muted=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
  async function load(){
   if(loaded||!fetcher)return;loaded=true;
-  await Promise.all(Object.values(ALIEN_V24_AUDIO).map(async name=>{try{const response=await fetcher(new URL(`../assets/alien-v24/${name}.ogg?v=island-v2-20261107-25`,import.meta.url));if(!response.ok)return;const decoded=await context.decodeAudioData(await response.arrayBuffer());if(!disposed)buffers.set(name,decoded);}catch{}}));
+  await Promise.all(Object.values(ALIEN_V24_AUDIO).map(async name=>{try{const response=await fetcher(new URL(`../assets/alien-v24/${name}.ogg?v=island-v2-20261107-26`,import.meta.url));if(!response.ok)return;const decoded=await context.decodeAudioData(await response.arrayBuffer());if(!disposed)buffers.set(name,decoded);}catch{}}));
  }
  function unlock(){if(disposed||paused||!AudioContext)return;try{if(!context){context=new AudioContext();master=context.createGain();master.gain.value=.32;master.connect(context.destination);void load();}if(context.state!=='running')void context.resume().catch(()=>{});}catch{}}
  function play(event){

@@ -1,7 +1,7 @@
 // racing-v24 pits, the view part: a painted box for every car in the working lane of the pit lane (racing-v24 pitLane: where racing-pit.mjs stops each car),
 // two side lines and a back line in the car's colour and a white stop bar. One instanced mesh: one draw call, 48 boxes of 12 triangles.
 // Drawn only when the race has stops (3 laps and more, unless ?racingPit=0) on the circuits with the Formula 1 trackside (the painted pit lane of racing-f1.mjs).
-import {pitLane,PIT,racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-25';
+import {pitLane,PIT,racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-26';
 export function pitBoxesOn(stage,search){return racingV24Flags(search).pit&&(stage?.laps||0)>=PIT.minLaps;}
 export function paintPitBoxes({T,scene,track,keep=x=>x,count=12,colors=[]}){
  const lane=pitLane(track),rows=[],white='#f2f2ee';

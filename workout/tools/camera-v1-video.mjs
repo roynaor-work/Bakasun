@@ -44,10 +44,14 @@ if (!clip) {
   await writeFile(cached, JSON.stringify(clip));
 }
 const api = await load(arg('modules'));
-const run = replay(clip, api, id);
+const flags = Object.fromEntries((arg('flags', '') || '').split(',').filter(Boolean).map(name => [name, true]));
+const run = replay(clip, api, id, flags);
 const seenFrames = clip.frames.filter(frame => frame.poses.length > 0).length;
 const ms = clip.frames.slice(3).map(frame => frame.ms).sort((a, b) => a - b);
-console.log(JSON.stringify({ video: path.basename(video), id, seconds: Math.round(clip.total / 100) / 10, frames: clip.frames.length,
+console.log(JSON.stringify({ flags: Object.keys(flags).join('+') || 'none', video: path.basename(video), id, seconds: Math.round(clip.total / 100) / 10, frames: clip.frames.length,
   detected: Math.round(100 * seenFrames / clip.frames.length) + '%', ready: Math.round(100 * run.readyFrames / run.frames) + '%',
   counted: run.timed ? Math.round(run.amount * 10) / 10 + ' s' : run.amount, expected: arg('reps') ?? '?', partials: run.partials,
-  statuses: run.statuses, events: run.events, modelMs: ms[ms.length >> 1] }));
+  statuses: run.statuses, events: run.events, modelMs: ms[ms.length >> 1],
+  // When each repetition was counted (seconds into the clip) and what the guidance said most, to set against the frames.
+  countedAt: run.countedAt.map(t => Math.round(t / 100) / 10), moves: run.moves,
+  lines: Object.fromEntries(Object.entries(run.lines).sort((x, y) => y[1] - x[1]).slice(0, 4)), hints: run.hints }));

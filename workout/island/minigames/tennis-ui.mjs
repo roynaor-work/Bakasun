@@ -1,4 +1,4 @@
-import {pointLabels} from './tennis.mjs?v=island-v2-20261107-25';
+import {pointLabels} from './tennis.mjs?v=island-v2-20261107-26';
 // Broadcast-style point cells: 40/40 at deuce, AD beside the leader only.
 export function tennisScoreCells(score,rules){return pointLabels(score,rules).map(v=>v==='deuce'?'40':v==='advantage'?'AD':String(v));}
 /** Event feedback describes the actual outcome; proximity alone is never a hit. */
@@ -32,3 +32,9 @@ export function ratingIcon(kind){
  const shapes={perfect:'<path d="M14 2l3.6 7.6 8.4 1-6.2 5.8 1.7 8.3L14 20.4 6.5 24.7l1.7-8.3L2 10.6l8.4-1z" fill="#ffd16f" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>',good:'<circle cx="14" cy="14" r="9" fill="none" stroke="#67d398" stroke-width="3.2"/>',early:'<path d="M14 5v15M7 14l7 7 7-7" fill="none" stroke="#efc355" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>',late:'<path d="M14 23V8M7 14l7-7 7 7" fill="none" stroke="#efc355" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>'};
  return `<svg viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">${shapes[kind]||''}</svg>`;
 }
+
+/** v25.2 (QA of v25.1): on the score board the rival's row said "יריב" and the player's row had no name at all (the v11 rule that removed
+ * the captions was weaker than the rule of the second row). The player's row now carries the child's name, or "אני" when there is none.
+ * ?tennisNames=old keeps the empty row. */
+export function tennisBoardNames(search=globalThis.location?.search||''){try{return new URLSearchParams(search).get('tennisNames')!=='old';}catch{return true;}}
+export function tennisPlayerLabel(name){const clean=typeof name==='string'?name.trim():'';return clean||'אני';}
