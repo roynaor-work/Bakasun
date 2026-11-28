@@ -96,7 +96,8 @@ export function replay(clip, api, id = clip.cfg.id, flags = {}) {
         reference = result.calibration;
         const body = flags.body && api.bodyFromFrames ? api.bodyFromFrames(reference.worlds) : null;
         if (body?.torsoMeters) memory.torsoMeters = body.torsoMeters;
-        counter.setReference(reference.reference.landmarks, { aspect: sample.aspect, scales: body ? api.scalesOf(body) : null });
+        counter.setReference(reference.reference.landmarks, { aspect: sample.aspect, scales: body ? api.scalesOf(body) : null,
+          depthEase: flags.depth && api.depthEaseOf ? api.depthEaseOf(body) : null });
       }
       motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect });
       if (motion.event) bump(events, motion.event);

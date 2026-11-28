@@ -11,8 +11,9 @@ export const cameraV1Href = (exerciseId = '') => 'camera-v1/' + (safe(exerciseId
 // Behaviours added after the first internal round, each behind its own address flag and off by default:
 //   camBody=1   thresholds scaled to the child's measured proportions (body.mjs)
 //   camSteps=1  "move back" counts steps
-//   camConf=1   confidence limits per exercise
+//   camConf=1   confidence limits per setup (floor exercises start on a lower limit)
+//   camDepth=1  push-up depth eased by the child's arm scale
 export const cameraFlags = (search = globalThis.location?.search || '') => {
   const on = name => { try { return new URLSearchParams(search).get(name) === '1'; } catch { return false; } };
-  return Object.freeze({ body: on('camBody'), steps: on('camSteps'), conf: on('camConf') });
+  return Object.freeze({ body: on('camBody'), steps: on('camSteps'), conf: on('camConf'), depth: on('camDepth') });
 };

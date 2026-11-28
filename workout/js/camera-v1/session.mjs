@@ -9,7 +9,7 @@ import { guide, GuideVoice, GUIDE_COPY, CueLimiter } from './guide.mjs?v=2026101
 
 const { landscape: LANDSCAPE, goal: GOAL, tight: TIGHT } = GUIDE_COPY.LINES;
 import { cameraV1Enabled, cameraFlags } from './flag.mjs?v=20261010-camera-1';
-import { bodyFromFrames, scalesOf } from './body.mjs?v=20261010-camera-1';
+import { bodyFromFrames, scalesOf, depthEaseOf } from './body.mjs?v=20261010-camera-1';
 
 const node = id => document.getElementById(id);
 function text(id, value) {
@@ -278,7 +278,8 @@ function onPose(sample) {
     // camBody=1: the child's proportions from the still frames of the calibration (see body.mjs).
     const body = flags.body ? bodyFromFrames(reference.worlds) : null;
     if (body?.torsoMeters) seenAt.torsoMeters = body.torsoMeters;
-    counter.setReference(landmarks, { aspect: sample.aspect, world, scales: body ? scalesOf(body) : null });
+    counter.setReference(landmarks, { aspect: sample.aspect, world, scales: body ? scalesOf(body) : null,
+      depthEase: flags.depth ? depthEaseOf(body) : null });
   }
   const motion = counter.update(result.pose.landmarks, sample.time, { aspect: sample.aspect, world: result.pose.world });
   const cameraProgress = isTimed() ? motion.activeMs / 1000 : motion.count;

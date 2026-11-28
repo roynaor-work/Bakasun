@@ -95,3 +95,13 @@ export const STEP_WORDS = Object.freeze({
   3: { text: 'זוז שלושה צעדים אחורה', say: 'זוּז שְׁלוֹשָׁה צְעָדִים אָחוֹרָה' },
   4: { text: 'זוז ארבעה צעדים אחורה', say: 'זוּז אַרְבָּעָה צְעָדִים אָחוֹרָה' },
 });
+
+// camDepth=1: on real people (a side view, the model's elbow angle reads high and the shoulder looks lower
+// than it is) most push-ups of a steady set stopped short of .39 torso lengths of lowering. 0.77 of that
+// (.30) counted 19 of ~20 reps in the one clip measured; a child with short arms lowers less in torso units,
+// so the factor shrinks with the arm scale of scalesOf(). Clamped, so a bad frame cannot empty the threshold.
+export const DEPTH_EASE = .77;
+export function depthEaseOf(body = null) {
+  const arm = scalesOf(body).arm;
+  return clamp(DEPTH_EASE / arm, .6, .85);
+}

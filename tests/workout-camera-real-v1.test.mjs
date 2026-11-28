@@ -154,8 +154,8 @@ test('camSteps: the guidance names the number of steps only when the flag is on 
 });
 
 test('flags: all off unless the address asks, and malformed addresses are harmless', () => {
-  assert.deepEqual({ ...cameraFlags('') }, { body: false, steps: false, conf: false });
-  assert.deepEqual({ ...cameraFlags('?camBody=1&camSteps=1') }, { body: true, steps: true, conf: false });
-  assert.deepEqual({ ...cameraFlags('?camBody=0&camConf=1') }, { body: false, steps: false, conf: true });
+  assert.deepEqual({ ...cameraFlags('') }, { body: false, steps: false, conf: false, depth: false });
+  assert.deepEqual({ ...cameraFlags('?camBody=1&camSteps=1') }, { body: true, steps: true, conf: false, depth: false });
+  assert.deepEqual({ ...cameraFlags('?camBody=0&camConf=1') }, { body: false, steps: false, conf: true, depth: false });
   assert.doesNotThrow(() => cameraFlags('%E0%A4%A'));
 });

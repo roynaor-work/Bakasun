@@ -238,7 +238,7 @@ export const PROFILES = {
       Math.abs(f.dy(f.main.knee, f.main.hip)) < .38, { verification: 'partial' }),
   'push-ups': rep(floorSide, 'נכופף את המרפקים כדי לקרב את החזה לרצפה. האגן יורד ועולה יחד עם הכתפיים.',
     plankStart, [point((f, c) => groundedPlank(f) && f.elbowAngle < 110 &&
-      shoulderHeight(c.origin) - shoulderHeight(f) > .39, 85)],
+      shoulderHeight(c.origin) - shoulderHeight(f) > .39 * f.depthEase, 85)],
     { form: f => hipSag(f) > .25 ? hipsInLine : null, minCycle: 250 }),
   'knee-push-ups': rep(floorSide, 'נשאיר ברכיים על הרצפה ואגן בקו עם הכתפיים, ונכופף את המרפקים.',
     f => f.kneeLine > 146 && reachFloor(f) && f.clearance(f.main.knee?.y) < .21 && f.elbowAngle > 145,

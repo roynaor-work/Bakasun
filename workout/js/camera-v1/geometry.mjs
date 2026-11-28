@@ -92,7 +92,9 @@ export function measure(points, aspect, reference, required) {
     torsoUp: dy(hip, shoulder), torsoWide: Math.abs(dx(hip, shoulder)),
     kneeWidth: Math.abs(dx(left.knee, right.knee)), wristSpread: Math.abs(dx(left.wrist, right.wrist)),
     ankleOrder: Math.sign(dx(left.ankle, right.ankle)), bodyLine: main.line, kneeLine: main.kneeLine,
-    kneeAngle: main.kneeAngle, elbowAngle: main.elbowAngle };
+    kneeAngle: main.kneeAngle, elbowAngle: main.elbowAngle,
+    // camDepth=1: how much easier than the written depth a push-up counts (1 = as written); see body.mjs depthEaseOf.
+    depthEase: reference?.depthEase ?? 1 };
   // A first measurement (no reference yet) of a standing child records the child's own thigh length.
   if (!reference) out.thigh = standingThigh(out);
   return out;
